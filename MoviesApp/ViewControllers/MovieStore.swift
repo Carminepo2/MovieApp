@@ -7,9 +7,11 @@
 
 import Foundation
 
-class MovieStore: ObservableObject {
+class MovieStore {
     let movies: Array<Movie> = load("movies.json")
+    private init() { }
     
+    static let shared = MovieStore()    
     
     private static func load<T: Decodable>(_ filename: String) -> T {
         let data: Data

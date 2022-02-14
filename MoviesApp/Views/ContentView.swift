@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var movieStore: MovieStore
     
     var body: some View {
         
         TabView {
             // MARK: - Search Tab
-            SearchTab()
+            DiscoverTab()
                 .withBackground()
+                .environmentObject(DiscoverViewController())
                 .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
+                    Label("Discover", systemImage: "globe.americas")
                 }
             
             // MARK: - Watchlist Tab

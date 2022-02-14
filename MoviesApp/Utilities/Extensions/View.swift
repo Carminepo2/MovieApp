@@ -64,11 +64,8 @@ extension View {
             if let color = color {
                 color
             } else {
-                LinearGradient(
-                    gradient: Gradient(colors: [.init("Gray-700"), .init("Gray-800")]),
-                    startPoint: .top, endPoint: .bottom
-                )
-                .edgesIgnoringSafeArea(.all)
+                Constants.AppBackground
+                    .edgesIgnoringSafeArea(.all)
             }
             
             self

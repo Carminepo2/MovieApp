@@ -13,13 +13,10 @@ struct MoviesApp: App {
     init() {
         //UINavigationBar.changeAppearance(clear: true)
     }
-    
-    let movieStore = MovieStore()
-    
+        
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(movieStore)
         }
     }
 }

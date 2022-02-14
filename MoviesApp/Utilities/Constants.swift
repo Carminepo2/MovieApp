@@ -14,6 +14,7 @@ struct Constants {
     
     // MARK: - Card
     static let CardAspectRatio: CGFloat = 2/3 // Movie poster's aspect ratio
+    static let NumOfCards = 5
     
     static let AppBackground = LinearGradient(
         gradient: Gradient(colors: [.init("Gray-700"), .init("Gray-800")]),
