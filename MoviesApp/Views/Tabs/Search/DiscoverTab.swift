@@ -15,10 +15,6 @@ struct DiscoverTab: View {
     @State private var showDetails = false
     @State private var tappedMovie: Movie? = nil
     
-    @State private var firstCardOffset: CGFloat = 0
-    @State private var firstCardRotation: CGFloat = 0
-    
-    
     
     private var movieCards: Array<DiscoverViewController.MovieCard> {
         return discoverViewController.movieCards
@@ -33,6 +29,13 @@ struct DiscoverTab: View {
         ZStack {
             if !showDetails {
                 VStack {
+                    
+                    Text("Discover")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                    
+                    
                     ZStack {
                         ForEach(movieCards) { movieCard in
                             if movieCard.id != movieCards.last!.id {
@@ -46,6 +49,7 @@ struct DiscoverTab: View {
                                 
                                 // MARK: - First Card
                                 MovieCard(movie: movieCard.movie, animation: animation)
+                                    .rotationEffect(.degrees(movieCard.rotationDegree))
                                     .rotationEffect(.degrees(movieCard.rotationOffset))
                                     .offset(x: movieCard.xOffset)
                                     .onTapGesture {
@@ -59,37 +63,16 @@ struct DiscoverTab: View {
                                             .onChanged(handleDragCard)
                                             .onEnded(handleEndDragCard)
                                     )
-
+                                
                             }
                         }
                     }
                     .padding()
                     
-                    HStack(spacing: 80) {
-                        Button(action: discardMovie) {
-                            Circle()
-                                .fill(Color("Gray-800"))
-                                .frame(width: 70, height: 70)
-                                .overlay {
-                                    Image(systemName: "xmark")
-                                }
-                        }
-                       
-                                                
-                        Button(action: makeMovieFavorite) {
-                            Circle()
-                                .fill(Color.accentColor)
-                                .frame(width: 70, height: 70)
-                                .overlay {
-                                    Image(systemName: "heart")
-                                }
-                        }
-                        
-                        
-                        
-                    }
-                    .padding()
-                    .padding(.horizontal)
+                    
+                    DiscardFavoriteButtons(makeFavorite: makeMovieFavorite, discard: discardMovie)
+                    
+                    
                 }
                 
             } else {
@@ -112,6 +95,9 @@ struct DiscoverTab: View {
             discoverViewController.movieCards[movieCards.last!].rotationOffset = 15
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 discoverViewController.nextCard()
+                withAnimation {
+                    discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
+                }
             }
         }
     }
@@ -122,8 +108,10 @@ struct DiscoverTab: View {
             discoverViewController.movieCards[movieCards.last!].rotationOffset = -15
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 discoverViewController.nextCard()
+                withAnimation {
+                    discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
+                }
             }
-            
         }
     }
     

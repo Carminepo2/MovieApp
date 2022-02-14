@@ -45,7 +45,7 @@ struct MovieCard: View {
                     
                     HStack(spacing: 20) {
                         Label("2h30m", systemImage: "clock")
-                        Label("2h30m", systemImage: "calendar")
+                        Label("2021", systemImage: "calendar")
                     }
                     .font(.body)
                     .matchedGeometryEffect(id: "movie-time", in: animationNamespace)

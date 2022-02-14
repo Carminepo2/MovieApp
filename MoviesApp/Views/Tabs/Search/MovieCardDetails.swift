@@ -12,7 +12,7 @@ struct MovieCardDetails: View {
     @Binding var showDetails: Bool
     @State private var scale: CGFloat = 1
     @State private var cornerRadius: CGFloat = 0
-
+    
     
     let movie: Movie
     var animation: Namespace.ID
@@ -41,7 +41,7 @@ struct MovieCardDetails: View {
                     Color.clear
                         .frame(maxHeight: 300)
                         .contentShape(Rectangle())
-                        //MARK: Drag gesture to close modal
+                    //MARK: Drag gesture to close modal
                         .gesture(
                             DragGesture(minimumDistance: 0, coordinateSpace: .global)
                                 .onChanged(onPosterDragChanged)
@@ -59,7 +59,7 @@ struct MovieCardDetails: View {
                         //MARK: Duration and year
                         HStack(spacing: 20) {
                             Label("2h30m", systemImage: "clock")
-                            Label("2h30m", systemImage: "calendar")
+                            Label("2021", systemImage: "calendar")
                         }
                         .font(.body)
                         .matchedGeometryEffect(id: "movie-time", in: animation)
@@ -77,7 +77,7 @@ struct MovieCardDetails: View {
                 }
                 .padding()
                 .foregroundColor(.white)
-
+                
                 Spacer()
             }
         }
@@ -90,7 +90,7 @@ struct MovieCardDetails: View {
     // MARK: - Functions
     func onPosterDragChanged(value: DragGesture.Value) {
         let progress = value.translation.height / getScreenBounds().height
-                
+        
         let scale = 1 - progress
         if scale > 0.8 {
             self.scale = scale

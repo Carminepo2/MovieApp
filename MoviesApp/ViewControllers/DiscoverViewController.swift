@@ -33,7 +33,7 @@ class DiscoverViewController: ObservableObject {
         }
         
         let id = UUID()
-        let rotationDegree = Double(
+        var rotationDegree = Double(
             Int.random(in: -4...4)
         )
         let movie: Movie
