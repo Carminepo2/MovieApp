@@ -15,7 +15,7 @@ struct ContentView: View {
             // MARK: - Search Tab
             DiscoverTab()
                 .withBackground()
-                .environmentObject(DiscoverViewController())
+                .environmentObject(DiscoverViewModel())
                 .tabItem {
                     Label("Discover", systemImage: "globe.americas")
                 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DiscoverTab: View {
-    @EnvironmentObject var discoverViewController: DiscoverViewController
+    @EnvironmentObject var discoverViewController: DiscoverViewModel
     
     @Namespace private var animation
     
@@ -16,7 +16,7 @@ struct DiscoverTab: View {
     @State private var tappedMovie: Movie? = nil
     
     
-    private var movieCards: Array<DiscoverViewController.MovieCard> {
+    private var movieCards: Array<DiscoverViewModel.MovieCard> {
         return discoverViewController.movieCards
     }
     
