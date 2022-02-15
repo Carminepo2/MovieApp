@@ -38,7 +38,6 @@ struct MoviePoster: View {
             try await imageLoader.fetchImage(url)
         } catch {
             print(error)
-            print(posterPath)
         }
     }
 
