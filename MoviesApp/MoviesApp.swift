@@ -9,11 +9,6 @@ import SwiftUI
 
 @main
 struct MoviesApp: App {
-    
-    init() {
-        //UINavigationBar.changeAppearance(clear: true)
-    }
-        
     var body: some Scene {
         WindowGroup {
             ContentView()

@@ -9,6 +9,7 @@ import Foundation
 
 class MovieStore {
     let movies: Array<Movie> = load("movies.json")
+    
     private init() { }
     
     static let shared = MovieStore()    

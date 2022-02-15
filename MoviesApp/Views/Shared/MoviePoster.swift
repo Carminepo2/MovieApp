@@ -10,7 +10,6 @@ import SwiftUI
 struct MoviePoster: View {
     let posterPath: String?
     
-    
     var body: some View {
         if let posterPath = posterPath {
             let url = URL(string: Constants.ImagesBasePath + posterPath)!

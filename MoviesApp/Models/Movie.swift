@@ -11,7 +11,6 @@ import Foundation
 struct Movie: Codable, Identifiable {
     
     let id: Int
-    
     let posterPath: String?
     let backdropPath: String?
     let belongsToCollection: Collection?
