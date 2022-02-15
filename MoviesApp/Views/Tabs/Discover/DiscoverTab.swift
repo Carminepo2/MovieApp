@@ -51,6 +51,7 @@ struct DiscoverTab: View {
                                 MovieCard(movie: movieCard.movie, animation: animation)
                                     .rotationEffect(.degrees(movieCard.rotationDegree))
                                     .rotationEffect(.degrees(movieCard.rotationOffset))
+                                
                                     .offset(x: movieCard.xOffset)
                                     .onTapGesture {
                                         withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.8)) {
@@ -90,6 +91,7 @@ struct DiscoverTab: View {
     
     // MARK: - Favorite and discard Functions
     func makeMovieFavorite() {
+        // Animation
         withAnimation {
             discoverViewController.movieCards[movieCards.last!].xOffset = 500
             discoverViewController.movieCards[movieCards.last!].rotationOffset = 15
@@ -103,6 +105,12 @@ struct DiscoverTab: View {
     }
     
     func discardMovie() {
+        // Remove discarded movie's poster image from cache
+        if let posterPath = movieCards.last?.movie.posterPath {
+            ImageCache.removeImageFromCache(with: Constants.ImagesBasePath + posterPath)
+        }
+        
+        // Animation
         withAnimation {
             discoverViewController.movieCards[movieCards.last!].xOffset = -500
             discoverViewController.movieCards[movieCards.last!].rotationOffset = -15
