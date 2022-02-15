@@ -58,8 +58,8 @@ struct MovieCardDetails: View {
                         
                         //MARK: Duration and year
                         HStack(spacing: 20) {
-                            Label("2h30m", systemImage: "clock")
-                            Label("2021", systemImage: "calendar")
+                            Label(movie.formattedDuration, systemImage: "clock")
+                            Label(movie.year, systemImage: "calendar")
                         }
                         .font(.body)
                         .matchedGeometryEffect(id: "movie-time", in: animation)
@@ -84,7 +84,6 @@ struct MovieCardDetails: View {
         .cornerRadius(cornerRadius)
         .scaleEffect(scale)
         .edgesIgnoringSafeArea(.all)
-        
     }
     
     // MARK: - Functions

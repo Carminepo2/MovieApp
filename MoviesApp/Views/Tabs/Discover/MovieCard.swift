@@ -12,6 +12,7 @@ struct MovieCard: View {
     @Namespace var animationPlaceholder
     var animation: Namespace.ID?
     
+    // If animation is not passed, it passes an animation id placeholder
     private var animationNamespace: Namespace.ID {
         animation != nil ? animation! : animationPlaceholder
     }
@@ -22,34 +23,40 @@ struct MovieCard: View {
             MoviePoster(posterPath: movie.posterPath)
                 .matchedGeometryEffect(id: "movie-poster", in: animationNamespace)
             
-            
             // MARK: - Gradient Overlay
             posterOverlay()
             
-            
             // MARK: - Movie Header
-            VStack(spacing: 10) {
+            VStack(spacing: Constants.HeaderVSpacing) {
                 Spacer()
                 
                 Group {
-                    
+                    // MARK: Title
                     Text(movie.title)
                         .font(.largeTitle)
                         .fontWeight(.semibold)
-                        .shadow(color: .black.opacity(0.5), radius: 4, x: 0, y: 2)
+                        .shadow(
+                            color: Constants.MovieTitleTextShadowColor,
+                            radius: Constants.MovieTitleTextShadowRadius,
+                            x: Constants.MovieTitleTextShadowPosition.x,
+                            y: Constants.MovieTitleTextShadowPosition.y
+                        )
                         .matchedGeometryEffect(id: "movie-title", in: animationNamespace)
                     
+                    // MARK: Overview
                     Text(movie.overview)
                         .font(.caption)
-                        .lineLimit(2)
+                        .lineLimit(Constants.CardMovieOverviewLineLimit)
                     
-                    HStack(spacing: 20) {
-                        Label("2h30m", systemImage: "clock")
-                        Label("2021", systemImage: "calendar")
+                    // MARK: Duration & Year
+                    HStack(spacing: Constants.DurationYearHSpacing) {
+                        Label(movie.formattedDuration, systemImage: "clock")
+                        Label(movie.year, systemImage: "calendar")
                     }
                     .font(.body)
                     .matchedGeometryEffect(id: "movie-time", in: animationNamespace)
                     
+                    // MARK: Rating
                     StarsRating(voteAverage: movie.voteAverage)
                         .matchedGeometryEffect(id: "movie-stars", in: animationNamespace)
                     
@@ -60,31 +67,26 @@ struct MovieCard: View {
             .padding()
             .foregroundColor(.white)
             
-            
         }
         .aspectRatio(Constants.CardAspectRatio, contentMode: .fit)
         .cornerRadius(Constants.CornerRadius)
         .padding(.horizontal)
-        .shadow(color: .init("Gray-900").opacity(0.8), radius: 5, x: 0, y: 0)
+        .shadow(
+            color: Constants.CardShadowColor,
+            radius: Constants.CardShadowRadius,
+            x: Constants.CardShadowPosition.x,
+            y: Constants.CardShadowPosition.y
+        )
     }
-    
     
     // MARK: - Functions
     func posterOverlay() -> some View {
         LinearGradient(
-            gradient: Gradient(
-                colors: [
-                    .init("Gray-900").opacity(0.75),
-                    .init("Gray-900").opacity(0.55),
-                    .init("Gray-900").opacity(0),
-                ]
-            ),
+            gradient: Constants.PosterOverlayGradient,
             startPoint: .bottom, endPoint: .top
         )
     }
 }
-
-   
 
 struct CardView_Previews: PreviewProvider {
     
@@ -101,5 +103,4 @@ struct CardView_Previews: PreviewProvider {
     static var previews: some View {
         TestView()
     }
-    
 }

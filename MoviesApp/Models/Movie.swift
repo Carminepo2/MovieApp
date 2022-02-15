@@ -38,6 +38,17 @@ struct Movie: Codable, Identifiable {
     let keywords: Array<Keyword>
     let providers: Providers
     
+    var formattedDuration: String {
+        guard let movieRuntime = self.runtime else { return "-" }
+        let hours = Int(movieRuntime / 60)
+        let minutes = movieRuntime % 60
+        return "\(hours)h\(minutes)m"
+    }
+    
+    var year: String {
+        self.releaseDate.components(separatedBy: "-")[0]
+    }
+    
     
     static let example = Movie(
         id: 634649,

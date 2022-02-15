@@ -188,7 +188,7 @@
 		75820CA727BA9D7200B489E1 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				75820CA927BA9F5500B489E1 /* Search */,
+				75820CA927BA9F5500B489E1 /* Discover */,
 				75820CA827BA9F4E00B489E1 /* Watchlist */,
 				75820CAA27BA9F5900B489E1 /* Settings */,
 			);
@@ -203,7 +203,7 @@
 			path = Watchlist;
 			sourceTree = "<group>";
 		};
-		75820CA927BA9F5500B489E1 /* Search */ = {
+		75820CA927BA9F5500B489E1 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
 				756F1DA427B8570A00609A15 /* MovieCardDetails.swift */,
@@ -211,7 +211,7 @@
 				75820CAF27BAA01000B489E1 /* DiscoverTab.swift */,
 				75702FEB27BB13850065ACB4 /* DiscardFavoriteButtons.swift */,
 			);
-			path = Search;
+			path = Discover;
 			sourceTree = "<group>";
 		};
 		75820CAA27BA9F5900B489E1 /* Settings */ = {

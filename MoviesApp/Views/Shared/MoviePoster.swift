@@ -21,7 +21,7 @@ struct MoviePoster: View {
             
                 
             } placeholder: {
-                Color.clear
+                Color("Gray-700")
                     .aspectRatio(Constants.CardAspectRatio, contentMode: .fit)
 
             }
