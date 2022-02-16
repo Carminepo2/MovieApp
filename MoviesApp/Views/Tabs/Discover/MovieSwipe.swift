@@ -16,6 +16,8 @@ struct MovieSwipe: View {
     @State private var tappedMovie: Movie? = nil
     @Binding var isSwipeCardModalOpen: Bool
     
+    @State private var userCanSwipe = true
+    
     
     private var movieCards: Array<DiscoverViewModel.MovieCard> {
         return discoverViewController.movieCards
@@ -71,8 +73,7 @@ struct MovieSwipe: View {
                 } else {
                     if let tappedMovie = tappedMovie {
                         MovieCardDetails(
-                            showDetails: $showDetails,
-                            movie: tappedMovie,
+                            movie: tappedMovie, showDetails: $showDetails,
                             animation: animation
                         )
                     }
@@ -93,11 +94,14 @@ struct MovieSwipe: View {
     
     // MARK: - Favorite and discard Functions
     func makeMovieFavorite() {
-        // Animation
+        if !userCanSwipe { return }
+
+        userCanSwipe = false
         withAnimation {
             discoverViewController.movieCards[movieCards.last!].xOffset = 500
             discoverViewController.movieCards[movieCards.last!].rotationOffset = 15
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                userCanSwipe = true
                 discoverViewController.nextCard()
                 withAnimation {
                     discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
@@ -107,16 +111,20 @@ struct MovieSwipe: View {
     }
     
     func discardMovie() {
+        if !userCanSwipe { return }
+        
+        userCanSwipe = false
+
         // Remove discarded movie's poster image from cache
         if let posterPath = movieCards.last?.movie.posterPath {
             ImageCache.removeImageFromCache(with: Constants.ImagesBasePath + posterPath)
         }
-        
-        // Animation
+
         withAnimation {
             discoverViewController.movieCards[movieCards.last!].xOffset = -500
             discoverViewController.movieCards[movieCards.last!].rotationOffset = -15
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                userCanSwipe = true
                 discoverViewController.nextCard()
                 withAnimation {
                     discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
