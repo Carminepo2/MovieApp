@@ -16,11 +16,16 @@ struct MoviePoster: View {
         self.contentMode = contentMode
     }
     
-    var body: some View {
+    init(posterPath: String?) {
         if let posterPath = posterPath {
-            let url = URL(string: Constants.ImagesBasePath + posterPath)!
-            AsyncImage(url: url) { image in
-                image
+            self.url = URL(string: Constants.ImagesBasePath + posterPath)
+        }
+    }
+    
+    var body: some View {
+        VStack {
+            if let uiImage = imageLoader.uiImage {
+                Image(uiImage: uiImage)
                     .resizable()
                     .aspectRatio(Constants.CardAspectRatio, contentMode: contentMode)
             
@@ -31,11 +36,23 @@ struct MoviePoster: View {
                     .scaledToFill()
                     //.aspectRatio(Constants.CardAspectRatio, contentMode: .fill)
 
+            } else {
+                Color("Gray-700")
+                    .aspectRatio(Constants.CardAspectRatio, contentMode: .fit)
             }
-        } else {
-            EmptyView() //TODO: Placeholder Image
+        }.task {
+            await downloadImage()
         }
     }
+    
+    private func downloadImage() async {
+        do {
+            try await imageLoader.fetchImage(url)
+        } catch {
+            print(error)
+        }
+    }
+
 }
 
 struct MoviePoster_Previews: PreviewProvider {

@@ -11,6 +11,7 @@ import SwiftUI
 struct Constants {
     static let ImagesBasePath = "https://image.tmdb.org/t/p/w500"
     static let CornerRadius = 8.0
+    static let maxImageCacheNum = 120
     
     // MARK: - Cards
     static let CardAspectRatio: CGFloat = 2/3 // Movie poster's aspect ratio
