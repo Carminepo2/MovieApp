@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct MoviePoster: View {
-    let posterPath: String?
+    var url: URL? = nil
     let contentMode: ContentMode
     
-    init(posterPath: String?, contentMode: ContentMode = .fit) {
-        self.posterPath = posterPath
-        self.contentMode = contentMode
-    }
+    @StateObject private var imageLoader = ImageLoaderViewModel()
     
-    init(posterPath: String?) {
+    
+    init(posterPath: String?, contentMode: ContentMode = .fit) {
+        self.contentMode = contentMode
         if let posterPath = posterPath {
             self.url = URL(string: Constants.ImagesBasePath + posterPath)
         }
     }
+
     
     var body: some View {
         VStack {
@@ -30,15 +30,10 @@ struct MoviePoster: View {
                     .aspectRatio(Constants.CardAspectRatio, contentMode: contentMode)
             
                 
-            } placeholder: {
+            } else {
                 Image("placeholder")
                     .resizable()
-                    .scaledToFill()
-                    //.aspectRatio(Constants.CardAspectRatio, contentMode: .fill)
-
-            } else {
-                Color("Gray-700")
-                    .aspectRatio(Constants.CardAspectRatio, contentMode: .fit)
+                    .aspectRatio(Constants.CardAspectRatio, contentMode: .fill)
             }
         }.task {
             await downloadImage()
