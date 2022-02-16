@@ -211,6 +211,8 @@
 			isa = PBXGroup;
 			children = (
 				75820CAD27BA9FFA00B489E1 /* WatchlistTab.swift */,
+				95BAEB8E27BBFE4F00E7750D /* WatchlistSavedForLater.swift */,
+				9549058A27BD2F0000DC60B5 /* MovieCardGridItem.swift */,
 			);
 			path = Watchlist;
 			sourceTree = "<group>";
@@ -313,11 +315,14 @@
 				7511316F27BD0D6B0025BE52 /* DiscoverTab.swift in Sources */,
 				756F1DA727B858A700609A15 /* MoviePoster.swift in Sources */,
 				756F1D7827B8164400609A15 /* ContentView.swift in Sources */,
+				9549058D27BD3D6000DC60B5 /* WatchlistViewModel.swift in Sources */,
+				95BAEB8F27BBFE4F00E7750D /* WatchlistSavedForLater.swift in Sources */,
 				75702FEC27BB13850065ACB4 /* DiscardFavoriteButtons.swift in Sources */,
 				756F1D7627B8164400609A15 /* MoviesApp.swift in Sources */,
 				75820CB027BAA01000B489E1 /* MovieSwipe.swift in Sources */,
 				7539459027B9152F00365782 /* Haptics.swift in Sources */,
 				756F1DA527B8570A00609A15 /* MovieCardDetails.swift in Sources */,
+				9549058B27BD2F0000DC60B5 /* MovieCardGridItem.swift in Sources */,
 				75820CAE27BA9FFA00B489E1 /* WatchlistTab.swift in Sources */,
 				756A041127BAF90B003ADFD4 /* Array.swift in Sources */,
 				DED54F8327BD5F8600DFB47F /* CurrentLocation.swift in Sources */,

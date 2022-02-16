@@ -23,6 +23,7 @@ struct ContentView: View {
             // MARK: - Watchlist Tab
             WatchlistTab()
                 .withBackground()
+                .environmentObject(WatchlistViewModel())
                 .tabItem {
                     Label("Watchlist", systemImage: "play.tv")
                 }
