@@ -7,9 +7,72 @@
 
 import SwiftUI
 
+
 struct SettingsTab: View {
+    
+    
     var body: some View {
-        Text("Settings")
+        NavigationView{
+            VStack{
+                VStack() {
+                    List {
+                        Group {
+                            
+                            
+                            Section(header: sectionHeader(label: "User")) {
+                                NavigationLink {
+                                    ProgressView()
+                                } label: {
+                                    Text("Current Location")
+                                }
+                                
+                                NavigationLink {
+                                    ProgressView()
+                                } label: {
+                                    Text("Streming Platforms")
+                                }
+                                
+                                
+                            }
+                            
+                            Section(header: sectionHeader(label: "General")) {
+                                NavigationLink {
+                                    ProgressView()
+                                } label: {
+                                    Text("Display")
+                                }
+                                NavigationLink {
+                                    ProgressView()
+                                } label: {
+                                    Text("Storage")
+                                }
+                                NavigationLink {
+                                    ProgressView()
+                                } label: {
+                                    Text("About")
+                                }
+                                
+                            }
+                        }
+                        .listRowBackground(Color.clear)
+                    }
+                    .withBackground()
+                    .listRowBackground(Color.clear)
+                    .listStyle(.plain)
+                    
+                }
+            }
+            .navigationTitle("Settings")
+            Spacer()
+        }
+    }
+    
+    // MARK: - Function
+    private func sectionHeader(label: String) -> some View {
+        Text(label.uppercased())
+            .font(.callout.weight(.medium))
+            .foregroundColor(.accentColor)
+            .hLeading()
     }
 }
 

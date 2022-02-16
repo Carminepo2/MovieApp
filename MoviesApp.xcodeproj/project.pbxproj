@@ -33,6 +33,8 @@
 		75820CAC27BA9FC700B489E1 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75820CAB27BA9FC700B489E1 /* SettingsTab.swift */; };
 		75820CAE27BA9FFA00B489E1 /* WatchlistTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75820CAD27BA9FFA00B489E1 /* WatchlistTab.swift */; };
 		75820CB027BAA01000B489E1 /* MovieSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75820CAF27BAA01000B489E1 /* MovieSwipe.swift */; };
+		DED54F8327BD5F8600DFB47F /* CurrentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED54F8227BD5F8600DFB47F /* CurrentLocation.swift */; };
+		DED54F8527BD5F9E00DFB47F /* StreamingPlatforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED54F8427BD5F9E00DFB47F /* StreamingPlatforms.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		75820CAB27BA9FC700B489E1 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		75820CAD27BA9FFA00B489E1 /* WatchlistTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchlistTab.swift; sourceTree = "<group>"; };
 		75820CAF27BAA01000B489E1 /* MovieSwipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSwipe.swift; sourceTree = "<group>"; };
+		DED54F8227BD5F8600DFB47F /* CurrentLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocation.swift; sourceTree = "<group>"; };
+		DED54F8427BD5F9E00DFB47F /* StreamingPlatforms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamingPlatforms.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +231,8 @@
 			isa = PBXGroup;
 			children = (
 				75820CAB27BA9FC700B489E1 /* SettingsTab.swift */,
+				DED54F8227BD5F8600DFB47F /* CurrentLocation.swift */,
+				DED54F8427BD5F9E00DFB47F /* StreamingPlatforms.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -314,11 +320,13 @@
 				756F1DA527B8570A00609A15 /* MovieCardDetails.swift in Sources */,
 				75820CAE27BA9FFA00B489E1 /* WatchlistTab.swift in Sources */,
 				756A041127BAF90B003ADFD4 /* Array.swift in Sources */,
+				DED54F8327BD5F8600DFB47F /* CurrentLocation.swift in Sources */,
 				756A040F27BAEC1D003ADFD4 /* DiscoverViewModel.swift in Sources */,
 				7511316B27BC00950025BE52 /* ImageCache.swift in Sources */,
 				756F1D9A27B82D5000609A15 /* MovieStore.swift in Sources */,
 				756F1D8B27B816C100609A15 /* String.swift in Sources */,
 				756F1DA327B8429B00609A15 /* StarsRating.swift in Sources */,
+				DED54F8527BD5F9E00DFB47F /* StreamingPlatforms.swift in Sources */,
 				7511316D27BC5FF20025BE52 /* ImageLoaderViewModel.swift in Sources */,
 				756F1D8927B816AA00609A15 /* View.swift in Sources */,
 				756F1D8E27B8178F00609A15 /* MovieCard.swift in Sources */,
