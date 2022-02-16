@@ -78,8 +78,7 @@ struct DiscoverTab: View {
             } else {
                 if let tappedMovie = tappedMovie {
                     MovieCardDetails(
-                        showDetails: $showDetails,
-                        movie: tappedMovie,
+                        movie: tappedMovie, showDetails: $showDetails,
                         animation: animation
                     )
                 }

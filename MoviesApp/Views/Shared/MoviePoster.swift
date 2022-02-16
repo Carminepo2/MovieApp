@@ -9,6 +9,12 @@ import SwiftUI
 
 struct MoviePoster: View {
     let posterPath: String?
+    let contentMode: ContentMode
+    
+    init(posterPath: String?, contentMode: ContentMode = .fit) {
+        self.posterPath = posterPath
+        self.contentMode = contentMode
+    }
     
     var body: some View {
         if let posterPath = posterPath {
@@ -16,12 +22,14 @@ struct MoviePoster: View {
             AsyncImage(url: url) { image in
                 image
                     .resizable()
-                    .aspectRatio(Constants.CardAspectRatio, contentMode: .fit)
+                    .aspectRatio(Constants.CardAspectRatio, contentMode: contentMode)
             
                 
             } placeholder: {
-                Color("Gray-700")
-                    .aspectRatio(Constants.CardAspectRatio, contentMode: .fit)
+                Image("placeholder")
+                    .resizable()
+                    .scaledToFill()
+                    //.aspectRatio(Constants.CardAspectRatio, contentMode: .fill)
 
             }
         } else {
