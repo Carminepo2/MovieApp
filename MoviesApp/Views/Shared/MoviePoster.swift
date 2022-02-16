@@ -9,24 +9,31 @@ import SwiftUI
 
 struct MoviePoster: View {
     var url: URL? = nil
+    let contentMode: ContentMode
+    
     @StateObject private var imageLoader = ImageLoaderViewModel()
     
-    init(posterPath: String?) {
+    
+    init(posterPath: String?, contentMode: ContentMode = .fit) {
+        self.contentMode = contentMode
         if let posterPath = posterPath {
             self.url = URL(string: Constants.ImagesBasePath + posterPath)
         }
     }
+
     
     var body: some View {
         VStack {
             if let uiImage = imageLoader.uiImage {
                 Image(uiImage: uiImage)
                     .resizable()
-                    .aspectRatio(Constants.CardAspectRatio, contentMode: .fit)
-
+                    .aspectRatio(Constants.CardAspectRatio, contentMode: contentMode)
+            
+                
             } else {
-                Color("Gray-700")
-                    .aspectRatio(Constants.CardAspectRatio, contentMode: .fit)
+                Image("placeholder")
+                    .resizable()
+                    .aspectRatio(Constants.CardAspectRatio, contentMode: .fill)
             }
         }.task {
             await downloadImage()

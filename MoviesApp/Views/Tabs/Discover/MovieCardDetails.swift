@@ -9,13 +9,26 @@ import SwiftUI
 
 struct MovieCardDetails: View {
     
+    let movie: Movie
     @Binding var showDetails: Bool
+    var animation: Namespace.ID?
+    @Namespace var animationPlaceholder
+
+
     @State private var scale: CGFloat = 1
     @State private var cornerRadius: CGFloat = 0
     
+    init(movie: Movie, showDetails: Binding<Bool> = .constant(true), animation: Namespace.ID? = nil) {
+        self.movie = movie
+        self._showDetails = showDetails
+        self.animation = animation
+    }
     
-    let movie: Movie
-    var animation: Namespace.ID
+    // If animation is not passed, it passes an animation id placeholder
+    private var animationNamespace: Namespace.ID {
+        animation != nil ? animation! : animationPlaceholder
+    }
+    
     
     var body: some View {
         
@@ -24,7 +37,7 @@ struct MovieCardDetails: View {
             // MARK: - Movie Poster
             VStack {
                 MoviePoster(posterPath: movie.posterPath)
-                    .matchedGeometryEffect(id: "movie-poster", in: animation)
+                    .matchedGeometryEffect(id: "movie-poster", in: animationNamespace)
                 
                 Spacer()
             }
@@ -54,7 +67,7 @@ struct MovieCardDetails: View {
                             .font(.largeTitle)
                             .fontWeight(.semibold)
                             .shadow(color: .black.opacity(0.5), radius: 4, x: 0, y: 2)
-                            .matchedGeometryEffect(id: "movie-title", in: animation)
+                            .matchedGeometryEffect(id: "movie-title", in: animationNamespace)
                         
                         //MARK: Duration and year
                         HStack(spacing: 20) {
@@ -62,11 +75,11 @@ struct MovieCardDetails: View {
                             Label(movie.year, systemImage: "calendar")
                         }
                         .font(.body)
-                        .matchedGeometryEffect(id: "movie-time", in: animation)
+                        .matchedGeometryEffect(id: "movie-time", in: animationNamespace)
                         
                         //MARK: Ratings
                         StarsRating(voteAverage: movie.voteAverage)
-                            .matchedGeometryEffect(id: "movie-stars", in: animation)
+                            .matchedGeometryEffect(id: "movie-stars", in: animationNamespace)
                         
                         //MARK: Overview
                         Text(movie.overview)
@@ -116,7 +129,7 @@ struct MovieDetails_Previews: PreviewProvider {
     struct TestView: View {
         @Namespace var ns
         var body: some View {
-            MovieCardDetails(showDetails: .constant(true), movie: .example, animation: ns)
+            MovieCardDetails(movie: .example, showDetails: .constant(true), animation: ns)
         }
     }
     static var previews: some View {
