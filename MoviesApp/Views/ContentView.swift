@@ -33,7 +33,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("Search", systemImage: "gear")
                 }
-            
+
         }
     }
 }
