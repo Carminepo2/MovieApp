@@ -10,7 +10,7 @@ import Foundation
 
 struct Movie: Codable, Identifiable {
     
-    let id: Int
+    let id: Int64
     let posterPath: String?
     // let backdropPath: String?
     // let belongsToCollection: Collection?
@@ -148,4 +148,15 @@ struct MoovieProvider: Codable {
     let logoPath: String
     let providerId: Int
     let providerName: String
+}
+
+enum Company{
+    case noOne
+    case couple
+    case friends
+    case family
+}
+struct shortMovie:Codable{
+    var id:Int?
+    var name:String?
 }

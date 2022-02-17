@@ -109,6 +109,9 @@ struct MovieSwipe: View {
                     discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
                 }
             }
+            discoverViewController.giveFeedback(drawValueId: movieCards.last!.movie.id, result: 1.0)
+
+
         }
     }
     
@@ -134,6 +137,7 @@ struct MovieSwipe: View {
                     discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
                 }
             }
+            discoverViewController.giveFeedback(drawValueId: movieCards.last!.movie.id, result: -1.0)
         }
     }
     
