@@ -47,51 +47,54 @@ struct MovieCardDetails: View {
             
             
             // MARK: - Movie Informations
-            VStack {
-                VStack(alignment: .trailing, spacing: 10) {
-                    
-                    // Visible part of the poster
-                    Color.clear
-                        .frame(maxHeight: 300)
-                        .contentShape(Rectangle())
-                    //MARK: Drag gesture to close modal
-                        .gesture(
-                            DragGesture(minimumDistance: 0, coordinateSpace: .global)
-                                .onChanged(onPosterDragChanged)
-                                .onEnded(onPosterDragEnded)
-                        )
-                    
-                    Group {
-                        //MARK: Title
-                        Text(movie.title)
-                            .font(.largeTitle)
-                            .fontWeight(.semibold)
-                            .shadow(color: .black.opacity(0.5), radius: 4, x: 0, y: 2)
-                            .matchedGeometryEffect(id: "movie-title", in: animationNamespace)
+            ScrollView {
+                VStack {
+                    VStack(alignment: .trailing, spacing: 10) {
                         
-                        //MARK: Duration and year
-                        HStack(spacing: 20) {
-                            Label(movie.formattedDuration, systemImage: "clock")
-                            Label(movie.year, systemImage: "calendar")
+                        // Visible part of the poster
+                        Color.clear
+                            .frame(height: 300)
+                            .contentShape(Rectangle())
+                        //MARK: Drag gesture to close modal
+                            .gesture(
+                                DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                                    .onChanged(onPosterDragChanged)
+                                    .onEnded(onPosterDragEnded)
+                            )
+                        
+                        Group {
+                            //MARK: Title
+                            Text(movie.title)
+                                .font(.largeTitle)
+                                .fontWeight(.semibold)
+                                .shadow(color: .black.opacity(0.5), radius: 4, x: 0, y: 2)
+                                .matchedGeometryEffect(id: "movie-title", in: animationNamespace)
+                            
+                            //MARK: Duration and year
+                            HStack(spacing: 20) {
+                                Label(movie.formattedDuration, systemImage: "clock")
+                                Label(movie.year, systemImage: "calendar")
+                            }
+                            .font(.body)
+                            .matchedGeometryEffect(id: "movie-time", in: animationNamespace)
+                            
+                            //MARK: Ratings
+                            StarsRating(voteAverage: movie.voteAverage)
+                                .matchedGeometryEffect(id: "movie-stars", in: animationNamespace)
+                            
+                            //MARK: Overview
+                            Text(movie.overview)
+                                .padding(.top)
+                            
                         }
-                        .font(.body)
-                        .matchedGeometryEffect(id: "movie-time", in: animationNamespace)
-                        
-                        //MARK: Ratings
-                        StarsRating(voteAverage: movie.voteAverage)
-                            .matchedGeometryEffect(id: "movie-stars", in: animationNamespace)
-                        
-                        //MARK: Overview
-                        Text(movie.overview)
-                            .padding(.top)
-                        
+                        .hLeading()
                     }
-                    .hLeading()
+                    .padding()
+                    .foregroundColor(.white)
+                    
+                    Spacer()
                 }
-                .padding()
-                .foregroundColor(.white)
-                
-                Spacer()
+
             }
         }
         .cornerRadius(cornerRadius)
