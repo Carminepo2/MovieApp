@@ -12,29 +12,29 @@ struct Movie: Codable, Identifiable {
     
     let id: Int
     let posterPath: String?
-    let backdropPath: String?
-    let belongsToCollection: Collection?
-    let budget: Int
+    // let backdropPath: String?
+    // let belongsToCollection: Collection?
+    // let budget: Int
     let genres: Array<Genre>
-    let homepage: String?
-    let imdbId: String?
+    // let homepage: String?
+    // let imdbId: String?
     let originalLanguage: String
     let originalTitle: String
     let overview: String
-    let popularity: Float
-    let productionCompanies: Array<ProductionCompany>
-    let productionCountries: Array<ProductionCountry>
+    // let popularity: Float
+    // let productionCompanies: Array<ProductionCompany>
+    // let productionCountries: Array<ProductionCountry>
     let releaseDate: String
-    let revenue: Int
+    // let revenue: Int
     let runtime: Int?
-    let spokenLanguages: Array<SpokenLanguage>
-    let status: String
+    // let spokenLanguages: Array<SpokenLanguage>
+    // let status: String
     let tagline: String
     let title: String
-    let video: Bool
+    // let video: Bool
     let voteAverage: Float
-    let voteCount: Int
-    let keywords: Array<Keyword>
+    // let voteCount: Int
+    // let keywords: Array<Keyword>
     let providers: Providers
     
     var formattedDuration: String {
@@ -52,29 +52,29 @@ struct Movie: Codable, Identifiable {
     static let example = Movie(
         id: 634649,
         posterPath: "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
-        backdropPath: "/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
-        belongsToCollection: nil,
-        budget: 200000000,
+        // backdropPath: "/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
+        // belongsToCollection: nil,
+        // budget: 200000000,
         genres: [],
-        homepage: "https://www.spidermannowayhome.movie",
-        imdbId: "tt10872600",
+        // homepage: "https://www.spidermannowayhome.movie",
+        // imdbId: "tt10872600",
         originalLanguage: "en",
         originalTitle: "Spider-Man: No Way Home",
         overview: "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.",
-        popularity: 11286.376,
-        productionCompanies: [],
-        productionCountries: [],
+        // popularity: 11286.376,
+        // productionCompanies: [],
+        // productionCountries: [],
         releaseDate: "2021-12-15",
-        revenue: 1775000000,
+        // revenue: 1775000000,
         runtime: 148,
-        spokenLanguages: [],
-        status: "Released",
+        // spokenLanguages: [],
+        // status: "Released",
         tagline: "The Multiverse unleashed.",
         title: "Spider-Man: No Way Home",
-        video: false,
+        // video: false,
         voteAverage: 8.4,
-        voteCount: 7443,
-        keywords: [],
+        // voteCount: 7443,
+        // keywords: [],
         providers: Providers.init(de: nil, it: nil, us: nil)
     )
 }
