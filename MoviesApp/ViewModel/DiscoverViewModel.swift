@@ -31,6 +31,9 @@ class DiscoverViewModel: ObservableObject {
     }
     // MARK: Riccardo Function
 
+   
+    
+    
     func getAdvice()->Movie{
         var isAdvisorSetted = advisor.isAdvisorSetted
         if(isAdvisorSetted == false){

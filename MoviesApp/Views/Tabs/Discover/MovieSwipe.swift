@@ -90,6 +90,7 @@ struct MovieSwipe: View {
             }
 
         }
+      
     }
     
     // MARK: - Favorite and discard Functions

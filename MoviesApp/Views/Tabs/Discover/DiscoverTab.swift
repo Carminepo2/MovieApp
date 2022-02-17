@@ -39,6 +39,7 @@ struct DiscoverTab: View {
     }
     
     
+    
     // MARK: - Functions
     func popCornButtonTapped() {
         isSwipeCardModalOpen = true

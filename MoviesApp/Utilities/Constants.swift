@@ -15,7 +15,7 @@ struct Constants {
     
     // MARK: - Cards
     static let CardAspectRatio: CGFloat = 2/3 // Movie poster's aspect ratio
-    static let NumOfCards: Int = 5
+    static let NumOfCards: Int = 3
     static let CardMovieOverviewLineLimit: Int = 2
     static let PosterOverlayGradient: Gradient = .init(
         colors: [

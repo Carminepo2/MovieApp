@@ -32,6 +32,8 @@ class MovieAppModel {
     func getWatchListId()->Array<Int64>{
         return []
     }
+ 
+    
     
     func addToWatchList(id:Int64){
         
