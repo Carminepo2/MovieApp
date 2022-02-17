@@ -26,7 +26,7 @@ struct DiscardFavoriteButtons: View {
             
             
             Button(action: makeFavorite) {
-                Image(systemName: "heart")
+                Image(systemName: "heart.fill")
                     .font(.title.weight(.semibold))
                     .foregroundColor(.init("Gray-800"))
             }

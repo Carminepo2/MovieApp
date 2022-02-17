@@ -101,6 +101,8 @@ struct MovieSwipe: View {
         withAnimation {
             discoverViewController.movieCards[movieCards.last!].xOffset = 500
             discoverViewController.movieCards[movieCards.last!].rotationOffset = 15
+            Haptics.shared.play(.heavy)
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 userCanSwipe = true
                 discoverViewController.nextCard()
@@ -123,6 +125,8 @@ struct MovieSwipe: View {
         if let posterPath = movieCards.last?.movie.posterPath {
             ImageCache.removeImageFromCache(with: Constants.ImagesBasePath + posterPath)
         }
+        
+        Haptics.shared.play(.soft)
 
         withAnimation {
             discoverViewController.movieCards[movieCards.last!].xOffset = -500
