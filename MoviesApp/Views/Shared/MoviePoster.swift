@@ -33,7 +33,7 @@ struct MoviePoster: View {
             } else {
                 Image("placeholder")
                     .resizable()
-                    .aspectRatio(Constants.CardAspectRatio, contentMode: .fill)
+                    .aspectRatio(Constants.CardAspectRatio, contentMode: contentMode)
             }
         }.task {
             await downloadImage()

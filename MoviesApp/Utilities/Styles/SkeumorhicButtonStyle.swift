@@ -21,7 +21,7 @@ struct SkeumorphicButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         Circle()
             .fill(isPrimary ? .accentColor : Color("Gray-700"))
-            .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 5)
+            .shadow(color: .black.opacity(0.2), radius: configuration.isPressed ? 0 : 5, x: 0, y: configuration.isPressed ? 0 : 5)
             .overlay {
                 configuration.label
                     .font(.title.weight(.semibold))
