@@ -13,7 +13,7 @@ struct MovieCardDetails: View {
     @Binding var showDetails: Bool
     var animation: Namespace.ID?
     @Namespace var animationPlaceholder
-
+    @EnvironmentObject var discoverViewController: DiscoverViewModel
 
     @State private var scale: CGFloat = 1
     @State private var cornerRadius: CGFloat = 0

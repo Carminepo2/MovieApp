@@ -12,6 +12,8 @@ struct MovieCard: View {
     @Namespace var animationPlaceholder
     var animation: Namespace.ID?
     
+    @EnvironmentObject var discoverViewController: DiscoverViewModel
+    
     // If animation is not passed, it passes an animation id placeholder
     private var animationNamespace: Namespace.ID {
         animation != nil ? animation! : animationPlaceholder
@@ -68,6 +70,9 @@ struct MovieCard: View {
             .foregroundColor(.white)
             
         }
+        .task {
+            await discoverViewController.getMovieById(movie.id)
+        }
         .aspectRatio(Constants.CardAspectRatio, contentMode: .fit)
         .cornerRadius(Constants.CornerRadius)
         .padding(.horizontal)
@@ -77,6 +82,7 @@ struct MovieCard: View {
             x: Constants.CardShadowPosition.x,
             y: Constants.CardShadowPosition.y
         )
+        
     }
     
     // MARK: - Functions
