@@ -14,14 +14,11 @@ class DiscoverViewModel: ObservableObject {
     var advisor:GrandAdvisor = GrandAdvisor.shared
     
     init() {
-       
-    }
-    
-    func setArray(){
         for _ in 0..<Constants.NumOfCards {
             movieCards.append(MovieCard(movie: self.getRandomMovie()!))
         }
     }
+    
     
     
     func nextCard(){
