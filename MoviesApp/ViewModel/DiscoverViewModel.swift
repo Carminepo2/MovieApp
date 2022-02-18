@@ -47,9 +47,9 @@ class DiscoverViewModel: ObservableObject {
         var idAdvice = advisor.getAdvice()
         return self.getMovieById(id: idAdvice)
     }
-//    func getAllMovies()->Array<Movie>{
-//        return model.movies
-//    }
+    func getAllMovies()->Array<Movie>{
+        return model.movies
+    }
     func giveFeedback(drawValueId:Int64,result:Double){
         advisor.giveFeedback(drawValueId: drawValueId, result: result)
     }
@@ -59,47 +59,8 @@ class DiscoverViewModel: ObservableObject {
     private func addToWatchLater(id:Int64){
         
     }
-    func getMovieById(id:Int64)->Movie{
-        let example = Movie(
-            id: 634649,
-            posterPath: "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
-            // backdropPath: "/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
-            // belongsToCollection: nil,
-            // budget: 200000000,
-            genres: [],
-            // homepage: "https://www.spidermannowayhome.movie",
-            // imdbId: "tt10872600",
-            originalLanguage: "en",
-            originalTitle: "Spider-Man: No Way Home",
-            overview: "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.",
-            // popularity: 11286.376,
-            // productionCompanies: [],
-            // productionCountries: [],
-            releaseDate: "2021-12-15",
-            // revenue: 1775000000,
-            runtime: 148,
-            // spokenLanguages: [],
-            // status: "Released",
-            tagline: "The Multiverse unleashed.",
-            title: "Spider-Man: No Way Home",
-            // video: false,
-            voteAverage: 8.4,
-            // voteCount: 7443,
-            // keywords: [],
-            providers: Providers.init(de: nil, it: nil, us: nil)
-        )
-        var movieToReturn:Movie? = nil
-        
-        Task{
-            do{
-                var movieToReturn = try await model.getMovieById(id: id)
-            }
-            catch{
-                
-            }
-        }
-        
-        return movieToReturn ?? example
+    func getMovieById(id:Int64)->Movie{        
+        return model.getMovieById(id: id)
     }
  
     

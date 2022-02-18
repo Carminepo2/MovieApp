@@ -8,7 +8,7 @@
 import Foundation
 
 class MovieAppModel {
-//    var movies:Array<Movie> = load("movies.json")
+    var movies:Array<Movie> = load("movies.json")
     var watchListAlone:Array<Movie>
     var watchListCouple:Array<Movie>
     var watchListFriends:Array<Movie>
@@ -41,34 +41,14 @@ class MovieAppModel {
     func addToMovieAlreadyReccomended(id:Int64){
         
     }
-    func getMovieById(id:Int64)  async throws ->Movie?{
-        var urlComponent = URLComponents(string: "https://api.themoviedb.org")!
-        var decoder = JSONDecoder()
+    func getMovieById(id:Int64)->Movie{
         var movieToReturn:Movie? = nil
-
-        urlComponent.path = "/3/movie/\(id)"
-        urlComponent.queryItems = [
-            "api_key": "fadf21998f46c545c3f3de23ca5712ec"
-        ].map { URLQueryItem(name: $0.key, value: $0.value) }
-        let (data,response) = try await URLSession.shared.data(from: urlComponent.url!)
-        if let httpResponse = response as? HTTPURLResponse,
-           httpResponse.statusCode == 200,
-           let movie = try? decoder.decode(Movie.self, from: data){
-                movieToReturn = movie
+        for indexOfMovies in 0..<movies.count{
+            if(movies[indexOfMovies].id == id){
+                movieToReturn = movies[indexOfMovies]
             }
-        else{
-            movieToReturn = nil
         }
-        
-            return movieToReturn
-        
-//        var movieToReturn:Movie? = nil
-//        for indexOfMovies in 0..<movies.count{
-//            if(movies[indexOfMovies].id == id){
-//                movieToReturn = movies[indexOfMovies]
-//            }
-//        }
-//        return movieToReturn!
+        return movieToReturn!
     }
     
     
@@ -97,5 +77,5 @@ class MovieAppModel {
             fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
         }
     }
-    
+
 }
