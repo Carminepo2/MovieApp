@@ -14,9 +14,9 @@
             filePath = "MoviesApp/Models/MovieAppModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "load(_:)"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "getMovieById(id:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

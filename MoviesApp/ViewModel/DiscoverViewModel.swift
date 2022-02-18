@@ -16,7 +16,8 @@ class DiscoverViewModel: ObservableObject {
     init() {
        
     }
-    func setMovieCards(){
+    
+    func setArray(){
         for _ in 0..<Constants.NumOfCards {
             movieCards.append(MovieCard(movie: self.getRandomMovie()!))
         }
