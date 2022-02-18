@@ -43,6 +43,7 @@ class MovieAppModel {
     }
     func getMovieById(id:Int64)->Movie{
         var movieToReturn:Movie? = nil
+   
         for indexOfMovies in 0..<movies.count{
             if(movies[indexOfMovies].id == id){
                 movieToReturn = movies[indexOfMovies]

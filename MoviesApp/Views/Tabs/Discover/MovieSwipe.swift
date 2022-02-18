@@ -178,6 +178,7 @@ struct MovieSwipe: View {
 }
 
 struct SearchTab_Previews: PreviewProvider {
+ 
     static var previews: some View {
         MovieSwipe(isSwipeCardModalOpen: .constant(true))
     }
