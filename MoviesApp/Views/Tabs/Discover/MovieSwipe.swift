@@ -16,6 +16,8 @@ struct MovieSwipe: View {
     @State private var tappedMovie: Movie? = nil
     @Binding var isSwipeCardModalOpen: Bool
     
+    @State private var userCanSwipe = true
+    
     
     private var movieCards: Array<DiscoverViewModel.MovieCard> {
         return discoverViewController.movieCards
@@ -71,8 +73,7 @@ struct MovieSwipe: View {
                 } else {
                     if let tappedMovie = tappedMovie {
                         MovieCardDetails(
-                            showDetails: $showDetails,
-                            movie: tappedMovie,
+                            movie: tappedMovie, showDetails: $showDetails,
                             animation: animation
                         )
                     }
@@ -89,39 +90,55 @@ struct MovieSwipe: View {
             }
 
         }
+      
     }
     
     // MARK: - Favorite and discard Functions
     func makeMovieFavorite() {
-        // Animation
+        if !userCanSwipe { return }
+
+        userCanSwipe = false
         withAnimation {
             discoverViewController.movieCards[movieCards.last!].xOffset = 500
             discoverViewController.movieCards[movieCards.last!].rotationOffset = 15
+            Haptics.shared.play(.heavy)
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                userCanSwipe = true
                 discoverViewController.nextCard()
                 withAnimation {
                     discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
                 }
             }
+            discoverViewController.giveFeedback(drawValueId: movieCards.last!.movie.id, result: 1.0)
+
+
         }
     }
     
     func discardMovie() {
+        if !userCanSwipe { return }
+        
+        userCanSwipe = false
+
         // Remove discarded movie's poster image from cache
         if let posterPath = movieCards.last?.movie.posterPath {
             ImageCache.removeImageFromCache(with: Constants.ImagesBasePath + posterPath)
         }
         
-        // Animation
+        Haptics.shared.play(.soft)
+
         withAnimation {
             discoverViewController.movieCards[movieCards.last!].xOffset = -500
             discoverViewController.movieCards[movieCards.last!].rotationOffset = -15
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                userCanSwipe = true
                 discoverViewController.nextCard()
                 withAnimation {
                     discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
                 }
             }
+            discoverViewController.giveFeedback(drawValueId: movieCards.last!.movie.id, result: -1.0)
         }
     }
     
@@ -161,6 +178,7 @@ struct MovieSwipe: View {
 }
 
 struct SearchTab_Previews: PreviewProvider {
+ 
     static var previews: some View {
         MovieSwipe(isSwipeCardModalOpen: .constant(true))
     }

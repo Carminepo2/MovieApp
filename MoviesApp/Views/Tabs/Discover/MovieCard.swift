@@ -20,7 +20,7 @@ struct MovieCard: View {
     var body: some View {
         ZStack {
             // MARK: - Movie Poster
-            MoviePoster(posterPath: movie.posterPath)
+            MoviePoster(posterPath: movie.posterPath, contentMode: .fill)
                 .matchedGeometryEffect(id: "movie-poster", in: animationNamespace)
             
             // MARK: - Gradient Overlay

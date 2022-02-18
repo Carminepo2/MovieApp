@@ -85,19 +85,28 @@ extension View {
             )
     }
     
-    func innerShadow<S: Shape>(using shape: S, angle: Angle = .degrees(0), color: Color = .black, width: CGFloat = 6, blur: CGFloat = 4 ) -> some View {
+    func innerShadow<S: Shape>(
+        using shape: S,
+        angle: Angle = .degrees(0),
+        color: Color = .black,
+        width: CGFloat = 6,
+        offsetX: CGFloat = 0,
+        offsetY: CGFloat = 0,
+        blur: CGFloat = 4
+    ) -> some View {
+        
         let finalX = CGFloat(cos(angle.radians - .pi/2))
         let finalY = CGFloat(sin(angle.radians - .pi/2))
         
         return self
-            .overlay {
+            .overlay(
                 shape
                     .stroke(color, lineWidth: width)
-                    .offset(x: finalX * width * 0.6, y: finalY * width * 0.6)
+                    .offset(x: finalX * width * offsetX, y: finalY * width * offsetY)
                     .blur(radius: blur)
                     .mask(shape)
-            }
-
+            )
+        
     }
     
 }

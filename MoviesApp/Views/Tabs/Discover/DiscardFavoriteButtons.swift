@@ -15,32 +15,24 @@ struct DiscardFavoriteButtons: View {
     var body: some View {
         HStack(spacing: 80) {
             Button(action: discard) {
-                Circle()
-                    .fill(Color("Gray-800"))
-                    .frame(width: 75, height: 75)
-                    .overlay {
-                        Image(systemName: "xmark")
-                            .font(.title.weight(.semibold))
-                            .foregroundColor(.accentColor)
-                    }
-                    .innerShadow(using: Circle(), color: .black.opacity(0.25), blur: 5)
-
+                Image(systemName: "xmark")
+                    .font(.title.weight(.semibold))
+                    .foregroundColor(.accentColor)
+                
             }
-           
-                                    
-            Button(action: makeFavorite) {
-                Circle()
-                    .fill(Color.accentColor)
-                    .frame(width: 75, height: 75)
-                    .overlay {
-                        Image(systemName: "heart")
-                            .font(.title.weight(.semibold))
-                            .foregroundColor(.init("Gray-800"))
-
-                    }
-                    .innerShadow(using: Circle(), color: .white.opacity(0.55))
+            .buttonStyle(SkeumorphicButtonStyle(.secondary))
+            .frame(width: 75, height: 75)
             
+            
+            
+            Button(action: makeFavorite) {
+                Image(systemName: "heart.fill")
+                    .font(.title.weight(.semibold))
+                    .foregroundColor(.init("Gray-800"))
             }
+            .buttonStyle(SkeumorphicButtonStyle(.primary))
+            .frame(width: 75, height: 75)
+            
         }
         .padding()
     }
