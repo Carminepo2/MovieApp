@@ -9,7 +9,6 @@ import SwiftUI
 
 struct DiscoverTab: View {
     @State private var isSwipeCardModalOpen: Bool = false
-    @EnvironmentObject var discoverViewController: DiscoverViewModel
     
     var body: some View {
         NavigationView {
@@ -44,9 +43,6 @@ struct DiscoverTab: View {
     // MARK: - Functions
     func popCornButtonTapped() {
         isSwipeCardModalOpen = true
-        async{
-            await discoverViewController.setCards()
-        }
     }
 }
 
