@@ -11,6 +11,8 @@ struct MovieCard: View {
     let movie: Movie
     @Namespace var animationPlaceholder
     var animation: Namespace.ID?
+    @EnvironmentObject var discoverViewController: DiscoverViewModel
+
     
     // If animation is not passed, it passes an animation id placeholder
     private var animationNamespace: Namespace.ID {
@@ -68,6 +70,9 @@ struct MovieCard: View {
             .foregroundColor(.white)
             
         }
+//        .task {
+//            await downloadData()
+//        }
         .aspectRatio(Constants.CardAspectRatio, contentMode: .fit)
         .cornerRadius(Constants.CornerRadius)
         .padding(.horizontal)
@@ -86,6 +91,13 @@ struct MovieCard: View {
             startPoint: .bottom, endPoint: .top
         )
     }
+//    private func downloadData() async {
+//        do {
+//            try await discoverViewController.fetchImage(url)
+//        } catch {
+//            print(error)
+//        }
+//    }
 }
 
 struct CardView_Previews: PreviewProvider {

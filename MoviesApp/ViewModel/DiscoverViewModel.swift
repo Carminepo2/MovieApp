@@ -15,20 +15,18 @@ class DiscoverViewModel: ObservableObject {
     
     init() {
         for _ in 0..<Constants.NumOfCards {
-            movieCards.append(MovieCard(movie: self.getRandomMovie()!))
+            movieCards.append(MovieCard(movie: self.getAdvice()))
         }
     }
     
     func nextCard(){
         movieCards.removeLast()
-        movieCards.insert(MovieCard(movie: self.getRandomMovie()!), at: 0)
+        movieCards.insert(MovieCard(movie: self.getAdvice()), at: 0)
 
     }
     
     
-    private func getRandomMovie() -> Movie? {
-        return self.getAdvice()
-    }
+ 
     // MARK: Riccardo Function
 
    
