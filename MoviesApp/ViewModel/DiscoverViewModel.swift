@@ -7,17 +7,18 @@
 
 import Foundation
 
+
 class DiscoverViewModel: ObservableObject {
-    @Published var movieCards: Array<MovieCard> = []
+    @Published var movieCards: Array<MovieCard>
     @Published var rotationDegreeCards: Array<Double> = []
     @Published var model:MovieAppModel = MovieAppModel.shared
     var advisor:GrandAdvisor = GrandAdvisor.shared
     
     init() {
-        setCards()
+        setModel()
     }
     
-    func setCards(){
+    func setModel(){
         for _ in 0..<Constants.NumOfCards {
             movieCards.append(MovieCard(movie: self.getAdvice()))
         }
