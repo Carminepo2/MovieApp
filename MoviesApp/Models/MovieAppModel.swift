@@ -44,6 +44,20 @@ class MovieAppModel {
     func getMovieById(id:Int64)->Movie{
         var movieToReturn:Movie? = nil
    
+//        var urlComponent = URLComponents(string: "https://api.themoviedb.org")!
+//        var decoder = JSONDecoder()
+//        urlComponent.path = "/3/movie/\(id)"
+//        urlComponent.queryItems = ["api_key": "fadf21998f46c545c3f3de23ca5712ec"].map { URLQueryItem(name: $0.key, value: $0.value) }
+//
+//        let (data,response) = try await URLSession.shared.data(from: urlComponent.url!)
+//        if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200,let movie = try? decoder.decode(Movie.self, from: data){
+//            movieToReturn = movie
+//        }
+//        else{
+//            movieToReturn = nil
+//        }
+        
+        
         for indexOfMovies in 0..<movies.count{
             if(movies[indexOfMovies].id == id){
                 movieToReturn = movies[indexOfMovies]
