@@ -1,41 +1,42 @@
 //
 //  Movie.swift
-//  MoviesApp
+//  provaAPI
 //
-//  Created by Carmine Porricelli on 12/02/22.
+//  Created by riccardo ruocco on 20/02/22.
 //
+
 
 import Foundation
 
 
 struct Movie: Codable, Identifiable {
-    
+    var adult:Bool
     let id: Int64
-    let posterPath: String?
-    // let backdropPath: String?
-    // let belongsToCollection: Collection?
-    // let budget: Int
+    let poster_path: String?
+     let backdrop_path: String?
+     let belongs_to_collection: Collection?
+     let budget: Int
     let genres: Array<Genre>
-    // let homepage: String?
-    // let imdbId: String?
-    let originalLanguage: String
-    let originalTitle: String
+     let homepage: String?
+     let imdbId: String?
+    let original_language: String
+    let original_title: String
     let overview: String
-    // let popularity: Float
-    // let productionCompanies: Array<ProductionCompany>
-    // let productionCountries: Array<ProductionCountry>
-    let releaseDate: String
-    // let revenue: Int
+     let popularity: Float
+     let production_companies: Array<ProductionCompany>
+     let production_countries: Array<ProductionCountry>
+    let release_date: String
+     let revenue: Int
     let runtime: Int?
-    // let spokenLanguages: Array<SpokenLanguage>
-    // let status: String
+     let spoken_languages: Array<SpokenLanguage>
+     let status: String
     let tagline: String
     let title: String
-    // let video: Bool
-    let voteAverage: Float
-    // let voteCount: Int
-    // let keywords: Array<Keyword>
-    let providers: Providers
+     let video: Bool
+    let vote_average: Float
+     let vote_count: Int
+     let keywords: Array<Keyword>?
+    let providers: Providers?
     
     var formattedDuration: String {
         guard let movieRuntime = self.runtime else { return "-" }
@@ -45,36 +46,37 @@ struct Movie: Codable, Identifiable {
     }
     
     var year: String {
-        self.releaseDate.components(separatedBy: "-")[0]
+        self.release_date.components(separatedBy: "-")[0]
     }
     
     
     static let example = Movie(
+        adult:false,
         id: 634649,
-        posterPath: "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
-        // backdropPath: "/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
-        // belongsToCollection: nil,
-        // budget: 200000000,
+        poster_path: "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+        backdrop_path: "/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
+        belongs_to_collection: nil,
+         budget: 200000000,
         genres: [],
-        // homepage: "https://www.spidermannowayhome.movie",
-        // imdbId: "tt10872600",
-        originalLanguage: "en",
-        originalTitle: "Spider-Man: No Way Home",
+         homepage: "https://www.spidermannowayhome.movie",
+         imdbId: "tt10872600",
+        original_language: "en",
+        original_title: "Spider-Man: No Way Home",
         overview: "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.",
-        // popularity: 11286.376,
-        // productionCompanies: [],
-        // productionCountries: [],
-        releaseDate: "2021-12-15",
-        // revenue: 1775000000,
+         popularity: 11286.376,
+        production_companies: [],
+        production_countries: [],
+        release_date: "2021-12-15",
+        revenue: 1775000000,
         runtime: 148,
-        // spokenLanguages: [],
-        // status: "Released",
+        spoken_languages: [],
+        status: "Released",
         tagline: "The Multiverse unleashed.",
         title: "Spider-Man: No Way Home",
-        // video: false,
-        voteAverage: 8.4,
-        // voteCount: 7443,
-        // keywords: [],
+        video: false,
+        vote_average: 8.4,
+        vote_count: 7443,
+         keywords: [],
         providers: Providers.init(de: nil, it: nil, us: nil)
     )
 }
@@ -99,19 +101,19 @@ struct ProductionCompany: Codable, Identifiable {
     let id: Int
     let logoPath: String?
     let name: String
-    let originCountry: String
+    let origin_country: String
 }
 
 // MARK: - ProductionCountry
 struct ProductionCountry: Codable {
-    let iso31661: String
+    let iso_3166_1: String
     let name: String
 }
 
 // MARK: - SpokenLanguage
 struct SpokenLanguage: Codable {
-    let englishName: String
-    let iso6391: String
+    let english_name: String
+    let iso_639_1: String
     let name: String
 }
 
@@ -160,3 +162,4 @@ struct shortMovie:Codable{
     var id:Int?
     var name:String?
 }
+

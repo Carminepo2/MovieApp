@@ -11,10 +11,11 @@ class DiscoverViewModel: ObservableObject {
     @Published var movieCards: Array<MovieCard> = []
     @Published var rotationDegreeCards: Array<Double> = []
     @Published var model:MovieAppModel = MovieAppModel.shared
+    @Published var movieToReturn:Movie?
     var advisor:GrandAdvisor = GrandAdvisor.shared
     
     init() {
-        setCards()
+//        setCards()
     }
     
     func setCards(){
@@ -33,7 +34,46 @@ class DiscoverViewModel: ObservableObject {
     
  
     // MARK: Riccardo Function
+    
+    @MainActor
+    func addFilm(filmToAdd:Movie?){
+        movieToReturn = filmToAdd
+    }
+    
+    func downloadFilm(id:Int64) async{
+        var movieToReturn:Movie = Movie.example
+        var urlComponent = URLComponents(string: "https://api.themoviedb.org")!
+        let decoder = JSONDecoder()
 
+        urlComponent.path = "/3/movie/\(id)"
+        urlComponent.queryItems = [
+            "api_key": "fadf21998f46c545c3f3de23ca5712ec"
+        ].map { URLQueryItem(name: $0.key, value: $0.value) }
+        
+        do{
+            let (data,response) = try await URLSession.shared.data(from: urlComponent.url!)
+            
+            
+            if let httpResponse = response as? HTTPURLResponse,
+               httpResponse.statusCode == 200,
+               let movie = try? decoder.decode(Movie.self, from: data){
+//                print(movie.title)
+                await addFilm(filmToAdd: movie)
+            }
+            
+        }
+        catch DecodingError.keyNotFound(let key, let context) {
+            print("Key '\(key)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        }
+        catch{
+            print("altro")
+        }
+        
+        
+        
+     
+    }
    
     
     
@@ -50,9 +90,9 @@ class DiscoverViewModel: ObservableObject {
         var idAdvice = advisor.getAdvice()
         return self.getMovieById(id: idAdvice)
     }
-    func getAllMovies()->Array<Movie>{
-        return model.movies
-    }
+//    func getAllMovies()->Array<Movie>{
+//        return model.movies
+//    }
     func giveFeedback(drawValueId:Int64,result:Double){
         advisor.giveFeedback(drawValueId: drawValueId, result: result)
     }
@@ -62,8 +102,11 @@ class DiscoverViewModel: ObservableObject {
     private func addToWatchLater(id:Int64){
         
     }
-    func getMovieById(id:Int64)->Movie{        
-        return model.getMovieById(id: id)
+    func getMovieById(id:Int64)->Movie{
+        Task{
+            await self.downloadFilm(id: id)
+        }
+        return self.movieToReturn ?? Movie.example
     }
  
     

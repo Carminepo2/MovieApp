@@ -25,7 +25,7 @@ class GrandAdvisor{
     
     func getAdvice()->Int64{
         var recommendedMovie:Int64 = 0
-        
+    
 
         if(numberOfDraws<6){
             var input1 = GenresRaccomender_1Input(items: input, k: 1, restrict_: nil, exclude: alreadDrawsMovies)

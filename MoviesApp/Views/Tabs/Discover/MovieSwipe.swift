@@ -122,7 +122,7 @@ struct MovieSwipe: View {
         userCanSwipe = false
 
         // Remove discarded movie's poster image from cache
-        if let posterPath = movieCards.last?.movie.posterPath {
+        if let posterPath = movieCards.last?.movie.poster_path {
             ImageCache.removeImageFromCache(with: Constants.ImagesBasePath + posterPath)
         }
         

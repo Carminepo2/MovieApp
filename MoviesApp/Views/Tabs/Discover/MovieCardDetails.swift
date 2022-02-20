@@ -36,7 +36,7 @@ struct MovieCardDetails: View {
             
             // MARK: - Movie Poster
             VStack {
-                MoviePoster(posterPath: movie.posterPath)
+                MoviePoster(posterPath: movie.poster_path)
                     .matchedGeometryEffect(id: "movie-poster", in: animationNamespace)
                 
                 Spacer()
@@ -79,7 +79,7 @@ struct MovieCardDetails: View {
                             .matchedGeometryEffect(id: "movie-time", in: animationNamespace)
                             
                             //MARK: Ratings
-                            StarsRating(voteAverage: movie.voteAverage)
+                            StarsRating(voteAverage: movie.vote_average)
                                 .matchedGeometryEffect(id: "movie-stars", in: animationNamespace)
                             
                             //MARK: Overview

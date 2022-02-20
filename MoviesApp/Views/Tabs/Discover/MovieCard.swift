@@ -22,7 +22,7 @@ struct MovieCard: View {
     var body: some View {
         ZStack {
             // MARK: - Movie Poster
-            MoviePoster(posterPath: movie.posterPath, contentMode: .fill)
+            MoviePoster(posterPath: movie.poster_path, contentMode: .fill)
                 .matchedGeometryEffect(id: "movie-poster", in: animationNamespace)
             
             // MARK: - Gradient Overlay
@@ -59,7 +59,7 @@ struct MovieCard: View {
                     .matchedGeometryEffect(id: "movie-time", in: animationNamespace)
                     
                     // MARK: Rating
-                    StarsRating(voteAverage: movie.voteAverage)
+                    StarsRating(voteAverage: movie.vote_average)
                         .matchedGeometryEffect(id: "movie-stars", in: animationNamespace)
                     
                 }
