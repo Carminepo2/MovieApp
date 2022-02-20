@@ -13,19 +13,20 @@ class DiscoverViewModel: ObservableObject {
     @Published var model:MovieAppModel = MovieAppModel.shared
     var advisor:GrandAdvisor = GrandAdvisor.shared
     
-    init(){
+    init() {
+        setCards()
     }
-    @MainActor
-    func setCards() async{
+    
+    func setCards(){
         for _ in 0..<Constants.NumOfCards {
-            await movieCards.append(MovieCard(movie: self.getAdvice()))
+            movieCards.append(MovieCard(movie: self.getAdvice()))
         }
     }
     
-    @MainActor
-    func nextCard() async{
+    
+    func nextCard(){
         movieCards.removeLast()
-        await movieCards.insert(MovieCard(movie: self.getAdvice()), at: 0)
+        movieCards.insert(MovieCard(movie: self.getAdvice()), at: 0)
 
     }
     
@@ -36,9 +37,8 @@ class DiscoverViewModel: ObservableObject {
    
     
     
-    func getAdvice() async->Movie{
+    func getAdvice()->Movie{
         var isAdvisorSetted = advisor.isAdvisorSetted
-        var movieToReturn:Movie
         if(isAdvisorSetted == false){
             var watchListId = model.getWatchListId()
             var initialValues:[Int64:Double] = [:]
@@ -48,12 +48,8 @@ class DiscoverViewModel: ObservableObject {
             advisor.setAdvisor(initialValues: initialValues)
         }
         var idAdvice = advisor.getAdvice()
-        movieToReturn = try! await getMovieById(id: idAdvice)
-        
-        
-        return await movieToReturn
+        return self.getMovieById(id: idAdvice)
     }
-    
     func getAllMovies()->Array<Movie>{
         return model.movies
     }
@@ -66,28 +62,8 @@ class DiscoverViewModel: ObservableObject {
     private func addToWatchLater(id:Int64){
         
     }
-    func getMovieById(id:Int64) async throws->Movie{
-        var movieToReturn:Movie = Movie.example
-        var urlComponent = URLComponents(string: "https://api.themoviedb.org")!
-        var decoder = JSONDecoder()
-        
-        urlComponent.path = "/3/movie/\(id)"
-        urlComponent.queryItems = [
-            "api_key": "fadf21998f46c545c3f3de23ca5712ec"
-        ].map { URLQueryItem(name: $0.key, value: $0.value) }
-        print("L")
-        
-            let (data,response) = try await URLSession.shared.data(from: urlComponent.url!)
-            if let httpResponse = response as? HTTPURLResponse,
-               httpResponse.statusCode == 200,
-               let movie = try? decoder.decode(Movie.self, from: data){
-                movieToReturn = movie
-                print("H")
-            }
-        
-     
-        return movieToReturn
-        
+    func getMovieById(id:Int64)->Movie{        
+        return model.getMovieById(id: id)
     }
  
     

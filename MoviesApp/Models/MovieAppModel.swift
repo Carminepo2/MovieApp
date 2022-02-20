@@ -8,8 +8,7 @@
 import Foundation
 
 class MovieAppModel {
-    var movies:Array<Movie> = []
-//    = load("movies.json")
+    var movies:Array<Movie> = load("movies.json")
     var watchListAlone:Array<Movie>
     var watchListCouple:Array<Movie>
     var watchListFriends:Array<Movie>
@@ -43,10 +42,6 @@ class MovieAppModel {
         
     }
     func getMovieById(id:Int64)->Movie{
-        
-        
-        
-        
         var movieToReturn:Movie? = nil
         for indexOfMovies in 0..<movies.count{
             if(movies[indexOfMovies].id == id){

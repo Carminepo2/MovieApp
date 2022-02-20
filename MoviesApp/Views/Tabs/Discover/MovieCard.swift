@@ -70,7 +70,9 @@ struct MovieCard: View {
             .foregroundColor(.white)
             
         }
-     
+//        .task {
+//            await downloadData()
+//        }
         .aspectRatio(Constants.CardAspectRatio, contentMode: .fit)
         .cornerRadius(Constants.CornerRadius)
         .padding(.horizontal)
