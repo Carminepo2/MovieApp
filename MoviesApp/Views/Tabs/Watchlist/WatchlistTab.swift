@@ -17,7 +17,7 @@ struct WatchlistTab: View {
         //        Text("Watchlist")
         //        .font(.title2)
         //        .fontWeight(.semibold)
-        //        .foregroundColor(.white)
+        //     1   .foregroundColor(.white)
         
         NavigationView {
             VStack {

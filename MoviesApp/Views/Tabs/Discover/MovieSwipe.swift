@@ -82,7 +82,6 @@ struct MovieSwipe: View {
             .withBackground()
             .navigationBarHidden(showDetails)
             .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle("1/10")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Close", action: closeButtonTapped)
