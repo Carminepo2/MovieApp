@@ -72,7 +72,7 @@ struct MovieSwipe: View {
                     
                 } else {
                     if let tappedMovie = tappedMovie {
-                        MovieCardDetails(
+                        MovieDetails(
                             movie: tappedMovie, showDetails: $showDetails,
                             animation: animation
                         )
