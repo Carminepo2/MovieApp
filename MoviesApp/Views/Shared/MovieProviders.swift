@@ -50,12 +50,14 @@ fileprivate struct ProviderIcon: View {
     let imageName: String;
     
     var body: some View {
+        
         Image(imageName)
             .resizable()
             .scaledToFill()
             .frame(width: 45, height: 45)
-            .opacity(isActive ? 1 : 0.2)
-    
+            .opacity(isActive ? 1 : 0.15)
+            .clipShape(Circle())
+        
     }
 }
 
