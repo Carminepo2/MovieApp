@@ -47,14 +47,35 @@ struct MovieDetails: View {
             
             
             // MARK: - Movie Informations
-            ScrollView {
+            ScrollView(showsIndicators: false) {
                 VStack {
-                    VStack(alignment: .trailing, spacing: 10) {
+                    VStack(alignment: .trailing) {
                         
                         // Visible part of the poster
-                        Color.clear
-                            .frame(height: 300)
-                            .contentShape(Rectangle())
+                        ZStack(alignment: .topTrailing) {
+                            Color.clear
+                                .contentShape(Rectangle())
+                            
+                            if animation != nil {
+                                Button {
+                                    withAnimation {
+                                        showDetails.toggle()
+                                    }
+                                } label: {
+                                    Circle()
+                                        .fill(.ultraThinMaterial)
+                                        .frame(width: 40, height: 40)
+                                        .overlay {
+                                            Image(systemName: "xmark")
+                                        }
+                                    
+                                }
+                                .padding()
+                            }
+                        }
+                        .frame(height: 300)
+
+                            
                         //MARK: Drag gesture to close modal
                             .gesture(
                                 DragGesture(minimumDistance: 0, coordinateSpace: .global)
@@ -70,22 +91,34 @@ struct MovieDetails: View {
                                 .shadow(color: .black.opacity(0.5), radius: 4, x: 0, y: 2)
                                 .matchedGeometryEffect(id: "movie-title", in: animationNamespace)
                             
-                            //MARK: Genres
-                            MovieGenres(movie.genres)
-                                .matchedGeometryEffect(id: "movie-genres", in: animationNamespace)
                             
-                            //MARK: Duration and year
-                            HStack(spacing: 20) {
-                                Label(movie.formattedDuration, systemImage: "clock")
-                                Label(movie.year, systemImage: "calendar")
+                            HStack {
+                                VStack(alignment: .leading, spacing: 16) {
+                                    //MARK: Genres
+                                    MovieGenres(movie.genres)
+                                        .matchedGeometryEffect(id: "movie-genres", in: animationNamespace)
+                                    
+                                    //MARK: Duration and year
+                                    HStack(spacing: 20) {
+                                        Label(movie.formattedDuration, systemImage: "clock")
+                                        Label(movie.year, systemImage: "calendar")
+                                    }
+                                    .font(.body)
+                                    .matchedGeometryEffect(id: "movie-time", in: animationNamespace)
+                                    
+                                    //MARK: Ratings
+                                    StarsRating(voteAverage: movie.voteAverage)
+                                        .matchedGeometryEffect(id: "movie-stars", in: animationNamespace)
+                                }
+                                
+                                Spacer()
+                                
+                                Button(action: handleBookmark, label: { Image(systemName: "bookmark.fill") })
+                                .buttonStyle(SkeumorphicButtonStyle(.primary))
+                                .frame(width: 80, height: 80)
+
                             }
-                            .font(.body)
-                            .matchedGeometryEffect(id: "movie-time", in: animationNamespace)
-                            .padding(.vertical, 4)
                             
-                            //MARK: Ratings
-                            StarsRating(voteAverage: movie.voteAverage)
-                                .matchedGeometryEffect(id: "movie-stars", in: animationNamespace)
                             
                             //MARK: Overview
                             Text(movie.overview)
@@ -134,6 +167,10 @@ struct MovieDetails: View {
             scale = 1
             
         }
+    }
+    
+    func handleBookmark() {
+        //TODO
     }
 }
 
