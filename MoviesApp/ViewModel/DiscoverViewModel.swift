@@ -15,7 +15,7 @@ class DiscoverViewModel: ObservableObject {
     var advisor:GrandAdvisor = GrandAdvisor.shared
     
     init() {
-//        setCards()
+        setCards()
     }
     
     func setCards(){
@@ -28,7 +28,6 @@ class DiscoverViewModel: ObservableObject {
     func nextCard(){
         movieCards.removeLast()
         movieCards.insert(MovieCard(movie: self.getAdvice()), at: 0)
-
     }
     
     
