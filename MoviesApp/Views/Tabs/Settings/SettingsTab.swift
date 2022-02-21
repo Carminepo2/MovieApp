@@ -21,7 +21,7 @@ struct SettingsTab: View {
                             
                             Section(header: sectionHeader(label: "User")) {
                                 NavigationLink {
-                                    ProgressView()
+                                    CurrentLocation()
                                 } label: {
                                     Text("Current Location")
                                 }
@@ -29,7 +29,7 @@ struct SettingsTab: View {
                                 NavigationLink {
                                     ProgressView()
                                 } label: {
-                                    Text("Streming Platforms")
+                                    Text("Streaming Platforms")
                                 }
                                 
                                 
