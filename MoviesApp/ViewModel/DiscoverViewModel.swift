@@ -15,13 +15,20 @@ class DiscoverViewModel: ObservableObject {
     var advisor:GrandAdvisor = GrandAdvisor.shared
     
     init() {
-//        setCards()
+        setCards()
     }
     
     func setCards(){
-        for _ in 0..<Constants.NumOfCards {
-            movieCards.append(MovieCard(movie: self.getAdvice()))
-        }
+        var numberOfCards = 0
+            var movieToAdd = getAdvice()
+            if(movieToAdd.id != Movie.example.id){
+                movieCards.append(MovieCard(movie: movieToAdd))
+                numberOfCards+=1
+            }
+        
+        
+        
+            
     }
     
     
