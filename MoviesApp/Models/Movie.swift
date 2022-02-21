@@ -148,6 +148,7 @@ enum Company{
     case friends
     case family
 }
+
 struct shortMovie:Codable{
     var id:Int?
     var name:String?

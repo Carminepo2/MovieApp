@@ -91,6 +91,10 @@ struct MovieDetails: View {
                             Text(movie.overview)
                                 .padding(.top)
                             
+                            //MARK: Providers
+                            MovieProviders(movie.providers.us)
+                                .padding(.top)
+                            
                         }
                         .hLeading()
                     }

@@ -44,3 +44,12 @@ struct Constants {
         startPoint: .top, endPoint: .bottom
     )
 }
+
+
+/// Provider Name -> ID
+enum StreamingProvider: Int {
+    case Netflix = 8
+    case AppleTv = 350
+    case DisneyPlus = 337
+    case PrimeVideo = 10
+}
