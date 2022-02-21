@@ -16,6 +16,8 @@
 		7511316D27BC5FF20025BE52 /* ImageLoaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511316C27BC5FF10025BE52 /* ImageLoaderViewModel.swift */; };
 		7511316F27BD0D6B0025BE52 /* DiscoverTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511316E27BD0D6B0025BE52 /* DiscoverTab.swift */; };
 		7539459027B9152F00365782 /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7539458F27B9152F00365782 /* Haptics.swift */; };
+		753B57D027C3D5ED00231CA4 /* MovieGenres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B57CF27C3D5ED00231CA4 /* MovieGenres.swift */; };
+		753B57D227C3DAF800231CA4 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753B57D127C3DAF800231CA4 /* Collection.swift */; };
 		756A040F27BAEC1D003ADFD4 /* DiscoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756A040E27BAEC1D003ADFD4 /* DiscoverViewModel.swift */; };
 		756A041127BAF90B003ADFD4 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756A041027BAF90B003ADFD4 /* Array.swift */; };
 		756F1D7627B8164400609A15 /* MoviesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756F1D7527B8164400609A15 /* MoviesApp.swift */; };
@@ -31,7 +33,7 @@
 		756F1D9A27B82D5000609A15 /* MovieAppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756F1D9927B82D5000609A15 /* MovieAppModel.swift */; };
 		756F1D9D27B8307200609A15 /* movies.json in Resources */ = {isa = PBXBuildFile; fileRef = 756F1D9C27B8307200609A15 /* movies.json */; };
 		756F1DA327B8429B00609A15 /* StarsRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756F1DA227B8429B00609A15 /* StarsRating.swift */; };
-		756F1DA527B8570A00609A15 /* MovieCardDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756F1DA427B8570A00609A15 /* MovieCardDetails.swift */; };
+		756F1DA527B8570A00609A15 /* MovieDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756F1DA427B8570A00609A15 /* MovieDetails.swift */; };
 		756F1DA727B858A700609A15 /* MoviePoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756F1DA627B858A700609A15 /* MoviePoster.swift */; };
 		756F1DAF27B904FD00609A15 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756F1DAE27B904FD00609A15 /* UINavigationBar.swift */; };
 		75702FEC27BB13850065ACB4 /* DiscardFavoriteButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75702FEB27BB13850065ACB4 /* DiscardFavoriteButtons.swift */; };
@@ -56,6 +58,8 @@
 		7511316C27BC5FF10025BE52 /* ImageLoaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderViewModel.swift; sourceTree = "<group>"; };
 		7511316E27BD0D6B0025BE52 /* DiscoverTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTab.swift; sourceTree = "<group>"; };
 		7539458F27B9152F00365782 /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
+		753B57CF27C3D5ED00231CA4 /* MovieGenres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenres.swift; sourceTree = "<group>"; };
+		753B57D127C3DAF800231CA4 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		756A040E27BAEC1D003ADFD4 /* DiscoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewModel.swift; sourceTree = "<group>"; };
 		756A041027BAF90B003ADFD4 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		756F1D7227B8164400609A15 /* MoviesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,7 +76,7 @@
 		756F1D9927B82D5000609A15 /* MovieAppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAppModel.swift; sourceTree = "<group>"; };
 		756F1D9C27B8307200609A15 /* movies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = movies.json; sourceTree = "<group>"; };
 		756F1DA227B8429B00609A15 /* StarsRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarsRating.swift; sourceTree = "<group>"; };
-		756F1DA427B8570A00609A15 /* MovieCardDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCardDetails.swift; sourceTree = "<group>"; };
+		756F1DA427B8570A00609A15 /* MovieDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetails.swift; sourceTree = "<group>"; };
 		756F1DA627B858A700609A15 /* MoviePoster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePoster.swift; sourceTree = "<group>"; };
 		756F1DAE27B904FD00609A15 /* UINavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
 		75702FEA27BB0E230065ACB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -191,6 +195,7 @@
 				756F1D8A27B816C100609A15 /* String.swift */,
 				756F1DAE27B904FD00609A15 /* UINavigationBar.swift */,
 				756A041027BAF90B003ADFD4 /* Array.swift */,
+				753B57D127C3DAF800231CA4 /* Collection.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -199,7 +204,9 @@
 			isa = PBXGroup;
 			children = (
 				756F1DA227B8429B00609A15 /* StarsRating.swift */,
+				756F1DA427B8570A00609A15 /* MovieDetails.swift */,
 				756F1DA627B858A700609A15 /* MoviePoster.swift */,
+				753B57CF27C3D5ED00231CA4 /* MovieGenres.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -245,7 +252,6 @@
 		75820CA927BA9F5500B489E1 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
-				756F1DA427B8570A00609A15 /* MovieCardDetails.swift */,
 				756F1D8D27B8178F00609A15 /* MovieCard.swift */,
 				75820CAF27BAA01000B489E1 /* MovieSwipe.swift */,
 				75702FEB27BB13850065ACB4 /* DiscardFavoriteButtons.swift */,
@@ -348,13 +354,14 @@
 				756F1D7627B8164400609A15 /* MoviesApp.swift in Sources */,
 				75820CB027BAA01000B489E1 /* MovieSwipe.swift in Sources */,
 				7539459027B9152F00365782 /* Haptics.swift in Sources */,
-				DED54F8727BFE29D00DFB47F /* CurrentLocation.swift in Sources */,
-				756F1DA527B8570A00609A15 /* MovieCardDetails.swift in Sources */,
+				756F1DA527B8570A00609A15 /* MovieDetails.swift in Sources */,
 				75820CAE27BA9FFA00B489E1 /* WatchlistTab.swift in Sources */,
 				756A041127BAF90B003ADFD4 /* Array.swift in Sources */,
 				DED54F8927BFFDC600DFB47F /* AllLocations.swift in Sources */,
 				756A040F27BAEC1D003ADFD4 /* DiscoverViewModel.swift in Sources */,
+				753B57D027C3D5ED00231CA4 /* MovieGenres.swift in Sources */,
 				1D1AA58727BE90F800085A2C /* GenresRaccomender 1.mlmodel in Sources */,
+				753B57D227C3DAF800231CA4 /* Collection.swift in Sources */,
 				7511316B27BC00950025BE52 /* ImageCache.swift in Sources */,
 				75C829C727BD5EBC005DED2A /* MovieCardGridItem.swift in Sources */,
 				756F1D9A27B82D5000609A15 /* MovieAppModel.swift in Sources */,
@@ -496,13 +503,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MoviesApp/Preview Content\"";
-				DEVELOPMENT_TEAM = USC938GT8B;
+				DEVELOPMENT_TEAM = W63RPFLVSJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoviesApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MoovieFinder;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -515,8 +524,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = it.carmineporricelli.MoviesApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.carmineporricelli.MoovieFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -528,13 +538,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MoviesApp/Preview Content\"";
-				DEVELOPMENT_TEAM = USC938GT8B;
+				DEVELOPMENT_TEAM = W63RPFLVSJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoviesApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = MoovieFinder;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -547,8 +559,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = it.carmineporricelli.MoviesApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.carmineporricelli.MoovieFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

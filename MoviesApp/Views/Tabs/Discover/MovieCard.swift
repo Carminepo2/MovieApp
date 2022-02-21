@@ -43,6 +43,10 @@ struct MovieCard: View {
                         )
                         .matchedGeometryEffect(id: "movie-title", in: animationNamespace)
                     
+                    MovieGenres(movie.genres)
+                        .matchedGeometryEffect(id: "movie-genres", in: animationNamespace)
+
+                    
                     // MARK: Overview
                     Text(movie.overview)
                         .font(.caption)

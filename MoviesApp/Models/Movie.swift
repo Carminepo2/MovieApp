@@ -55,7 +55,7 @@ struct Movie: Codable, Identifiable {
         // backdropPath: "/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
         // belongsToCollection: nil,
         // budget: 200000000,
-        genres: [],
+        genres: [Genre(id: 1, name: "Genre 1"), Genre(id: 2, name: "Genre 2")],
         // homepage: "https://www.spidermannowayhome.movie",
         // imdbId: "tt10872600",
         originalLanguage: "en",
@@ -79,14 +79,6 @@ struct Movie: Codable, Identifiable {
     )
 }
 
-
-// MARK: - Collection
-struct Collection: Codable, Identifiable {
-    let id: Int
-    let name: String
-    let posterPath: String?
-    let backdropPath: String?
-}
 
 // MARK: - Genre
 struct Genre: Codable, Identifiable {

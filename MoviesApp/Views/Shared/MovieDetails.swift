@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MovieCardDetails: View {
+struct MovieDetails: View {
     
     let movie: Movie
     @Binding var showDetails: Bool
@@ -70,6 +70,10 @@ struct MovieCardDetails: View {
                                 .shadow(color: .black.opacity(0.5), radius: 4, x: 0, y: 2)
                                 .matchedGeometryEffect(id: "movie-title", in: animationNamespace)
                             
+                            //MARK: Genres
+                            MovieGenres(movie.genres)
+                                .matchedGeometryEffect(id: "movie-genres", in: animationNamespace)
+                            
                             //MARK: Duration and year
                             HStack(spacing: 20) {
                                 Label(movie.formattedDuration, systemImage: "clock")
@@ -77,6 +81,7 @@ struct MovieCardDetails: View {
                             }
                             .font(.body)
                             .matchedGeometryEffect(id: "movie-time", in: animationNamespace)
+                            .padding(.vertical, 4)
                             
                             //MARK: Ratings
                             StarsRating(voteAverage: movie.voteAverage)
@@ -132,7 +137,7 @@ struct MovieDetails_Previews: PreviewProvider {
     struct TestView: View {
         @Namespace var ns
         var body: some View {
-            MovieCardDetails(movie: .example, showDetails: .constant(true), animation: ns)
+            MovieDetails(movie: .example, showDetails: .constant(true), animation: ns)
         }
     }
     static var previews: some View {
