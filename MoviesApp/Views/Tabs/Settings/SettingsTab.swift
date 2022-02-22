@@ -27,7 +27,7 @@ struct SettingsTab: View {
                                 }
                                 
                                 NavigationLink {
-                                    ProgressView()
+                                    StreamingPlatforms()
                                 } label: {
                                     Text("Streaming Platforms")
                                 }
@@ -37,7 +37,7 @@ struct SettingsTab: View {
                             
                             Section(header: sectionHeader(label: "General")) {
                                 NavigationLink {
-                                    ProgressView()
+                                    Display()
                                 } label: {
                                     Text("Display")
                                 }
