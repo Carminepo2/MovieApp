@@ -48,19 +48,21 @@ struct DiscoverTab: View {
             do{
                 try await discoverViewController.setCards()
                 isSwipeCardModalOpen = true
+                
+                var valore = try await NetworkManager.shared.getProviderById(id: 299536)
+                
+                print(                valore.it?.flatrate![0].providerName)
+
             }
             catch{
                 print("Errore caricamento dati")
             }
             
         }
-    
         
         
 
-//        for i in 0...3{
-//            discoverViewController.nextCard()
-//        }
+
     }
         
 }

@@ -20,7 +20,30 @@ class NetworkManager{
         
     }
     
-   
+    func getProviderById(id:Int64) async throws->Providers{
+        var providerToReturn:Providers = Providers(de: nil, it: nil, us: nil)
+        var urlComponent = URLComponents(string: "https://api.themoviedb.org")!
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        urlComponent.path = "/3/movie/\(id)/watch/providers"
+        urlComponent.queryItems = [
+            "api_key": "fadf21998f46c545c3f3de23ca5712ec"
+        ].map { URLQueryItem(name: $0.key, value: $0.value) }
+        
+        do{
+            let (data,response) = try await URLSession.shared.data(from: urlComponent.url!)
+            if let httpResponse = response as? HTTPURLResponse,
+               httpResponse.statusCode == 200,
+               let provider = try? decoder.decode(Providers.self, from: data){
+                providerToReturn = provider
+            }
+        }
+        catch{
+            print("Hello")
+        }
+        return providerToReturn
+        
+    }
     
     
     func getMovieById(id:Int64) async throws -> Movie {

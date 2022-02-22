@@ -35,6 +35,7 @@ class DiscoverViewModel: ObservableObject {
         let advice = try await self.getAdvice()
         if let advice = advice {
             movieCards.insert(MovieCard(movie: advice), at: 0)
+            print("\(advice.title):\(advice.id): ")
         }
     }
     
@@ -61,9 +62,11 @@ class DiscoverViewModel: ObservableObject {
         return try await self.getMovieById(id: idAdvice)
     }
 
-//    func getAllMovies()->Array<Movie>{
+//    func searchMovie()->Array<Movie>{
 //        return model.movies
 //    }
+    
+    
     func giveFeedback(drawValueId:Int64,result:Double){
         advisor.giveFeedback(drawValueId: drawValueId, result: result)
     }
