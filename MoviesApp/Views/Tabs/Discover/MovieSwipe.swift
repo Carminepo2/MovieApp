@@ -105,11 +105,15 @@ struct MovieSwipe: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 userCanSwipe = true
                 Task{
-                   await discoverViewController.nextCard()
-
-                }
-                withAnimation {
-                    discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
+                    do{
+                        try await discoverViewController.nextCard()
+                        withAnimation {
+                            discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
+                        }
+                    }
+                    catch{
+                        print("Errore dati")
+                    }
                 }
             }
             discoverViewController.giveFeedback(drawValueId: movieCards.last!.movie.id, result: 1.0)
@@ -136,11 +140,15 @@ struct MovieSwipe: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 userCanSwipe = true
                 Task{
-                    await discoverViewController.nextCard()
-
-                }
-                withAnimation {
-                    discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
+                    do {
+                        try await discoverViewController.nextCard()
+                        withAnimation {
+                            discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
+                        }
+                    }
+                    catch{
+                        print("Errore caricamento dati")
+                    }
                 }
             }
             discoverViewController.giveFeedback(drawValueId: movieCards.last!.movie.id, result: -1.0)
