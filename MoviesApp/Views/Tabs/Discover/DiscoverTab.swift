@@ -36,6 +36,7 @@ struct DiscoverTab: View {
                 
             })
             .withBackground()
+            
         }
     }
     
@@ -43,11 +44,19 @@ struct DiscoverTab: View {
     
     // MARK: - Functions
     func popCornButtonTapped() {
-        isSwipeCardModalOpen = true
-        for i in 0...3{
-            discoverViewController.nextCard()
+        Task{
+            await discoverViewController.setCards()
+            isSwipeCardModalOpen = true
         }
+    
+        
+        
+
+//        for i in 0...3{
+//            discoverViewController.nextCard()
+//        }
     }
+        
 }
 
 struct DiscoverTab_Previews: PreviewProvider {
