@@ -20,9 +20,9 @@ class DiscoverViewModel: ObservableObject {
     }
     
     @MainActor
-    func setCards() async {
+    func setCards() async throws{
             for _ in 0..<Constants.NumOfCards {
-                let movie = await getAdvice()
+                let movie = try await getAdvice()
                 if let unwrappedMovie = movie {
                     movieCards.append(MovieCard(movie: unwrappedMovie))
                 }
@@ -30,9 +30,9 @@ class DiscoverViewModel: ObservableObject {
     }
     
     @MainActor
-    func nextCard() async{
+    func nextCard() async throws{
         movieCards.removeLast()
-        let advice = await self.getAdvice()
+        let advice = try await self.getAdvice()
         if let advice = advice {
             movieCards.insert(MovieCard(movie: advice), at: 0)
         }
@@ -42,7 +42,7 @@ class DiscoverViewModel: ObservableObject {
  
     // MARK: Riccardo Function
     
-    func getAdvice() async -> Movie? {
+    func getAdvice() async throws -> Movie? {
         let isAdvisorSetted = advisor.isAdvisorSetted
         if(isAdvisorSetted == false){
             let watchListId = model.getWatchListId()
@@ -54,7 +54,7 @@ class DiscoverViewModel: ObservableObject {
         }
         let idAdvice = advisor.getAdvice()
         
-        return await self.getMovieById(id: idAdvice)
+        return try await self.getMovieById(id: idAdvice)
     }
 
 //    func getAllMovies()->Array<Movie>{
@@ -69,8 +69,8 @@ class DiscoverViewModel: ObservableObject {
     private func addToWatchLater(id:Int64){
         
     }
-    func getMovieById(id:Int64) async -> Movie? {
-        return await networkingManager.getMovieById(id: id)
+    func getMovieById(id:Int64) async throws-> Movie? {
+        return try await networkingManager.getMovieById(id: id)
     }
  
     
