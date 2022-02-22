@@ -23,7 +23,7 @@ struct MovieCardGridItem: View {
     var body: some View {
         VStack(spacing: 0) {
             // MARK: Poster
-            MoviePoster(posterPath: movie.poster_path, contentMode: .fit)
+            MoviePoster(posterPath: movie.posterPath, contentMode: .fit)
                 
             HStack {
                 VStack(alignment: .leading, spacing: 5) {

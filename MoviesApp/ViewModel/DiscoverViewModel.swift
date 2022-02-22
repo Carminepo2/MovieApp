@@ -19,7 +19,7 @@ class DiscoverViewModel: ObservableObject {
         
     }
     
-    
+    @MainActor
     func setCards() async{
             for _ in 0..<Constants.NumOfCards {
                 let movie = await getAdvice()

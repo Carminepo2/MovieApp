@@ -27,6 +27,8 @@ class NetworkManager{
         var movieToReturn:Movie = Movie.example
         var urlComponent = URLComponents(string: "https://api.themoviedb.org")!
         let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
         
         urlComponent.path = "/3/movie/\(id)"
         urlComponent.queryItems = [

@@ -52,6 +52,6 @@ struct MoviePoster: View {
 
 struct MoviePoster_Previews: PreviewProvider {
     static var previews: some View {
-        MoviePoster(posterPath: Movie.example.poster_path)
+        MoviePoster(posterPath: Movie.example.posterPath)
     }
 }
