@@ -10,7 +10,7 @@ import SwiftUI
 struct DiscoverTab: View {
     @State private var isSwipeCardModalOpen: Bool = false
     @EnvironmentObject var discoverViewController: DiscoverViewModel
-    
+
     var body: some View {
         NavigationView {
             VStack(spacing: 30) {
@@ -36,6 +36,7 @@ struct DiscoverTab: View {
                 
             })
             .withBackground()
+            
         }
     }
     
@@ -43,9 +44,19 @@ struct DiscoverTab: View {
     
     // MARK: - Functions
     func popCornButtonTapped() {
-        isSwipeCardModalOpen = true
-//        discoverViewController.setArray()
+        Task{
+            await discoverViewController.setCards()
+            isSwipeCardModalOpen = true
+        }
+    
+        
+        
+
+//        for i in 0...3{
+//            discoverViewController.nextCard()
+//        }
     }
+        
 }
 
 struct DiscoverTab_Previews: PreviewProvider {

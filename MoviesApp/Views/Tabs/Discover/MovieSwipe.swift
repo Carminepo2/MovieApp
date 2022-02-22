@@ -104,7 +104,10 @@ struct MovieSwipe: View {
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 userCanSwipe = true
-                discoverViewController.nextCard()
+                Task{
+                   await discoverViewController.nextCard()
+
+                }
                 withAnimation {
                     discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
                 }
@@ -121,7 +124,7 @@ struct MovieSwipe: View {
         userCanSwipe = false
 
         // Remove discarded movie's poster image from cache
-        if let posterPath = movieCards.last?.movie.posterPath {
+        if let posterPath = movieCards.last?.movie.poster_path {
             ImageCache.removeImageFromCache(with: Constants.ImagesBasePath + posterPath)
         }
         
@@ -132,7 +135,10 @@ struct MovieSwipe: View {
             discoverViewController.movieCards[movieCards.last!].rotationOffset = -15
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 userCanSwipe = true
-                discoverViewController.nextCard()
+                Task{
+                    await discoverViewController.nextCard()
+
+                }
                 withAnimation {
                     discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
                 }

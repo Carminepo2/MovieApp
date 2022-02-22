@@ -11,32 +11,38 @@ class DiscoverViewModel: ObservableObject {
     @Published var movieCards: Array<MovieCard> = []
     @Published var rotationDegreeCards: Array<Double> = []
     @Published var model:MovieAppModel = MovieAppModel.shared
+    @Published var networkingManager = NetworkManager.shared
     var advisor:GrandAdvisor = GrandAdvisor.shared
     
+    
     init() {
-        for _ in 0..<Constants.NumOfCards {
-            movieCards.append(MovieCard(movie: self.getRandomMovie()!))
-        }
+        
     }
     
     
+    func setCards() async{
+            for _ in 0..<Constants.NumOfCards {
+                let movie = await getAdvice()
+                if let unwrappedMovie = movie{
+                    movieCards.append(MovieCard(movie: unwrappedMovie))
+
+                }
+            }
+        
+        
+    }
     
-    func nextCard(){
+    @MainActor
+    func nextCard() async{
         movieCards.removeLast()
-        movieCards.insert(MovieCard(movie: self.getRandomMovie()!), at: 0)
-
+        await movieCards.insert(MovieCard(movie: self.getAdvice()!), at: 0)
     }
     
     
-    private func getRandomMovie() -> Movie? {
-        return self.getAdvice()
-    }
+ 
     // MARK: Riccardo Function
-
-   
     
-    
-    func getAdvice()->Movie{
+    func getAdvice() async->Movie?{
         var isAdvisorSetted = advisor.isAdvisorSetted
         if(isAdvisorSetted == false){
             var watchListId = model.getWatchListId()
@@ -47,11 +53,13 @@ class DiscoverViewModel: ObservableObject {
             advisor.setAdvisor(initialValues: initialValues)
         }
         var idAdvice = advisor.getAdvice()
-        return self.getMovieById(id: idAdvice)
+        
+        return await self.getMovieById(id: idAdvice)
     }
-    func getAllMovies()->Array<Movie>{
-        return model.movies
-    }
+
+//    func getAllMovies()->Array<Movie>{
+//        return model.movies
+//    }
     func giveFeedback(drawValueId:Int64,result:Double){
         advisor.giveFeedback(drawValueId: drawValueId, result: result)
     }
@@ -61,8 +69,8 @@ class DiscoverViewModel: ObservableObject {
     private func addToWatchLater(id:Int64){
         
     }
-    func getMovieById(id:Int64)->Movie{        
-        return model.getMovieById(id: id)
+    func getMovieById(id:Int64) async->Movie?{
+        return await networkingManager.getMovieById(id: id)
     }
  
     
@@ -72,7 +80,7 @@ class DiscoverViewModel: ObservableObject {
         fileprivate init(movie: Movie) {
             self.movie = movie
         }
-        
+
         let id = UUID()
         var rotationDegree = Double(
             Int.random(in: -4...4)
