@@ -39,6 +39,10 @@ class DiscoverViewModel: ObservableObject {
     }
     
     
+    func resetModel(){
+        advisor.resetAdvisor()
+    }
+    
  
     // MARK: Riccardo Function
     

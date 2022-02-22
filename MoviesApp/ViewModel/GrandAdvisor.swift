@@ -85,5 +85,12 @@ class GrandAdvisor{
         }
         
     }
+    func resetAdvisor(){
+        input = [:]
+        numberOfDraws = 0
+        isAdvisorSetted = false
+        alreadDrawsMovies = []
+        
+    }
     
 }
