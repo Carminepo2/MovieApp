@@ -14,14 +14,8 @@ struct DiscoverTab: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 30) {
-                Button(action: popCornButtonTapped) {
-                    Image("Popcorns")
-                        .resizable()
-                        .scaledToFill()
-
-                }
-                .buttonStyle(SkeumorphicButtonStyle(.secondary))
-                .frame(width: 252, height: 252)
+                
+                PopcornButton(isLoading: true, action: popCornButtonTapped)
                 
                 Text("Pop the corns to get suggestion")
                     .font(.title2)
