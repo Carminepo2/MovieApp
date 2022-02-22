@@ -58,10 +58,14 @@ class DiscoverViewModel: ObservableObject {
             advisor.setAdvisor(initialValues: initialValues)
         }
         let idAdvice = advisor.getAdvice()
-        
-        return try await self.getMovieById(id: idAdvice)
+        var adviceToReturn = try await self.getMovieById(id: idAdvice)
+        return adviceToReturn
     }
 
+    func getProvidersById(id:Int64) async throws -> Providers?{
+        return try await networkingManager.getProvidersById(id: id).results
+    }
+    
 //    func searchMovie()->Array<Movie>{
 //        return model.movies
 //    }
