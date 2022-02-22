@@ -35,7 +35,6 @@ class DiscoverViewModel: ObservableObject {
         let advice = try await self.getAdvice()
         if let advice = advice {
             movieCards.insert(MovieCard(movie: advice), at: 0)
-            print("\(advice.title):\(advice.id): ")
         }
     }
     
@@ -59,6 +58,10 @@ class DiscoverViewModel: ObservableObject {
         }
         let idAdvice = advisor.getAdvice()
         var adviceToReturn = try await self.getMovieById(id: idAdvice)
+        var elemento = try await getProvidersById(id: idAdvice)
+        
+        
+        adviceToReturn?.providers = elemento
         return adviceToReturn
     }
 
@@ -84,7 +87,6 @@ class DiscoverViewModel: ObservableObject {
         return try await networkingManager.getMovieById(id: id)
     }
  
-    
     
     
     struct MovieCard: Identifiable {
