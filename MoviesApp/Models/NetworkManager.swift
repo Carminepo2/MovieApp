@@ -36,17 +36,12 @@ class NetworkManager{
         ].map { URLQueryItem(name: $0.key, value: $0.value) }
         
         do {
-            let (data,response) = try! await URLSession.shared.data(from: urlComponent.url!)
-            
-            guard (response as? HTTPURLResponse)?.statusCode == 200 else {
-                return movieToReturn
+            let (data,response) = try await URLSession.shared.data(from: urlComponent.url!)
+            if let httpResponse = response as? HTTPURLResponse,
+               httpResponse.statusCode == 200,
+               let movie = try? decoder.decode(Movie.self, from: data){
+                movieToReturn = movie
             }
-            
-            
-           let movie = try decoder.decode(Movie.self, from: data)
-            movieToReturn = movie
-            
-            
         } catch DecodingError.keyNotFound(let key, let context) {
             print("Key '\(key)' not found:", context.debugDescription)
             print("codingPath:", context.codingPath)

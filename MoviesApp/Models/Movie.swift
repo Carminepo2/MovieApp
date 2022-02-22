@@ -34,8 +34,8 @@ struct Movie: Codable, Identifiable {
     let video: Bool
     let voteAverage: Float
     let voteCount: Int
-    // let keywords: Array<Keyword>
-    // let providers: Providers
+//     let keywords: Array<Keyword>
+//     let providers: Providers
     
     var formattedDuration: String {
         guard let movieRuntime = self.runtime else { return "-" }
