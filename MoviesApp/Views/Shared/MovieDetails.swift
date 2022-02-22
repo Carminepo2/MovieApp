@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MovieDetails: View {
     
+    @Environment(\.presentationMode) var goback: Binding<PresentationMode>
+    
     let movie: Movie
     @Binding var showDetails: Bool
     var animation: Namespace.ID?
@@ -142,6 +144,13 @@ struct MovieDetails: View {
         .cornerRadius(cornerRadius)
         .scaleEffect(scale)
         .edgesIgnoringSafeArea(.all)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: Button(action : {
+            self.goback.wrappedValue.dismiss()
+        }){
+            Text(Image(systemName: "arrow.left"))
+                .fontWeight(.bold)
+        })
     }
     
     // MARK: - Functions
