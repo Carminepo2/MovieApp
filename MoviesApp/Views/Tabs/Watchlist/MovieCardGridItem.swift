@@ -24,7 +24,7 @@ struct MovieCardGridItem: View {
         VStack(spacing: 0) {
             // MARK: Poster
             MoviePoster(posterPath: movie.posterPath, contentMode: .fit)
-                
+            
             HStack {
                 VStack(alignment: .leading, spacing: 5) {
                     // MARK: Title
@@ -53,13 +53,39 @@ struct MovieCardGridItem: View {
     }
 }
 
+struct MovieCardLikedGridItem: View {
+    let movie : Movie
+    
+    var body: some View {
+        ZStack(alignment: .bottom) {
+            // MARK: Poster
+            MoviePoster(posterPath: movie.posterPath, contentMode: .fit)
+            
+            HStack() {
+                Text(movie.title)
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .lineLimit(1)
+                Image(systemName: "chevron.right")
+            }
+            .padding(8)
+        }
+        .background(Color("Gray-800"))
+        .cornerRadius(6)
+        
+    }
+}
+
 struct MovieCardGridItem_Previews: PreviewProvider {
     static var previews: some View {
-        //MovieCardGridItem(movie: Movie.example)
-        
         MovieCardGridItem(movie: Movie.example)
             .frame(width: 183)
+    }
+}
 
-
+struct MovieCardLikedGridItem_Previews: PreviewProvider {
+    static var previews: some View {
+        MovieCardLikedGridItem(movie: Movie.example)
+            .frame(width: 183)
     }
 }
