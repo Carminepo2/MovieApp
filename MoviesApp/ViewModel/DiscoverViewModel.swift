@@ -12,7 +12,7 @@ class DiscoverViewModel: ObservableObject {
     @Published var rotationDegreeCards: Array<Double> = []
     @Published var model:MovieAppModel = MovieAppModel.shared
     @Published var networkingManager = NetworkManager.shared
-    var advisor:GrandAdvisor = GrandAdvisor.shared
+    var advisor: GrandAdvisor = GrandAdvisor.shared
     
     
     init() {
@@ -20,39 +20,39 @@ class DiscoverViewModel: ObservableObject {
     }
     
     @MainActor
-    func setCards() async{
+    func setCards() async {
             for _ in 0..<Constants.NumOfCards {
                 let movie = await getAdvice()
-                if let unwrappedMovie = movie{
+                if let unwrappedMovie = movie {
                     movieCards.append(MovieCard(movie: unwrappedMovie))
-
                 }
             }
-        
-        
     }
     
     @MainActor
     func nextCard() async{
         movieCards.removeLast()
-        await movieCards.insert(MovieCard(movie: self.getAdvice()!), at: 0)
+        let advice = await self.getAdvice()
+        if let advice = advice {
+            movieCards.insert(MovieCard(movie: advice), at: 0)
+        }
     }
     
     
  
     // MARK: Riccardo Function
     
-    func getAdvice() async->Movie?{
-        var isAdvisorSetted = advisor.isAdvisorSetted
+    func getAdvice() async -> Movie? {
+        let isAdvisorSetted = advisor.isAdvisorSetted
         if(isAdvisorSetted == false){
-            var watchListId = model.getWatchListId()
+            let watchListId = model.getWatchListId()
             var initialValues:[Int64:Double] = [:]
-            for id in watchListId{
+            for id in watchListId {
                 initialValues[id] = 1.0
             }
             advisor.setAdvisor(initialValues: initialValues)
         }
-        var idAdvice = advisor.getAdvice()
+        let idAdvice = advisor.getAdvice()
         
         return await self.getMovieById(id: idAdvice)
     }
@@ -69,7 +69,7 @@ class DiscoverViewModel: ObservableObject {
     private func addToWatchLater(id:Int64){
         
     }
-    func getMovieById(id:Int64) async->Movie?{
+    func getMovieById(id:Int64) async -> Movie? {
         return await networkingManager.getMovieById(id: id)
     }
  

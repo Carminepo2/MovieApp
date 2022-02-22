@@ -125,8 +125,8 @@ struct MovieDetails: View {
                                 .padding(.top)
                             
                             //MARK: Providers
-                            MovieProviders(movie.providers.us)
-                                .padding(.top)
+//                            MovieProviders(movie.providers.us)
+//                                .padding(.top)
                             
                         }
                         .hLeading()
