@@ -35,7 +35,7 @@ struct Movie: Codable, Identifiable {
     let voteAverage: Float
     let voteCount: Int
 //     let keywords: Array<Keyword>
-//     let providers: Providers
+     let providers: Providers? = nil
     
     var formattedDuration: String {
         guard let movieRuntime = self.runtime else { return "-" }
@@ -75,7 +75,7 @@ struct Movie: Codable, Identifiable {
         voteAverage: 8.4,
         voteCount: 7443
 //        keywords: [],
-//        providers: Providers.init(de: nil, it: nil, us: nil)
+        
     )
 }
 

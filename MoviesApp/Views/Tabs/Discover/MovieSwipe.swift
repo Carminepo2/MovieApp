@@ -105,7 +105,13 @@ struct MovieSwipe: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 userCanSwipe = true
                 Task{
-                   await discoverViewController.nextCard()
+                    do{
+                        try await discoverViewController.nextCard()
+                    }
+                    catch{
+                        print("Errore dati")
+                    }
+                  
 
                 }
                 withAnimation {
@@ -136,7 +142,13 @@ struct MovieSwipe: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 userCanSwipe = true
                 Task{
-                    await discoverViewController.nextCard()
+                    do{
+                        try await discoverViewController.nextCard()
+                    }
+                    catch{
+                        print("Errore caricamento dati")
+                    }
+                    
 
                 }
                 withAnimation {
