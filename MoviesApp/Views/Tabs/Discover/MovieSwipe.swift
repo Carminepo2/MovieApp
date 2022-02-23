@@ -117,8 +117,6 @@ struct MovieSwipe: View {
                 }
             }
             discoverViewController.giveFeedback(drawValueId: movieCards.last!.movie.id, result: 1.0)
-
-
         }
     }
     

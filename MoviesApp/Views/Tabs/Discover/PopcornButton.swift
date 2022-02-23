@@ -38,11 +38,8 @@ struct PopcornButton: View {
 
                 }
             }
-            .buttonStyle(SkeumorphicButtonStyle(.secondary))
+            .buttonStyle(SkeumorphicButtonStyle(.secondary, withHapticFeedback: true))
             .frame(width: 252, height: 252)
-            
-            
-            
         }
 
     }
