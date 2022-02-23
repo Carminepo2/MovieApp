@@ -117,7 +117,7 @@ struct MovieDetails: View {
                                 
                                 Button(action: handleBookmark, label: { Image(systemName: "bookmark.fill") })
                                 .buttonStyle(SkeumorphicButtonStyle(.primary))
-                                .frame(width: 80, height: 80)
+                                .frame(width: 75, height: 75)
 
                             }
                             

@@ -10,10 +10,10 @@ import SwiftUI
 struct SkeumorphicButtonStyle: ButtonStyle {
     
     let type: SkeumorphicButtonStyleType
-    let withHapticFeedback: Bool
+    let withHapticFeedback: UIImpactFeedbackGenerator.FeedbackStyle?
     
     
-    init(_ type: SkeumorphicButtonStyleType = .primary, withHapticFeedback: Bool = false) {
+    init(_ type: SkeumorphicButtonStyleType = .primary, withHapticFeedback: UIImpactFeedbackGenerator.FeedbackStyle? = nil) {
         self.type = type
         self.withHapticFeedback = withHapticFeedback
     }
@@ -40,7 +40,9 @@ struct SkeumorphicButtonStyle: ButtonStyle {
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
             .onChange(of: configuration.isPressed) { newValue in
                 if newValue {
-                    Haptics.shared.play(.rigid)
+                    if let hapticFeedbackType = withHapticFeedback {
+                        Haptics.shared.play(hapticFeedbackType)
+                    }
                 }
             }
     }
