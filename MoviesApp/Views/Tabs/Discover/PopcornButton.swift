@@ -28,21 +28,19 @@ struct PopcornButton: View {
                     Image("Popcorns")
                         .resizable()
                         .scaledToFill()
-                    if isLoading {
+                    
+                    //TODO: Implement
+                    if false {
                         SpriteView(scene: particlesScene, options: [.allowsTransparency])
                             .frame(width: 252, height: 252)
                             .background(.clear)
                             .zIndex(999)
 
                     }
-
                 }
             }
-            .buttonStyle(SkeumorphicButtonStyle(.secondary))
+            .buttonStyle(SkeumorphicButtonStyle(.secondary, withHapticFeedback: .rigid))
             .frame(width: 252, height: 252)
-            
-            
-            
         }
 
     }

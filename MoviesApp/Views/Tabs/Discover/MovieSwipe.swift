@@ -76,6 +76,7 @@ struct MovieSwipe: View {
                             movie: tappedMovie, showDetails: $showDetails,
                             animation: animation
                         )
+                            .statusBar(hidden: showDetails)
                     }
                 }
             }
@@ -87,21 +88,21 @@ struct MovieSwipe: View {
                     Button("Close", action: closeButtonTapped)
                 }
             }
-
+            
         }
-      
+        
     }
     
     // MARK: - Favorite and discard Functions
     func makeMovieFavorite() {
         if !userCanSwipe { return }
-
+        
         userCanSwipe = false
         withAnimation {
             discoverViewController.movieCards[movieCards.last!].xOffset = 500
             discoverViewController.movieCards[movieCards.last!].rotationOffset = 15
             Haptics.shared.play(.heavy)
-
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 userCanSwipe = true
                 Task{
@@ -117,8 +118,6 @@ struct MovieSwipe: View {
                 }
             }
             discoverViewController.giveFeedback(drawValueId: movieCards.last!.movie.id, result: 1.0)
-
-
         }
     }
     
@@ -126,14 +125,14 @@ struct MovieSwipe: View {
         if !userCanSwipe { return }
         
         userCanSwipe = false
-
+        
         // Remove discarded movie's poster image from cache
         if let posterPath = movieCards.last?.movie.posterPath {
             ImageCache.removeImageFromCache(with: Constants.ImagesBasePath + posterPath)
         }
         
         Haptics.shared.play(.soft)
-
+        
         withAnimation {
             discoverViewController.movieCards[movieCards.last!].xOffset = -500
             discoverViewController.movieCards[movieCards.last!].rotationOffset = -15
@@ -191,7 +190,7 @@ struct MovieSwipe: View {
 }
 
 struct SearchTab_Previews: PreviewProvider {
- 
+    
     static var previews: some View {
         MovieSwipe(isSwipeCardModalOpen: .constant(true))
     }
