@@ -26,6 +26,7 @@ class DiscoverViewModel: ObservableObject {
                 let movie = try await getAdvice()
                 if let unwrappedMovie = movie {
                     movieCards.append(MovieCard(movie: unwrappedMovie))
+                    print("\(unwrappedMovie.id):\(unwrappedMovie.title)")
                 }
             }
         cardSetted = true
@@ -41,6 +42,8 @@ class DiscoverViewModel: ObservableObject {
         let advice = try await self.getAdvice()
         if let advice = advice {
             movieCards.insert(MovieCard(movie: advice), at: 0)
+            print("\(advice.id):\(advice.title)")
+
         }
     }
     

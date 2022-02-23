@@ -14,7 +14,7 @@ class GrandAdvisor{
         input = [:]
         numberOfDraws = 0
         isAdvisorSetted = false
-        alreadDrawsMovies = []
+        alreadDrawsMovies = [197158,875460]
     }
     
     private var input:[Int64:Double]
