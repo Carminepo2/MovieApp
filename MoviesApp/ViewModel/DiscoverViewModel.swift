@@ -22,16 +22,17 @@ class DiscoverViewModel: ObservableObject {
     
     @MainActor
     func setCards() async throws{
-        if(cardSetted == false){
-            cardSetted = true
             for _ in 0..<Constants.NumOfCards {
                 let movie = try await getAdvice()
                 if let unwrappedMovie = movie {
                     movieCards.append(MovieCard(movie: unwrappedMovie))
                 }
             }
-        }
+        cardSetted = true
          
+    }
+    func isCardsSetted()->Bool{
+        return self.cardSetted
     }
     
     @MainActor

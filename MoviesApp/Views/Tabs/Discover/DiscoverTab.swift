@@ -38,16 +38,25 @@ struct DiscoverTab: View {
     
     // MARK: - Functions
     func popCornButtonTapped() {
-        Task{
-            do{
-                try await discoverViewController.setCards()
-                isSwipeCardModalOpen = true
-            }
-            catch{
-                print("Errore caricamento dati")
-            }
+        
+        if(!discoverViewController.isCardsSetted()){
             
+            Task{
+                do{
+                    try await discoverViewController.setCards()
+                    isSwipeCardModalOpen = true
+                }
+                catch{
+                    print("Errore caricamento dati")
+                }
+                
+            }
         }
+        else{
+            isSwipeCardModalOpen = true
+        }
+        
+       
         
         
 
