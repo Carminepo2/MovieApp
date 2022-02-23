@@ -127,8 +127,11 @@ struct MovieDetails: View {
                                 .padding(.top)
                             
                             //MARK: Providers
-//                            MovieProviders(movie.providers.us)
-//                                .padding(.top)
+                            if(movie.providers != nil){
+                                MovieProviders(movie.providers?.us)
+                                    .padding(.top)
+                            }
+                            
                             
                         }
                         .hLeading()

@@ -10,18 +10,15 @@ import Foundation
 class NetworkManager{
     
     static var shared = NetworkManager()
-    var downloadedFilm:Movie?{
-        didSet{
-            print("Je")
-        }
-    }
+
     
     private init(){
         
     }
     
-    func getProviderById(id:Int64) async throws->Providers{
-        var providerToReturn:Providers = Providers(de: nil, it: nil, us: nil)
+    func getProvidersById(id:Int64) async throws->ProviderResponse{
+        
+        var providerToReturn:ProviderResponse = ProviderResponse(id: nil, results: nil)
         var urlComponent = URLComponents(string: "https://api.themoviedb.org")!
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -32,15 +29,28 @@ class NetworkManager{
         
         do{
             let (data,response) = try await URLSession.shared.data(from: urlComponent.url!)
+            
             if let httpResponse = response as? HTTPURLResponse,
                httpResponse.statusCode == 200,
-               let provider = try? decoder.decode(Providers.self, from: data){
+               let provider = try?decoder.decode(ProviderResponse.self, from: data){
                 providerToReturn = provider
             }
         }
-        catch{
-            print("Hello")
-        }
+        catch let DecodingError.dataCorrupted(context) {
+                print(context)
+            } catch let DecodingError.keyNotFound(key, context) {
+                print("Key '\(key)' not found:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+            } catch let DecodingError.valueNotFound(value, context) {
+                print("Value '\(value)' not found:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+            } catch let DecodingError.typeMismatch(type, context)  {
+                print("Type '\(type)' mismatch:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+            } catch {
+                print("error: ", error)
+            }
+       
         return providerToReturn
         
     }
