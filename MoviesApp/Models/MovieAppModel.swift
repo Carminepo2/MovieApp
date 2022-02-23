@@ -15,7 +15,6 @@ class MovieAppModel {
     var watchListFamily:Array<Movie>
     var with:Company
     var movieAlreadyRecommended:Array<Movie>
-    var chosenMovie:Movie?
     
     static var shared = MovieAppModel()
     var networkManager = NetworkManager.shared
@@ -27,7 +26,6 @@ class MovieAppModel {
         watchListFamily = []
         with = Company.noOne
         movieAlreadyRecommended = []
-        chosenMovie = nil
     }
     func getWatchListId()->Array<Int64>{
         return []
