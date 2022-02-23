@@ -19,10 +19,10 @@ struct WatchlistSavedForLater: View {
         ScrollView(.vertical, showsIndicators: false) {
             
             LazyVGrid(columns: threeColumnGrid, spacing: 14) {
-                ForEach(viewModel.savedMovies) { newRecord in
+                ForEach(viewModel.getMovieAlreadyRecommended()) { newRecord in
                     NavigationLink {
-                        MovieDetails(movie: Movie.example)
-                    } label: { MovieCardLikedGridItem(movie: Movie.example) }
+                        MovieDetails(movie: newRecord)
+                    } label: { MovieCardLikedGridItem(movie: newRecord) }
                     .foregroundColor(Color.white)
                 }
                 /*NavigationLink {

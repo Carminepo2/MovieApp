@@ -38,12 +38,13 @@ class MovieAppModel {
     func addToWatchList(id:Int64){
         
     }
-    func addToMovieAlreadyReccomended(id:Int64){
-        
+    func addToMovieAlreadyReccomended(movieToSave:Movie){
+        movieAlreadyRecommended.append(movieToSave)
     }
-    func getMovieById(id:Int64){
-    
+    func getMovieAlreadyRecommended()->Array<Movie>{
+        return self.movieAlreadyRecommended
     }
+  
     
     
     

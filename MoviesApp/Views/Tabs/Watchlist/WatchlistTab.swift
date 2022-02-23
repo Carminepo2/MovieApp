@@ -39,10 +39,10 @@ struct WatchlistTab: View {
                     ScrollView(.vertical, showsIndicators: false) {
                         
                         LazyVGrid(columns: twoColumnGrid, spacing: 24) {
-                            ForEach(viewModel.savedMovies) { newRecord in
+                            ForEach(viewModel.getWatchList()) { newRecord in
                                 NavigationLink {
-                                    MovieDetails(movie: Movie.example)
-                                } label: { MovieCardGridItem(movie: Movie.example) }
+                                    MovieDetails(movie: newRecord)
+                                } label: { MovieCardGridItem(movie: newRecord) }
                                 .foregroundColor(Color.white)
                             }
                             /*NavigationLink {

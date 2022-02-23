@@ -38,11 +38,14 @@ class DiscoverViewModel: ObservableObject {
     
     @MainActor
     func nextCard() async throws{
-        movieCards.removeLast()
         let advice = try await self.getAdvice()
+        movieCards.removeLast()
         if let advice = advice {
-            movieCards.insert(MovieCard(movie: advice), at: 0)
-            print("\(advice.id):\(advice.title)")
+            if (advice.id != Movie.example.id){
+                movieCards.insert(MovieCard(movie: advice), at: 0)
+                print("\(advice.id):\(advice.title)")
+            }
+            
 
         }
     }
@@ -86,14 +89,15 @@ class DiscoverViewModel: ObservableObject {
     func giveFeedback(drawValueId:Int64,result:Double){
         advisor.giveFeedback(drawValueId: drawValueId, result: result)
     }
-    func chooseMovie(id:Int64){
-        
-    }
+
     private func addToWatchLater(id:Int64){
         
     }
     func getMovieById(id:Int64) async throws-> Movie? {
         return try await networkingManager.getMovieById(id: id)
+    }
+    func addToMovieAlreadyReccomended(movieToSave:Movie){
+        self.model.addToMovieAlreadyReccomended(movieToSave: movieToSave)
     }
  
     

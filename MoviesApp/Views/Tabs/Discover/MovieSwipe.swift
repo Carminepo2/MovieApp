@@ -117,6 +117,7 @@ struct MovieSwipe: View {
                     }
                 }
             }
+            discoverViewController.addToMovieAlreadyReccomended(movieToSave: movieCards.last!.movie)
             discoverViewController.giveFeedback(drawValueId: movieCards.last!.movie.id, result: 1.0)
         }
     }
