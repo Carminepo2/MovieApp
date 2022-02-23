@@ -15,7 +15,7 @@ struct CurrentLocation: View {
     
     
     var locations = ["United States", "United Kingdom", "Italy", "Germany"]
-    @State private var selectedLocationIndex = 0
+    
     
     var body: some View {
         VStack{

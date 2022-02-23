@@ -7,32 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "79EC47AA-BB14-4F1C-8FF9-FC855BA7748E"
+            uuid = "D7CD3EAC-877F-462E-9F01-B4934C09107F"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MoviesApp/Views/Tabs/Discover/DiscoverTab.swift"
+            filePath = "MoviesApp/Models/NetworkManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "popCornButtonTapped()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CACBAAAE-5984-41CB-A7ED-7B3F62DA2B20"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoviesApp/Views/Tabs/Discover/DiscoverTab.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "popCornButtonTapped()"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "getProvidersById(id:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

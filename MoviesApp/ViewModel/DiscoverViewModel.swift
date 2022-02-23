@@ -13,6 +13,7 @@ class DiscoverViewModel: ObservableObject {
     @Published var model:MovieAppModel = MovieAppModel.shared
     @Published var networkingManager = NetworkManager.shared
     var advisor: GrandAdvisor = GrandAdvisor.shared
+    var cardSetted:Bool = false
     
     
     init() {
@@ -27,6 +28,11 @@ class DiscoverViewModel: ObservableObject {
                     movieCards.append(MovieCard(movie: unwrappedMovie))
                 }
             }
+        cardSetted = true
+         
+    }
+    func isCardsSetted()->Bool{
+        return self.cardSetted
     }
     
     @MainActor
@@ -35,7 +41,6 @@ class DiscoverViewModel: ObservableObject {
         let advice = try await self.getAdvice()
         if let advice = advice {
             movieCards.insert(MovieCard(movie: advice), at: 0)
-            print("\(advice.title):\(advice.id): ")
         }
     }
     
@@ -58,10 +63,18 @@ class DiscoverViewModel: ObservableObject {
             advisor.setAdvisor(initialValues: initialValues)
         }
         let idAdvice = advisor.getAdvice()
+        var adviceToReturn = try await self.getMovieById(id: idAdvice)
+        var elemento = try await getProvidersById(id: idAdvice)
         
-        return try await self.getMovieById(id: idAdvice)
+        
+        adviceToReturn?.providers = elemento
+        return adviceToReturn
     }
 
+    func getProvidersById(id:Int64) async throws -> Providers?{
+        return try await networkingManager.getProvidersById(id: id).results
+    }
+    
 //    func searchMovie()->Array<Movie>{
 //        return model.movies
 //    }
@@ -80,7 +93,6 @@ class DiscoverViewModel: ObservableObject {
         return try await networkingManager.getMovieById(id: id)
     }
  
-    
     
     
     struct MovieCard: Identifiable {
