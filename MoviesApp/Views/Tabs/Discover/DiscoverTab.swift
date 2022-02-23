@@ -42,11 +42,6 @@ struct DiscoverTab: View {
             do{
                 try await discoverViewController.setCards()
                 isSwipeCardModalOpen = true
-                
-              
-                
-                
-
             }
             catch{
                 print("Errore caricamento dati")

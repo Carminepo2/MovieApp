@@ -13,6 +13,7 @@ class DiscoverViewModel: ObservableObject {
     @Published var model:MovieAppModel = MovieAppModel.shared
     @Published var networkingManager = NetworkManager.shared
     var advisor: GrandAdvisor = GrandAdvisor.shared
+    var cardSetted:Bool = false
     
     
     init() {
@@ -21,12 +22,16 @@ class DiscoverViewModel: ObservableObject {
     
     @MainActor
     func setCards() async throws{
+        if(cardSetted == false){
+            cardSetted = true
             for _ in 0..<Constants.NumOfCards {
                 let movie = try await getAdvice()
                 if let unwrappedMovie = movie {
                     movieCards.append(MovieCard(movie: unwrappedMovie))
                 }
             }
+        }
+         
     }
     
     @MainActor
