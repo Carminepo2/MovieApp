@@ -38,12 +38,15 @@ class DiscoverViewModel: ObservableObject {
     
     @MainActor
     func nextCard() async throws{
+        
         let advice = try await self.getAdvice()
         movieCards.removeLast()
+        
         if let notNullAdvice = advice {
             if (notNullAdvice.id != Movie.example.id){
                 movieCards.insert(MovieCard(movie: notNullAdvice), at: 0)
             }
+         
         }
         
     }
@@ -67,6 +70,7 @@ class DiscoverViewModel: ObservableObject {
             advisor.setAdvisor(initialValues: initialValues)
         }
         let idAdvice = advisor.getAdvice()
+        
         var adviceToReturn = try await self.getMovieById(id: idAdvice)
         var elemento = try await getProvidersById(id: idAdvice)
         
@@ -88,11 +92,16 @@ class DiscoverViewModel: ObservableObject {
         advisor.giveFeedback(drawValueId: drawValueId, result: result)
     }
 
-    private func addToWatchLater(id:Int64){
-        
-    }
+//    private func addToWatchLater(id:Int64){
+//
+//    }
     func getMovieById(id:Int64) async throws-> Movie? {
-        return try await networkingManager.getMovieById(id: id)
+        var movieToReturn = try await networkingManager.getMovieById(id: id)
+        while(movieToReturn.id == Movie.example.id){
+            movieToReturn = try await networkingManager.getMovieById(id: id)
+        }
+        
+        return movieToReturn
     }
     func addToMovieAlreadyReccomended(movieToSave:Movie,voteOfTheMovie:Float){
         movieToSave.vote = voteOfTheMovie
