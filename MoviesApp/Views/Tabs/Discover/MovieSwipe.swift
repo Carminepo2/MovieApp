@@ -104,10 +104,10 @@ struct MovieSwipe: View {
             Haptics.shared.play(.heavy)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                userCanSwipe = true
-                Task{
+                Task {
                     do{
                         try await discoverViewController.nextCard()
+                        userCanSwipe = true
                         withAnimation {
                             discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
                         }
@@ -138,13 +138,15 @@ struct MovieSwipe: View {
             discoverViewController.movieCards[movieCards.last!].xOffset = -500
             discoverViewController.movieCards[movieCards.last!].rotationOffset = -15
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                userCanSwipe = true
+                
                 Task{
                     do {
                         try await discoverViewController.nextCard()
+                        userCanSwipe = true
                         withAnimation {
                             discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
                         }
+                        
                     }
                     catch{
                         print("Errore caricamento dati")

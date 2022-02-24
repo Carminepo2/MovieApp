@@ -17,7 +17,7 @@ struct DiscoverTab: View {
                 
                 PopcornButton(isLoading: true, action: popCornButtonTapped)
                 
-                Text("Pop the corns to get suggestion")
+                Text("Tap to start!")
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
