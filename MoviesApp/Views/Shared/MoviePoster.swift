@@ -24,7 +24,13 @@ struct MoviePoster: View {
     
     var body: some View {
         VStack {
-            if let uiImage = imageLoader.uiImage {
+            
+            if let url = url, let cachedImage = ImageCache[url.absoluteString] {
+                Image(uiImage: cachedImage)
+                    .resizable()
+                    .aspectRatio(Constants.CardAspectRatio, contentMode: contentMode)
+
+            } else if let uiImage = imageLoader.uiImage {
                 Image(uiImage: uiImage)
                     .resizable()
                     .aspectRatio(Constants.CardAspectRatio, contentMode: contentMode)
@@ -34,9 +40,10 @@ struct MoviePoster: View {
                 Image("placeholder")
                     .resizable()
                     .aspectRatio(Constants.CardAspectRatio, contentMode: contentMode)
+                    .task {
+                        await downloadImage()
+                    }
             }
-        }.task {
-            await downloadImage()
         }
     }
     
