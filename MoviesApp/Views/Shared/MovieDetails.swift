@@ -147,13 +147,6 @@ struct MovieDetails: View {
         .cornerRadius(cornerRadius)
         .scaleEffect(scale)
         .edgesIgnoringSafeArea(.all)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: Button(action : {
-            self.goback.wrappedValue.dismiss()
-        }){
-            Text(Image(systemName: "arrow.left"))
-                .fontWeight(.bold)
-        })
     }
     
     // MARK: - Functions
