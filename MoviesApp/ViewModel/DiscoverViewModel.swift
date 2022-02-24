@@ -94,7 +94,8 @@ class DiscoverViewModel: ObservableObject {
     func getMovieById(id:Int64) async throws-> Movie? {
         return try await networkingManager.getMovieById(id: id)
     }
-    func addToMovieAlreadyReccomended(movieToSave:Movie){
+    func addToMovieAlreadyReccomended(movieToSave:Movie,voteOfTheMovie:Float){
+        movieToSave.vote = voteOfTheMovie
         self.model.addToMovieAlreadyReccomended(movieToSave: movieToSave)
     }
  

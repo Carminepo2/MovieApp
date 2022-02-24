@@ -36,6 +36,7 @@ class Movie: Codable, Identifiable {
     let voteCount: Int
 //     let keywords: Array<Keyword>
      var providers: Providers? = Providers(de: nil, it: nil, us: nil)
+    var vote:Float? = nil
     
      static let example = Movie()
     

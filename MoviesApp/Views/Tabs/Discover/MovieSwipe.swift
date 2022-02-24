@@ -117,7 +117,7 @@ struct MovieSwipe: View {
                     }
                 }
             }
-            discoverViewController.addToMovieAlreadyReccomended(movieToSave: movieCards.last!.movie)
+            discoverViewController.addToMovieAlreadyReccomended(movieToSave: movieCards.last!.movie,voteOfTheMovie: 1.0)
             discoverViewController.giveFeedback(drawValueId: movieCards.last!.movie.id, result: 1.0)
         }
     }
@@ -151,6 +151,7 @@ struct MovieSwipe: View {
                     }
                 }
             }
+            discoverViewController.addToMovieAlreadyReccomended(movieToSave: movieCards.last!.movie,voteOfTheMovie: 1.0)
             discoverViewController.giveFeedback(drawValueId: movieCards.last!.movie.id, result: -1.0)
         }
     }
