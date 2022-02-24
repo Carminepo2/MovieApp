@@ -45,21 +45,20 @@ class MovieAppModel {
         return idListToReturn
     }
     
-    func setWatchLists() async{
-        for aMovie in savedMovies{
-            var movieToPick = try await NetworkManager.shared.getMovieById(id: aMovie.id)
-            if(aMovie.watchListItBelong == "alone"){
-                self.watchListAlone.append(movieToPick)
-            }
-            else if(aMovie.watchListItBelong == "couple"){
-                self.watchListCouple.append(movieToPick)
-            }
-            
-            
-            
-            
-        }
-    }
+//    func setWatchLists() async{
+//        for aMovie in savedMovies{
+//            var movieToPick = try await NetworkManager.shared.getMovieById(id: aMovie.id)
+//            if(aMovie.watchListItBelong == "alone"){
+//                self.watchListAlone.append(movieToPick)
+//            }
+//            else if(aMovie.watchListItBelong == "couple"){
+//                self.watchListCouple.append(movieToPick)
+//            }
+//            
+//
+//            
+//        }
+//    }
     func getWatchList()->Array<Movie>{
         var watchListToReturn:Array<Movie> = []
         if(with == Company.alone){

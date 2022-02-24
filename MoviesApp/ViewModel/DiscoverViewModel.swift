@@ -40,14 +40,12 @@ class DiscoverViewModel: ObservableObject {
     func nextCard() async throws{
         let advice = try await self.getAdvice()
         movieCards.removeLast()
-        if let advice = advice {
-            if (advice.id != Movie.example.id){
-                movieCards.insert(MovieCard(movie: advice), at: 0)
-                print("\(advice.id):\(advice.title)")
+        if let notNullAdvice = advice {
+            if (notNullAdvice.id != Movie.example.id){
+                movieCards.insert(MovieCard(movie: notNullAdvice), at: 0)
             }
-            
-
         }
+        
     }
     
     
