@@ -95,19 +95,22 @@ struct MovieSwipe: View {
     
     // MARK: - Favorite and discard Functions
     func makeMovieFavorite() {
-        if !userCanSwipe { return }
+//        if !userCanSwipe { return }
+//
+//        userCanSwipe = false
+//        userCanSwipe = true
+
         
-        userCanSwipe = false
         withAnimation {
             discoverViewController.movieCards[movieCards.last!].xOffset = 500
             discoverViewController.movieCards[movieCards.last!].rotationOffset = 15
             Haptics.shared.play(.heavy)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+
                 Task {
                     do{
-                        try await discoverViewController.nextCard()
-                        userCanSwipe = true
+                        try await discoverViewController.nextCard(voto: 1.0)
                         withAnimation {
                             discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
                         }
@@ -116,16 +119,21 @@ struct MovieSwipe: View {
                         print("Errore dati")
                     }
                 }
+               
             }
-            discoverViewController.addToMovieAlreadyReccomended(movieToSave: movieCards.last!.movie,voteOfTheMovie: 1.0)
-            discoverViewController.giveFeedback(drawValueId: movieCards.last!.movie.id, result: 1.0)
+//            discoverViewController.addToMovieAlreadyReccomended(movieToSave: movieCards.last!.movie,voteOfTheMovie: 1.0)
+//            discoverViewController.giveFeedback(drawValueId: movieCards.last!.movie.id, result: 1.0)
+                
+            
+            
         }
     }
     
     func discardMovie() {
-        if !userCanSwipe { return }
-        
-        userCanSwipe = false
+//        if !userCanSwipe { return }
+//
+//        userCanSwipe = false
+//        userCanSwipe = true
         
         // Remove discarded movie's poster image from cache
         if let posterPath = movieCards.last?.movie.posterPath {
@@ -134,15 +142,16 @@ struct MovieSwipe: View {
         
         Haptics.shared.play(.soft)
         
+
+        
+        
         withAnimation {
             discoverViewController.movieCards[movieCards.last!].xOffset = -500
             discoverViewController.movieCards[movieCards.last!].rotationOffset = -15
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                
                 Task{
                     do {
-                        try await discoverViewController.nextCard()
-                        userCanSwipe = true
+                        try await discoverViewController.nextCard(voto: -1.0)
                         withAnimation {
                             discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
                         }
@@ -152,9 +161,12 @@ struct MovieSwipe: View {
                         print("Errore caricamento dati")
                     }
                 }
+                
             }
-            discoverViewController.addToMovieAlreadyReccomended(movieToSave: movieCards.last!.movie,voteOfTheMovie: 1.0)
-            discoverViewController.giveFeedback(drawValueId: movieCards.last!.movie.id, result: -1.0)
+//            discoverViewController.addToMovieAlreadyReccomended(movieToSave: movieCards.last!.movie,voteOfTheMovie: 1.0)
+//            discoverViewController.giveFeedback(drawValueId: movieCards.last!.movie.id, result: -1.0)
+                
+            
         }
     }
     

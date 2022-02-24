@@ -37,10 +37,13 @@ class DiscoverViewModel: ObservableObject {
     }
     
     @MainActor
-    func nextCard() async throws{
+    func nextCard(voto:Double) async throws{
         
         let advice = try await self.getAdvice()
-        movieCards.removeLast()
+        var lastCard = movieCards.removeLast()
+        var movieRemoved = lastCard.movie
+        self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
+        self.addToMovieAlreadyReccomended(movieToSave: movieRemoved, voteOfTheMovie: Float(voto))
         
         if let notNullAdvice = advice {
             if (notNullAdvice.id != Movie.example.id){
@@ -105,6 +108,7 @@ class DiscoverViewModel: ObservableObject {
     }
     func addToMovieAlreadyReccomended(movieToSave:Movie,voteOfTheMovie:Float){
         movieToSave.vote = voteOfTheMovie
+        print("\(movieToSave.id):\(movieToSave.title)")
         self.model.addToMovieAlreadyReccomended(movieToSave: movieToSave)
     }
  
