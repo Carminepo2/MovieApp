@@ -14,6 +14,15 @@
 		1D1AA58D27BE94A400085A2C /* movies-id-name.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D1AA58C27BE94A300085A2C /* movies-id-name.json */; };
 		1DF92ACA27C386F200BAA05B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF92AC927C386F200BAA05B /* NetworkManager.swift */; };
 		1DF94AED27C51F1F00B1E491 /* DataException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF94AEC27C51F1F00B1E491 /* DataException.swift */; };
+<<<<<<< Updated upstream
+=======
+		1DF94AF127C6734F00B1E491 /* GenreRecommender2 1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 1DF94AEE27C6734E00B1E491 /* GenreRecommender2 1.mlmodel */; };
+		1DF94AF227C6734F00B1E491 /* ProductionRecommender2 1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 1DF94AEF27C6734F00B1E491 /* ProductionRecommender2 1.mlmodel */; };
+		1DF94AF327C6734F00B1E491 /* KeywordsRecommender2 1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 1DF94AF027C6734F00B1E491 /* KeywordsRecommender2 1.mlmodel */; };
+		1DF94AF627C792FB00B1E491 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1DF94AF427C792FB00B1E491 /* CoreDataModel.xcdatamodeld */; };
+		1DF94AF827C7966100B1E491 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF94AF727C7966100B1E491 /* CoreDataManager.swift */; };
+		1DF94AFA27C7D0A900B1E491 /* MovieCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF94AF927C7D0A900B1E491 /* MovieCache.swift */; };
+>>>>>>> Stashed changes
 		7511316B27BC00950025BE52 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511316A27BC00950025BE52 /* ImageCache.swift */; };
 		7511316D27BC5FF20025BE52 /* ImageLoaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511316C27BC5FF10025BE52 /* ImageLoaderViewModel.swift */; };
 		7511316F27BD0D6B0025BE52 /* DiscoverTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511316E27BD0D6B0025BE52 /* DiscoverTab.swift */; };
@@ -59,6 +68,15 @@
 		1D1AA58C27BE94A300085A2C /* movies-id-name.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "movies-id-name.json"; sourceTree = "<group>"; };
 		1DF92AC927C386F200BAA05B /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		1DF94AEC27C51F1F00B1E491 /* DataException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataException.swift; sourceTree = "<group>"; };
+<<<<<<< Updated upstream
+=======
+		1DF94AEE27C6734E00B1E491 /* GenreRecommender2 1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "GenreRecommender2 1.mlmodel"; sourceTree = "<group>"; };
+		1DF94AEF27C6734F00B1E491 /* ProductionRecommender2 1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "ProductionRecommender2 1.mlmodel"; sourceTree = "<group>"; };
+		1DF94AF027C6734F00B1E491 /* KeywordsRecommender2 1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "KeywordsRecommender2 1.mlmodel"; sourceTree = "<group>"; };
+		1DF94AF527C792FB00B1E491 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		1DF94AF727C7966100B1E491 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		1DF94AF927C7D0A900B1E491 /* MovieCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCache.swift; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
 		7511316A27BC00950025BE52 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		7511316C27BC5FF10025BE52 /* ImageLoaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoaderViewModel.swift; sourceTree = "<group>"; };
 		7511316E27BD0D6B0025BE52 /* DiscoverTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTab.swift; sourceTree = "<group>"; };
@@ -179,6 +197,7 @@
 				756F1D9027B81B8D00609A15 /* Constants.swift */,
 				7539458F27B9152F00365782 /* Haptics.swift */,
 				7511316A27BC00950025BE52 /* ImageCache.swift */,
+				1DF94AF927C7D0A900B1E491 /* MovieCache.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -382,6 +401,11 @@
 				753B57D227C3DAF800231CA4 /* Collection.swift in Sources */,
 				7511316B27BC00950025BE52 /* ImageCache.swift in Sources */,
 				75C829C727BD5EBC005DED2A /* MovieCardGridItem.swift in Sources */,
+<<<<<<< Updated upstream
+=======
+				1DF94AFA27C7D0A900B1E491 /* MovieCache.swift in Sources */,
+				1DF94AF627C792FB00B1E491 /* CoreDataModel.xcdatamodeld in Sources */,
+>>>>>>> Stashed changes
 				756F1D9A27B82D5000609A15 /* MovieAppModel.swift in Sources */,
 				1DF92ACA27C386F200BAA05B /* NetworkManager.swift in Sources */,
 				75C829CB27BD811C005DED2A /* SkeumorhicButtonStyle.swift in Sources */,

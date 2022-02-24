@@ -47,6 +47,11 @@ class NetworkManager{
     
     
     func getMovieById(id:Int64) async throws -> Movie {
+        
+        if let cachedMovie = MovieCache[id] {
+            return cachedMovie
+        }
+        
         var movieToReturn:Movie = Movie.example
         var urlComponent = URLComponents(string: "https://api.themoviedb.org")!
         let decoder = JSONDecoder()
@@ -69,7 +74,7 @@ class NetworkManager{
         catch{
             throw DataException.ErrorGettingTheData
         }
-     
+        MovieCache[movieToReturn.id] = movieToReturn
         return movieToReturn
         
     }

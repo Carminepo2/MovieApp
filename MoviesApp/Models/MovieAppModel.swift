@@ -34,12 +34,38 @@ class MovieAppModel {
     }
  
     
+<<<<<<< Updated upstream
     
     func addToWatchList(id:Int64){
         
     }
     func addToMovieAlreadyReccomended(id:Int64){
         
+=======
+//    func setWatchLists() async{
+//        for aMovie in savedMovies{
+//            var movieToPick = try await NetworkManager.shared.getMovieById(id: aMovie.id)
+//            if(aMovie.watchListItBelong == "alone"){
+//                self.watchListAlone.append(movieToPick)
+//            }
+//            else if(aMovie.watchListItBelong == "couple"){
+//                self.watchListCouple.append(movieToPick)
+//            }
+//        }
+//        
+//    }
+    func getWatchList()->Array<Movie>{
+        var watchListToReturn:Array<Movie> = []
+        if(with == Company.alone){
+        }
+        else if(with == Company.couple){
+        }
+        else if(with == Company.family){
+        }
+        else if(with == Company.friends){
+        }
+        return watchListToReturn
+>>>>>>> Stashed changes
     }
     func getMovieById(id:Int64){
     
