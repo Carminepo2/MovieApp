@@ -157,7 +157,7 @@ struct MoovieProvider: Codable {
 }
 
 enum Company{
-    case noOne
+    case alone
     case couple
     case friends
     case family

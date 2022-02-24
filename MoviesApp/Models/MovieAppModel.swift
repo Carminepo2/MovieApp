@@ -8,7 +8,7 @@
 import Foundation
 
 class MovieAppModel {
-    var movies:Array<Movie> = []
+    var savedMovies:Array<MovieToSave>
     var watchListAlone:Array<Movie>
     var watchListCouple:Array<Movie>
     var watchListFriends:Array<Movie>
@@ -24,18 +24,76 @@ class MovieAppModel {
         watchListCouple = []
         watchListFriends = []
         watchListFamily = []
-        with = Company.noOne
+        savedMovies = CoreDataManager.shared.readMovie()
+        with = Company.alone
         movieAlreadyRecommended = []
     }
     func getWatchListId()->Array<Int64>{
-        return []
+        var idListToReturn:Array<Int64> = []
+        if(with == Company.alone){
+            
+        }
+        else if(with == Company.couple){
+            
+        }
+        else if(with == Company.family){
+            
+        }
+        else if(with == Company.friends){
+            
+        }
+        return idListToReturn
     }
- 
+    
+    func setWatchLists() async{
+        for aMovie in savedMovies{
+            var movieToPick = try await NetworkManager.shared.getMovieById(id: aMovie.id)
+            if(aMovie.watchListItBelong == "alone"){
+                self.watchListAlone.append(movieToPick)
+            }
+            else if(aMovie.watchListItBelong == "couple"){
+                self.watchListCouple.append(movieToPick)
+            }
+            
+            
+            
+            
+        }
+    }
+    func getWatchList()->Array<Movie>{
+        var watchListToReturn:Array<Movie> = []
+        if(with == Company.alone){
+        }
+        else if(with == Company.couple){
+        }
+        else if(with == Company.family){
+        }
+        else if(with == Company.friends){
+        }
+        return watchListToReturn
+    }
     
     
     func addToWatchList(id:Int64){
+        var movieToSave = MovieToSave(context: CoreDataManager.shared.persistentContainer.viewContext)
+        movieToSave.id = id
+        if(with == Company.alone){
+            movieToSave.watchListItBelong = "alone"
+        }
+        else if(with == Company.couple){
+            movieToSave.watchListItBelong = "couple"
+        }
+        else if(with == Company.family){
+            movieToSave.watchListItBelong = "family"
+        }
+        else if(with == Company.friends){
+            movieToSave.watchListItBelong = "friends"
+        }
+        CoreDataManager.shared.createMovie(movieToSave)
         
-    }
+}
+    
+    
     func addToMovieAlreadyReccomended(movieToSave:Movie){
         movieAlreadyRecommended.append(movieToSave)
     }
@@ -43,32 +101,5 @@ class MovieAppModel {
         return self.movieAlreadyRecommended
     }
   
-    
-    
-    
-    
-    
-//    private static func load<T: Decodable>(_ filename: String) -> T {
-//        let data: Data
-//
-//        guard let file = Bundle.main.url(forResource: filename, withExtension: nil)
-//        else {
-//            fatalError("Couldn't find \(filename) in main bundle.")
-//        }
-//
-//        do {
-//            data = try Data(contentsOf: file)
-//        } catch {
-//            fatalError("Couldn't load \(filename) from main bundle:\n\(error)")
-//        }
-//
-//        do {
-//            let decoder = JSONDecoder()
-//            decoder.keyDecodingStrategy = .convertFromSnakeCase
-//            return try decoder.decode(T.self, from: data)
-//        } catch {
-//            fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
-//        }
-//    }
 
 }
