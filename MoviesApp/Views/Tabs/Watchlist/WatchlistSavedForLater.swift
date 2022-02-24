@@ -25,26 +25,9 @@ struct WatchlistSavedForLater: View {
                     } label: { MovieCardLikedGridItem(movie: newRecord) }
                     .foregroundColor(Color.white)
                 }
-                /*NavigationLink {
-                    MovieDetails(movie: Movie.example)
-                } label: { MovieCardLikedGridItem(movie: Movie.example) }
-                .foregroundColor(Color.white)
-                NavigationLink {
-                    MovieDetails(movie: Movie.example)
-                } label: { MovieCardLikedGridItem(movie: Movie.example) }
-                .foregroundColor(Color.white)
-                NavigationLink {
-                    MovieDetails(movie: Movie.example)
-                } label: { MovieCardLikedGridItem(movie: Movie.example) }
-                .foregroundColor(Color.white)
-                NavigationLink {
-                    MovieDetails(movie: Movie.example)
-                } label: { MovieCardLikedGridItem(movie: Movie.example) }
-                .foregroundColor(Color.white)*/
             }
+            .padding()
         }
-        
-        .padding()
         .navigationTitle("History")
         .navigationBarTitleDisplayMode(.inline)
         .withBackground()
