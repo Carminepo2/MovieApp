@@ -121,7 +121,6 @@ struct MovieDetails: View {
 
                             }
                             
-                            
                             //MARK: Overview
                             Text(movie.overview)
                                 .padding(.top)
@@ -131,8 +130,6 @@ struct MovieDetails: View {
                                 MovieProviders(movie.providers?.us)
                                     .padding(.top)
                             }
-                            
-                            
                         }
                         .hLeading()
                     }
@@ -141,19 +138,11 @@ struct MovieDetails: View {
                     
                     Spacer()
                 }
-
             }
         }
         .cornerRadius(cornerRadius)
         .scaleEffect(scale)
         .edgesIgnoringSafeArea(.all)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: Button(action : {
-            self.goback.wrappedValue.dismiss()
-        }){
-            Text(Image(systemName: "arrow.left"))
-                .fontWeight(.bold)
-        })
     }
     
     // MARK: - Functions
