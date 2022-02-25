@@ -133,5 +133,8 @@ class MovieAppModel {
         return self.movieAlreadyRecommended
     }
   
+}
 
+struct WatchList{
+    
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 class WatchlistViewModel: ObservableObject {
-    @Published var model:MovieAppModel = MovieAppModel.shared
+    @Published var model: MovieAppModel = MovieAppModel.shared
     
     init(){
        
