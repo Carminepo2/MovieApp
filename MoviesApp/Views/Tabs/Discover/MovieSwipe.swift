@@ -79,15 +79,37 @@ struct MovieSwipe: View {
         
     }
     
-    // MARK: - Functions
+    // MARK: - Favorite and discard Functions
     
-    func showDetailsOf(_ movie: Movie) {
-        withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.8)) {
-            showDetails.toggle()
-            tappedMovie = movie
+    // MARK: - Drag Functions
+    
+    func handleDragCard(value: DragGesture.Value) {
+        let scrollProgress = value.translation.width / getScreenBounds().width
+        let cornerRadius = (scrollProgress / 0.20) * 4
+        discoverViewController.movieCards[movieCards.last!].rotationOffset = cornerRadius
+        discoverViewController.movieCards[movieCards.last!].xOffset = value.translation.width
+    }
+    
+    func handleEndDragCard(value: DragGesture.Value) {
+        let xTranslation = value.translation.width
+        if xTranslation > 0 {
+            if xTranslation > 150 {
+                discoverViewController.makeMovieFavorite()
+                return
+            }
+        } else {
+            if xTranslation < -150 {
+                discoverViewController.discardMovie()
+                return
+            }
+        }
+        withAnimation {
+            discoverViewController.movieCards[movieCards.last!].xOffset = 0
+            discoverViewController.movieCards[movieCards.last!].rotationOffset = 0
         }
     }
     
+    // MARK: - Close Modal Function
     func closeButtonTapped() {
         isSwipeCardModalOpen = false
     }
