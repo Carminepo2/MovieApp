@@ -15,8 +15,8 @@ class MovieCardDetailsViewModel: ObservableObject {
     }
     
     
-    func addToWatchList(id:Int64){
-        model.addToWatchList(id: id)
+    func addToWatchList(_ movie:Movie){
+        model.addToWatchList(movie)
     }
 
 }

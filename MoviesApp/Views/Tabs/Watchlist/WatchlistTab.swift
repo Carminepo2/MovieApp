@@ -14,6 +14,7 @@ struct WatchlistTab: View {
     
     var watchList:Array<Movie>{
             return viewModel.getWatchList()
+        
     }
     private var twoColumnGrid = [GridItem(.flexible(), spacing:14), GridItem(.flexible())]
     
@@ -44,9 +45,7 @@ struct WatchlistTab: View {
                 }
             }
             .withBackground()
-                .task{
-                    await  viewModel.model.setWatchList()
-                }
+              
             
             
             

@@ -17,7 +17,7 @@ struct MovieDetails: View {
     @Binding var showDetails: Bool
     var animation: Namespace.ID?
     @Namespace var animationPlaceholder
-
+    @State var isSaved = false
 
     @State private var scale: CGFloat = 1
     @State private var cornerRadius: CGFloat = 0
@@ -173,7 +173,14 @@ struct MovieDetails: View {
     }
     
     func handleBookmark() {
-        viewModel.addToWatchList(id: self.movie.id)
+        if(!isSaved){
+            viewModel.addToWatchList(self.movie)
+            print("\(movie.title) salvato")
+            isSaved.toggle()
+        }
+        else{
+            
+        }
         //TODO
     }
 }

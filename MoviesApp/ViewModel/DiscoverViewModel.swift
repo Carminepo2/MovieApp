@@ -27,7 +27,6 @@ class DiscoverViewModel: ObservableObject {
                 let movie = try await getAdvice()
                 if let unwrappedMovie = movie {
                     movieCards.append(MovieCard(movie: unwrappedMovie))
-                    print("\(unwrappedMovie.id):\(unwrappedMovie.title)")
                 }
             }
         cardSetted = true
@@ -111,7 +110,6 @@ class DiscoverViewModel: ObservableObject {
     
     func addToMovieAlreadyReccomended(movieToSave:Movie,voteOfTheMovie:Float){
         movieToSave.vote = voteOfTheMovie
-        print("\(movieToSave.id):\(movieToSave.title)")
         self.model.addToMovieAlreadyReccomended(movieToSave: movieToSave)
     }
  

@@ -33,6 +33,8 @@ class MovieAppModel {
         savedMovies = CoreDataManager.shared.readMovie()
         with = Company.alone
         movieAlreadyRecommended = []
+    
+        
     }
     
     func getMovieById(id:Int64) async throws-> Movie? {
@@ -99,23 +101,27 @@ class MovieAppModel {
     }
     
     
-    func addToWatchList(id:Int64){
+    func addToWatchList(_ movie:Movie){
         var movieToSave = MovieToSave(context: CoreDataManager.shared.persistentContainer.viewContext)
-        movieToSave.id = id
+        movieToSave.id = movie.id
         if(with == Company.alone){
             movieToSave.watchListItBelong = "alone"
+            watchListAlone.append(movie)
         }
         else if(with == Company.couple){
             movieToSave.watchListItBelong = "couple"
+            watchListCouple.append(movie)
         }
         else if(with == Company.family){
             movieToSave.watchListItBelong = "family"
+            watchListFamily.append(movie)
         }
         else if(with == Company.friends){
             movieToSave.watchListItBelong = "friends"
+            watchListFriends.append(movie)
         }
         savedMovies.append(movieToSave)
-//        CoreDataManager.shared.createMovie(movieToSave)
+        CoreDataManager.shared.createMovie(movieToSave)
 }
     
     
