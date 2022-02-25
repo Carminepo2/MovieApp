@@ -13,6 +13,8 @@ class DiscoverViewModel: ObservableObject {
     @Published var movieCards: Array<MovieCard> = []
     @Published var rotationDegreeCards: Array<Double> = []
     @Published var model:MovieAppModel = MovieAppModel.shared
+    @Published var watchListModel:WatchListModel = WatchListModel.shared
+    
     @Published var networkingManager = NetworkManager.shared
     var advisor: GrandAdvisor = GrandAdvisor.shared
     var cardSetted:Bool = false
@@ -70,7 +72,7 @@ class DiscoverViewModel: ObservableObject {
     func getAdvice() async throws -> Movie? {
         let isAdvisorSetted = advisor.isAdvisorSetted
         if(isAdvisorSetted == false){
-            let watchListId = model.getWatchListId()
+            let watchListId = watchListModel.getWatchListId()
             var initialValues:[Int64:Double] = [:]
             for id in watchListId {
                 initialValues[id] = 1.0

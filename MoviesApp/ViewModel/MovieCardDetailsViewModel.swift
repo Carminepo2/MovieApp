@@ -8,15 +8,17 @@
 import Foundation
 
 class MovieCardDetailsViewModel: ObservableObject {
+    
+    
     @Published var model:MovieAppModel = MovieAppModel.shared
+    @Published var watchListModel:WatchListModel = WatchListModel.shared
     
     init(){
        
     }
     
-    
     func addToWatchList(_ movie:Movie){
-        model.addToWatchList(movie)
+        watchListModel.addToWatchList(movie)
     }
 
 }

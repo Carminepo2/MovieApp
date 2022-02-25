@@ -135,3 +135,4 @@ struct SearchTab_Previews: PreviewProvider {
         MovieSwipe(isSwipeCardModalOpen: .constant(true))
     }
 }
+
