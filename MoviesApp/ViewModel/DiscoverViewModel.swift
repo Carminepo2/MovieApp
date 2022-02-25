@@ -120,10 +120,7 @@ class DiscoverViewModel: ObservableObject {
         Haptics.shared.play(.soft)
         
         withAnimation {
-            movieCards[movieCards.last!].xOffset = -500
-            movieCards[movieCards.last!].rotationOffset = -15
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                
                 Task{
                     do {
                         try await self.nextCard(voto: -1.0)
@@ -144,8 +141,6 @@ class DiscoverViewModel: ObservableObject {
     
     func makeMovieFavorite() {
         withAnimation {
-            movieCards[movieCards.last!].xOffset = 500
-            movieCards[movieCards.last!].rotationOffset = 15
             Haptics.shared.play(.heavy)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -177,7 +172,5 @@ class DiscoverViewModel: ObservableObject {
             Int.random(in: -4...4)
         )
         let movie: Movie
-        var xOffset: Double = 0
-        var rotationOffset: Double = 0
     }
 }
