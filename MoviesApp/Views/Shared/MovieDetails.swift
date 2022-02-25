@@ -11,6 +11,8 @@ struct MovieDetails: View {
     
     @Environment(\.presentationMode) var goback: Binding<PresentationMode>
     
+    var viewModel:MovieCardDetailsViewModel = MovieCardDetailsViewModel()
+    
     let movie: Movie
     @Binding var showDetails: Bool
     var animation: Namespace.ID?
@@ -171,6 +173,7 @@ struct MovieDetails: View {
     }
     
     func handleBookmark() {
+        viewModel.addToWatchList(id: self.movie.id)
         //TODO
     }
 }

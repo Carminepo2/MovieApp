@@ -14,6 +14,7 @@ class DiscoverViewModel: ObservableObject {
     @Published var networkingManager = NetworkManager.shared
     var advisor: GrandAdvisor = GrandAdvisor.shared
     var cardSetted:Bool = false
+    var carLoading:Bool = false
     
     
     init() {
@@ -30,12 +31,18 @@ class DiscoverViewModel: ObservableObject {
                 }
             }
         cardSetted = true
+
          
     }
     func isCardsSetted()->Bool{
         return self.cardSetted
     }
-    
+    func isCardsLoading()->Bool{
+        return self.carLoading
+    }
+    func setCardsLoading(_ value:Bool){
+        carLoading = value
+    }
     @MainActor
     func nextCard(voto:Double) async throws{
         
@@ -99,13 +106,9 @@ class DiscoverViewModel: ObservableObject {
 //
 //    }
     func getMovieById(id:Int64) async throws-> Movie? {
-        var movieToReturn = try await networkingManager.getMovieById(id: id)
-        while(movieToReturn.id == Movie.example.id){
-            movieToReturn = try await networkingManager.getMovieById(id: id)
-        }
-        
-        return movieToReturn
+        return try await model.getMovieById(id: id)
     }
+    
     func addToMovieAlreadyReccomended(movieToSave:Movie,voteOfTheMovie:Float){
         movieToSave.vote = voteOfTheMovie
         print("\(movieToSave.id):\(movieToSave.title)")
