@@ -11,19 +11,19 @@ import SwiftUI
 
 class DiscoverViewModel: ObservableObject {
     @Published var movieCards: Array<MovieCard> = []
-    @Published var rotationDegreeCards: Array<Double> = []
-    @Published var model:MovieAppModel = MovieAppModel.shared
+
     @Published var watchListModel:WatchListModel = WatchListModel.shared
-    
+
+    @Published var model: MovieAppModel = MovieAppModel.shared
     @Published var networkingManager = NetworkManager.shared
+    
     var advisor: GrandAdvisor = GrandAdvisor.shared
-    var cardSetted:Bool = false
-    var carLoading:Bool = false
+    
+    var cardSetted: Bool = false
+    var carLoading: Bool = false
     
     
-    init() {
-        
-    }
+    init() { }
     
     @MainActor
     func setCards() async throws{
@@ -106,14 +106,37 @@ class DiscoverViewModel: ObservableObject {
         self.model.addToMovieAlreadyReccomended(movieToSave: movieToSave)
     }
     
+    func discardMovie() {
+
+        // Remove discarded movie's poster image from cache
+        if let posterPath = movieCards.last?.movie.posterPath {
+            ImageCache.removeImageFromCache(with: Constants.ImagesBasePath + posterPath)
+        }
+        Haptics.shared.play(.soft)
+        withAnimation {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                Task{
+                    do {
+                        try await self.nextCard(voto: -1.0)
+                        withAnimation {
+                            self.movieCards[self.movieCards.last!].rotationDegree = 0
+                        }
+                    }
+                    catch{
+                        print("Errore caricamento dati")
+                    }
+                }
+            }
+            addToMovieAlreadyReccomended(movieToSave: movieCards.last!.movie,voteOfTheMovie: 1.0)
+            giveFeedback(drawValueId: movieCards.last!.movie.id, result: -1.0)
+        }
+    }
+    
     func makeMovieFavorite() {
         withAnimation {
-            self.movieCards[movieCards.last!].xOffset = 500
-            self.movieCards[movieCards.last!].rotationOffset = 15
             Haptics.shared.play(.heavy)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-
                 Task {
                     do{
                         try await self.nextCard(voto: 1.0)
@@ -128,36 +151,17 @@ class DiscoverViewModel: ObservableObject {
             }
         }
     }
-    func discardMovie() {
-
-        // Remove discarded movie's poster image from cache
-        if let posterPath = movieCards.last?.movie.posterPath {
-            ImageCache.removeImageFromCache(with: Constants.ImagesBasePath + posterPath)
-        }
-        Haptics.shared.play(.soft)
-        withAnimation {
-            self.movieCards[movieCards.last!].xOffset = -500
-            self.movieCards[movieCards.last!].rotationOffset = -15
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                Task{
-                    do {
-                        try await self.nextCard(voto: -1.0)
-                        withAnimation {
-                            self.movieCards[self.movieCards.last!].rotationDegree = 0
-                        }
-                    }
-                    catch{
-                        print("Errore caricamento dati")
-                    }
-                }
-            }
-        }
+    
+    
+    
+    
+    func rotateCard(_ movieCard: MovieCard, degrees: Double) {
+        movieCards[movieCard].rotationOffset = degrees
     }
     
-    
-    
-    
-    
+    func moveCard(_ movieCard: MovieCard, offset: Double) {
+        movieCards[movieCard].xOffset = offset
+    }
     
     struct MovieCard: Identifiable {
         fileprivate init(movie: Movie) {
@@ -169,7 +173,9 @@ class DiscoverViewModel: ObservableObject {
             Int.random(in: -4...4)
         )
         let movie: Movie
-        var xOffset: Double = 0
-        var rotationOffset: Double = 0
+        
+        var xOffset: CGFloat = .zero
+        var rotationOffset: CGFloat = .zero
+    
     }
 }
