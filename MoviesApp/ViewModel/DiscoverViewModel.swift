@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
+
 
 class DiscoverViewModel: ObservableObject {
     @Published var movieCards: Array<MovieCard> = []
@@ -112,7 +114,62 @@ class DiscoverViewModel: ObservableObject {
         movieToSave.vote = voteOfTheMovie
         self.model.addToMovieAlreadyReccomended(movieToSave: movieToSave)
     }
- 
+    
+    func makeMovieFavorite() {
+//        if !userCanSwipe { return }
+//
+//        userCanSwipe = false
+//        userCanSwipe = true
+        withAnimation {
+            self.movieCards[movieCards.last!].xOffset = 500
+            self.movieCards[movieCards.last!].rotationOffset = 15
+            Haptics.shared.play(.heavy)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+
+                Task {
+                    do{
+                        try await self.nextCard(voto: 1.0)
+                        withAnimation {
+                            self.movieCards[self.movieCards.last!].rotationDegree = 0
+                        }
+                    }
+                    catch{
+                        print("Errore dati")
+                    }
+                }
+            }
+        }
+    }
+    func discardMovie() {
+
+        // Remove discarded movie's poster image from cache
+        if let posterPath = movieCards.last?.movie.posterPath {
+            ImageCache.removeImageFromCache(with: Constants.ImagesBasePath + posterPath)
+        }
+        Haptics.shared.play(.soft)
+        withAnimation {
+            self.movieCards[movieCards.last!].xOffset = -500
+            self.movieCards[movieCards.last!].rotationOffset = -15
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                Task{
+                    do {
+                        try await self.nextCard(voto: -1.0)
+                        withAnimation {
+                            self.movieCards[self.movieCards.last!].rotationDegree = 0
+                        }
+                    }
+                    catch{
+                        print("Errore caricamento dati")
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
+    
     
     
     struct MovieCard: Identifiable {
