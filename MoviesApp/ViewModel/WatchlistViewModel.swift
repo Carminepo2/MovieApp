@@ -21,8 +21,6 @@ class WatchlistViewModel: ObservableObject {
     func getWatchList()->Array<Movie>{
         return model.getWatchList()
     }
-//    func setWatchList() async{
-//        await model.setWatchList()
-//    }
+
 
 }
