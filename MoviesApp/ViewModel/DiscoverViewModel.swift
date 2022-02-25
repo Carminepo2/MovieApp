@@ -127,7 +127,6 @@ class DiscoverViewModel: ObservableObject {
                     }
                 }
             }
-            addToMovieAlreadyReccomended(movieToSave: movieCards.last!.movie,voteOfTheMovie: 1.0)
             giveFeedback(drawValueId: movieCards.last!.movie.id, result: -1.0)
         }
     }
