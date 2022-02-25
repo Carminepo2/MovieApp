@@ -14,7 +14,7 @@ class DiscoverViewModel: ObservableObject {
     @Published var model: MovieAppModel = MovieAppModel.shared
     @Published var networkingManager = NetworkManager.shared
     @Published var userCanSwipe = true
-
+    
     var advisor: GrandAdvisor = GrandAdvisor.shared
     var cardSetted:Bool = false
     var carLoading:Bool = false
@@ -26,14 +26,14 @@ class DiscoverViewModel: ObservableObject {
     
     @MainActor
     func setCards() async throws{
-            for _ in 0..<Constants.NumOfCards {
-                let movie = try await getAdvice()
-                if let unwrappedMovie = movie {
-                    movieCards.append(MovieCard(movie: unwrappedMovie))
-                }
+        for _ in 0..<Constants.NumOfCards {
+            let movie = try await getAdvice()
+            if let unwrappedMovie = movie {
+                movieCards.append(MovieCard(movie: unwrappedMovie))
             }
+        }
         cardSetted = true
-         
+        
     }
     
     func isCardsSetted() -> Bool{
@@ -58,7 +58,7 @@ class DiscoverViewModel: ObservableObject {
             if (notNullAdvice.id != Movie.example.id){
                 movieCards.insert(MovieCard(movie: notNullAdvice), at: 0)
             }
-         
+            
         }
         
     }
@@ -68,7 +68,7 @@ class DiscoverViewModel: ObservableObject {
         advisor.resetAdvisor()
     }
     
- 
+    
     //MARK: Riccardo Function
     
     func getAdvice() async throws -> Movie? {
@@ -90,7 +90,7 @@ class DiscoverViewModel: ObservableObject {
         adviceToReturn?.providers = elemento
         return adviceToReturn
     }
-
+    
     func getProvidersById(id:Int64) async throws -> Providers?{
         return try await networkingManager.getProvidersById(id: id).results
     }
@@ -98,7 +98,7 @@ class DiscoverViewModel: ObservableObject {
     func giveFeedback(drawValueId:Int64,result:Double){
         advisor.giveFeedback(drawValueId: drawValueId, result: result)
     }
-
+    
     func getMovieById(id:Int64) async throws-> Movie? {
         return try await model.getMovieById(id: id)
     }
@@ -111,9 +111,6 @@ class DiscoverViewModel: ObservableObject {
     //MARK: - User intentions Actions
     
     func discardMovie() {
-        if !userCanSwipe { return }
-        
-        userCanSwipe = false
         
         // Remove discarded movie's poster image from cache
         if let posterPath = movieCards.last?.movie.posterPath {
@@ -127,14 +124,11 @@ class DiscoverViewModel: ObservableObject {
             movieCards[movieCards.last!].rotationOffset = -15
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 
-                Task {
+                Task{
                     do {
-                        try await self.nextCard()
-                        self.userCanSwipe = true
+                        try await self.nextCard(voto: -1.0)
                         withAnimation {
-                            if let shownCard = self.movieCards.last {
-                                self.movieCards[shownCard].rotationDegree = 0
-                            }
+                            self.movieCards[self.movieCards.last!].rotationDegree = 0
                         }
                         
                     }
@@ -147,11 +141,8 @@ class DiscoverViewModel: ObservableObject {
             giveFeedback(drawValueId: movieCards.last!.movie.id, result: -1.0)
         }
     }
- 
+    
     func makeMovieFavorite() {
-        if !userCanSwipe { return }
-        
-        userCanSwipe = false
         withAnimation {
             movieCards[movieCards.last!].xOffset = 500
             movieCards[movieCards.last!].rotationOffset = 15
@@ -160,18 +151,16 @@ class DiscoverViewModel: ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 Task {
                     do{
-                        try await self.nextCard()
-                        self.userCanSwipe = true
+                        try await self.nextCard(voto: 1.0)
                         withAnimation {
-                            if let shownCard = self.movieCards.last {
-                                self.movieCards[shownCard].rotationDegree = 0
-                            }
+                            self.movieCards[self.movieCards.last!].rotationDegree = 0
                         }
                     }
                     catch{
                         print("Errore dati")
                     }
                 }
+                
             }
             addToMovieAlreadyReccomended(movieToSave: movieCards.last!.movie,voteOfTheMovie: 1.0)
             giveFeedback(drawValueId: movieCards.last!.movie.id, result: 1.0)
@@ -182,7 +171,7 @@ class DiscoverViewModel: ObservableObject {
         fileprivate init(movie: Movie) {
             self.movie = movie
         }
-
+        
         let id = UUID()
         var rotationDegree = Double(
             Int.random(in: -4...4)
