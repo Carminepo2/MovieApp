@@ -6,19 +6,20 @@
 //
 
 import Foundation
+import SwiftUI
 
 class DiscoverViewModel: ObservableObject {
     @Published var movieCards: Array<MovieCard> = []
     @Published var rotationDegreeCards: Array<Double> = []
-    @Published var model:MovieAppModel = MovieAppModel.shared
+    @Published var model: MovieAppModel = MovieAppModel.shared
     @Published var networkingManager = NetworkManager.shared
+    @Published var userCanSwipe = true
+
     var advisor: GrandAdvisor = GrandAdvisor.shared
-    var cardSetted:Bool = false
+    var cardSetted: Bool = false
     
     
-    init() {
-        
-    }
+    init() { }
     
     @MainActor
     func setCards() async throws{
@@ -32,7 +33,8 @@ class DiscoverViewModel: ObservableObject {
         cardSetted = true
          
     }
-    func isCardsSetted()->Bool{
+    
+    func isCardsSetted() -> Bool{
         return self.cardSetted
     }
     
@@ -57,7 +59,7 @@ class DiscoverViewModel: ObservableObject {
     }
     
  
-    // MARK: Riccardo Function
+    //MARK: Riccardo Function
     
     func getAdvice() async throws -> Movie? {
         let isAdvisorSetted = advisor.isAdvisorSetted
@@ -71,8 +73,8 @@ class DiscoverViewModel: ObservableObject {
         }
         let idAdvice = advisor.getAdvice()
         
-        var adviceToReturn = try await self.getMovieById(id: idAdvice)
-        var elemento = try await getProvidersById(id: idAdvice)
+        let adviceToReturn = try await self.getMovieById(id: idAdvice)
+        let elemento = try await getProvidersById(id: idAdvice)
         
         
         adviceToReturn?.providers = elemento
@@ -83,18 +85,10 @@ class DiscoverViewModel: ObservableObject {
         return try await networkingManager.getProvidersById(id: id).results
     }
     
-//    func searchMovie()->Array<Movie>{
-//        return model.movies
-//    }
-    
-    
     func giveFeedback(drawValueId:Int64,result:Double){
         advisor.giveFeedback(drawValueId: drawValueId, result: result)
     }
 
-//    private func addToWatchLater(id:Int64){
-//
-//    }
     func getMovieById(id:Int64) async throws-> Movie? {
         var movieToReturn = try await networkingManager.getMovieById(id: id)
         while(movieToReturn.id == Movie.example.id){
@@ -103,12 +97,81 @@ class DiscoverViewModel: ObservableObject {
         
         return movieToReturn
     }
-    func addToMovieAlreadyReccomended(movieToSave:Movie,voteOfTheMovie:Float){
+    
+    func addToMovieAlreadyReccomended(movieToSave: Movie, voteOfTheMovie: Float) {
         movieToSave.vote = voteOfTheMovie
         self.model.addToMovieAlreadyReccomended(movieToSave: movieToSave)
     }
- 
     
+    //MARK: - User intentions Actions
+    
+    func discardMovie() {
+        if !userCanSwipe { return }
+        
+        userCanSwipe = false
+        
+        // Remove discarded movie's poster image from cache
+        if let posterPath = movieCards.last?.movie.posterPath {
+            ImageCache.removeImageFromCache(with: Constants.ImagesBasePath + posterPath)
+        }
+        
+        Haptics.shared.play(.soft)
+        
+        withAnimation {
+            movieCards[movieCards.last!].xOffset = -500
+            movieCards[movieCards.last!].rotationOffset = -15
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                
+                Task {
+                    do {
+                        try await self.nextCard()
+                        self.userCanSwipe = true
+                        withAnimation {
+                            if let shownCard = self.movieCards.last {
+                                self.movieCards[shownCard].rotationDegree = 0
+                            }
+                        }
+                        
+                    }
+                    catch{
+                        print("Errore caricamento dati")
+                    }
+                }
+            }
+            addToMovieAlreadyReccomended(movieToSave: movieCards.last!.movie,voteOfTheMovie: 1.0)
+            giveFeedback(drawValueId: movieCards.last!.movie.id, result: -1.0)
+        }
+    }
+ 
+    func makeMovieFavorite() {
+        if !userCanSwipe { return }
+        
+        userCanSwipe = false
+        withAnimation {
+            movieCards[movieCards.last!].xOffset = 500
+            movieCards[movieCards.last!].rotationOffset = 15
+            Haptics.shared.play(.heavy)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                Task {
+                    do{
+                        try await self.nextCard()
+                        self.userCanSwipe = true
+                        withAnimation {
+                            if let shownCard = self.movieCards.last {
+                                self.movieCards[shownCard].rotationDegree = 0
+                            }
+                        }
+                    }
+                    catch{
+                        print("Errore dati")
+                    }
+                }
+            }
+            addToMovieAlreadyReccomended(movieToSave: movieCards.last!.movie,voteOfTheMovie: 1.0)
+            giveFeedback(drawValueId: movieCards.last!.movie.id, result: 1.0)
+        }
+    }
     
     struct MovieCard: Identifiable {
         fileprivate init(movie: Movie) {
