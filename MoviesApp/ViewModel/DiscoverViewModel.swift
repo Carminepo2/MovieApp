@@ -11,17 +11,17 @@ import SwiftUI
 
 class DiscoverViewModel: ObservableObject {
     @Published var movieCards: Array<MovieCard> = []
-    @Published var rotationDegreeCards: Array<Double> = []
-    @Published var model:MovieAppModel = MovieAppModel.shared
+    
+    @Published var model: MovieAppModel = MovieAppModel.shared
     @Published var networkingManager = NetworkManager.shared
+    
     var advisor: GrandAdvisor = GrandAdvisor.shared
-    var cardSetted:Bool = false
-    var carLoading:Bool = false
+    
+    var cardSetted: Bool = false
+    var carLoading: Bool = false
     
     
-    init() {
-        
-    }
+    init() { }
     
     @MainActor
     func setCards() async throws{
@@ -115,32 +115,7 @@ class DiscoverViewModel: ObservableObject {
         self.model.addToMovieAlreadyReccomended(movieToSave: movieToSave)
     }
     
-    func makeMovieFavorite() {
-//        if !userCanSwipe { return }
-//
-//        userCanSwipe = false
-//        userCanSwipe = true
-        withAnimation {
-            self.movieCards[movieCards.last!].xOffset = 500
-            self.movieCards[movieCards.last!].rotationOffset = 15
-            Haptics.shared.play(.heavy)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
 
-                Task {
-                    do{
-                        try await self.nextCard(voto: 1.0)
-                        withAnimation {
-                            self.movieCards[self.movieCards.last!].rotationDegree = 0
-                        }
-                    }
-                    catch{
-                        print("Errore dati")
-                    }
-                }
-            }
-        }
-    }
     func discardMovie() {
 
         // Remove discarded movie's poster image from cache
@@ -149,8 +124,6 @@ class DiscoverViewModel: ObservableObject {
         }
         Haptics.shared.play(.soft)
         withAnimation {
-            self.movieCards[movieCards.last!].xOffset = -500
-            self.movieCards[movieCards.last!].rotationOffset = -15
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 Task{
                     do {
@@ -192,7 +165,13 @@ class DiscoverViewModel: ObservableObject {
     
     
     
+    func rotateCard(_ movieCard: MovieCard, degrees: Double) {
+        movieCards[movieCard].rotationOffset = degrees
+    }
     
+    func moveCard(_ movieCard: MovieCard, offset: Double) {
+        movieCards[movieCard].xOffset = offset
+    }
     
     struct MovieCard: Identifiable {
         fileprivate init(movie: Movie) {
@@ -204,5 +183,9 @@ class DiscoverViewModel: ObservableObject {
             Int.random(in: -4...4)
         )
         let movie: Movie
+        
+        var xOffset: CGFloat = .zero
+        var rotationOffset: CGFloat = .zero
+    
     }
 }
