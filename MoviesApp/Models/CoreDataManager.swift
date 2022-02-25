@@ -15,7 +15,7 @@ class CoreDataManager {
 
     
     private init() {
-        persistentContainer = NSPersistentContainer(name: "CoreDataModelAirQuotes")
+        persistentContainer = NSPersistentContainer(name: "CoreDataModel")
         persistentContainer.loadPersistentStores{ (description,error) in
             if let error = error {
                 fatalError("Core Data Store failed \(error.localizedDescription)")
@@ -54,6 +54,21 @@ class CoreDataManager {
         let fetchRequest:NSFetchRequest<MovieToSave> = MovieToSave.fetchRequest()
 //        fetchRequest.predicate =  NSPredicate(format: "name == %@", query)
 
+        var result:Array<MovieToSave> = []
+        do{
+            result = try persistentContainer.viewContext.fetch(fetchRequest)
+        }
+        catch{
+            
+        }
+        return result
+    }
+    
+    func readMovieAlone()->Array<MovieToSave>{
+        let fetchRequest:NSFetchRequest<MovieToSave> = MovieToSave.fetchRequest()
+        var query = "alone"
+        fetchRequest.predicate = NSPredicate(format: "watchListItBelong == %@", query)
+    
         var result:Array<MovieToSave> = []
         do{
             result = try persistentContainer.viewContext.fetch(fetchRequest)

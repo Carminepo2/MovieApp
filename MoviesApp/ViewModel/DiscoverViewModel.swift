@@ -16,10 +16,13 @@ class DiscoverViewModel: ObservableObject {
     @Published var userCanSwipe = true
 
     var advisor: GrandAdvisor = GrandAdvisor.shared
-    var cardSetted: Bool = false
+    var cardSetted:Bool = false
+    var carLoading:Bool = false
     
     
-    init() { }
+    init() {
+        
+    }
     
     @MainActor
     func setCards() async throws{
@@ -27,7 +30,6 @@ class DiscoverViewModel: ObservableObject {
                 let movie = try await getAdvice()
                 if let unwrappedMovie = movie {
                     movieCards.append(MovieCard(movie: unwrappedMovie))
-                    print("\(unwrappedMovie.id):\(unwrappedMovie.title)")
                 }
             }
         cardSetted = true
@@ -37,12 +39,20 @@ class DiscoverViewModel: ObservableObject {
     func isCardsSetted() -> Bool{
         return self.cardSetted
     }
-    
+    func isCardsLoading()->Bool{
+        return self.carLoading
+    }
+    func setCardsLoading(_ value:Bool){
+        carLoading = value
+    }
     @MainActor
-    func nextCard() async throws{
+    func nextCard(voto:Double) async throws{
         
         let advice = try await self.getAdvice()
-        movieCards.removeLast()
+        var lastCard = movieCards.removeLast()
+        var movieRemoved = lastCard.movie
+        self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
+        self.addToMovieAlreadyReccomended(movieToSave: movieRemoved, voteOfTheMovie: Float(voto))
         
         if let notNullAdvice = advice {
             if (notNullAdvice.id != Movie.example.id){
@@ -90,15 +100,10 @@ class DiscoverViewModel: ObservableObject {
     }
 
     func getMovieById(id:Int64) async throws-> Movie? {
-        var movieToReturn = try await networkingManager.getMovieById(id: id)
-        while(movieToReturn.id == Movie.example.id){
-            movieToReturn = try await networkingManager.getMovieById(id: id)
-        }
-        
-        return movieToReturn
+        return try await model.getMovieById(id: id)
     }
     
-    func addToMovieAlreadyReccomended(movieToSave: Movie, voteOfTheMovie: Float) {
+    func addToMovieAlreadyReccomended(movieToSave:Movie,voteOfTheMovie:Float){
         movieToSave.vote = voteOfTheMovie
         self.model.addToMovieAlreadyReccomended(movieToSave: movieToSave)
     }

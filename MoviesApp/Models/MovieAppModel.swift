@@ -8,6 +8,7 @@
 import Foundation
 
 class MovieAppModel {
+    var allMovies:Array<Movie>
     var savedMovies:Array<MovieToSave>
     var watchListAlone:Array<Movie>
     var watchListCouple:Array<Movie>
@@ -20,48 +21,63 @@ class MovieAppModel {
     var networkManager = NetworkManager.shared
     
     private init(){
+        allMovies = []
         watchListAlone = []
         watchListCouple = []
         watchListFriends = []
         watchListFamily = []
+//        var movieToSave = MovieToSave(context: CoreDataManager.shared.persistentContainer.viewContext)
+//        movieToSave.id = Movie.example.id
+//        movieToSave.watchListItBelong = "alone"
+//        savedMovies = [movieToSave]
         savedMovies = CoreDataManager.shared.readMovie()
         with = Company.alone
         movieAlreadyRecommended = []
+    
+        
     }
+    
+    func getMovieById(id:Int64) async throws-> Movie? {
+        var movieToReturn = try await NetworkManager.shared.getMovieById(id: id)
+        while(movieToReturn.id == Movie.example.id){
+            movieToReturn = try await NetworkManager.shared.getMovieById(id: id)
+        }
+        
+        allMovies.append(movieToReturn)
+        return movieToReturn
+    }
+    
+    
+    
     func getWatchListId()->Array<Int64>{
         var idListToReturn:Array<Int64> = []
         if(with == Company.alone){
-            
+
         }
         else if(with == Company.couple){
-            
+
         }
         else if(with == Company.family){
-            
+
         }
         else if(with == Company.friends){
-            
+
         }
         return idListToReturn
     }
     
-//    func setWatchLists() async{
-//        for aMovie in savedMovies{
-//            var movieToPick = try await NetworkManager.shared.getMovieById(id: aMovie.id)
-//            if(aMovie.watchListItBelong == "alone"){
-//                self.watchListAlone.append(movieToPick)
-//            }
-//            else if(aMovie.watchListItBelong == "couple"){
-//                self.watchListCouple.append(movieToPick)
-//            }
-//            
-//
-//            
-//        }
-//    }
-    func getWatchList()->Array<Movie>{
-        var watchListToReturn:Array<Movie> = []
+    func setWatchList() async{
         if(with == Company.alone){
+            for eachElement in savedMovies{
+                do{
+                    var movieToAdd:Movie = try await self.getMovie(id: eachElement.id)
+                    watchListAlone.append(movieToAdd)
+                }
+                catch{
+                    
+                }
+                
+            }
         }
         else if(with == Company.couple){
         }
@@ -69,27 +85,43 @@ class MovieAppModel {
         }
         else if(with == Company.friends){
         }
-        return watchListToReturn
+    }
+    private func getMovie(id:Int64) async throws->Movie{
+        var movieToReturn:Movie? = nil
+        movieToReturn = allMovies.first(where: {$0.id == id})
+        if (movieToReturn == nil){
+            movieToReturn = try await self.getMovieById(id: id)
+        }
+        return movieToReturn!
     }
     
     
-    func addToWatchList(id:Int64){
+    func getWatchList()->Array<Movie>{
+        return watchListAlone
+    }
+    
+    
+    func addToWatchList(_ movie:Movie){
         var movieToSave = MovieToSave(context: CoreDataManager.shared.persistentContainer.viewContext)
-        movieToSave.id = id
+        movieToSave.id = movie.id
         if(with == Company.alone){
             movieToSave.watchListItBelong = "alone"
+            watchListAlone.append(movie)
         }
         else if(with == Company.couple){
             movieToSave.watchListItBelong = "couple"
+            watchListCouple.append(movie)
         }
         else if(with == Company.family){
             movieToSave.watchListItBelong = "family"
+            watchListFamily.append(movie)
         }
         else if(with == Company.friends){
             movieToSave.watchListItBelong = "friends"
+            watchListFriends.append(movie)
         }
+        savedMovies.append(movieToSave)
         CoreDataManager.shared.createMovie(movieToSave)
-        
 }
     
     
