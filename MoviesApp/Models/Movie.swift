@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Movie: Codable, Identifiable {
+class Movie: Codable, Identifiable {
     
     let id: Int64
     let posterPath: String?
@@ -36,7 +36,38 @@ struct Movie: Codable, Identifiable {
     let voteCount: Int
 //     let keywords: Array<Keyword>
      var providers: Providers? = Providers(de: nil, it: nil, us: nil)
+    var vote:Float? = nil
     
+     static let example = Movie()
+    
+    
+    init(){
+        self.id = 634649
+        self.posterPath = "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg"
+        self.backdropPath = "/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg"
+        self.belongsToCollection = nil
+        self.budget = 200000000
+        self.genres = []
+        self.homepage = "https://www.spidermannowayhome.movie"
+        self.imdbId = "tt10872600"
+        self.originalLanguage = "en"
+        self.originalTitle = "Spider-Man: No Way Home"
+        self.overview = "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man."
+        self.popularity = 11286.376
+        self.productionCompanies = []
+        self.productionCountries = []
+        self.releaseDate = "2021-12-15"
+        self.revenue = 1775000000
+        self.runtime = 148
+        self.spokenLanguages = []
+        self.status = "Released"
+        self.tagline = "The Multiverse unleashed."
+        self.title = "Spider-Man: No Way Home"
+        self.video = false
+        self.voteAverage = 8.4
+        self.voteCount = 7443
+    }
+
     var formattedDuration: String {
         guard let movieRuntime = self.runtime else { return "-" }
         let hours = Int(movieRuntime / 60)
@@ -47,37 +78,8 @@ struct Movie: Codable, Identifiable {
     var year: String {
         self.releaseDate.components(separatedBy: "-")[0]
     }
-    
-    
-    static let example = Movie(
-        id: 634649,
-        posterPath: "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
-        backdropPath: "/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
-        belongsToCollection: nil,
-        budget: 200000000,
-        genres: [Genre(id: 1, name: "Genre 1"), Genre(id: 2, name: "Genre 2")],
-        homepage: "https://www.spidermannowayhome.movie",
-        imdbId: "tt10872600",
-        originalLanguage: "en",
-        originalTitle: "Spider-Man: No Way Home",
-        overview: "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man.",
-        popularity: 11286.376,
-        productionCompanies: [],
-        productionCountries: [],
-        releaseDate: "2021-12-15",
-        revenue: 1775000000,
-        runtime: 148,
-        spokenLanguages: [],
-        status: "Released",
-        tagline: "The Multiverse unleashed.",
-        title: "Spider-Man: No Way Home",
-        video: false,
-        voteAverage: 8.4,
-        voteCount: 7443
-//        keywords: [],
-        
-    )
 }
+
 
 struct MovieCollection: Codable {
     let id: Int
@@ -156,7 +158,7 @@ struct MoovieProvider: Codable {
 }
 
 enum Company{
-    case noOne
+    case alone
     case couple
     case friends
     case family

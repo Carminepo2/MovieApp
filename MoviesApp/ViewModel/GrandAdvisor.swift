@@ -14,7 +14,7 @@ class GrandAdvisor{
         input = [:]
         numberOfDraws = 0
         isAdvisorSetted = false
-        alreadDrawsMovies = []
+        alreadDrawsMovies = [197158,875460]
     }
     
     private var input:[Int64:Double]
@@ -28,8 +28,8 @@ class GrandAdvisor{
     
 
         if(numberOfDraws<6){
-            var input1 = GenresRaccomender_1Input(items: input, k: 1, restrict_: nil, exclude: alreadDrawsMovies)
-            lazy var model1 = GenresRaccomender_1()
+            var input1 = GenreRecommender2_1Input(items: input, k: 1, restrict_: nil, exclude: alreadDrawsMovies)
+            lazy var model1 = GenreRecommender2_1()
             do {
                 let result1 = try model1.prediction(input:input1)
                 recommendedMovie = result1.recommendations[0]
@@ -41,8 +41,8 @@ class GrandAdvisor{
             numberOfDraws+=1
         }
         else if(numberOfDraws<8){
-            var input2 = KeyWordRaccomander_1Input(items: input, k: 1, restrict_: nil, exclude: alreadDrawsMovies)
-            lazy var model2 = KeyWordRaccomander_1()
+            var input2 = KeywordsRecommender2_1Input(items: input, k: 1, restrict_: nil, exclude: alreadDrawsMovies)
+            lazy var model2 = KeywordsRecommender2_1()
             do {
                 let result2 = try model2.prediction(input:input2)
                 recommendedMovie = result2.recommendations[0]
@@ -54,8 +54,8 @@ class GrandAdvisor{
             numberOfDraws+=1
         }
         else if(numberOfDraws<10){
-            var input3 = ProductionRaccomender1_1Input(items: input, k: 1, restrict_: nil, exclude: alreadDrawsMovies)
-            lazy var model3 = ProductionRaccomender1_1()
+            var input3 = ProductionRecommender2_1Input(items: input, k: 1, restrict_: nil, exclude: alreadDrawsMovies)
+            lazy var model3 = ProductionRecommender2_1()
             do {
                 let result3 = try model3.prediction(input:input3)
                 recommendedMovie = result3.recommendations[0]

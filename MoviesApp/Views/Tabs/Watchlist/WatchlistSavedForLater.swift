@@ -19,41 +19,17 @@ struct WatchlistSavedForLater: View {
         ScrollView(.vertical, showsIndicators: false) {
             
             LazyVGrid(columns: threeColumnGrid, spacing: 14) {
-                ForEach(viewModel.savedMovies) { newRecord in
+                ForEach(viewModel.getMovieAlreadyRecommended()) { newRecord in
                     NavigationLink {
-                        MovieDetails(movie: Movie.example)
-                    } label: { MovieCardLikedGridItem(movie: Movie.example) }
+                        MovieDetails(movie: newRecord)
+                    } label: { MovieCardLikedGridItem(movie: newRecord) }
                     .foregroundColor(Color.white)
                 }
-                /*NavigationLink {
-                    MovieDetails(movie: Movie.example)
-                } label: { MovieCardLikedGridItem(movie: Movie.example) }
-                .foregroundColor(Color.white)
-                NavigationLink {
-                    MovieDetails(movie: Movie.example)
-                } label: { MovieCardLikedGridItem(movie: Movie.example) }
-                .foregroundColor(Color.white)
-                NavigationLink {
-                    MovieDetails(movie: Movie.example)
-                } label: { MovieCardLikedGridItem(movie: Movie.example) }
-                .foregroundColor(Color.white)
-                NavigationLink {
-                    MovieDetails(movie: Movie.example)
-                } label: { MovieCardLikedGridItem(movie: Movie.example) }
-                .foregroundColor(Color.white)*/
             }
+            .padding()
         }
-        
-        .padding()
-        .navigationTitle("👀 Saved for later")
+        .navigationTitle("History")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: Button(action : {
-            self.goback.wrappedValue.dismiss()
-        }){
-            Text(Image(systemName: "arrow.left"))
-                .fontWeight(.semibold)
-        })
         .withBackground()
     }
 }

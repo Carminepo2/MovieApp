@@ -11,11 +11,13 @@ struct MovieDetails: View {
     
     @Environment(\.presentationMode) var goback: Binding<PresentationMode>
     
+    var viewModel:MovieCardDetailsViewModel = MovieCardDetailsViewModel()
+    
     let movie: Movie
     @Binding var showDetails: Bool
     var animation: Namespace.ID?
     @Namespace var animationPlaceholder
-
+    @State var isSaved = false
 
     @State private var scale: CGFloat = 1
     @State private var cornerRadius: CGFloat = 0
@@ -117,10 +119,9 @@ struct MovieDetails: View {
                                 
                                 Button(action: handleBookmark, label: { Image(systemName: "bookmark.fill") })
                                 .buttonStyle(SkeumorphicButtonStyle(.primary))
-                                .frame(width: 80, height: 80)
+                                .frame(width: 75, height: 75)
 
                             }
-                            
                             
                             //MARK: Overview
                             Text(movie.overview)
@@ -131,8 +132,6 @@ struct MovieDetails: View {
                                 MovieProviders(movie.providers?.us)
                                     .padding(.top)
                             }
-                            
-                            
                         }
                         .hLeading()
                     }
@@ -141,19 +140,11 @@ struct MovieDetails: View {
                     
                     Spacer()
                 }
-
             }
         }
         .cornerRadius(cornerRadius)
         .scaleEffect(scale)
         .edgesIgnoringSafeArea(.all)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: Button(action : {
-            self.goback.wrappedValue.dismiss()
-        }){
-            Text(Image(systemName: "arrow.left"))
-                .fontWeight(.bold)
-        })
     }
     
     // MARK: - Functions
@@ -182,6 +173,14 @@ struct MovieDetails: View {
     }
     
     func handleBookmark() {
+        if(!isSaved){
+            viewModel.addToWatchList(self.movie)
+            print("\(movie.title) salvato")
+            isSaved.toggle()
+        }
+        else{
+            
+        }
         //TODO
     }
 }

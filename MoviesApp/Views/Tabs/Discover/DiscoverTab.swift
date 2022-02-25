@@ -17,7 +17,7 @@ struct DiscoverTab: View {
                 
                 PopcornButton(isLoading: true, action: popCornButtonTapped)
                 
-                Text("Pop the corns to get suggestion")
+                Text("Tap to start!")
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
@@ -39,11 +39,13 @@ struct DiscoverTab: View {
     // MARK: - Functions
     func popCornButtonTapped() {
         
-        if(!discoverViewController.isCardsSetted()){
-            
+        if((!discoverViewController.isCardsSetted())&&(!discoverViewController.isCardsLoading()))
+        {
+            discoverViewController.setCardsLoading(true)
             Task{
                 do{
                     try await discoverViewController.setCards()
+                    discoverViewController.setCardsLoading(false)
                     isSwipeCardModalOpen = true
                 }
                 catch{
@@ -53,7 +55,10 @@ struct DiscoverTab: View {
             }
         }
         else{
-            isSwipeCardModalOpen = true
+            if(!discoverViewController.isCardsLoading()){
+                isSwipeCardModalOpen = true
+
+            }
         }
         
        

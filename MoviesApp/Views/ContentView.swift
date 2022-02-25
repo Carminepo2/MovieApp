@@ -25,7 +25,7 @@ struct ContentView: View {
                 .withBackground()
                 .environmentObject(WatchlistViewModel())
                 .tabItem {
-                    Label("Watchlist", systemImage: "play.tv")
+                    Label("Watchlist", systemImage: "bookmark.fill")
                 }
             
             // MARK: - Settings Tab

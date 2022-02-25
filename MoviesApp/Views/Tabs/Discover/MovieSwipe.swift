@@ -66,7 +66,7 @@ struct MovieSwipe: View {
                         }
                         .padding()
                         
-                        DiscardFavoriteButtons(makeFavorite: makeMovieFavorite, discard: discardMovie)
+                        DiscardFavoriteButtons(makeFavorite: discoverViewController.makeMovieFavorite, discard: discoverViewController.discardMovie)
                         
                     }
                     
@@ -76,6 +76,7 @@ struct MovieSwipe: View {
                             movie: tappedMovie, showDetails: $showDetails,
                             animation: animation
                         )
+                            .statusBar(hidden: showDetails)
                     }
                 }
             }
@@ -87,74 +88,12 @@ struct MovieSwipe: View {
                     Button("Close", action: closeButtonTapped)
                 }
             }
-
+            
         }
-      
+        
     }
     
     // MARK: - Favorite and discard Functions
-    func makeMovieFavorite() {
-        if !userCanSwipe { return }
-
-        userCanSwipe = false
-        withAnimation {
-            discoverViewController.movieCards[movieCards.last!].xOffset = 500
-            discoverViewController.movieCards[movieCards.last!].rotationOffset = 15
-            Haptics.shared.play(.heavy)
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                userCanSwipe = true
-                Task{
-                    do{
-                        try await discoverViewController.nextCard()
-                        withAnimation {
-                            discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
-                        }
-                    }
-                    catch{
-                        print("Errore dati")
-                    }
-                }
-            }
-            discoverViewController.giveFeedback(drawValueId: movieCards.last!.movie.id, result: 1.0)
-
-
-        }
-    }
-    
-    func discardMovie() {
-        if !userCanSwipe { return }
-        
-        userCanSwipe = false
-
-        // Remove discarded movie's poster image from cache
-        if let posterPath = movieCards.last?.movie.posterPath {
-            ImageCache.removeImageFromCache(with: Constants.ImagesBasePath + posterPath)
-        }
-        
-        Haptics.shared.play(.soft)
-
-        withAnimation {
-            discoverViewController.movieCards[movieCards.last!].xOffset = -500
-            discoverViewController.movieCards[movieCards.last!].rotationOffset = -15
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                userCanSwipe = true
-                Task{
-                    do {
-                        try await discoverViewController.nextCard()
-                        withAnimation {
-                            discoverViewController.movieCards[movieCards.last!].rotationDegree = 0
-                        }
-                    }
-                    catch{
-                        print("Errore caricamento dati")
-                    }
-                }
-            }
-            discoverViewController.giveFeedback(drawValueId: movieCards.last!.movie.id, result: -1.0)
-        }
-    }
-    
     
     // MARK: - Drag Functions
     
@@ -169,12 +108,12 @@ struct MovieSwipe: View {
         let xTranslation = value.translation.width
         if xTranslation > 0 {
             if xTranslation > 150 {
-                makeMovieFavorite()
+                discoverViewController.makeMovieFavorite()
                 return
             }
         } else {
             if xTranslation < -150 {
-                discardMovie()
+                discoverViewController.discardMovie()
                 return
             }
         }
@@ -191,7 +130,7 @@ struct MovieSwipe: View {
 }
 
 struct SearchTab_Previews: PreviewProvider {
- 
+    
     static var previews: some View {
         MovieSwipe(isSwipeCardModalOpen: .constant(true))
     }

@@ -27,28 +27,20 @@ class ImageLoaderViewModel: ObservableObject {
         
         let request = URLRequest(url: url)
         
-        // check in cache
-        if let cachedImage = ImageCache[url.absoluteString] {
-            uiImage = cachedImage
-        } else {
-            
-            let (data, response) = try await URLSession.shared.data(for: request)
-            guard let httpResponse = response as? HTTPURLResponse,
-                  httpResponse.statusCode == 200 else {
-                      throw NetworkError.badRequest
-                  }
-            
-            guard let image = UIImage(data: data) else {
-                throw NetworkError.unsupportedImage
-            }
-            
-            // store it in the cache
-            ImageCache[url.absoluteString] = image
-            uiImage = image
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+                  throw NetworkError.badRequest
+              }
+        
+        guard let image = UIImage(data: data) else {
+            throw NetworkError.unsupportedImage
         }
         
-        
-        
+        // store it in the cache
+        ImageCache[url.absoluteString] = image
+        uiImage = image
         
     }
     

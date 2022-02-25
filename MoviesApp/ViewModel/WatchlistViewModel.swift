@@ -8,6 +8,19 @@
 import Foundation
 
 class WatchlistViewModel: ObservableObject {
-    @Published var savedMovies: [Movie] = Array(repeating: Movie.example, count: 6)
+    @Published var model: MovieAppModel = MovieAppModel.shared
+    
+    init(){
+       
+    }
+    
+    
+    func getMovieAlreadyRecommended()->Array<Movie>{
+        return model.getMovieAlreadyRecommended()
+    }
+    func getWatchList()->Array<Movie>{
+        return model.getWatchList()
+    }
+
 
 }

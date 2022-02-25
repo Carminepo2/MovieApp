@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
+
 
 class DiscoverViewModel: ObservableObject {
     @Published var movieCards: Array<MovieCard> = []
@@ -14,6 +16,7 @@ class DiscoverViewModel: ObservableObject {
     @Published var networkingManager = NetworkManager.shared
     var advisor: GrandAdvisor = GrandAdvisor.shared
     var cardSetted:Bool = false
+    var carLoading:Bool = false
     
     
     init() {
@@ -29,22 +32,34 @@ class DiscoverViewModel: ObservableObject {
                 }
             }
         cardSetted = true
+
          
     }
     func isCardsSetted()->Bool{
         return self.cardSetted
     }
-    
-    @MainActor
-    func nextCard() async throws{
-        movieCards.removeLast()
-        let advice = try await self.getAdvice()
-        if let advice = advice {
-            movieCards.insert(MovieCard(movie: advice), at: 0)
-        }
+    func isCardsLoading()->Bool{
+        return self.carLoading
     }
-    
-    
+    func setCardsLoading(_ value:Bool){
+        carLoading = value
+    }
+    @MainActor
+    func nextCard(voto:Double) async throws{
+        
+        let advice = try await self.getAdvice()
+        var lastCard = movieCards.removeLast()
+        var movieRemoved = lastCard.movie
+        self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
+        self.addToMovieAlreadyReccomended(movieToSave: movieRemoved, voteOfTheMovie: Float(voto))
+        
+        if let notNullAdvice = advice {
+            if (notNullAdvice.id != Movie.example.id){
+                movieCards.insert(MovieCard(movie: notNullAdvice), at: 0)
+            }
+        }
+        
+    }
     func resetModel(){
         advisor.resetAdvisor()
     }
@@ -63,6 +78,7 @@ class DiscoverViewModel: ObservableObject {
             advisor.setAdvisor(initialValues: initialValues)
         }
         let idAdvice = advisor.getAdvice()
+        
         var adviceToReturn = try await self.getMovieById(id: idAdvice)
         var elemento = try await getProvidersById(id: idAdvice)
         
@@ -74,25 +90,71 @@ class DiscoverViewModel: ObservableObject {
     func getProvidersById(id:Int64) async throws -> Providers?{
         return try await networkingManager.getProvidersById(id: id).results
     }
-    
-//    func searchMovie()->Array<Movie>{
-//        return model.movies
-//    }
-    
-    
+        
     func giveFeedback(drawValueId:Int64,result:Double){
         advisor.giveFeedback(drawValueId: drawValueId, result: result)
     }
-    func chooseMovie(id:Int64){
-        
-    }
-    private func addToWatchLater(id:Int64){
-        
-    }
+
     func getMovieById(id:Int64) async throws-> Movie? {
-        return try await networkingManager.getMovieById(id: id)
+        return try await model.getMovieById(id: id)
     }
- 
+    
+    func addToMovieAlreadyReccomended(movieToSave:Movie,voteOfTheMovie:Float){
+        movieToSave.vote = voteOfTheMovie
+        self.model.addToMovieAlreadyReccomended(movieToSave: movieToSave)
+    }
+    
+    func makeMovieFavorite() {
+        withAnimation {
+            self.movieCards[movieCards.last!].xOffset = 500
+            self.movieCards[movieCards.last!].rotationOffset = 15
+            Haptics.shared.play(.heavy)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+
+                Task {
+                    do{
+                        try await self.nextCard(voto: 1.0)
+                        withAnimation {
+                            self.movieCards[self.movieCards.last!].rotationDegree = 0
+                        }
+                    }
+                    catch{
+                        print("Errore dati")
+                    }
+                }
+            }
+        }
+    }
+    func discardMovie() {
+
+        // Remove discarded movie's poster image from cache
+        if let posterPath = movieCards.last?.movie.posterPath {
+            ImageCache.removeImageFromCache(with: Constants.ImagesBasePath + posterPath)
+        }
+        Haptics.shared.play(.soft)
+        withAnimation {
+            self.movieCards[movieCards.last!].xOffset = -500
+            self.movieCards[movieCards.last!].rotationOffset = -15
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                Task{
+                    do {
+                        try await self.nextCard(voto: -1.0)
+                        withAnimation {
+                            self.movieCards[self.movieCards.last!].rotationDegree = 0
+                        }
+                    }
+                    catch{
+                        print("Errore caricamento dati")
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
+    
     
     
     struct MovieCard: Identifiable {
