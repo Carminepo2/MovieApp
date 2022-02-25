@@ -15,7 +15,9 @@ struct MovieSwipe: View {
     @State private var showDetails = false
     @State private var tappedMovie: Movie? = nil
     @Binding var isSwipeCardModalOpen: Bool
-        
+    
+    @State private var userCanSwipe = true
+    
     
     private var movieCards: Array<DiscoverViewModel.MovieCard> {
         return discoverViewController.movieCards
@@ -91,6 +93,7 @@ struct MovieSwipe: View {
         
     }
     
+    // MARK: - Favorite and discard Functions
     
     // MARK: - Drag Functions
     
