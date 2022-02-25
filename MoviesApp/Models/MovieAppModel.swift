@@ -97,7 +97,7 @@ class MovieAppModel {
     
     
     func getWatchList()->Array<Movie>{
-        return watchListAlone
+        return self.watchListAlone
     }
     
     
@@ -120,6 +120,7 @@ class MovieAppModel {
             movieToSave.watchListItBelong = "friends"
             watchListFriends.append(movie)
         }
+        
         savedMovies.append(movieToSave)
         CoreDataManager.shared.createMovie(movieToSave)
 }
@@ -132,5 +133,8 @@ class MovieAppModel {
         return self.movieAlreadyRecommended
     }
   
+}
 
+struct WatchList{
+    
 }

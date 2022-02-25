@@ -8,7 +8,7 @@
 import Foundation
 
 class WatchlistViewModel: ObservableObject {
-    @Published var model:MovieAppModel = MovieAppModel.shared
+    @Published var model: MovieAppModel = MovieAppModel.shared
     
     init(){
        
@@ -21,8 +21,6 @@ class WatchlistViewModel: ObservableObject {
     func getWatchList()->Array<Movie>{
         return model.getWatchList()
     }
-//    func setWatchList() async{
-//        await model.setWatchList()
-//    }
+
 
 }

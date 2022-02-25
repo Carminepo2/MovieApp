@@ -57,12 +57,9 @@ class DiscoverViewModel: ObservableObject {
             if (notNullAdvice.id != Movie.example.id){
                 movieCards.insert(MovieCard(movie: notNullAdvice), at: 0)
             }
-         
         }
         
     }
-    
-    
     func resetModel(){
         advisor.resetAdvisor()
     }
@@ -93,19 +90,11 @@ class DiscoverViewModel: ObservableObject {
     func getProvidersById(id:Int64) async throws -> Providers?{
         return try await networkingManager.getProvidersById(id: id).results
     }
-    
-//    func searchMovie()->Array<Movie>{
-//        return model.movies
-//    }
-    
-    
+        
     func giveFeedback(drawValueId:Int64,result:Double){
         advisor.giveFeedback(drawValueId: drawValueId, result: result)
     }
 
-//    private func addToWatchLater(id:Int64){
-//
-//    }
     func getMovieById(id:Int64) async throws-> Movie? {
         return try await model.getMovieById(id: id)
     }
@@ -115,6 +104,13 @@ class DiscoverViewModel: ObservableObject {
         self.model.addToMovieAlreadyReccomended(movieToSave: movieToSave)
     }
     
+    func makeMovieFavorite() {
+        withAnimation {
+            self.movieCards[movieCards.last!].xOffset = 500
+            self.movieCards[movieCards.last!].rotationOffset = 15
+            Haptics.shared.play(.heavy)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
 
     func discardMovie() {
 
