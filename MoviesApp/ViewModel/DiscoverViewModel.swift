@@ -104,14 +104,6 @@ class DiscoverViewModel: ObservableObject {
         self.model.addToMovieAlreadyReccomended(movieToSave: movieToSave)
     }
     
-    func makeMovieFavorite() {
-        withAnimation {
-            self.movieCards[movieCards.last!].xOffset = 500
-            self.movieCards[movieCards.last!].rotationOffset = 15
-            Haptics.shared.play(.heavy)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-
     func discardMovie() {
 
         // Remove discarded movie's poster image from cache
