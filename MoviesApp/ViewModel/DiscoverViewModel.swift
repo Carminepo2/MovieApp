@@ -131,7 +131,6 @@ class DiscoverViewModel: ObservableObject {
                     }
                 }
             }
-            giveFeedback(drawValueId: movieCards.last!.movie.id, result: -1.0)
         }
     }
     
