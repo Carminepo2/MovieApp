@@ -29,7 +29,7 @@ struct WatchlistTab: View {
                     }
                 }
             }
-            .padding()
+            .padding(.horizontal)
             .navigationTitle("Watchlist")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

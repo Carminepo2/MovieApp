@@ -157,8 +157,8 @@ class DiscoverViewModel: ObservableObject {
         movieCards[movieCard].rotationOffset = degrees
     }
     
-    func moveCard(_ movieCard: MovieCard, offset: Double) {
-        movieCards[movieCard].xOffset = offset
+    func moveCard(_ movieCard: MovieCard, offset: CGSize) {
+        movieCards[movieCard].offset = offset
     }
     
     struct MovieCard: Identifiable {
@@ -172,8 +172,9 @@ class DiscoverViewModel: ObservableObject {
         )
         let movie: Movie
         
-        var xOffset: CGFloat = .zero
+        var offset: CGSize = .zero
         var rotationOffset: CGFloat = .zero
+        
     
     }
 }

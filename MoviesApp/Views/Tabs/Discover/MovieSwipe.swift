@@ -44,7 +44,9 @@ struct MovieSwipe: View {
                                         .swipableCard(
                                             card: movieCard,
                                             onSwipeRightSuccess: discoverViewModel.makeMovieFavorite,
-                                            onSwipeLeftSuccess: discoverViewModel.discardMovie
+                                            onSwipeLeftSuccess: discoverViewModel.discardMovie,
+                                            //TODO: Bookmark
+                                            onSwipeDownSuccess: discoverViewModel.discardMovie
                                         )
                                 }
                             }
@@ -95,7 +97,7 @@ struct MovieSwipe: View {
     
     func makeFavoriteButtonTapped() {
         withAnimation {
-            discoverViewModel.moveCard(movieCards[movieCards.last!], offset: 500)
+            discoverViewModel.moveCard(movieCards[movieCards.last!], offset: .init(width: 500, height: 0))
             discoverViewModel.rotateCard(movieCards[movieCards.last!], degrees: 15)
         }
         discoverViewModel.makeMovieFavorite()
@@ -103,9 +105,18 @@ struct MovieSwipe: View {
     
     func discardButtonTapped() {
         withAnimation {
-            discoverViewModel.moveCard(movieCards[movieCards.last!], offset: -500)
+            discoverViewModel.moveCard(movieCards[movieCards.last!], offset: .init(width: -500, height: 0))
             discoverViewModel.rotateCard(movieCards[movieCards.last!], degrees: -15)
         }
+        discoverViewModel.discardMovie()
+    }
+    
+    func bookmarkButtonTapped() {
+        withAnimation {
+            discoverViewModel.moveCard(movieCards[movieCards.last!], offset: .init(width: 0, height: 800))
+            discoverViewModel.rotateCard(movieCards[movieCards.last!], degrees: 0)
+        }
+        //TODO: Bookmark
         discoverViewModel.discardMovie()
     }
 }
