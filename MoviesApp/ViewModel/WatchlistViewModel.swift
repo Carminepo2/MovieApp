@@ -9,7 +9,8 @@ import Foundation
 
 class WatchlistViewModel: ObservableObject {
     @Published var model: MovieAppModel = MovieAppModel.shared
-    
+    @Published var watchListModel:WatchListModel = WatchListModel.shared
+
     init(){
        
     }
@@ -19,7 +20,7 @@ class WatchlistViewModel: ObservableObject {
         return model.getMovieAlreadyRecommended()
     }
     func getWatchList()->Array<Movie>{
-        return model.getWatchList()
+        return watchListModel.getWatchList()
     }
 
 

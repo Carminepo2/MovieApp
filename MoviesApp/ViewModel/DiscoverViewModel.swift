@@ -11,7 +11,9 @@ import SwiftUI
 
 class DiscoverViewModel: ObservableObject {
     @Published var movieCards: Array<MovieCard> = []
-    
+
+    @Published var watchListModel:WatchListModel = WatchListModel.shared
+
     @Published var model: MovieAppModel = MovieAppModel.shared
     @Published var networkingManager = NetworkManager.shared
     
@@ -70,7 +72,7 @@ class DiscoverViewModel: ObservableObject {
     func getAdvice() async throws -> Movie? {
         let isAdvisorSetted = advisor.isAdvisorSetted
         if(isAdvisorSetted == false){
-            let watchListId = model.getWatchListId()
+            let watchListId = watchListModel.getWatchListId()
             var initialValues:[Int64:Double] = [:]
             for id in watchListId {
                 initialValues[id] = 1.0
@@ -125,7 +127,6 @@ class DiscoverViewModel: ObservableObject {
                     }
                 }
             }
-            addToMovieAlreadyReccomended(movieToSave: movieCards.last!.movie,voteOfTheMovie: 1.0)
             giveFeedback(drawValueId: movieCards.last!.movie.id, result: -1.0)
         }
     }
