@@ -63,7 +63,8 @@ struct WatchListModel{
     var couple:Array<Movie>
     var friends:Array<Movie>
     var family:Array<Movie>
-    
+    var with:Company = Company.alone
+
     var savedMovies:Array<MovieToSave>
     static var shared = WatchListModel()
     
@@ -75,7 +76,6 @@ struct WatchListModel{
         savedMovies = CoreDataManager.shared.readMovie()
     }
 
-    var with:Company = Company.alone
     
     
     
@@ -86,6 +86,7 @@ struct WatchListModel{
         if(with == Company.alone){
             movieToSave.watchListItBelong = "alone"
             alone.append(movie)
+            print("A")
         }
         else if(with == Company.couple){
             movieToSave.watchListItBelong = "couple"
@@ -104,6 +105,7 @@ struct WatchListModel{
         CoreDataManager.shared.createMovie(movieToSave)
     }
     func getWatchList()->Array<Movie>{
+        
         return self.alone
     }
     

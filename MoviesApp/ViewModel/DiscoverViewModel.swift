@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import ModelIO
 
 
 class DiscoverViewModel: ObservableObject {
@@ -81,11 +82,14 @@ class DiscoverViewModel: ObservableObject {
         }
         let idAdvice = advisor.getAdvice()
         
-        var adviceToReturn = try await self.getMovieById(id: idAdvice)
-        var elemento = try await getProvidersById(id: idAdvice)
+//        var adviceToReturn = try await self.getMovieById(id: idAdvice)
+//        var elemento = try await getProvidersById(id: idAdvice)
+          async let downloadedMovie = try self.getMovieById(id: idAdvice)
+          async let providersOfTheMovie = try self.getProvidersById(id: idAdvice)
         
+          var (adviceToReturn, elemento) = try await (downloadedMovie, providersOfTheMovie)
+          adviceToReturn?.providers = elemento
         
-        adviceToReturn?.providers = elemento
         return adviceToReturn
     }
 
