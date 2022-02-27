@@ -16,14 +16,22 @@ class DiscoverViewModel: ObservableObject {
     @Published var model: MovieAppModel = MovieAppModel.shared
     @Published var networkingManager = NetworkManager.shared
     @Published var uiImage: UIImage?
-
     var advisor: GrandAdvisor = GrandAdvisor.shared
     
     var cardSetted: Bool = false
     var carLoading: Bool = false
     
     
-    init() { }
+    init() {
+        Task{
+            do{
+                try await self.setCards()
+            }
+            catch{
+                
+            }
+        }
+    }
     
     @MainActor
     func setCards() async throws{
@@ -95,22 +103,19 @@ class DiscoverViewModel: ObservableObject {
         }
         let idAdvice = advisor.getAdvice()
         
-//        var adviceToReturn = try await self.getMovieById(id: idAdvice)
-//        var elemento = try await getProvidersById(id: idAdvice)
+
           async let downloadedMovie = try self.getMovieById(id: idAdvice)
           async let providersOfTheMovie = try self.getProvidersById(id: idAdvice)
           var (adviceToReturn, elemento) = try await (downloadedMovie, providersOfTheMovie)
           adviceToReturn?.providers = elemento
-        
-        
         let posterPath = URL(string: Constants.ImagesBasePath + (adviceToReturn?.posterPath!)!)
-        Task{
+        Task(priority:.high){
             try await self.fetchImage(posterPath)
         }
         return adviceToReturn
     }
 
-    
+    @MainActor
     func fetchImage(_ url: URL?) async throws {
         
         guard let url = url else {
