@@ -35,8 +35,6 @@ class DiscoverViewModel: ObservableObject {
                 }
             }
         cardSetted = true
-
-         
     }
     func isCardsSetted()->Bool{
         return self.cardSetted
@@ -55,7 +53,6 @@ class DiscoverViewModel: ObservableObject {
         var movieRemoved = lastCard.movie
         self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
         self.addToMovieAlreadyReccomended(movieToSave: movieRemoved, voteOfTheMovie: Float(voto))
-        
         if let notNullAdvice = advice {
             if (notNullAdvice.id != Movie.example.id){
                 movieCards.insert(MovieCard(movie: notNullAdvice), at: 0)
