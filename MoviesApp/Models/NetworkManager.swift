@@ -67,7 +67,6 @@ class NetworkManager{
         urlComponent.queryItems = [
             "api_key": "fadf21998f46c545c3f3de23ca5712ec"
         ].map { URLQueryItem(name: $0.key, value: $0.value) }
-        
         do{
             let (data,response) = try await URLSession.shared.data(from: urlComponent.url!)
             if let httpResponse = response as? HTTPURLResponse,

@@ -12,12 +12,11 @@ import ModelIO
 
 class DiscoverViewModel: ObservableObject {
     @Published var movieCards: Array<MovieCard> = []
-
     @Published var watchListModel:WatchListModel = WatchListModel.shared
-
     @Published var model: MovieAppModel = MovieAppModel.shared
     @Published var networkingManager = NetworkManager.shared
-    
+    @Published var uiImage: UIImage?
+
     var advisor: GrandAdvisor = GrandAdvisor.shared
     
     var cardSetted: Bool = false
@@ -48,16 +47,33 @@ class DiscoverViewModel: ObservableObject {
     @MainActor
     func nextCard(voto:Double) async throws{
         
-        let advice = try await self.getAdvice()
-        var lastCard = movieCards.removeLast()
-        var movieRemoved = lastCard.movie
-        self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
-        self.addToMovieAlreadyReccomended(movieToSave: movieRemoved, voteOfTheMovie: Float(voto))
-        if let notNullAdvice = advice {
-            if (notNullAdvice.id != Movie.example.id){
-                movieCards.insert(MovieCard(movie: notNullAdvice), at: 0)
+        if(movieCards.count >= 3){
+            var lastCard = movieCards.removeLast()
+            var movieRemoved = lastCard.movie
+            self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
+            self.addToMovieAlreadyReccomended(movieToSave: movieRemoved, voteOfTheMovie: Float(voto))
+            let advice = try await self.getAdvice()
+            if let notNullAdvice = advice {
+                if (notNullAdvice.id != Movie.example.id){
+                    movieCards.insert(MovieCard(movie: notNullAdvice), at: 0)
+                }
             }
         }
+        else if(movieCards.count < 3){
+            let advice = try await self.getAdvice()
+            var lastCard = movieCards.removeLast()
+            var movieRemoved = lastCard.movie
+            self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
+            self.addToMovieAlreadyReccomended(movieToSave: movieRemoved, voteOfTheMovie: Float(voto))
+            if let notNullAdvice = advice {
+                if (notNullAdvice.id != Movie.example.id){
+                    movieCards.insert(MovieCard(movie: notNullAdvice), at: 0)
+                }
+            }
+        }
+        
+        
+        
         
     }
     func resetModel(){
@@ -83,13 +99,45 @@ class DiscoverViewModel: ObservableObject {
 //        var elemento = try await getProvidersById(id: idAdvice)
           async let downloadedMovie = try self.getMovieById(id: idAdvice)
           async let providersOfTheMovie = try self.getProvidersById(id: idAdvice)
-        
           var (adviceToReturn, elemento) = try await (downloadedMovie, providersOfTheMovie)
           adviceToReturn?.providers = elemento
         
+        
+        let posterPath = URL(string: Constants.ImagesBasePath + (adviceToReturn?.posterPath!)!)
+        Task{
+            try await self.fetchImage(posterPath)
+        }
         return adviceToReturn
     }
 
+    
+    func fetchImage(_ url: URL?) async throws {
+        
+        guard let url = url else {
+            throw NetworkError.badUrl
+        }
+        
+        let request = URLRequest(url: url)
+        
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+                  throw NetworkError.badRequest
+              }
+        
+        guard let image = UIImage(data: data) else {
+            throw NetworkError.unsupportedImage
+        }
+        
+        // store it in the cache
+        ImageCache[url.absoluteString] = image
+        uiImage = image
+        
+    }
+    
+    
+    
     func getProvidersById(id:Int64) async throws -> Providers?{
         return try await networkingManager.getProvidersById(id: id).results
     }
