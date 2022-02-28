@@ -16,6 +16,7 @@ struct DiscoverTab: View {
             VStack(spacing: 30) {
                 
                 PopcornButton(isLoading: true, action: popCornButtonTapped)
+                    .spotlight(enabled: true, title: "TAP")
                 
                 Text("Tap to start!")
                     .font(.title2)

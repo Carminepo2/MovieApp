@@ -11,8 +11,6 @@ struct WatchlistSavedForLater: View {
     @State private var searchQuery = ""
     @State private var filter: HistoryFilter = .all
     
-    @Environment(\.presentationMode) var goback: Binding<PresentationMode>
-    
     @EnvironmentObject var viewModel: WatchlistViewModel
     
     var filmHistory: Array<Movie> {

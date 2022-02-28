@@ -13,7 +13,8 @@ struct DiscardFavoriteButtons: View {
     
     
     var body: some View {
-        HStack(spacing: 160) {
+        HStack {
+            // MARK: - Discard button
             Button(action: discard) {
                 Image(systemName: "xmark")
                     .font(.title.weight(.semibold))
@@ -21,17 +22,28 @@ struct DiscardFavoriteButtons: View {
                 
             }
             .buttonStyle(SkeumorphicButtonStyle(.secondary))
-            .frame(width: 75, height: 75)
-            
-            
-            
-            Button(action: makeFavorite) {
-                Image(systemName: "heart.fill")
+            .frame(width: 60, height: 60)
+            // MARK: - Spacer
+            Spacer()
+            // MARK: - Bookmark button
+            Button(action: makeFavorite) /* TODO: insert corretc action func */ {
+                Image(systemName: "bookmark.fill")
                     .font(.title.weight(.semibold))
                     .foregroundColor(.init("Gray-800"))
             }
             .buttonStyle(SkeumorphicButtonStyle(.primary))
             .frame(width: 75, height: 75)
+            .padding(.top)
+            // MARK: - Spacer
+            Spacer()
+            // MARK: - Like button
+            Button(action: makeFavorite) {
+                Image(systemName: "heart.fill")
+                    .font(.title.weight(.semibold))
+                    .foregroundColor(.accentColor)
+            }
+            .buttonStyle(SkeumorphicButtonStyle(.secondary))
+            .frame(width: 60, height: 60)
             
         }
         .padding()
