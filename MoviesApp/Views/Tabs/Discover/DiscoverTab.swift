@@ -10,7 +10,8 @@ import SwiftUI
 struct DiscoverTab: View {
     @State private var isSwipeCardModalOpen: Bool = false
     @EnvironmentObject var discoverViewController: DiscoverViewModel
-
+    @State private var isSearchMovieOpen: Bool = false
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 30) {
@@ -21,13 +22,24 @@ struct DiscoverTab: View {
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
-                    
-
+                
+                
             }
             .navigationTitle("Discover")
+            .toolbar{
+                ToolbarItem(placement: .navigationBarTrailing)
+                {Button{
+                isSearchMovieOpen.toggle()
+                } label: {
+                    Image(systemName: "magnifyingglass")
+                }}
+                
+            }
             .fullScreenCover(isPresented: $isSwipeCardModalOpen, content: {
                 MovieSwipe(isSwipeCardModalOpen: $isSwipeCardModalOpen)
-                
+            })
+            .fullScreenCover(isPresented: $isSearchMovieOpen, content: {
+                SearchMovie(isSearchMovieOpen: $isSearchMovieOpen)
             })
             .withBackground()
             
@@ -57,17 +69,17 @@ struct DiscoverTab: View {
         else{
             if(!discoverViewController.isCardsLoading()){
                 isSwipeCardModalOpen = true
-
+                
             }
         }
         
-       
         
         
-
-
+        
+        
+        
     }
-        
+    
 }
 
 struct DiscoverTab_Previews: PreviewProvider {
