@@ -59,8 +59,9 @@
 		75C829C727BD5EBC005DED2A /* MovieCardGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C829C527BD5EBC005DED2A /* MovieCardGridItem.swift */; };
 		75C829C927BD5EC6005DED2A /* WatchlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C829C827BD5EC6005DED2A /* WatchlistViewModel.swift */; };
 		75C829CB27BD811C005DED2A /* SkeumorhicButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C829CA27BD811C005DED2A /* SkeumorhicButtonStyle.swift */; };
-		9595A2C127CD0F25001DF56F /* MovieResultListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9595A2C027CD0F25001DF56F /* MovieResultListItem.swift */; };
-		9595A2C327CD1387001DF56F /* onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9595A2C227CD1387001DF56F /* onboarding.swift */; };
+		9595A2C127CD0F25001DF56F /* (null) in Sources */ = {isa = PBXBuildFile; };
+		9595A2C327CD1387001DF56F /* (null) in Sources */ = {isa = PBXBuildFile; };
+		DEC4459427CD1BE500F56D54 /* SearchMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC4459227CD0C6700F56D54 /* SearchMovie.swift */; };
 		DED54F8927BFFDC600DFB47F /* AllLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED54F8827BFFDC600DFB47F /* AllLocations.swift */; };
 		DED54F8B27C52A7C00DFB47F /* StreamingPlatforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED54F8A27C52A7C00DFB47F /* StreamingPlatforms.swift */; };
 		DED54F8D27C53FF500DFB47F /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED54F8C27C53FF500DFB47F /* Display.swift */; };
@@ -156,7 +157,6 @@
 				754784E127C9107D00997A5A /* withBackground.swift */,
 				754784E327C910B600997A5A /* ViewAlignment.swift */,
 				754784E527C910D700997A5A /* swipableCard.swift */,
-				9595A2C227CD1387001DF56F /* onboarding.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -319,7 +319,6 @@
 		75820CA927BA9F5500B489E1 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
-				9595A2C027CD0F25001DF56F /* MovieResultListItem.swift */,
 				756F1D8D27B8178F00609A15 /* MovieCard.swift */,
 				75820CAF27BAA01000B489E1 /* MovieSwipe.swift */,
 				75702FEB27BB13850065ACB4 /* DiscardFavoriteButtons.swift */,
@@ -419,7 +418,6 @@
 			files = (
 				756F1D9427B81D1400609A15 /* RoundedRectangleButtonStyle.swift in Sources */,
 				754784E427C910B600997A5A /* ViewAlignment.swift in Sources */,
-				DEC4459327CD0C6700F56D54 /* SearchMovie.swift in Sources */,
 				75C829C627BD5EBC005DED2A /* WatchlistSavedForLater.swift in Sources */,
 				756F1DAF27B904FD00609A15 /* UINavigationBar.swift in Sources */,
 				75A4C76A27C51C7400CF5D53 /* PopcornButton.swift in Sources */,
@@ -447,7 +445,7 @@
 				753B57D027C3D5ED00231CA4 /* MovieGenres.swift in Sources */,
 				753B57D227C3DAF800231CA4 /* Collection.swift in Sources */,
 				754784E227C9107D00997A5A /* withBackground.swift in Sources */,
-				9595A2C127CD0F25001DF56F /* MovieResultListItem.swift in Sources */,
+				9595A2C127CD0F25001DF56F /* (null) in Sources */,
 				7511316B27BC00950025BE52 /* ImageCache.swift in Sources */,
 				754784E627C910D700997A5A /* swipableCard.swift in Sources */,
 				75C829C727BD5EBC005DED2A /* MovieCardGridItem.swift in Sources */,
@@ -461,10 +459,11 @@
 				7511316D27BC5FF20025BE52 /* ImageLoaderViewModel.swift in Sources */,
 				75C829C927BD5EC6005DED2A /* WatchlistViewModel.swift in Sources */,
 				756F1D8927B816AA00609A15 /* View.swift in Sources */,
+				DEC4459427CD1BE500F56D54 /* SearchMovie.swift in Sources */,
 				1DF94AF127C6734F00B1E491 /* GenreRecommender2 1.mlmodel in Sources */,
 				756F1D8E27B8178F00609A15 /* MovieCard.swift in Sources */,
 				753B57D427C3DD8700231CA4 /* MovieProviders.swift in Sources */,
-				9595A2C327CD1387001DF56F /* onboarding.swift in Sources */,
+				9595A2C327CD1387001DF56F /* (null) in Sources */,
 				75820CAC27BA9FC700B489E1 /* SettingsTab.swift in Sources */,
 				1D1AA58327BE8ABE00085A2C /* GrandAdvisor.swift in Sources */,
 				DED54F8F27C542B800DFB47F /* AllLanguages.swift in Sources */,
@@ -601,7 +600,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"MoviesApp/Preview Content\"";
-				DEVELOPMENT_TEAM = YLR58HQSWU;
+				DEVELOPMENT_TEAM = VMY5FW826Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoviesApp/Info.plist;
@@ -637,7 +636,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"MoviesApp/Preview Content\"";
-				DEVELOPMENT_TEAM = YLR58HQSWU;
+				DEVELOPMENT_TEAM = VMY5FW826Z;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoviesApp/Info.plist;
