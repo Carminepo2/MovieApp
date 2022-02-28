@@ -35,13 +35,26 @@ class DiscoverViewModel: ObservableObject {
     
     @MainActor
     func setCards() async throws{
-            for _ in 0..<Constants.NumOfCards {
-                let movie = try await getAdvice()
-                if let unwrappedMovie = movie {
-                    movieCards.append(MovieCard(movie: unwrappedMovie))
+        let movies = try await withThrowingTaskGroup(of: Movie?.self, returning: [Movie?].self){
+            group in
+            for _ in 0..<Constants.NumOfCards{
+                group.addTask{
+                    return try await self.getAdvice()
                 }
             }
+            
+            return try await group.reduce(into:[Movie?]()){
+                result,movie in
+                result.append(movie)
+            }
+        }
+        for i in 0..<Constants.NumOfCards{
+            if let unwrappedMovie = movies[i]{
+                movieCards.append(MovieCard(movie: unwrappedMovie))
+            }
+        }
         cardSetted = true
+
     }
     func isCardsSetted()->Bool{
         return self.cardSetted
