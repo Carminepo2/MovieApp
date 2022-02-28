@@ -56,6 +56,7 @@ class DiscoverViewModel: ObservableObject {
         cardSetted = true
 
     }
+    
     func isCardsSetted()->Bool{
         return self.cardSetted
     }
@@ -238,7 +239,6 @@ class DiscoverViewModel: ObservableObject {
             }
         }
     }
-    
     func swipeToWatchList(){
         withAnimation {
             Haptics.shared.play(.heavy)
@@ -246,8 +246,8 @@ class DiscoverViewModel: ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 Task {
                     do{
-                        var movie = try await self.nextCard(voto: 1.0)
-                        WatchlistViewModel.shared.addToWatchList(movie!.movie)
+                        try await self.nextCard(voto: 1.0)
+//                        WatchlistViewModel.shared.addToWatchList(self)
                         withAnimation {
                             self.movieCards[self.movieCards.last!].rotationDegree = 0
                         }
