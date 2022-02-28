@@ -12,7 +12,6 @@ import ModelIO
 
 class DiscoverViewModel: ObservableObject {
     @Published var movieCards: Array<MovieCard> = []
-    @Published var watchListModel:WatchListModel = WatchListModel.shared
     @Published var model: MovieAppModel = MovieAppModel.shared
     @Published var networkingManager = NetworkManager.shared
     @Published var uiImage: UIImage?
@@ -108,7 +107,7 @@ class DiscoverViewModel: ObservableObject {
     func getAdviceByID(idAdvice:Int64) async throws-> Movie?{
         let isAdvisorSetted = advisor.isAdvisorSetted
         if(isAdvisorSetted == false){
-            let watchListId = watchListModel.getWatchListId()
+            let watchListId = WatchlistViewModel.shared.getWatchListId()
             var initialValues:[Int64:Double] = [:]
             for id in watchListId {
                 initialValues[id] = 1.0
@@ -123,6 +122,7 @@ class DiscoverViewModel: ObservableObject {
         Task(priority:.high){
             try await self.fetchImage(posterPath)
         }
+        adviceToReturn?.isSaved = false
         return adviceToReturn
     }
     
@@ -131,7 +131,7 @@ class DiscoverViewModel: ObservableObject {
     func getAdvice() async throws -> Movie? {
         let isAdvisorSetted = advisor.isAdvisorSetted
         if(isAdvisorSetted == false){
-            let watchListId = watchListModel.getWatchListId()
+            let watchListId = WatchlistViewModel.shared.getWatchListId()
             var initialValues:[Int64:Double] = [:]
             for id in watchListId {
                 initialValues[id] = 1.0
@@ -149,6 +149,7 @@ class DiscoverViewModel: ObservableObject {
         Task(priority:.high){
             try await self.fetchImage(posterPath)
         }
+        adviceToReturn?.isSaved = false
         return adviceToReturn
     }
 
@@ -194,7 +195,7 @@ class DiscoverViewModel: ObservableObject {
     
     func addToMovieAlreadyReccomended(movieToSave:Movie,voteOfTheMovie:Float){
         movieToSave.vote = voteOfTheMovie
-        self.model.addToMovieAlreadyReccomended(movieToSave: movieToSave)
+        WatchlistViewModel.shared.addToMovieAlreadyReccomended(movieToSave)
     }
     
     func discardMovie() {

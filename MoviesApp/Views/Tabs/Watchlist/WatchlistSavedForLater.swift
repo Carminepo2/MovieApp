@@ -84,6 +84,6 @@ enum HistoryFilter {
 struct WatchlistSavedForLater_Previews: PreviewProvider {
     static var previews: some View {
         WatchlistSavedForLater()
-            .environmentObject(WatchlistViewModel())
+            .environmentObject(WatchlistViewModel.shared)
     }
 }

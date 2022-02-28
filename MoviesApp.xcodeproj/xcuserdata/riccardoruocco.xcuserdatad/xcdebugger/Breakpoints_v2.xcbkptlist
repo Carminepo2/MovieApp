@@ -30,8 +30,8 @@
             filePath = "MoviesApp/ViewModel/DiscoverViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "getAdvice()"
             landmarkType = "7">
             <Locations>
@@ -78,41 +78,25 @@
             filePath = "MoviesApp/Models/MovieAppModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "init()"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "getMovieById(id:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D57C782D-E699-4B3A-80E9-E24EB6A08B51"
+            uuid = "7E1E0A19-9F67-40A8-B9B8-33EE4078DE4E"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MoviesApp/Models/MovieAppModel.swift"
+            filePath = "MoviesApp/Views/Tabs/Discover/DiscoverTab.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "addToWatchList(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "515E8545-B26E-4C9D-98C0-BC6C93CD16C3"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoviesApp/Models/MovieAppModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "getWatchList()"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "popCornButtonTapped()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
