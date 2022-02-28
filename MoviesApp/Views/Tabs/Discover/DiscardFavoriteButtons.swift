@@ -13,7 +13,7 @@ struct DiscardFavoriteButtons: View {
     
     
     var body: some View {
-        HStack(spacing: 80) {
+        HStack(spacing: 160) {
             Button(action: discard) {
                 Image(systemName: "xmark")
                     .font(.title.weight(.semibold))

@@ -85,7 +85,13 @@ struct MovieSwipe: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Close", action: closeButtonTapped)
+//                    Button("Close", action: closeButtonTapped)
+                    Button(action: closeButtonTapped, label: {
+                        Text("CLOSE")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            
+                    })
                 }
             }
             
@@ -133,5 +139,6 @@ struct SearchTab_Previews: PreviewProvider {
     
     static var previews: some View {
         MovieSwipe(isSwipeCardModalOpen: .constant(true))
+            .environmentObject(DiscoverViewModel())
     }
 }
