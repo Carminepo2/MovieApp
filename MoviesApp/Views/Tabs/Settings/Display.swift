@@ -34,10 +34,11 @@ struct Display: View {
                                     }
                 .listRowBackground(Color.clear)
                 
-            }.padding()
+            }.padding(.vertical)
+            .listStyle(.plain)
                 .withBackground()
                 
-                .listStyle(.plain)
+                
                 .navigationTitle("Display")
                     .navigationBarTitleDisplayMode(.inline)
             

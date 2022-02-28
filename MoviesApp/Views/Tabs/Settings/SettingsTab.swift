@@ -42,7 +42,7 @@ struct SettingsTab: View {
                                     Text("Display")
                                 }
                                 NavigationLink {
-                                    ProgressView()
+                                    Storage()
                                 } label: {
                                     Text("Storage")
                                 }

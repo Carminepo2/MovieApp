@@ -20,10 +20,25 @@ struct SearchMovie: View {
         
         NavigationView{
             VStack{
-                Text("Searching for \(searchText)")
+                List{
+                    MovieResultListItem(movie: Movie.example)
+                        .listRowBackground(Color.clear)
+                    MovieResultListItem(movie: Movie.example)
+                        .listRowBackground(Color.clear)
+                    MovieResultListItem(movie: Movie.example)
+                        .listRowBackground(Color.clear)
+                    MovieResultListItem(movie: Movie.example)
+                        .listRowBackground(Color.clear)
+                    MovieResultListItem(movie: Movie.example)
+                        .listRowBackground(Color.clear)
+                    MovieResultListItem(movie: Movie.example)
+                        .listRowBackground(Color.clear)
+                }
+                    .listStyle(.plain)
                     .navigationTitle("Search")
                     .navigationBarTitleDisplayMode(.inline)
                     .withBackground()
+                    
                     .searchable(text: $searchText)
                     .toolbar{
                         ToolbarItem(placement: .navigationBarTrailing)

@@ -32,7 +32,7 @@ struct AllLanguages: View {
                 
             }
         }
-        .padding()
+        .padding(.vertical)
         .withBackground()
         .listStyle(.plain)
     }

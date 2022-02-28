@@ -12,6 +12,7 @@ struct MovieResultListItem: View {
     let movie : Movie
     @EnvironmentObject var discoverViewController: DiscoverViewModel
     
+    
     var body: some View {
         HStack(spacing: 0) {
             // MARK: Poster
@@ -39,7 +40,6 @@ struct MovieResultListItem: View {
             }
             .padding()
         }
-        .background(Color("Gray-700"))
     }
 }
 
