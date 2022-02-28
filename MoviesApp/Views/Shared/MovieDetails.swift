@@ -180,14 +180,13 @@ struct MovieDetails: View {
     }
     
     func handleBookmark() {
-        if(!isSaved){
+        if(!self.movie.isSaved!){
             WatchlistViewModel.shared.addToWatchList(self.movie)
-            print("\(movie.title) salvato")
-            isSaved.toggle()
         }
         else{
-            
+            WatchlistViewModel.shared.removeFromWatchList(self.movie)
         }
+        self.movie.isSaved!.toggle()
         //TODO
     }
 }

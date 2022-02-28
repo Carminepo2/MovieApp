@@ -122,6 +122,7 @@ class DiscoverViewModel: ObservableObject {
         Task(priority:.high){
             try await self.fetchImage(posterPath)
         }
+        adviceToReturn?.isSaved = false
         return adviceToReturn
     }
     
@@ -148,6 +149,7 @@ class DiscoverViewModel: ObservableObject {
         Task(priority:.high){
             try await self.fetchImage(posterPath)
         }
+        adviceToReturn?.isSaved = false
         return adviceToReturn
     }
 

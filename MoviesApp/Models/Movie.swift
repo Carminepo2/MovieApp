@@ -37,6 +37,7 @@ class Movie: Codable, Identifiable {
 //     let keywords: Array<Keyword>
      var providers: Providers? = Providers(de: nil, it: nil, us: nil)
     var vote:Float? = nil
+    var isSaved:Bool? = nil
     
      static let example = Movie()
     
@@ -66,6 +67,7 @@ class Movie: Codable, Identifiable {
         self.video = false
         self.voteAverage = 8.4
         self.voteCount = 7443
+        
     }
 
     var formattedDuration: String {

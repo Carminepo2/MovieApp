@@ -9,8 +9,6 @@ import Foundation
 
 class MovieAppModel {
     var allMovies:Array<Movie>
-    
-    
     static var shared = MovieAppModel()
     var networkManager = NetworkManager.shared
     
@@ -70,7 +68,35 @@ struct WatchListModel{
         movieAlreadyRecommended = []
 
     }
-
+    @MainActor
+    mutating func setWatchList()async throws{
+        if(with == Company.alone){
+            let movies = try await withThrowingTaskGroup(of: Movie?.self, returning: [Movie?].self){
+                group in
+                for aMovie in savedMovies{
+                    if(aMovie.watchListItBelong == "alone"){
+                        group.addTask{
+                            return try await NetworkManager.shared.getMovieById(id: aMovie.id)
+                        }
+                    }
+                }
+                
+                return try await group.reduce(into:[Movie?]()){
+                    result,movie in
+                    result.append(movie)
+                }
+            }
+            for i in 0..<movies.count{
+                if(movies[i] != nil){
+                    alone.append(movies[i]!)
+                }
+            }
+        }
+        
+    }
+    
+    
+    
     
     mutating func addToMovieAlreadyReccomended(movieToSave:Movie){
         movieAlreadyRecommended.append(movieToSave)
@@ -86,7 +112,6 @@ struct WatchListModel{
         if(with == Company.alone){
             movieToSave.watchListItBelong = "alone"
             alone.append(movie)
-            print("A")
         }
         else if(with == Company.couple){
             movieToSave.watchListItBelong = "couple"
@@ -100,18 +125,62 @@ struct WatchListModel{
             movieToSave.watchListItBelong = "friends"
             friends.append(movie)
         }
-        
         savedMovies.append(movieToSave)
         CoreDataManager.shared.createMovie(movieToSave)
     }
-    func getWatchList()->Array<Movie>{
+    mutating func removeFromWatchList(_ movie:Movie){
+        var theIndex:Int? = nil
+        if(with == Company.alone){
+            alone.remove(movie)
+        }
+        else if(with == Company.couple){
+         
+        }
+        else if(with == Company.family){
+            
+        }
+        else if(with == Company.friends){
+       
+        }
+        for i in 0..<savedMovies.count{
+            if(savedMovies[i].id == movie.id){
+                theIndex = i
+            }
+        }
+        if let unwrapped = theIndex{
+            let savedToRemove = savedMovies.remove(at: unwrapped)
+            CoreDataManager.shared.deleteMovie(savedToRemove)
+        }
         
-        return self.alone
+    }
+    
+    
+    
+    func getWatchList()->Array<Movie>{
+        var watchListToReturn = Array<Movie>()
+        
+        if(with == Company.alone){
+           
+            watchListToReturn = self.alone
+        }
+        else if(with == Company.couple){
+            watchListToReturn = self.couple
+        }
+        else if(with == Company.family){
+            watchListToReturn = self.family
+        }
+        else if(with == Company.friends){
+            watchListToReturn = self.friends
+        }
+        return watchListToReturn
     }
     
     func getWatchListId()->Array<Int64>{
         var idListToReturn:Array<Int64> = []
         return idListToReturn
+    }
+    mutating func removeFromAlreadyRecommended(_ movie:Movie){
+        self.movieAlreadyRecommended.remove(movie)
     }
     
 }
