@@ -88,6 +88,7 @@ struct WatchListModel{
             }
             for i in 0..<movies.count{
                 if(movies[i] != nil){
+                    movies[i]!.isSaved = true
                     alone.append(movies[i]!)
                 }
             }
@@ -149,6 +150,7 @@ struct WatchListModel{
         }
         if let unwrapped = theIndex{
             let savedToRemove = savedMovies.remove(at: unwrapped)
+            
             CoreDataManager.shared.deleteMovie(savedToRemove)
         }
         
