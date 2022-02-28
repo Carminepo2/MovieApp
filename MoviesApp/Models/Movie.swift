@@ -8,7 +8,15 @@
 import Foundation
 
 
-class Movie: Codable, Identifiable {
+class Movie: Codable, Identifiable,Hashable {
+    static func == (lhs: Movie, rhs: Movie) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+            
+        }
+    
     
     let id: Int64
     let posterPath: String?

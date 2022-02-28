@@ -55,7 +55,8 @@ struct MovieSwipe: View {
                         
                         DiscardFavoriteButtons(
                             makeFavorite: makeFavoriteButtonTapped,
-                            discard: discardButtonTapped
+                            discard: discardButtonTapped,
+                            addToBookmark: bookmarkButtonTapped
                         )
                     }
                     
@@ -122,8 +123,6 @@ struct MovieSwipe: View {
             discoverViewModel.moveCard(movieCards[movieCards.last!], offset: .init(width: 0, height: 800))
             discoverViewModel.rotateCard(movieCards[movieCards.last!], degrees: 0)
         }
-        //TODO: Bookmark
-        discoverViewModel.discardMovie()
     }
 }
 

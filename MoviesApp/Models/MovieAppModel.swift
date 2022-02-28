@@ -51,10 +51,10 @@ class MovieAppModel {
 }
 
 struct WatchListModel{
-    var alone:Array<Movie>
-    var couple:Array<Movie>
-    var friends:Array<Movie>
-    var family:Array<Movie>
+    var alone:Set<Movie>
+    var couple:Set<Movie>
+    var friends:Set<Movie>
+    var family:Set<Movie>
     var with:Company = Company.alone
     var movieAlreadyRecommended:Array<Movie>
     var savedMovies:Array<MovieToSave>
@@ -88,7 +88,9 @@ struct WatchListModel{
             }
             for i in 0..<movies.count{
                 if(movies[i] != nil){
-                    alone.append(movies[i]!)
+                    movies[i]!.isSaved = true
+                    alone.insert(movies[i]!)
+//                    alone.append(movies[i]!)
                 }
             }
         }
@@ -111,19 +113,19 @@ struct WatchListModel{
         movieToSave.id = movie.id
         if(with == Company.alone){
             movieToSave.watchListItBelong = "alone"
-            alone.append(movie)
+            alone.insert(movie)
         }
         else if(with == Company.couple){
             movieToSave.watchListItBelong = "couple"
-            self.couple.append(movie)
+//            self.couple.append(movie)
         }
         else if(with == Company.family){
             movieToSave.watchListItBelong = "family"
-            family.append(movie)
+//            family.append(movie)
         }
         else if(with == Company.friends){
             movieToSave.watchListItBelong = "friends"
-            friends.append(movie)
+//            friends.append(movie)
         }
         savedMovies.append(movieToSave)
         CoreDataManager.shared.createMovie(movieToSave)
@@ -149,6 +151,7 @@ struct WatchListModel{
         }
         if let unwrapped = theIndex{
             let savedToRemove = savedMovies.remove(at: unwrapped)
+            
             CoreDataManager.shared.deleteMovie(savedToRemove)
         }
         
@@ -156,8 +159,8 @@ struct WatchListModel{
     
     
     
-    func getWatchList()->Array<Movie>{
-        var watchListToReturn = Array<Movie>()
+    func getWatchList()->Set<Movie>{
+        var watchListToReturn = Set<Movie>()
         
         if(with == Company.alone){
            

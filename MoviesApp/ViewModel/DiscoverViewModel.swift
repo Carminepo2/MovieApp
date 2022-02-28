@@ -92,11 +92,8 @@ class DiscoverViewModel: ObservableObject {
                 }
             }
         }
-        
-        
-        
-        
     }
+    
     func resetModel(){
         advisor.resetAdvisor()
     }
@@ -241,6 +238,7 @@ class DiscoverViewModel: ObservableObject {
             }
         }
     }
+    
     
     
     

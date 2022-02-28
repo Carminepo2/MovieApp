@@ -12,7 +12,7 @@ struct WatchlistTab: View {
     
     @EnvironmentObject var viewModel: WatchlistViewModel
     
-    var movie:Array<Movie>{
+    var movie:Set<Movie>{
         return viewModel.getWatchList()
     }
     
@@ -25,7 +25,7 @@ struct WatchlistTab: View {
             ScrollView(.vertical, showsIndicators: false) {
                 
                 LazyVGrid(columns: twoColumnGrid, spacing: 24) {
-                    ForEach(movie) { newRecord in
+                    ForEach(Array(movie),id: \.self) { newRecord in
                         NavigationLink {
                             MovieDetails(movie: newRecord)
                         } label: { MovieCardGridItem(movie: newRecord) }

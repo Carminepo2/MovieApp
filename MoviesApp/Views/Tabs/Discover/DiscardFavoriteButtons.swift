@@ -10,6 +10,7 @@ import SwiftUI
 struct DiscardFavoriteButtons: View {
     let makeFavorite: () -> Void
     let discard: () -> Void
+    let addToBookmark: () -> Void
     
     
     var body: some View {
@@ -26,7 +27,7 @@ struct DiscardFavoriteButtons: View {
             // MARK: - Spacer
             Spacer()
             // MARK: - Bookmark button
-            Button(action: makeFavorite) /* TODO: insert corretc action func */ {
+            Button(action: addToBookmark) {
                 Image(systemName: "bookmark.fill")
                     .font(.title.weight(.semibold))
                     .foregroundColor(.init("Gray-800"))
@@ -53,6 +54,6 @@ struct DiscardFavoriteButtons: View {
 
 struct DiscardFavoriteButtons_Previews: PreviewProvider {
     static var previews: some View {
-        DiscardFavoriteButtons(makeFavorite: {}, discard: {})
+        DiscardFavoriteButtons(makeFavorite: {}, discard: {}, addToBookmark: {})
     }
 }
