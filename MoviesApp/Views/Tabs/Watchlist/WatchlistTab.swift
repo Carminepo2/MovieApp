@@ -12,6 +12,10 @@ struct WatchlistTab: View {
     
     @EnvironmentObject var viewModel: WatchlistViewModel
     
+    var movie:Array<Movie>{
+        return viewModel.getWatchList()
+    }
+    
     
     private var twoColumnGrid = [GridItem(.flexible(), spacing:14), GridItem(.flexible())]
     
@@ -21,7 +25,7 @@ struct WatchlistTab: View {
             ScrollView(.vertical, showsIndicators: false) {
                 
                 LazyVGrid(columns: twoColumnGrid, spacing: 24) {
-                    ForEach(viewModel.getWatchList()) { newRecord in
+                    ForEach(movie) { newRecord in
                         NavigationLink {
                             MovieDetails(movie: newRecord)
                         } label: { MovieCardGridItem(movie: newRecord) }
@@ -29,7 +33,7 @@ struct WatchlistTab: View {
                     }
                 }
             }
-            .padding()
+            .padding(.horizontal)
             .navigationTitle("Watchlist")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

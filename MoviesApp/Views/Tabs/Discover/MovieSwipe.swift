@@ -8,23 +8,17 @@
 import SwiftUI
 
 struct MovieSwipe: View {
-    @EnvironmentObject var discoverViewController: DiscoverViewModel
+    @EnvironmentObject var discoverViewModel: DiscoverViewModel
     
     @Namespace private var animation
     
-    @State private var showDetails = false
-    @State private var tappedMovie: Movie? = nil
     @Binding var isSwipeCardModalOpen: Bool
     
-    @State private var userCanSwipe = true
-    
-    
+    @State private var showDetails = false
+    @State private var tappedMovie: Movie? = nil
+
     private var movieCards: Array<DiscoverViewModel.MovieCard> {
-        return discoverViewController.movieCards
-    }
-    
-    private var rotationDegreeCards: Array<Double> {
-        return discoverViewController.rotationDegreeCards
+        return discoverViewModel.movieCards
     }
     
     
@@ -36,38 +30,33 @@ struct MovieSwipe: View {
                         ZStack {
                             ForEach(movieCards) { movieCard in
                                 if movieCard.id != movieCards.last!.id {
-                                    // MARK: - Card behind
+                                    // MARK: - Cards behind
                                     MovieCard(movie: movieCard.movie)
                                         .rotationEffect(
                                             .degrees(movieCard.rotationDegree)
                                         )
                                     
                                 } else {
-                                    
                                     // MARK: - First Card
                                     MovieCard(movie: movieCard.movie, animation: animation)
                                         .rotationEffect(.degrees(movieCard.rotationDegree))
-                                        .rotationEffect(.degrees(movieCard.rotationOffset))
-                                    
-                                        .offset(x: movieCard.xOffset)
-                                        .onTapGesture {
-                                            withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.8)) {
-                                                showDetails.toggle()
-                                                tappedMovie = movieCard.movie
-                                            }
-                                        }
-                                        .gesture(
-                                            DragGesture()
-                                                .onChanged(handleDragCard)
-                                                .onEnded(handleEndDragCard)
+                                        .onTapGesture { showDetailsOf(movieCard.movie) }
+                                        .swipableCard(
+                                            card: movieCard,
+                                            onSwipeRightSuccess: discoverViewModel.makeMovieFavorite,
+                                            onSwipeLeftSuccess: discoverViewModel.discardMovie,
+                                            //TODO: Bookmark
+                                            onSwipeDownSuccess: discoverViewModel.discardMovie
                                         )
                                 }
                             }
                         }
                         .padding()
                         
-                        DiscardFavoriteButtons(makeFavorite: discoverViewController.makeMovieFavorite, discard: discoverViewController.discardMovie)
-                        
+                        DiscardFavoriteButtons(
+                            makeFavorite: makeFavoriteButtonTapped,
+                            discard: discardButtonTapped
+                        )
                     }
                     
                 } else {
@@ -99,39 +88,42 @@ struct MovieSwipe: View {
         
     }
     
-    // MARK: - Favorite and discard Functions
+    // MARK: - Functions
     
-    // MARK: - Drag Functions
-    
-    func handleDragCard(value: DragGesture.Value) {
-        let scrollProgress = value.translation.width / getScreenBounds().width
-        let cornerRadius = (scrollProgress / 0.20) * 4
-        discoverViewController.movieCards[movieCards.last!].rotationOffset = cornerRadius
-        discoverViewController.movieCards[movieCards.last!].xOffset = value.translation.width
-    }
-    
-    func handleEndDragCard(value: DragGesture.Value) {
-        let xTranslation = value.translation.width
-        if xTranslation > 0 {
-            if xTranslation > 150 {
-                discoverViewController.makeMovieFavorite()
-                return
-            }
-        } else {
-            if xTranslation < -150 {
-                discoverViewController.discardMovie()
-                return
-            }
-        }
-        withAnimation {
-            discoverViewController.movieCards[movieCards.last!].xOffset = 0
-            discoverViewController.movieCards[movieCards.last!].rotationOffset = 0
+    func showDetailsOf(_ movie: Movie) {
+        withAnimation(.interactiveSpring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.8)) {
+            showDetails.toggle()
+            tappedMovie = movie
         }
     }
     
-    // MARK: - Close Modal Function
     func closeButtonTapped() {
         isSwipeCardModalOpen = false
+    }
+    
+    func makeFavoriteButtonTapped() {
+        withAnimation {
+            discoverViewModel.moveCard(movieCards[movieCards.last!], offset: .init(width: 500, height: 0))
+            discoverViewModel.rotateCard(movieCards[movieCards.last!], degrees: 15)
+        }
+        discoverViewModel.makeMovieFavorite()
+    }
+    
+    func discardButtonTapped() {
+        withAnimation {
+            discoverViewModel.moveCard(movieCards[movieCards.last!], offset: .init(width: -500, height: 0))
+            discoverViewModel.rotateCard(movieCards[movieCards.last!], degrees: -15)
+        }
+        discoverViewModel.discardMovie()
+    }
+    
+    func bookmarkButtonTapped() {
+        withAnimation {
+            discoverViewModel.moveCard(movieCards[movieCards.last!], offset: .init(width: 0, height: 800))
+            discoverViewModel.rotateCard(movieCards[movieCards.last!], degrees: 0)
+        }
+        //TODO: Bookmark
+        discoverViewModel.discardMovie()
     }
 }
 
@@ -142,3 +134,4 @@ struct SearchTab_Previews: PreviewProvider {
             .environmentObject(DiscoverViewModel())
     }
 }
+

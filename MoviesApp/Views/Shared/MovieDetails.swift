@@ -18,7 +18,7 @@ struct MovieDetails: View {
     var animation: Namespace.ID?
     @Namespace var animationPlaceholder
     @State var isSaved = false
-
+    
     @State private var scale: CGFloat = 1
     @State private var cornerRadius: CGFloat = 0
     
@@ -78,14 +78,14 @@ struct MovieDetails: View {
                             }
                         }
                         .frame(height: 300)
-
-                            
+                        
+                        
                         //MARK: Drag gesture to close modal
-                            .gesture(
-                                DragGesture(minimumDistance: 0, coordinateSpace: .global)
-                                    .onChanged(onPosterDragChanged)
-                                    .onEnded(onPosterDragEnded)
-                            )
+                        .gesture(
+                            DragGesture(minimumDistance: 0, coordinateSpace: .global)
+                                .onChanged(onPosterDragChanged)
+                                .onEnded(onPosterDragEnded)
+                        )
                         
                         Group {
                             //MARK: Title
@@ -118,9 +118,9 @@ struct MovieDetails: View {
                                 Spacer()
                                 
                                 Button(action: handleBookmark, label: { Image(systemName: "bookmark.fill") })
-                                .buttonStyle(SkeumorphicButtonStyle(.primary))
-                                .frame(width: 75, height: 75)
-
+                                    .buttonStyle(SkeumorphicButtonStyle(.primary))
+                                    .frame(width: 75, height: 75)
+                                
                             }
                             
                             //MARK: Overview
@@ -149,6 +149,10 @@ struct MovieDetails: View {
     
     // MARK: - Functions
     func onPosterDragChanged(value: DragGesture.Value) {
+        guard let _ = animation else {
+            return
+        }
+
         let progress = value.translation.height / getScreenBounds().height
         
         let scale = 1 - progress
@@ -163,6 +167,10 @@ struct MovieDetails: View {
     }
     
     func onPosterDragEnded(value: DragGesture.Value) {
+        guard let _ = animation else {
+            return
+        }
+        
         withAnimation(.spring()) {
             if scale < 0.9 {
                 showDetails.toggle()

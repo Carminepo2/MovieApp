@@ -49,6 +49,7 @@ struct MoviePoster: View {
     
     private func downloadImage() async {
         do {
+            print(url)
             try await imageLoader.fetchImage(url)
         } catch {
             print(error)
