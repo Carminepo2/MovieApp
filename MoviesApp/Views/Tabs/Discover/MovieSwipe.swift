@@ -126,7 +126,7 @@ struct MovieSwipe: View {
     }
 }
 
-struct SearchTab_Previews: PreviewProvider {
+struct MovieSwipe_Previews: PreviewProvider {
     
     static var previews: some View {
         MovieSwipe(isSwipeCardModalOpen: .constant(true))

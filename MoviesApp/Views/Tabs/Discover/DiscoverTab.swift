@@ -10,7 +10,6 @@ import SwiftUI
 struct DiscoverTab: View {
     @State private var isSwipeCardModalOpen: Bool = false
     @EnvironmentObject var discoverViewController: DiscoverViewModel
-    @State private var isSearchMovieOpen: Bool = false
     
     var body: some View {
         NavigationView {
@@ -27,20 +26,19 @@ struct DiscoverTab: View {
                 
             }
             .navigationTitle("Discover")
-            .toolbar{
-                ToolbarItem(placement: .navigationBarTrailing)
-                {Button{
-                isSearchMovieOpen.toggle()
-                } label: {
-                    Image(systemName: "magnifyingglass")
-                }}
-                
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink {
+                        DiscoverHistory()
+                    } label: {
+                        Image(systemName: "clock.arrow.circlepath")
+                    }
+
+                }
             }
+
             .fullScreenCover(isPresented: $isSwipeCardModalOpen, content: {
                 MovieSwipe(isSwipeCardModalOpen: $isSwipeCardModalOpen)
-            })
-            .fullScreenCover(isPresented: $isSearchMovieOpen, content: {
-                SearchMovie(isSearchMovieOpen: $isSearchMovieOpen)
             })
             .withBackground()
             

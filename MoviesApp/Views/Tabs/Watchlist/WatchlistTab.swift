@@ -35,16 +35,6 @@ struct WatchlistTab: View {
             }
             .padding(.horizontal)
             .navigationTitle("Watchlist")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink {
-                        WatchlistSavedForLater()
-                    } label: {
-                        Image(systemName: "clock.arrow.circlepath")
-                    }
-
-                }
-            }
             .withBackground()
               
             

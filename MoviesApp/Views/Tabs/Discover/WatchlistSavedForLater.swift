@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct WatchlistSavedForLater: View {
+struct DiscoverHistory: View {
     @State private var searchQuery = ""
     @State private var filter: HistoryFilter = .all
     
-    @EnvironmentObject var viewModel: WatchlistViewModel
+    @EnvironmentObject var viewModel: DiscoverViewModel
     
     var filmHistory: Array<Movie> {
-        var movies = viewModel.getMovieAlreadyRecommended()
+        var movies = WatchlistViewModel.shared.getMovieAlreadyRecommended()
         
         if filter == .discarded {
             movies = movies.filter { $0.vote != nil && $0.vote! < 0 }
@@ -81,9 +81,9 @@ enum HistoryFilter {
     case loved, discarded, all
 }
 
-struct WatchlistSavedForLater_Previews: PreviewProvider {
+struct DiscoverHistory_Previews: PreviewProvider {
     static var previews: some View {
-        WatchlistSavedForLater()
+        DiscoverHistory()
             .environmentObject(WatchlistViewModel.shared)
     }
 }
