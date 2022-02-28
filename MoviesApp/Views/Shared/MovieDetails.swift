@@ -11,7 +11,6 @@ struct MovieDetails: View {
     
     @Environment(\.presentationMode) var goback: Binding<PresentationMode>
     
-    var viewModel:MovieCardDetailsViewModel = MovieCardDetailsViewModel()
     
     let movie: Movie
     @Binding var showDetails: Bool
@@ -182,7 +181,7 @@ struct MovieDetails: View {
     
     func handleBookmark() {
         if(!isSaved){
-            viewModel.addToWatchList(self.movie)
+            WatchlistViewModel.shared.addToWatchList(self.movie)
             print("\(movie.title) salvato")
             isSaved.toggle()
         }

@@ -9,14 +9,13 @@ import Foundation
 
 class MovieAppModel {
     var allMovies:Array<Movie>
-    var movieAlreadyRecommended:Array<Movie>
+    
     
     static var shared = MovieAppModel()
     var networkManager = NetworkManager.shared
     
     private init(){
         allMovies = []
-        movieAlreadyRecommended = []
     }
     
     func getMovieById(id:Int64) async throws-> Movie? {
@@ -49,12 +48,7 @@ class MovieAppModel {
    
     
     
-    func addToMovieAlreadyReccomended(movieToSave:Movie){
-        movieAlreadyRecommended.append(movieToSave)
-    }
-    func getMovieAlreadyRecommended()->Array<Movie>{
-        return self.movieAlreadyRecommended
-    }
+    
   
 }
 
@@ -64,20 +58,26 @@ struct WatchListModel{
     var friends:Array<Movie>
     var family:Array<Movie>
     var with:Company = Company.alone
-
+    var movieAlreadyRecommended:Array<Movie>
     var savedMovies:Array<MovieToSave>
-    static var shared = WatchListModel()
     
-    private init(){
+     init(){
         alone = []
         couple = []
         friends = []
         family = []
         savedMovies = CoreDataManager.shared.readMovie()
+        movieAlreadyRecommended = []
+
     }
 
     
-    
+    mutating func addToMovieAlreadyReccomended(movieToSave:Movie){
+        movieAlreadyRecommended.append(movieToSave)
+    }
+    func getMovieAlreadyRecommended()->Array<Movie>{
+        return self.movieAlreadyRecommended
+    }
     
     
     mutating func addToWatchList(_ movie:Movie){

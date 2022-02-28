@@ -23,7 +23,7 @@ struct ContentView: View {
             // MARK: - Watchlist Tab
             WatchlistTab()
                 .withBackground()
-                .environmentObject(WatchlistViewModel())
+                .environmentObject(WatchlistViewModel.shared)
                 .tabItem {
                     Label("Watchlist", systemImage: "bookmark.fill")
                 }

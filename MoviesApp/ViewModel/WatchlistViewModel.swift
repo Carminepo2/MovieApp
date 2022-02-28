@@ -8,19 +8,29 @@
 import Foundation
 
 class WatchlistViewModel: ObservableObject {
-    @Published var model: MovieAppModel = MovieAppModel.shared
-    @Published var watchListModel:WatchListModel = WatchListModel.shared
-
-    init(){
+    @Published var model: WatchListModel = WatchListModel()
+    static var shared = WatchlistViewModel()
+    private init(){
        
     }
     
+    func addToMovieAlreadyReccomended(_ movie:Movie){
+        model.addToMovieAlreadyReccomended(movieToSave: movie)
+    }
+    
+    func getWatchListId()->Array<Int64>{
+        return model.getWatchListId()
+    }
+    
+    func addToWatchList(_ movie:Movie){
+        model.addToWatchList(movie)
+    }
     
     func getMovieAlreadyRecommended()->Array<Movie>{
         return model.getMovieAlreadyRecommended()
     }
     func getWatchList()->Array<Movie>{
-        return watchListModel.getWatchList()
+        return model.getWatchList()
     }
 
 
