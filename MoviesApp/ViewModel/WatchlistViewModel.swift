@@ -45,7 +45,7 @@ class WatchlistViewModel: ObservableObject {
     func getMovieAlreadyRecommended()->Array<Movie>{
         return model.getMovieAlreadyRecommended()
     }
-    func getWatchList()->Array<Movie>{
+    func getWatchList()->Set<Movie>{
         return model.getWatchList()
     }
 
