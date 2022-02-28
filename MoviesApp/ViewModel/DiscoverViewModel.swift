@@ -38,8 +38,9 @@ class DiscoverViewModel: ObservableObject {
         let movies = try await withThrowingTaskGroup(of: Movie?.self, returning: [Movie?].self){
             group in
             for _ in 0..<Constants.NumOfCards{
+                let idAdvice = advisor.getAdvice()
                 group.addTask{
-                    return try await self.getAdvice()
+                    return try await self.getAdviceByID(idAdvice: idAdvice)
                 }
             }
             
@@ -103,6 +104,29 @@ class DiscoverViewModel: ObservableObject {
     
  
     // MARK: Riccardo Function
+    
+    func getAdviceByID(idAdvice:Int64) async throws-> Movie?{
+        let isAdvisorSetted = advisor.isAdvisorSetted
+        if(isAdvisorSetted == false){
+            let watchListId = watchListModel.getWatchListId()
+            var initialValues:[Int64:Double] = [:]
+            for id in watchListId {
+                initialValues[id] = 1.0
+            }
+            advisor.setAdvisor(initialValues: initialValues)
+        }
+          async let downloadedMovie = try self.getMovieById(id: idAdvice)
+          async let providersOfTheMovie = try self.getProvidersById(id: idAdvice)
+          var (adviceToReturn, elemento) = try await (downloadedMovie, providersOfTheMovie)
+          adviceToReturn?.providers = elemento
+        let posterPath = URL(string: Constants.ImagesBasePath + (adviceToReturn?.posterPath!)!)
+        Task(priority:.high){
+            try await self.fetchImage(posterPath)
+        }
+        return adviceToReturn
+    }
+    
+    
     
     func getAdvice() async throws -> Movie? {
         let isAdvisorSetted = advisor.isAdvisorSetted
