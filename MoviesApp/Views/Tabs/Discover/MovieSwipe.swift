@@ -123,7 +123,6 @@ struct MovieSwipe: View {
             discoverViewModel.moveCard(movieCards[movieCards.last!], offset: .init(width: 0, height: 800))
             discoverViewModel.rotateCard(movieCards[movieCards.last!], degrees: 0)
         }
-        discoverViewModel.addToBookmark()
     }
 }
 

@@ -51,10 +51,10 @@ class MovieAppModel {
 }
 
 struct WatchListModel{
-    var alone:Array<Movie>
-    var couple:Array<Movie>
-    var friends:Array<Movie>
-    var family:Array<Movie>
+    var alone:Set<Movie>
+    var couple:Set<Movie>
+    var friends:Set<Movie>
+    var family:Set<Movie>
     var with:Company = Company.alone
     var movieAlreadyRecommended:Array<Movie>
     var savedMovies:Array<MovieToSave>
@@ -89,6 +89,7 @@ struct WatchListModel{
             for i in 0..<movies.count{
                 if(movies[i] != nil){
                     movies[i]!.isSaved = true
+                    alone.insert(movies[i]!)
                     alone.append(movies[i]!)
                 }
             }
