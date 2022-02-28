@@ -58,8 +58,9 @@ struct WatchlistTab: View {
 
 struct WatchlistTab_Previews: PreviewProvider {
     static var previews: some View {
+        var wVM = WatchlistViewModel.shared
         WatchlistTab()
-            .environmentObject(WatchlistViewModel())
+            .environmentObject(wVM)
         
     }
 }

@@ -59,7 +59,8 @@
 		75C829C727BD5EBC005DED2A /* MovieCardGridItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C829C527BD5EBC005DED2A /* MovieCardGridItem.swift */; };
 		75C829C927BD5EC6005DED2A /* WatchlistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C829C827BD5EC6005DED2A /* WatchlistViewModel.swift */; };
 		75C829CB27BD811C005DED2A /* SkeumorhicButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C829CA27BD811C005DED2A /* SkeumorhicButtonStyle.swift */; };
-		DEC4459327CD0C6700F56D54 /* SearchMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC4459227CD0C6700F56D54 /* SearchMovie.swift */; };
+		9595A2C127CD0F25001DF56F /* MovieResultListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9595A2C027CD0F25001DF56F /* MovieResultListItem.swift */; };
+		9595A2C327CD1387001DF56F /* onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9595A2C227CD1387001DF56F /* onboarding.swift */; };
 		DED54F8927BFFDC600DFB47F /* AllLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED54F8827BFFDC600DFB47F /* AllLocations.swift */; };
 		DED54F8B27C52A7C00DFB47F /* StreamingPlatforms.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED54F8A27C52A7C00DFB47F /* StreamingPlatforms.swift */; };
 		DED54F8D27C53FF500DFB47F /* Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED54F8C27C53FF500DFB47F /* Display.swift */; };
@@ -155,6 +156,7 @@
 				754784E127C9107D00997A5A /* withBackground.swift */,
 				754784E327C910B600997A5A /* ViewAlignment.swift */,
 				754784E527C910D700997A5A /* swipableCard.swift */,
+				9595A2C227CD1387001DF56F /* onboarding.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -317,6 +319,7 @@
 		75820CA927BA9F5500B489E1 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
+				9595A2C027CD0F25001DF56F /* MovieResultListItem.swift */,
 				756F1D8D27B8178F00609A15 /* MovieCard.swift */,
 				75820CAF27BAA01000B489E1 /* MovieSwipe.swift */,
 				75702FEB27BB13850065ACB4 /* DiscardFavoriteButtons.swift */,
@@ -444,6 +447,7 @@
 				753B57D027C3D5ED00231CA4 /* MovieGenres.swift in Sources */,
 				753B57D227C3DAF800231CA4 /* Collection.swift in Sources */,
 				754784E227C9107D00997A5A /* withBackground.swift in Sources */,
+				9595A2C127CD0F25001DF56F /* MovieResultListItem.swift in Sources */,
 				7511316B27BC00950025BE52 /* ImageCache.swift in Sources */,
 				754784E627C910D700997A5A /* swipableCard.swift in Sources */,
 				75C829C727BD5EBC005DED2A /* MovieCardGridItem.swift in Sources */,
@@ -460,6 +464,7 @@
 				1DF94AF127C6734F00B1E491 /* GenreRecommender2 1.mlmodel in Sources */,
 				756F1D8E27B8178F00609A15 /* MovieCard.swift in Sources */,
 				753B57D427C3DD8700231CA4 /* MovieProviders.swift in Sources */,
+				9595A2C327CD1387001DF56F /* onboarding.swift in Sources */,
 				75820CAC27BA9FC700B489E1 /* SettingsTab.swift in Sources */,
 				1D1AA58327BE8ABE00085A2C /* GrandAdvisor.swift in Sources */,
 				DED54F8F27C542B800DFB47F /* AllLanguages.swift in Sources */,
@@ -594,9 +599,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"MoviesApp/Preview Content\"";
-				DEVELOPMENT_TEAM = USC938GT8B;
+				DEVELOPMENT_TEAM = YLR58HQSWU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoviesApp/Info.plist;
@@ -604,16 +609,17 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.carmineporricelli.MoovieFinder;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ToM.MoovieFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -629,9 +635,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"MoviesApp/Preview Content\"";
-				DEVELOPMENT_TEAM = USC938GT8B;
+				DEVELOPMENT_TEAM = YLR58HQSWU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MoviesApp/Info.plist;
@@ -639,16 +645,17 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.carmineporricelli.MoovieFinder;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ToM.MoovieFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
