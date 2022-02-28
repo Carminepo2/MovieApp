@@ -239,6 +239,27 @@ class DiscoverViewModel: ObservableObject {
         }
     }
     
+    func swipeToWatchList(){
+        withAnimation {
+            Haptics.shared.play(.heavy)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                Task {
+                    do{
+                        var movie = try await self.nextCard(voto: 1.0)
+                        WatchlistViewModel.shared.addToWatchList(movie!.movie)
+                        withAnimation {
+                            self.movieCards[self.movieCards.last!].rotationDegree = 0
+                        }
+                    }
+                    catch{
+                        print("Errore dati")
+                    }
+                }
+            }
+        }
+        
+    }
     
     
     
