@@ -34,9 +34,11 @@ struct AllLocations: View {
                 
             }
         }
-        .padding()
+        .padding(.top)
         .withBackground()
         .listStyle(.plain)
+        .navigationTitle("Select country")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
