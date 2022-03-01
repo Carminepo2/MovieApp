@@ -14,10 +14,12 @@ struct MovieProviders: View {
         self.providers = providers
     }
     
+    let movieProvidersTitle = LocalizedStringKey("movie-providers-title")
+    
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Available on: ")
+            Text(movieProvidersTitle)
                 .font(.callout)
                 .foregroundStyle(.secondary)
             

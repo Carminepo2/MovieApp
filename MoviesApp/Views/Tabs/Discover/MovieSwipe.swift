@@ -21,6 +21,8 @@ struct MovieSwipe: View {
         return discoverViewModel.movieCards
     }
     
+    let closeButtonText = LocalizedStringKey("close")
+    
     
     var body: some View {
         NavigationView {
@@ -77,7 +79,7 @@ struct MovieSwipe: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
 //                    Button("Close", action: closeButtonTapped)
                     Button(action: closeButtonTapped, label: {
-                        Text("CLOSE")
+                        Text(closeButtonText)
                             .font(.subheadline)
                             .fontWeight(.semibold)
                             
