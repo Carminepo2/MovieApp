@@ -20,6 +20,8 @@ struct MovieDetails: View {
     
     @State private var scale: CGFloat = 1
     @State private var cornerRadius: CGFloat = 0
+    @State private var forceUIRefresh = false
+    
     
     init(movie: Movie, showDetails: Binding<Bool> = .constant(true), animation: Namespace.ID? = nil) {
         self.movie = movie
@@ -34,6 +36,7 @@ struct MovieDetails: View {
     
     
     var body: some View {
+        let isBookmarked = movie.isSaved ?? false
         
         ZStack {
             
@@ -116,8 +119,9 @@ struct MovieDetails: View {
                                 
                                 Spacer()
                                 
-                                Button(action: handleBookmark, label: { Image(systemName: "bookmark.fill") })
-                                    .buttonStyle(SkeumorphicButtonStyle(.primary))
+                                Button(action: handleBookmark, label: { Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark") })
+                                    .buttonStyle(SkeumorphicButtonStyle(isBookmarked ? .primary : .secondary))
+                                    .foregroundColor(isBookmarked ? .white : .accentColor)
                                     .frame(width: 75, height: 75)
                                 
                             }
@@ -141,6 +145,7 @@ struct MovieDetails: View {
                 }
             }
         }
+        .onChange(of: forceUIRefresh, perform: { _ in })
         .cornerRadius(cornerRadius)
         .scaleEffect(scale)
         .edgesIgnoringSafeArea(.all)
@@ -187,7 +192,7 @@ struct MovieDetails: View {
             WatchlistViewModel.shared.removeFromWatchList(self.movie)
         }
         self.movie.isSaved!.toggle()
-        //TODO
+        forceUIRefresh.toggle()
     }
 }
 
