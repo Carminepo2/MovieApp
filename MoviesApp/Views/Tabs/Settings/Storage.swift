@@ -1,60 +1,49 @@
 //
-//  CleanCache.swift
+//  Storage.swift
 //  MoviesApp
 //
-//  Created by Luca Basile on 01/03/22.
+//  Created by Luca Basile on 28/02/22.
 //
 
 import SwiftUI
 
 struct Storage: View {
-    
-    @State private var showingCleanWatchlist = false
-    @State private var showingCleanHistory = false
-    @State private var showingCleanCache = false
-    
     var body: some View {
-        VStack(spacing: 30) {
-            
-            Button("Clean Watchlist") {
-                showingCleanWatchlist = true
-            }
-            .buttonStyle(RoundedRectangleButtonStyle())
-            .confirmationDialog("Clear all watchlist data", isPresented: $showingCleanWatchlist, titleVisibility: .visible) {
-                Button("Clear", role: .destructive) {
-                    //TODO: Clear watchlist data
+        VStack() {
+            List {
+                Group {
+                        NavigationLink {
+                            ProgressView()
+                        } label: {
+                            Text("Clean Cache")
+                        }
+                        
+                        NavigationLink {
+                            ProgressView()
+                        } label: {
+                            Text("Clean Watchlist")
+                        }
+                    NavigationLink {
+                        ProgressView()
+                    } label: {
+                        Text("Clean History")
+                    }
+                        
+                        
                 }
+                .listRowBackground(Color.clear)
             }
-            
-            Button("Clean History") {
-                showingCleanHistory = true
-            }
-            .buttonStyle(RoundedRectangleButtonStyle(.secondary))
-            .confirmationDialog("Clear all history data", isPresented: $showingCleanHistory, titleVisibility: .visible) {
-                Button("Clear", role: .destructive) {
-                    //TODO: Clear history data
-                }
-            }
-            
-            Button("Clean Cache") {
-                showingCleanCache = true
-            }
-            .confirmationDialog("Clear all cache data", isPresented: $showingCleanCache, titleVisibility: .visible) {
-                Button("Clear", role: .destructive) {
-                    //TODO: Clear Cache data
-                }
-            }
-            
+            .listRowBackground(Color.clear)
+            .listStyle(.plain)
         }
-        .padding()
+        .padding(.top)
         .withBackground()
         .navigationTitle("Storage")
         .navigationBarTitleDisplayMode(.inline)
-        
     }
 }
 
-struct CleanCache_Previews: PreviewProvider {
+struct Storage_Previews: PreviewProvider {
     static var previews: some View {
         Storage()
     }

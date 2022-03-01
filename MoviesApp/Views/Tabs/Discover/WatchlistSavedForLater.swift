@@ -34,12 +34,6 @@ struct DiscoverHistory: View {
     
     private var threeColumnGrid = [GridItem(.flexible(), spacing:11), GridItem(.flexible(), spacing:11), GridItem(.flexible())]
     
-    //MARK: Localization strings
-    let discoverHistoryTitle = LocalizedStringKey("discover-history-title")
-    let lovedFilterText = LocalizedStringKey("loved-history-filter")
-    let discardedFilterText = LocalizedStringKey("discarded-history-filter")
-    let allFilterText = LocalizedStringKey("all-history-filter")
-    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             
@@ -53,7 +47,7 @@ struct DiscoverHistory: View {
             }
             .padding()
         }
-        .navigationTitle(discoverHistoryTitle)
+        .navigationTitle("History")
         .navigationBarTitleDisplayMode(.inline)
         .withBackground()
         .searchable(text: $searchQuery)
@@ -62,13 +56,13 @@ struct DiscoverHistory: View {
                 Menu {
                     Picker(selection: $filter, label:Text("Filter options")) {
                         
-                        Label(lovedFilterText, systemImage: "heart.fill")
+                        Label("Loved", systemImage: "heart.fill")
                             .tag(HistoryFilter.loved)
                         
-                        Label(discardedFilterText, systemImage: "xmark")
+                        Label("Discarded", systemImage: "xmark")
                             .tag(HistoryFilter.discarded)
                         
-                        Text(allFilterText)
+                        Text("All")
                             .tag(HistoryFilter.all)
                         
                     }

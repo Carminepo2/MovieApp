@@ -9,20 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     
-    //MARK: Localization strings
-    let discoverTabTitle = LocalizedStringKey("discover-tab-title")
-    let watchlistTabTitle = LocalizedStringKey("watchlist-tab-title")
-    let settingsTabTitle = LocalizedStringKey("settings-tab-title")
-    
     var body: some View {
         
         TabView {
-            // MARK: - Discover Tab
+            // MARK: - Search Tab
             DiscoverTab()
                 .withBackground()
                 .environmentObject(DiscoverViewModel())
                 .tabItem {
-                    Label(discoverTabTitle, systemImage: "globe.americas")
+                    Label("Discover", systemImage: "globe.americas")
                 }
             
             /* MARK: - Search Tab
@@ -38,14 +33,14 @@ struct ContentView: View {
                 .withBackground()
                 .environmentObject(WatchlistViewModel.shared)
                 .tabItem {
-                    Label(watchlistTabTitle, systemImage: "bookmark.fill")
+                    Label("Watchlist", systemImage: "bookmark.fill")
                 }
             
             // MARK: - Settings Tab
             SettingsTab()
                 .withBackground()
                 .tabItem {
-                    Label(settingsTabTitle, systemImage: "gear")
+                    Label("Settings", systemImage: "gear")
                 }
 
         }
