@@ -11,6 +11,10 @@ struct DiscoverTab: View {
     @State private var isSwipeCardModalOpen: Bool = false
     @EnvironmentObject var discoverViewController: DiscoverViewModel
     
+    //MARK: Localization strings
+    let discoverTabTitle = LocalizedStringKey("discover-tab-title")
+    let callToActionText = LocalizedStringKey("discover-call-to-action")
+
     var body: some View {
         NavigationView {
             VStack(spacing: 30) {
@@ -18,14 +22,13 @@ struct DiscoverTab: View {
                 PopcornButton(isLoading: true, action: popCornButtonTapped)
                     //.spotlight(enabled: true, title: "TAP")
                 
-                Text("Tap to start!")
+                Text(callToActionText)
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
                 
-                
             }
-            .navigationTitle("Discover")
+            .navigationTitle(discoverTabTitle)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink {
