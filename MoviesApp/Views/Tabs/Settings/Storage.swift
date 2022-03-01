@@ -33,11 +33,13 @@ struct Storage: View {
                 }
                 .listRowBackground(Color.clear)
             }
-            .withBackground()
             .listRowBackground(Color.clear)
             .listStyle(.plain)
-            
         }
+        .padding(.top)
+        .withBackground()
+        .navigationTitle("Storage")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

@@ -35,6 +35,8 @@ struct AllLanguages: View {
         .padding(.vertical)
         .withBackground()
         .listStyle(.plain)
+        .navigationTitle("Select language")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
