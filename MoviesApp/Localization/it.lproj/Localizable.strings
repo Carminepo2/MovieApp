@@ -7,4 +7,15 @@
 */
 
 
-"discover-tab-title" = "Scopri";
+"discover-tab-title" = "Discover";
+"watchlist-tab-title" = "Watchlist";
+"settings-tab-title" = "Settings";
+"discover-call-to-action" = "Tap to start!";
+
+"discover-history-title" = "History";
+"loved-history-filter" = "Loved";
+"discarded-history-filter" = "Discarded";
+"all-history-filter" = "All";
+
+"movie-providers-title" = "Available on:";
+"close" = "Close";

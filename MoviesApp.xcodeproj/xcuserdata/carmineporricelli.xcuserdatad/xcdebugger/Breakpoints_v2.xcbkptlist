@@ -46,8 +46,8 @@
             filePath = "MoviesApp/Views/Shared/MovieProviders.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "isMovieAvailableFor(_:)"
             landmarkType = "7">
          </BreakpointContent>
