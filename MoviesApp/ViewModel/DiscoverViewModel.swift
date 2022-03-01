@@ -22,6 +22,19 @@ class DiscoverViewModel: ObservableObject {
     
     
     init() {
+        let isAdvisorSetted = advisor.isAdvisorSetted
+        if(isAdvisorSetted == false){
+            let watchListId = WatchlistViewModel.shared.getWatchListId()
+            
+            var initialValues:[Int64:Double] = [:]
+            for id in watchListId {
+                initialValues[id] = 1.0
+            }
+            advisor.setAdvisor(initialValues: initialValues)
+        }
+        
+        
+        
         Task{
             do{
                 try await self.setCards()
@@ -34,6 +47,8 @@ class DiscoverViewModel: ObservableObject {
     
     @MainActor
     func setCards() async throws{
+        
+        
         let movies = try await withThrowingTaskGroup(of: Movie?.self, returning: [Movie?].self){
             group in
             for _ in 0..<Constants.NumOfCards{
@@ -104,15 +119,7 @@ class DiscoverViewModel: ObservableObject {
     // MARK: Riccardo Function
     
     func getAdviceByID(idAdvice:Int64) async throws-> Movie?{
-        let isAdvisorSetted = advisor.isAdvisorSetted
-        if(isAdvisorSetted == false){
-            let watchListId = WatchlistViewModel.shared.getWatchListId()
-            var initialValues:[Int64:Double] = [:]
-            for id in watchListId {
-                initialValues[id] = 1.0
-            }
-            advisor.setAdvisor(initialValues: initialValues)
-        }
+    
           async let downloadedMovie = try self.getMovieById(id: idAdvice)
           async let providersOfTheMovie = try self.getProvidersById(id: idAdvice)
           var (adviceToReturn, elemento) = try await (downloadedMovie, providersOfTheMovie)
@@ -128,15 +135,15 @@ class DiscoverViewModel: ObservableObject {
     
     
     func getAdvice() async throws -> Movie? {
-        let isAdvisorSetted = advisor.isAdvisorSetted
-        if(isAdvisorSetted == false){
-            let watchListId = WatchlistViewModel.shared.getWatchListId()
-            var initialValues:[Int64:Double] = [:]
-            for id in watchListId {
-                initialValues[id] = 1.0
-            }
-            advisor.setAdvisor(initialValues: initialValues)
-        }
+//        let isAdvisorSetted = advisor.isAdvisorSetted
+//        if(isAdvisorSetted == false){
+//            let watchListId = WatchlistViewModel.shared.getWatchListId()
+//            var initialValues:[Int64:Double] = [:]
+//            for id in watchListId {
+//                initialValues[id] = 1.0
+//            }
+//            advisor.setAdvisor(initialValues: initialValues)
+//        }
         let idAdvice = advisor.getAdvice()
         
 

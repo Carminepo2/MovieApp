@@ -182,8 +182,12 @@ struct WatchListModel{
     
     func getWatchListId()->Array<Int64>{
         var idListToReturn:Array<Int64> = []
+        for eachFilm in savedMovies{
+            idListToReturn.append(eachFilm.id)
+        }
         return idListToReturn
     }
+    
     mutating func removeFromAlreadyRecommended(_ movie:Movie){
         self.movieAlreadyRecommended.remove(movie)
     }

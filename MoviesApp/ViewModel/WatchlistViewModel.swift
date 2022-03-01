@@ -32,6 +32,7 @@ class WatchlistViewModel: ObservableObject {
     
     
     func getWatchListId()->Array<Int64>{
+        
         return model.getWatchListId()
     }
     
