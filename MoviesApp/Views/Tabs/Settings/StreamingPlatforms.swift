@@ -40,7 +40,7 @@ struct StreamingPlatforms: View {
                     }
                 }
             }
-        }   .padding()
+        }   .padding(.top)
             .withBackground()
             .listStyle(.plain)
             .navigationTitle("Streaming Platforms")

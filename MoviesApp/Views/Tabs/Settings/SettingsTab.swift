@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct SettingsTab: View {
-    
+    var locations = ["United States", "United Kingdom", "Italy", "Germany"]
     
     var body: some View {
         NavigationView{
@@ -21,9 +21,14 @@ struct SettingsTab: View {
                             
                             Section(header: sectionHeader(label: "User")) {
                                 NavigationLink {
-                                    CurrentLocation()
+                                    AllLocations()
                                 } label: {
-                                    Text("Current Location")
+                                    HStack(){
+                                        Text("Current Location")
+                                        Spacer()
+                                        Text(locations[0])
+                                            .foregroundColor(.secondary)
+                                    }
                                 }
                                 
                                 NavigationLink {

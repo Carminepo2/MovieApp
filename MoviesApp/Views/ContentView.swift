@@ -20,13 +20,13 @@ struct ContentView: View {
                     Label("Discover", systemImage: "globe.americas")
                 }
             
-            // MARK: - Search Tab
+            /* MARK: - Search Tab
             SearchTab()
                 .withBackground()
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                 }
-            
+            */
             
             // MARK: - Watchlist Tab
             WatchlistTab()
@@ -40,7 +40,7 @@ struct ContentView: View {
             SettingsTab()
                 .withBackground()
                 .tabItem {
-                    Label("Search", systemImage: "gear")
+                    Label("Settings", systemImage: "gear")
                 }
 
         }
