@@ -21,29 +21,39 @@ struct WatchlistTab: View {
     
     var body: some View {
         NavigationView {
-            // MARK: - Watchlist grid
-            ScrollView(.vertical, showsIndicators: false) {
-                
-                LazyVGrid(columns: twoColumnGrid, spacing: 24) {
-                    ForEach(Array(movie),id: \.self) { newRecord in
-                        NavigationLink {
-                            MovieDetails(movie: newRecord)
-                        } label: { MovieCardGridItem(movie: newRecord) }
-                        .foregroundColor(Color.white)
+            ZStack{
+                // MARK: - Empty state placeholder
+                if (viewModel.getWatchList().count == 0) {
+                    VStack(spacing:10) {
+                        Image("WatchlistEmptyStatePlaceholder")
+                        Text("Bookmark movies to find them here")
+                            .font(.headline)
+                            .foregroundColor(.secondary)
                     }
+                } else {
+                    // MARK: - Watchlist grid
+                    ScrollView(.vertical, showsIndicators: false) {
+                        
+                        LazyVGrid(columns: twoColumnGrid, spacing: 24) {
+                            ForEach(Array(movie),id: \.self) { newRecord in
+                                NavigationLink {
+                                    MovieDetails(movie: newRecord)
+                                } label: { MovieCardGridItem(movie: newRecord) }
+                                .foregroundColor(Color.white)
+                            }
+                        }
+                    }
+                    
+                    
                 }
             }
             .padding(.horizontal)
             .navigationTitle("Watchlist")
             .withBackground()
-              
-            
-            
-            
         }
         
     }
-        
+    
 }
 
 struct WatchlistTab_Previews: PreviewProvider {

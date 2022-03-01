@@ -36,16 +36,29 @@ struct DiscoverHistory: View {
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            
-            LazyVGrid(columns: threeColumnGrid, spacing: 14) {
-                ForEach(filmHistory) { newRecord in
-                    NavigationLink {
-                        MovieDetails(movie: newRecord)
-                    } label: { MovieCardLikedGridItem(movie: newRecord) }
-                    .foregroundColor(Color.white)
+            // MARK: - Empty state placeholder
+            if (filmHistory.count == 0) {
+                VStack(spacing:10) {
+                    Image("HistoryEmptyStatePlaceholder")
+                    Text("The movies you swiped in the current session will be displayed here")
+                        .font(.headline)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
                 }
+                .offset(y: UIScreen.main.bounds.height / 4)
+            } else {
+                // MARK: - Swiped movies grid
+                LazyVGrid(columns: threeColumnGrid, spacing: 14) {
+                    ForEach(filmHistory) { newRecord in
+                        NavigationLink {
+                            MovieDetails(movie: newRecord)
+                        } label: { MovieCardLikedGridItem(movie: newRecord) }
+                        .foregroundColor(Color.white)
+                    }
+                }
+                .padding()
             }
-            .padding()
         }
         .navigationTitle("History")
         .navigationBarTitleDisplayMode(.inline)
@@ -68,7 +81,7 @@ struct DiscoverHistory: View {
                     }
                 }
             label: {
-                Image(systemName: "line.3.horizontal.decrease")
+                Image(systemName: "ellipsis.circle")
             }
                 
             }

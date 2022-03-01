@@ -13,6 +13,8 @@ struct Constants {
     static let CornerRadius = 8.0
     static let maxImageCacheNum = 120
     
+    static let CircleAspectRatio: CGFloat = 1/1
+    
     // MARK: - Cards
     static let CardAspectRatio: CGFloat = 2/3 // Movie poster's aspect ratio
     static let NumOfCards: Int = 3
