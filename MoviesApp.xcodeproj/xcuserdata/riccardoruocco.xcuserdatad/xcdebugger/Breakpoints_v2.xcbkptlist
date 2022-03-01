@@ -78,8 +78,8 @@
             filePath = "MoviesApp/ViewModel/DiscoverViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "DiscoverViewModel"
             landmarkType = "3">
          </BreakpointContent>
@@ -94,8 +94,8 @@
             filePath = "MoviesApp/Models/MovieAppModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "getWatchListId()"
             landmarkType = "7">
          </BreakpointContent>
@@ -103,17 +103,79 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "59B12498-2DFE-42C2-BB31-1E8A433CEA5A"
+            uuid = "FE9C2F27-DE8A-4C96-8D7F-D906625A4503"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MoviesApp/Views/Shared/MovieDetails.swift"
+            filePath = "MoviesApp/ViewModel/DiscoverViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
-            landmarkName = "handleBookmark()"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
+            landmarkName = "swipeToWatchList()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "FE9C2F27-DE8A-4C96-8D7F-D906625A4503 - d0198f464350f1ac"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable () async -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in MoviesApp.DiscoverViewModel.swipeToWatchList() -&gt; ()"
+                  moduleName = "MoviesApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/riccardoruocco/Desktop/AppleAcademy/ArtefattiAcademy/MovieApp/MoviesApp/ViewModel/DiscoverViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "256"
+                  endingLineNumber = "256"
+                  offsetFromSymbolStart = "156">
+               </Location>
+               <Location
+                  uuid = "FE9C2F27-DE8A-4C96-8D7F-D906625A4503 - 1f0988a6687de352"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) await resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in MoviesApp.DiscoverViewModel.swipeToWatchList() -&gt; ()"
+                  moduleName = "MoviesApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/riccardoruocco/Desktop/AppleAcademy/ArtefattiAcademy/MovieApp/MoviesApp/ViewModel/DiscoverViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "256"
+                  endingLineNumber = "256"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "FE9C2F27-DE8A-4C96-8D7F-D906625A4503 - ca15acace2d7dbaa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in MoviesApp.DiscoverViewModel.swipeToWatchList() -&gt; ()"
+                  moduleName = "MoviesApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/riccardoruocco/Desktop/AppleAcademy/ArtefattiAcademy/MovieApp/MoviesApp/ViewModel/DiscoverViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "256"
+                  endingLineNumber = "256"
+                  offsetFromSymbolStart = "96">
+               </Location>
+               <Location
+                  uuid = "FE9C2F27-DE8A-4C96-8D7F-D906625A4503 - badd44948bc23dab"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #1 () -&gt; () in closure #1 () -&gt; () in MoviesApp.DiscoverViewModel.swipeToWatchList() -&gt; ()"
+                  moduleName = "MoviesApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/riccardoruocco/Desktop/AppleAcademy/ArtefattiAcademy/MovieApp/MoviesApp/ViewModel/DiscoverViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "256"
+                  endingLineNumber = "256"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

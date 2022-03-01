@@ -67,13 +67,13 @@ class DiscoverViewModel: ObservableObject {
         carLoading = value
     }
     @MainActor
-    func nextCard(voto:Double) async throws{
-        
+    func nextCard() async throws->MovieCard{
+        var removedCard:MovieCard? = nil
         if(movieCards.count >= 3){
-            var lastCard = movieCards.removeLast()
-            var movieRemoved = lastCard.movie
-            self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
-            self.addToMovieAlreadyReccomended(movieToSave: movieRemoved, voteOfTheMovie: Float(voto))
+            removedCard = movieCards.removeLast()
+            var movieRemoved = removedCard!.movie
+//            self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
+//            self.addToMovieAlreadyReccomended(movieToSave: movieRemoved, voteOfTheMovie: Float(voto))
             let advice = try await self.getAdvice()
             if let notNullAdvice = advice {
                 if (notNullAdvice.id != Movie.example.id){
@@ -83,16 +83,17 @@ class DiscoverViewModel: ObservableObject {
         }
         else if(movieCards.count < 3){
             let advice = try await self.getAdvice()
-            var lastCard = movieCards.removeLast()
-            var movieRemoved = lastCard.movie
-            self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
-            self.addToMovieAlreadyReccomended(movieToSave: movieRemoved, voteOfTheMovie: Float(voto))
+            removedCard = movieCards.removeLast()
+            var movieRemoved = removedCard!.movie
+//            self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
+//            self.addToMovieAlreadyReccomended(movieToSave: movieRemoved, voteOfTheMovie: Float(voto))
             if let notNullAdvice = advice {
                 if (notNullAdvice.id != Movie.example.id){
                     movieCards.insert(MovieCard(movie: notNullAdvice), at: 0)
                 }
             }
         }
+        return removedCard!
     }
     
     func resetModel(){
@@ -207,7 +208,10 @@ class DiscoverViewModel: ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 Task{
                     do {
-                        try await self.nextCard(voto: -1.0)
+                        let card = try await self.nextCard()
+                        self.giveFeedback(drawValueId: card.movie.id, result: -1.0)
+                        self.addToMovieAlreadyReccomended(movieToSave: card.movie, voteOfTheMovie: -1.0)
+                        
                         withAnimation {
                             self.movieCards[self.movieCards.last!].rotationDegree = 0
                         }
@@ -227,7 +231,9 @@ class DiscoverViewModel: ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 Task {
                     do{
-                        try await self.nextCard(voto: 1.0)
+                        let card = try await self.nextCard()
+                        self.giveFeedback(drawValueId: card.movie.id, result: 1.0)
+                        self.addToMovieAlreadyReccomended(movieToSave: card.movie, voteOfTheMovie: 1.0)
                         withAnimation {
                             self.movieCards[self.movieCards.last!].rotationDegree = 0
                         }
@@ -242,12 +248,14 @@ class DiscoverViewModel: ObservableObject {
     func swipeToWatchList(){
         withAnimation {
             Haptics.shared.play(.heavy)
-            
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 Task {
                     do{
-                        try await self.nextCard(voto: 1.0)
-//                        WatchlistViewModel.shared.addToWatchList(self)
+                        let card = try await self.nextCard()
+                        self.giveFeedback(drawValueId: card.movie.id, result: 1.0)
+                        card.movie.isSaved = true
+                        WatchlistViewModel.shared.addToWatchList(card.movie)
                         withAnimation {
                             self.movieCards[self.movieCards.last!].rotationDegree = 0
                         }

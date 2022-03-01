@@ -113,7 +113,11 @@ struct WatchListModel{
         movieToSave.id = movie.id
         if(with == Company.alone){
             movieToSave.watchListItBelong = "alone"
-            alone.insert(movie)
+            if(!alone.contains(where: {$0.id == movie.id})){
+                alone.insert(movie)
+                savedMovies.append(movieToSave)
+                CoreDataManager.shared.createMovie(movieToSave)
+            }
         }
         else if(with == Company.couple){
             movieToSave.watchListItBelong = "couple"
@@ -127,8 +131,7 @@ struct WatchListModel{
             movieToSave.watchListItBelong = "friends"
 //            friends.append(movie)
         }
-        savedMovies.append(movieToSave)
-        CoreDataManager.shared.createMovie(movieToSave)
+        
     }
     mutating func removeFromWatchList(_ movie:Movie){
         var theIndex:Int? = nil
@@ -151,7 +154,6 @@ struct WatchListModel{
         }
         if let unwrapped = theIndex{
             let savedToRemove = savedMovies.remove(at: unwrapped)
-            
             CoreDataManager.shared.deleteMovie(savedToRemove)
         }
         
