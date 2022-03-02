@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct MovieCard: View {
-    let movie: Movie
     @Namespace var animationPlaceholder
-    var animation: Namespace.ID?
     @EnvironmentObject var discoverViewController: DiscoverViewModel
+    
+    let movie: Movie
+    var animation: Namespace.ID?
+    
+    let verticalScrollProgress: CGFloat
+    let horizontalScrollProgress: CGFloat
 
     
     // If animation is not passed, it passes an animation id placeholder
@@ -110,7 +114,7 @@ struct CardView_Previews: PreviewProvider {
         @Namespace var animation
         
         var body: some View {
-            MovieCard(movie: Movie.example, animation: animation)
+            MovieCard(movie: Movie.example, animation: animation, verticalScrollProgress: 0, horizontalScrollProgress: 0)
                 .padding()
                 .withBackground()
         }

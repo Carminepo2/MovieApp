@@ -14,10 +14,13 @@ fileprivate struct SwipableCard: ViewModifier {
     
     var card: DiscoverViewModel.MovieCard
     
+    @Binding var verticalSwipeProgress: CGFloat
+    @Binding var horizontalSwipeProgress: CGFloat
+    
     let onSwipeRightSuccess: (() -> Void)?
     let onSwipeLeftSuccess: (() -> Void)?
     let onSwipeDownSuccess: (() -> Void)?
-    
+        
     func body(content: Content) -> some View {
         content
             .rotationEffect(.degrees(card.rotationOffset))
@@ -32,8 +35,10 @@ fileprivate struct SwipableCard: ViewModifier {
     // MARK: - Drag Functions
     
     func handleDragCard(value: DragGesture.Value) {
-        let swipeProgress = value.translation.width / UIScreen.main.bounds.width
-        discoverViewModel.rotateCard(card, degrees: (swipeProgress / 0.20) * 4)
+        horizontalSwipeProgress = value.translation.width / UIScreen.main.bounds.width
+        verticalSwipeProgress = value.translation.height / UIScreen.main.bounds.height
+        
+        discoverViewModel.rotateCard(card, degrees: (horizontalSwipeProgress / 0.20) * 4)
         discoverViewModel.moveCard(card, offset: value.translation)
     }
     
@@ -94,6 +99,8 @@ fileprivate struct SwipableCard: ViewModifier {
 extension View {
     func swipableCard(
         card: DiscoverViewModel.MovieCard,
+        verticalSwipeProgress: Binding<CGFloat>,
+        horizontalSwipeProgress: Binding<CGFloat>,
         onSwipeRightSuccess: (() -> Void)? = nil,
         onSwipeLeftSuccess: (() -> Void)? = nil,
         onSwipeDownSuccess: (() -> Void)? = nil
@@ -101,6 +108,8 @@ extension View {
         modifier(
             SwipableCard(
                 card: card,
+                verticalSwipeProgress: verticalSwipeProgress,
+                horizontalSwipeProgress: horizontalSwipeProgress,
                 onSwipeRightSuccess: onSwipeRightSuccess,
                 onSwipeLeftSuccess: onSwipeLeftSuccess,
                 onSwipeDownSuccess: onSwipeDownSuccess

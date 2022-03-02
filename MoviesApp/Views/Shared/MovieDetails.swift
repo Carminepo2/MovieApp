@@ -11,22 +11,25 @@ struct MovieDetails: View {
     
     @Environment(\.presentationMode) var goback: Binding<PresentationMode>
     
-    
     let movie: Movie
+    var onBookmarkPressed: (() -> Void)?
+
     @Binding var showDetails: Bool
     var animation: Namespace.ID?
-    @Namespace var animationPlaceholder
-    @State var isSaved = false
     
+    @Namespace var animationPlaceholder
+    
+    @State var isSaved = false
     @State private var scale: CGFloat = 1
     @State private var cornerRadius: CGFloat = 0
     @State private var forceUIRefresh = false
     
     
-    init(movie: Movie, showDetails: Binding<Bool> = .constant(true), animation: Namespace.ID? = nil) {
+    init(movie: Movie, showDetails: Binding<Bool> = .constant(true), animation: Namespace.ID? = nil, onBookmarkPressed: (() -> Void)? = nil) {
         self.movie = movie
         self._showDetails = showDetails
         self.animation = animation
+        self.onBookmarkPressed = onBookmarkPressed
     }
     
     // If animation is not passed, it passes an animation id placeholder
@@ -58,28 +61,9 @@ struct MovieDetails: View {
                     VStack(alignment: .trailing) {
                         
                         // Visible part of the poster
-                        ZStack(alignment: .topTrailing) {
                             Color.clear
                                 .contentShape(Rectangle())
-                            
-                            if animation != nil {
-                                Button {
-                                    withAnimation {
-                                        showDetails.toggle()
-                                    }
-                                } label: {
-                                    Circle()
-                                        .fill(.ultraThinMaterial)
-                                        .frame(width: 40, height: 40)
-                                        .overlay {
-                                            Image(systemName: "xmark")
-                                        }
-                                    
-                                }
-                                .padding()
-                            }
-                        }
-                        .frame(height: 300)
+                                .frame(height: 300)
                         
                         
                         //MARK: Drag gesture to close modal
@@ -144,11 +128,34 @@ struct MovieDetails: View {
                     Spacer()
                 }
             }
+            
+            // MARK: - Close button
+            if animation != nil {
+                Button {
+                    withAnimation {
+                        showDetails.toggle()
+                    }
+                } label: {
+                    Circle()
+                        .fill(.ultraThinMaterial)
+                        .frame(width: 40, height: 40)
+                        .overlay {
+                            Image(systemName: "xmark")
+                                .foregroundColor(.white)
+                        }
+                    
+                }
+                .position(
+                    x: getScreenBounds().width - 45,
+                    y: 45
+                )
+            }
         }
         .onChange(of: forceUIRefresh, perform: { _ in })
         .cornerRadius(cornerRadius)
         .scaleEffect(scale)
         .edgesIgnoringSafeArea(.all)
+        
     }
     
     // MARK: - Functions
@@ -185,10 +192,15 @@ struct MovieDetails: View {
     }
     
     func handleBookmark() {
-        if(!self.movie.isSaved!){
-            WatchlistViewModel.shared.addToWatchList(self.movie)
-        }
-        else{
+        if (!self.movie.isSaved!) {
+            
+            if let onBookmarkPressed = onBookmarkPressed {
+                onBookmarkPressed()
+            } else {
+                WatchlistViewModel.shared.addToWatchList(self.movie)
+            }
+            
+        } else {
             WatchlistViewModel.shared.removeFromWatchList(self.movie)
         }
         self.movie.isSaved!.toggle()

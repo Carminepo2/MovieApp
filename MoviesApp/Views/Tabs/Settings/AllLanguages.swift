@@ -9,17 +9,22 @@ import SwiftUI
 
 struct AllLanguages: View {
     
-    let languages = ["English", "Italian", "German"]
-    @State private var selectedLanguage = "English"
+    let languages = [
+        Language(locale: "en", key: "language-english"),
+        Language(locale: "ge", key: "language-german"),
+        Language(locale: "it", key: "language-italian")
+    ]
+    
+    @State private var selectedLanguage = "en"
     
     
     var body: some View {
         List {
-            ForEach(languages,id: \.self) { language in
+            ForEach(languages) { language in
                 HStack{
-                    Text(language)
+                    Text(language.localizedString)
                     Spacer()
-                    if selectedLanguage == language {
+                    if selectedLanguage == language.locale {
                         Image(systemName: "checkmark")
                             .foregroundColor(.accentColor)
                     }
@@ -27,7 +32,7 @@ struct AllLanguages: View {
                 .listRowBackground(Color.clear)
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    selectedLanguage = language
+                    selectedLanguage = language.locale
                 }
                 
             }
@@ -35,8 +40,19 @@ struct AllLanguages: View {
         .padding(.vertical)
         .withBackground()
         .listStyle(.plain)
-        .navigationTitle("Select language")
+        .navigationTitle(LocalizedStringKey("select-language-title"))
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    
+    struct Language: Identifiable {
+        let id = UUID()
+        let locale: String
+        let key: String
+        
+        var localizedString: LocalizedStringKey {
+            LocalizedStringKey(self.key)
+        }
     }
 }
 
