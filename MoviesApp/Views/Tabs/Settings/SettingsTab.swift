@@ -9,7 +9,12 @@ import SwiftUI
 
 
 struct SettingsTab: View {
-    var locations = ["United States", "United Kingdom", "Italy", "Germany"]
+    var locations = [
+        "location-united-states" : "United States",
+        "location-united-kingdom" : "United Kingdom",
+        "location-italy" : "Italy",
+        "location-germany" : "Germany"
+    ]
     
     var body: some View {
         NavigationView{
@@ -20,20 +25,16 @@ struct SettingsTab: View {
                             
                             
                             Section(header: sectionHeader(label: "User")) {
-                                NavigationLink {
-                                    AllLocations()
-                                } label: {
-                                    HStack(){
+                                NavigationLink { AllLocations() } label: {
+                                    HStack {
                                         Text("Current Location")
                                         Spacer()
-                                        Text(locations[0])
+                                        Text(locations["location-united-states"]!)
                                             .foregroundColor(.secondary)
                                     }
                                 }
                                 
-                                NavigationLink {
-                                    StreamingPlatforms()
-                                } label: {
+                                NavigationLink { StreamingPlatforms() } label: {
                                     Text("Streaming Platforms")
                                 }
                                 

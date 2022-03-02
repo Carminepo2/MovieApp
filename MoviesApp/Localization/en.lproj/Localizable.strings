@@ -19,3 +19,8 @@
 
 "movie-providers-title" = "Available on:";
 "close" = "Close";
+
+"location-united-states" = "United States";
+"location-united-kingdom" = "United Kingdom";
+"location-italy" = "Italy";
+"location-germany" = "Germany";
