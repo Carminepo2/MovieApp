@@ -16,6 +16,9 @@ struct MovieSwipe: View {
     
     @State private var showDetails = false
     @State private var tappedMovie: Movie? = nil
+    @State private var cardHorizontalScrollProgress: CGFloat = 0
+    @State private var cardVerticalScrollProgress: CGFloat = 0
+
 
     private var movieCards: Array<DiscoverViewModel.MovieCard> {
         return discoverViewModel.movieCards
@@ -40,11 +43,18 @@ struct MovieSwipe: View {
                                     
                                 } else {
                                     // MARK: - First Card
-                                    MovieCard(movie: movieCard.movie, animation: animation)
+                                    MovieCard(
+                                        movie: movieCard.movie,
+                                        animation: animation,
+                                        verticalScrollProgress: cardVerticalScrollProgress,
+                                        horizontalScrollProgress: cardHorizontalScrollProgress
+                                    )
                                         .rotationEffect(.degrees(movieCard.rotationDegree))
                                         .onTapGesture { showDetailsOf(movieCard.movie) }
                                         .swipableCard(
                                             card: movieCard,
+                                            verticalSwipeProgress: $cardVerticalScrollProgress,
+                                            horizontalSwipeProgress: $cardHorizontalScrollProgress,
                                             onSwipeRightSuccess: discoverViewModel.makeMovieFavorite,
                                             onSwipeLeftSuccess: discoverViewModel.discardMovie,
                                             //TODO: Bookmark
