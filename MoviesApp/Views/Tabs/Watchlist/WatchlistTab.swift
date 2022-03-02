@@ -48,6 +48,7 @@ struct WatchlistTab: View {
                                 .foregroundColor(Color.white)
                             }
                         }
+                        .padding(.vertical)
                     }
                     
                     
@@ -55,7 +56,6 @@ struct WatchlistTab: View {
             }
             .searchable(text: $searchText)
             .padding(.horizontal)
-            .padding(.bottom)
             .navigationTitle("Watchlist")
             .withBackground()
         }
