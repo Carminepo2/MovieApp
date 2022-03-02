@@ -49,7 +49,7 @@ struct MovieSwipe: View {
                                         verticalScrollProgress: cardVerticalScrollProgress,
                                         horizontalScrollProgress: cardHorizontalScrollProgress
                                     )
-                                        .rotationEffect(.degrees(movieCard.rotationDegree))
+                                       .rotationEffect(.degrees(movieCard.rotationDegree))
                                         .onTapGesture { showDetailsOf(movieCard.movie) }
                                         .swipableCard(
                                             card: movieCard,
