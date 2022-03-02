@@ -10,11 +10,22 @@ import SwiftUI
 
 struct SettingsTab: View {
     var locations = [
-        "location-united-states" : "United States",
-        "location-united-kingdom" : "United Kingdom",
-        "location-italy" : "Italy",
-        "location-germany" : "Germany"
+        "United States",
+        "United Kingdom",
+        "Italy",
+        "Germany",
     ]
+    
+    // MARK: - Localized string
+    let settigsTabTitle = LocalizedStringKey("settings-tab-title")
+    let userSectionTitle = LocalizedStringKey("label-user-settings-section")
+    let generalSectionTitle = LocalizedStringKey("label-general-settings-section")
+    let currentLocationSettings = LocalizedStringKey("current-location-settings")
+    let streamingPlatformSettings = LocalizedStringKey("streaming-platform-settings")
+    let displaySettings = LocalizedStringKey("display-settings")
+    let storageSettings = LocalizedStringKey("storage-settings")
+    let aboutSettings = LocalizedStringKey("about-settings")
+
     
     var body: some View {
         NavigationView{
@@ -22,40 +33,38 @@ struct SettingsTab: View {
                 VStack() {
                     List {
                         Group {
-                            
-                            
-                            Section(header: sectionHeader(label: "User")) {
+                            Section(header: sectionHeader(label: userSectionTitle)) {
                                 NavigationLink { AllLocations() } label: {
                                     HStack {
-                                        Text("Current Location")
+                                        Text(currentLocationSettings)
                                         Spacer()
-                                        Text(locations["location-united-states"]!)
+                                        Text(locations[0])
                                             .foregroundColor(.secondary)
                                     }
                                 }
                                 
                                 NavigationLink { StreamingPlatforms() } label: {
-                                    Text("Streaming Platforms")
+                                    Text(streamingPlatformSettings)
                                 }
                                 
                                 
                             }
                             
-                            Section(header: sectionHeader(label: "General")) {
+                            Section(header: sectionHeader(label: generalSectionTitle)) {
                                 NavigationLink {
                                     Display()
                                 } label: {
-                                    Text("Display")
+                                    Text(displaySettings)
                                 }
                                 NavigationLink {
                                     Storage()
                                 } label: {
-                                    Text("Storage")
+                                    Text(storageSettings)
                                 }
                                 NavigationLink {
                                     ProgressView()
                                 } label: {
-                                    Text("About")
+                                    Text(aboutSettings)
                                 }
                                 
                             }
@@ -68,16 +77,17 @@ struct SettingsTab: View {
                     
                 }
             }
-            .navigationTitle("Settings")
+            .navigationTitle(settigsTabTitle)
             Spacer()
         }
     }
     
     // MARK: - Function
-    private func sectionHeader(label: String) -> some View {
-        Text(label.uppercased())
+    private func sectionHeader(label: LocalizedStringKey) -> some View {
+        Text(label)
             .font(.callout.weight(.medium))
             .foregroundColor(.accentColor)
+            .textCase(.uppercase)
             .hLeading()
     }
 }
