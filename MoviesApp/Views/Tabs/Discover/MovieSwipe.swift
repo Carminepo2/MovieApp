@@ -66,9 +66,17 @@ struct MovieSwipe: View {
                     if let tappedMovie = tappedMovie {
                         MovieDetails(
                             movie: tappedMovie, showDetails: $showDetails,
-                            animation: animation
+                            animation: animation,
+                            onBookmarkPressed: {
+                                withAnimation {
+                                    showDetails = false
+                                }
+                                
+                                DispatchQueue.main
+                                    .asyncAfter(deadline: .now() + 0.2, execute: bookmarkButtonTapped)
+                            }
                         )
-                            .statusBar(hidden: showDetails)
+                        .statusBar(hidden: showDetails)
                     }
                 }
             }
