@@ -18,7 +18,7 @@ struct DiscardFavoriteButtons: View {
             // MARK: - Discard button
             Button(action: discard) {
                 Image(systemName: "xmark")
-                    .font(.title.weight(.semibold))
+                    .font(.title2.weight(.semibold))
                     .foregroundColor(.accentColor)
                 
             }
@@ -40,7 +40,7 @@ struct DiscardFavoriteButtons: View {
             // MARK: - Like button
             Button(action: makeFavorite) {
                 Image(systemName: "heart.fill")
-                    .font(.title.weight(.semibold))
+                    .font(.title2.weight(.semibold))
                     .foregroundColor(.accentColor)
             }
             .buttonStyle(SkeumorphicButtonStyle(.secondary))
@@ -48,6 +48,7 @@ struct DiscardFavoriteButtons: View {
             
         }
         .padding()
+        .padding(.horizontal)
     }
     
 }
