@@ -46,8 +46,6 @@ struct SettingsTab: View {
                                 NavigationLink { StreamingPlatforms() } label: {
                                     Text(streamingPlatformSettings)
                                 }
-                                
-                                
                             }
                             
                             Section(header: sectionHeader(label: generalSectionTitle)) {
