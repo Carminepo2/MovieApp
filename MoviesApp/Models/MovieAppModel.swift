@@ -168,7 +168,13 @@ struct WatchListModel{
         }
         
     }
+    mutating func removeFromWatchList(_ movies:Array<Movie>){
+        for aMovie in movies{
+            aMovie.isSaved = false
+            self.removeFromWatchList(aMovie)
+        }
     
+    }
     
     
     func getWatchList()->Set<Movie>{

@@ -64,19 +64,8 @@ fileprivate struct ProviderIcon: View {
                     }
                     else{
                         if(itunesItem != nil){
-                            print("Hello")
-                            var vc:SKStoreProductViewController = SKStoreProductViewController()
-                            let params = [
-                                SKStoreProductParameterITunesItemIdentifier:"itunesItem",
-                                SKStoreProductParameterAffiliateToken:"11l4Cu",
-                                SKStoreProductParameterCampaignToken:"hype_movie"
-                            ] as [String : Any]
-                            // vc!.delegate = self
-                            vc.loadProduct(withParameters: params, completionBlock: { (success,error) -> Void in
-                                UIApplication.shared.windows.first?.rootViewController?.present(vc, animated: true, completion: nil)
-                            })
+                            
                         }
-                                           
                     }
                 }
             }

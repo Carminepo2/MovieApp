@@ -36,8 +36,9 @@ class WatchlistViewModel: ObservableObject {
         model.cleanHistory()
     }
     
-    
-    
+    func removeFromWatchList(_ movies:Array<Movie>){
+        model.removeFromWatchList(movies)
+    }
     
     func getWatchListId()->Array<Int64>{
         return model.getWatchListId()
