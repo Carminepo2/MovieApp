@@ -97,7 +97,8 @@ struct WatchListModel{
         
     }
     mutating func cleanHistory(){
-        self.movieAlreadyRecommended = []
+        movieAlreadyRecommended.removeAll()
+        
     }
     
     mutating func cleanWatchList(){
@@ -173,7 +174,6 @@ struct WatchListModel{
             aMovie.isSaved = false
             self.removeFromWatchList(aMovie)
         }
-    
     }
     
     

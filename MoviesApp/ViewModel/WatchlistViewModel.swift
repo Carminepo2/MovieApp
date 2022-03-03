@@ -33,6 +33,7 @@ class WatchlistViewModel: ObservableObject {
         model.cleanWatchList()
     }
     func cleanHistory(){
+        
         model.cleanHistory()
     }
     
@@ -50,7 +51,6 @@ class WatchlistViewModel: ObservableObject {
     func removeFromWatchList(_ movie:Movie){
         model.removeFromWatchList(movie)
     }
-    
     func getMovieAlreadyRecommended()->Array<Movie>{
         return model.getMovieAlreadyRecommended()
     }
