@@ -288,7 +288,7 @@ class DiscoverViewModel: ObservableObject {
     }
     
     struct MovieCard: Identifiable {
-        fileprivate init(movie: Movie) {
+        init(movie: Movie) {
             self.movie = movie
         }
 

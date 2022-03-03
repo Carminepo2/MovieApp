@@ -11,19 +11,17 @@ struct MovieCard: View {
     @Namespace var animationPlaceholder
     @EnvironmentObject var discoverViewController: DiscoverViewModel
     
-    let movie: Movie
+    let card: DiscoverViewModel.MovieCard
     var animation: Namespace.ID?
     
-    let verticalScrollProgress: CGFloat?
-    let horizontalScrollProgress: CGFloat?
+    var movie: Movie { card.movie }
     
-    init(movie: Movie, animation: Namespace.ID? = nil, verticalScrollProgress: CGFloat? = nil, horizontalScrollProgress: CGFloat? = nil) {
-        self.movie = movie
+        
+    init(card: DiscoverViewModel.MovieCard, animation: Namespace.ID? = nil) {
+        self.card = card
         self.animation = animation
-        self.verticalScrollProgress = verticalScrollProgress
-        self.horizontalScrollProgress = horizontalScrollProgress
     }
-
+    
     
     // If animation is not passed, it passes an animation id placeholder
     private var animationNamespace: Namespace.ID {
@@ -58,7 +56,7 @@ struct MovieCard: View {
                     
                     MovieGenres(movie.genres)
                         .matchedGeometryEffect(id: "movie-genres", in: animationNamespace)
-
+                    
                     
                     // MARK: Overview
                     Text(movie.overview)
@@ -84,6 +82,59 @@ struct MovieCard: View {
             .padding()
             .foregroundColor(.white)
             
+            
+            ZStack {
+                ZStack {
+                    GeometryReader { geometry in
+                        Color("Gray-800")
+                        
+                            .overlay {
+                                Text("Loved!")
+                                    .font(.system(size: geometry.size.width * 0.4))
+                                    .blendMode(.destinationOut)
+                                
+                            }
+                        
+                    }
+                }
+                .compositingGroup()
+                .opacity(getLovedOpacity())
+                
+                ZStack {
+                    GeometryReader { geometry in
+                        Color("Gray-800")
+                        
+                            .overlay {
+                                Text("Discarded!")
+                                    .font(.system(size: geometry.size.width * 0.4))
+                                    .blendMode(.destinationOut)
+                                
+                            }
+                        
+                    }
+                }
+                .compositingGroup()
+                .opacity(getDiscardedOpacity())
+                
+                ZStack {
+                    GeometryReader { geometry in
+                        Color.accentColor
+                        
+                            .overlay {
+                                Text("Bookmarked!")
+                                    .font(.system(size: geometry.size.width * 0.4))
+                                    .blendMode(.destinationOut)
+                                
+                            }
+                        
+                    }
+                }
+                .compositingGroup()
+                .opacity(getBookmarkedOpacity())
+            }
+            
+            
+            
         }
         .aspectRatio(Constants.CardAspectRatio, contentMode: .fit)
         .cornerRadius(Constants.CornerRadius)
@@ -103,13 +154,18 @@ struct MovieCard: View {
             startPoint: .bottom, endPoint: .top
         )
     }
-//    private func downloadData() async {
-//        do {
-//            try await discoverViewController.fetchImage(url)
-//        } catch {
-//            print(error)
-//        }
-//    }
+    
+    func getLovedOpacity() -> CGFloat {
+        return 0
+    }
+    
+    func getDiscardedOpacity() -> CGFloat {
+        return 0
+    }
+    
+    func getBookmarkedOpacity() -> CGFloat {
+        return 0
+    }
 }
 
 struct CardView_Previews: PreviewProvider {
@@ -118,7 +174,7 @@ struct CardView_Previews: PreviewProvider {
         @Namespace var animation
         
         var body: some View {
-            MovieCard(movie: Movie.example, animation: animation, verticalScrollProgress: 0, horizontalScrollProgress: 0)
+            MovieCard(card: DiscoverViewModel.MovieCard(movie: Movie.example), animation: animation)
                 .padding()
                 .withBackground()
         }
