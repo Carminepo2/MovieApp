@@ -14,8 +14,8 @@ struct DiscoverHistory: View {
     @StateObject var watchListViewModel = WatchlistViewModel.shared
     
     var filmHistory: Array<Movie> {
-        var movies = watchListViewModel.getMovieAlreadyRecommended()
-        print("Hello")
+        var movies = watchListViewModel.getMovieAlreadyRecommended().reduce([],{ [$1] + $0 })
+        
         if filter == .discarded {
             movies = movies.filter { $0.vote != nil && $0.vote! < 0 }
         } else if filter == .loved {
@@ -23,7 +23,7 @@ struct DiscoverHistory: View {
         }
         
         if searchQuery.isEmpty {
-            return watchListViewModel.getMovieAlreadyRecommended()
+            return movies
         } else {
             return movies.filter { movie in
                 movie.title.contains(searchQuery)
