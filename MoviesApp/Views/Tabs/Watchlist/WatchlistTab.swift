@@ -11,9 +11,15 @@ import Foundation
 struct WatchlistTab: View {
     
     @EnvironmentObject var viewModel: WatchlistViewModel
+    @State private var searchText = ""
     
-    var movie:Set<Movie>{
-        return viewModel.getWatchList()
+    var movie: Set<Movie> {
+        let movies = viewModel.getWatchList()
+        if searchText.isEmpty {
+            return movies
+        }
+        
+        return movies.filter { $0.title.contains(searchText) }
     }
     
     
@@ -42,11 +48,13 @@ struct WatchlistTab: View {
                                 .foregroundColor(Color.white)
                             }
                         }
+                        .padding(.vertical)
                     }
                     
                     
                 }
             }
+            .searchable(text: $searchText)
             .padding(.horizontal)
             .navigationTitle("Watchlist")
             .withBackground()

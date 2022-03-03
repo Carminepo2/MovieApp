@@ -19,3 +19,25 @@
 
 "movie-providers-title" = "Available on:";
 "close" = "Close";
+
+"location-united-states" = "United States";
+"location-united-kingdom" = "United Kingdom";
+"location-italy" = "Italy";
+"location-germany" = "Germany";
+
+
+"settings-title" = "Settings";
+
+"select-language-title" = "Select language";
+"language-italian" = "Italian";
+"language-german" = "German";
+"language-english" = "English";
+
+"label-user-settings-section" = "User";
+"label-general-settings-section" = "General";
+
+"current-location-settings" = "Current Location";
+"streaming-platform-settings" = "Current Location";
+"display-settings" = "Display";
+"storage-settings" = "Storage";
+"about-settings" = "About";

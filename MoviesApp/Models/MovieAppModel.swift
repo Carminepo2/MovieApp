@@ -25,7 +25,7 @@ class MovieAppModel {
         allMovies.append(movieToReturn)
         return movieToReturn
     }
-    
+  
     
     
    
@@ -96,7 +96,17 @@ struct WatchListModel{
         }
         
     }
+    mutating func cleanHistory(){
+        self.movieAlreadyRecommended = []
+    }
     
+    mutating func cleanWatchList(){
+        self.alone = []
+        for savedMovie in savedMovies{
+            CoreDataManager.shared.deleteMovie(savedMovie)
+        }
+        self.savedMovies = []
+    }
     
     
     
@@ -158,7 +168,13 @@ struct WatchListModel{
         }
         
     }
+    mutating func removeFromWatchList(_ movies:Array<Movie>){
+        for aMovie in movies{
+            aMovie.isSaved = false
+            self.removeFromWatchList(aMovie)
+        }
     
+    }
     
     
     func getWatchList()->Set<Movie>{

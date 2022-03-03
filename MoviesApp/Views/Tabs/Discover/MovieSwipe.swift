@@ -16,6 +16,9 @@ struct MovieSwipe: View {
     
     @State private var showDetails = false
     @State private var tappedMovie: Movie? = nil
+    @State private var cardHorizontalScrollProgress: CGFloat = 0
+    @State private var cardVerticalScrollProgress: CGFloat = 0
+
 
     private var movieCards: Array<DiscoverViewModel.MovieCard> {
         return discoverViewModel.movieCards
@@ -40,11 +43,18 @@ struct MovieSwipe: View {
                                     
                                 } else {
                                     // MARK: - First Card
-                                    MovieCard(movie: movieCard.movie, animation: animation)
-                                        .rotationEffect(.degrees(movieCard.rotationDegree))
+                                    MovieCard(
+                                        movie: movieCard.movie,
+                                        animation: animation,
+                                        verticalScrollProgress: cardVerticalScrollProgress,
+                                        horizontalScrollProgress: cardHorizontalScrollProgress
+                                    )
+                                       .rotationEffect(.degrees(movieCard.rotationDegree))
                                         .onTapGesture { showDetailsOf(movieCard.movie) }
                                         .swipableCard(
                                             card: movieCard,
+                                            verticalSwipeProgress: $cardVerticalScrollProgress,
+                                            horizontalSwipeProgress: $cardHorizontalScrollProgress,
                                             onSwipeRightSuccess: discoverViewModel.makeMovieFavorite,
                                             onSwipeLeftSuccess: discoverViewModel.discardMovie,
                                             //TODO: Bookmark
@@ -66,9 +76,17 @@ struct MovieSwipe: View {
                     if let tappedMovie = tappedMovie {
                         MovieDetails(
                             movie: tappedMovie, showDetails: $showDetails,
-                            animation: animation
+                            animation: animation,
+                            onBookmarkPressed: {
+                                withAnimation {
+                                    showDetails = false
+                                }
+                                
+                                DispatchQueue.main
+                                    .asyncAfter(deadline: .now() + 0.2, execute: bookmarkButtonTapped)
+                            }
                         )
-                            .statusBar(hidden: showDetails)
+                        .statusBar(hidden: showDetails)
                     }
                 }
             }

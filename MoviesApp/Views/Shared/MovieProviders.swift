@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct MovieProviders: View {
     let providers: CountryProviders?
@@ -24,7 +25,7 @@ struct MovieProviders: View {
                 .foregroundStyle(.secondary)
             
             HStack(spacing: 16) {
-                ProviderIcon(isActive: isMovieAvailableFor(.Netflix), imageName: "netflix")
+                ProviderIcon(isActive: isMovieAvailableFor(.Netflix), imageName: "netflix",url: "nflx://",itunesItem: 363590051)
                 ProviderIcon(isActive: isMovieAvailableFor(.DisneyPlus), imageName: "disney+")
                 ProviderIcon(isActive: isMovieAvailableFor(.PrimeVideo), imageName: "prime-video")
                 ProviderIcon(isActive: isMovieAvailableFor(.AppleTv), imageName: "apple-tv")
@@ -50,15 +51,35 @@ struct MovieProviders: View {
 fileprivate struct ProviderIcon: View {
     let isActive: Bool;
     let imageName: String;
-    
+    var url:String? = nil
+    var itunesItem:Int? = nil
     var body: some View {
         
-        Image(imageName)
-            .resizable()
-            .scaledToFill()
-            .frame(width: 45, height: 45)
-            .opacity(isActive ? 1 : 0.15)
-            .clipShape(Circle())
+        Button(action: {
+            if(isActive && url != nil){
+                
+                if let urlOfTheProvider = URL(string: url!){
+                    if(UIApplication.shared.canOpenURL(urlOfTheProvider)){
+                        UIApplication.shared.open(urlOfTheProvider, options: [:], completionHandler: nil)
+                    }
+                    else{
+                        if(itunesItem != nil){
+                            
+                        }
+                    }
+                }
+            }
+        }, label: {
+            Image(imageName)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 45, height: 45)
+                .opacity(isActive ? 1 : 0.15)
+                .clipShape(Circle())
+        })
+        
+        
+     
         
     }
 }

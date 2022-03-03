@@ -29,10 +29,18 @@ class WatchlistViewModel: ObservableObject {
     func removeFromAlreadyReccomended(_ movie:Movie){
         model.removeFromAlreadyRecommended(movie)
     }
+    func cleanWatchList(){
+        model.cleanWatchList()
+    }
+    func cleanHistory(){
+        model.cleanHistory()
+    }
     
+    func removeFromWatchList(_ movies:Array<Movie>){
+        model.removeFromWatchList(movies)
+    }
     
     func getWatchListId()->Array<Int64>{
-        
         return model.getWatchListId()
     }
     

@@ -23,6 +23,7 @@ struct DiscoverTab: View {
                 PopcornButton(isLoading: true, action: popCornButtonTapped)
                     //.spotlight(enabled: true, title: "TAP")
                     .background(Pulse())
+                
                 Text("Tap to start!")
                     .font(.title2)
                     .fontWeight(.semibold)
@@ -99,9 +100,9 @@ struct Pulse: View {
                 .scaleEffect(self.pulseAnimate ? 1: 0.9)
         }
         .onAppear {
-            self.pulseAnimate.toggle()
+            withAnimation(Animation.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {
+                self.pulseAnimate.toggle()
+            }
         }
-        .animation(Animation.easeInOut(duration: 1.5).repeatForever(autoreverses: true))
-//        .animation(Animation.linear(duration: 4.4).repeatForever(autoreverses: true))
     }
 }
