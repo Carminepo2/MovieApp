@@ -47,8 +47,6 @@ class DiscoverViewModel: ObservableObject {
     
     @MainActor
     func setCards() async throws{
-        
-        
         let movies = try await withThrowingTaskGroup(of: Movie?.self, returning: [Movie?].self){
             group in
             for _ in 0..<Constants.NumOfCards{
@@ -71,6 +69,8 @@ class DiscoverViewModel: ObservableObject {
         cardSetted = true
 
     }
+    
+    
     
     func isCardsSetted()->Bool{
         return self.cardSetted

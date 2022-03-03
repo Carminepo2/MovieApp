@@ -23,6 +23,7 @@ struct Storage: View {
             .confirmationDialog("Clear all watchlist data", isPresented: $showingCleanWatchlist, titleVisibility: .visible) {
                 Button("Clear", role: .destructive) {
                     //TODO: Clear watchlist data
+                    WatchlistViewModel.shared.cleanWatchList()
                 }
             }
             
@@ -32,6 +33,7 @@ struct Storage: View {
             .buttonStyle(RoundedRectangleButtonStyle(.secondary))
             .confirmationDialog("Clear all history data", isPresented: $showingCleanHistory, titleVisibility: .visible) {
                 Button("Clear", role: .destructive) {
+                    WatchlistViewModel.shared.cleanHistory()
                     //TODO: Clear history data
                 }
             }
@@ -42,6 +44,7 @@ struct Storage: View {
             .confirmationDialog("Clear all cache data", isPresented: $showingCleanCache, titleVisibility: .visible) {
                 Button("Clear", role: .destructive) {
                     //TODO: Clear Cache data
+                    ImageCache.deleteCache()
                 }
             }
             

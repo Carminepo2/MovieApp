@@ -10,12 +10,12 @@ import SwiftUI
 struct DiscoverHistory: View {
     @State private var searchQuery = ""
     @State private var filter: HistoryFilter = .all
-    
     @EnvironmentObject var viewModel: DiscoverViewModel
+    @StateObject var watchListViewModel = WatchlistViewModel.shared
     
     var filmHistory: Array<Movie> {
-        var movies = WatchlistViewModel.shared.getMovieAlreadyRecommended()
-        
+        var movies = watchListViewModel.getMovieAlreadyRecommended()
+        print("Hello")
         if filter == .discarded {
             movies = movies.filter { $0.vote != nil && $0.vote! < 0 }
         } else if filter == .loved {
@@ -23,7 +23,7 @@ struct DiscoverHistory: View {
         }
         
         if searchQuery.isEmpty {
-            return movies
+            return watchListViewModel.getMovieAlreadyRecommended()
         } else {
             return movies.filter { movie in
                 movie.title.contains(searchQuery)
