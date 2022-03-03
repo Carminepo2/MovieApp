@@ -27,6 +27,10 @@ class ImageCache {
         }
     }
     
+    static func deleteCache(){
+        cache.removeAllObjects()
+    }
+    
     private init() { }
 }
 

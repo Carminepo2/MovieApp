@@ -44,6 +44,7 @@ struct Storage: View {
             .confirmationDialog("Clear all cache data", isPresented: $showingCleanCache, titleVisibility: .visible) {
                 Button("Clear", role: .destructive) {
                     //TODO: Clear Cache data
+                    ImageCache.deleteCache()
                 }
             }
             
