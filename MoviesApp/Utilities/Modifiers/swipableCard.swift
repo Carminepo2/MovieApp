@@ -42,8 +42,12 @@ fileprivate struct SwipableCard: ViewModifier {
     func handleEndDragCard(value: DragGesture.Value) {
         let swipeTranslation = value.translation
         
+        let horizontalSwipeProgress = swipeTranslation.width / UIScreen.main.bounds.width
+        let verticalSwipeProgress = swipeTranslation.height / UIScreen.main.bounds.height
+
+        
         // MARK: Card Swiped Right
-        if swipeTranslation.width > 150 {
+        if horizontalSwipeProgress > 0.3 {
             withAnimation {
                 discoverViewModel.moveCard(card, offset: .init(width: 500, height: 0))
                 discoverViewModel.rotateCard(card, degrees: 15)
@@ -57,7 +61,7 @@ fileprivate struct SwipableCard: ViewModifier {
         }
         
         // MARK: Card Swiped Left
-        if swipeTranslation.width < -150 {
+        if horizontalSwipeProgress < -0.3 {
             withAnimation {
                 discoverViewModel.moveCard(card, offset: .init(width: -500, height: 0))
                 discoverViewModel.rotateCard(card, degrees: -15)
@@ -71,7 +75,7 @@ fileprivate struct SwipableCard: ViewModifier {
         }
         
         // MARK: Card Swiped Down
-        if swipeTranslation.height > 300 {
+        if verticalSwipeProgress > 0.3 {
             withAnimation {
                 discoverViewModel.moveCard(card, offset: .init(width: 0, height: 800))
                 discoverViewModel.rotateCard(card, degrees: 0)

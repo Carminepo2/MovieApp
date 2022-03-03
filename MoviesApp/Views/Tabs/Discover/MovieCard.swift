@@ -16,6 +16,20 @@ struct MovieCard: View {
     
     var movie: Movie { card.movie }
     
+    var horizontalSwipeProgress: CGFloat {
+        if let lastCard = discoverViewController.movieCards.last, lastCard.id == card.id {
+            return discoverViewController.movieCards[lastCard].offset.width / getScreenBounds().width
+        }
+        return 0
+    }
+    
+    var verticalSwipeProgress: CGFloat {
+        if let lastCard = discoverViewController.movieCards.last, lastCard.id == card.id {
+            return discoverViewController.movieCards[lastCard].offset.height / getScreenBounds().height
+        }
+        return 0
+    }
+    
         
     init(card: DiscoverViewModel.MovieCard, animation: Namespace.ID? = nil) {
         self.card = card
@@ -124,9 +138,7 @@ struct MovieCard: View {
                                 Text("Bookmarked!")
                                     .font(.system(size: geometry.size.width * 0.4))
                                     .blendMode(.destinationOut)
-                                
                             }
-                        
                     }
                 }
                 .compositingGroup()
@@ -156,15 +168,16 @@ struct MovieCard: View {
     }
     
     func getLovedOpacity() -> CGFloat {
-        return 0
+        return (horizontalSwipeProgress - 0.2) * 5
     }
     
     func getDiscardedOpacity() -> CGFloat {
-        return 0
+        return (horizontalSwipeProgress + 0.2) * -5
     }
     
     func getBookmarkedOpacity() -> CGFloat {
-        return 0
+        let verticalOpacity = (verticalSwipeProgress - 0.2) * 5
+        return verticalOpacity - abs((verticalOpacity * (horizontalSwipeProgress / 0.2)))
     }
 }
 
