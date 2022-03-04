@@ -13,19 +13,21 @@ struct LikedLabel: View {
             Group {
                 Image(systemName: "heart.fill")
                     .font(.title3)
-
+                
                 Text("YEP")
                     .font(.title3)
                     .fontWeight(.heavy)
             }
             .foregroundColor(Color("AccentColor"))
         }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 10)
-            .overlay(
-                RoundedRectangle(cornerRadius: 100)
-                    .strokeBorder(Color("AccentColor"), lineWidth: 3.5)
-            )
+        .padding(.horizontal, 20)
+        .padding(.vertical, 10)
+        .background(.ultraThinMaterial)
+        .cornerRadius(100)
+        .overlay(
+            RoundedRectangle(cornerRadius: 100)
+                .strokeBorder(Color("AccentColor"), lineWidth: 3.5)
+        )
     }
 }
 
@@ -35,19 +37,41 @@ struct DiscardedLabel: View {
             Group {
                 Image(systemName: "xmark")
                     .font(.title3)
-
+                
                 Text("NOPE")
                     .font(.title3)
                     .fontWeight(.heavy)
             }
             .foregroundColor(.white)
         }
-            .padding(.horizontal, 20)
-            .padding(.vertical, 10)
-            .overlay(
-                RoundedRectangle(cornerRadius: 100)
-                    .strokeBorder(.white, lineWidth: 3.5)
-            )
+        .padding(.horizontal, 20)
+        .padding(.vertical, 10)
+        .background(.ultraThinMaterial)
+        .cornerRadius(100)
+        .overlay(
+            RoundedRectangle(cornerRadius: 100)
+                .strokeBorder(.white, lineWidth: 3.5)
+        )
+    }
+}
+
+struct SavedLabel: View {
+    var body: some View {
+        HStack {
+            Group {
+                Image(systemName: "bookmark.fill")
+                    .font(.title3)
+                
+                Text("SAVED")
+                    .font(.title3)
+                    .fontWeight(.heavy)
+            }
+            .foregroundColor(Color("Gray-800"))
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 10)
+        .background(Color("AccentColor"))
+        .cornerRadius(100)
     }
 }
 

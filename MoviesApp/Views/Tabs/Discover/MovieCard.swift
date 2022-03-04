@@ -108,19 +108,10 @@ struct MovieCard: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                     .opacity(getDiscardedOpacity())
                 
-                ZStack {
-                    GeometryReader { geometry in
-                        Color.accentColor
-                        
-                            .overlay {
-                                Text("Bookmarked!")
-                                    .font(.system(size: geometry.size.width * 0.4))
-                                    .blendMode(.destinationOut)
-                            }
-                    }
-                }
-                .compositingGroup()
-                .opacity(getBookmarkedOpacity())
+                SavedLabel()
+                    .padding()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                    .opacity(getBookmarkedOpacity())
             }
             
             
