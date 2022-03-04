@@ -44,7 +44,7 @@ class DiscoverViewModel: ObservableObject {
             }
         }
     }
-    func setLanguage(language:languageType){
+    func setLanguage(language:LanguageType){
         NetworkManager.shared.setLanguage(language: language)
     }
     

@@ -16,14 +16,14 @@ class NetworkManager{
         
     }
     
-    func setLanguage(language:languageType){
-        if(language == languageType.englishUSA){
+    func setLanguage(language:LanguageType){
+        if(language == LanguageType.englishUSA){
             languageResult = "en"
         }
-        else if(language == languageType.german){
+        else if(language == LanguageType.german){
             languageResult = "de"
         }
-        else if(language == languageType.italian){
+        else if(language == LanguageType.italian){
             languageResult = "it"
         }
     }
@@ -93,14 +93,14 @@ class NetworkManager{
             throw DataException.ErrorGettingTheData
         }
         if(self.languageResult == "en"){
-            movieToReturn.language = languageType.englishUSA
+            movieToReturn.language = LanguageType.englishUSA
         }
         else if(self.languageResult == "de"){
-            movieToReturn.language = languageType.german
+            movieToReturn.language = LanguageType.german
 
         }
         else if(languageResult == "it"){
-            movieToReturn.language = languageType.italian
+            movieToReturn.language = LanguageType.italian
 
         }
      
