@@ -27,7 +27,7 @@ struct WatchlistTab: View {
     
     var body: some View {
         NavigationView {
-            ZStack{
+            ScrollView(.vertical, showsIndicators: false) {
                 // MARK: - Empty state placeholder
                 if (viewModel.getWatchList().count == 0) {
                     VStack(spacing:10) {
@@ -36,24 +36,22 @@ struct WatchlistTab: View {
                             .font(.headline)
                             .foregroundColor(.secondary)
                     }
+                    .offset(y: UIScreen.main.bounds.height / 5.5)
                 } else {
-                    // MARK: - Watchlist grid
-                    ScrollView(.vertical, showsIndicators: false) {
-                        
-                        LazyVGrid(columns: twoColumnGrid, spacing: 24) {
-                            ForEach(Array(movie),id: \.self) { newRecord in
-                                NavigationLink {
-                                    MovieDetails(movie: newRecord)
-                                } label: { MovieCardGridItem(movie: newRecord) }
-                                .foregroundColor(Color.white)
-                            }
+                    // MARK: - Swiped movies grid
+                    LazyVGrid(columns: twoColumnGrid, spacing: 24) {
+                        ForEach(Array(movie),id: \.self) { newRecord in
+                            NavigationLink {
+                                MovieDetails(movie: newRecord)
+                            } label: { MovieCardGridItem(movie: newRecord) }
+                            .foregroundColor(Color.white)
                         }
-                        .padding(.vertical)
                     }
-                    
-                    
+                    .padding(.vertical)
                 }
             }
+            
+            
             .searchable(text: $searchText)
             .padding(.horizontal)
             .navigationTitle("Watchlist")
