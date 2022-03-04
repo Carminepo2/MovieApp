@@ -118,7 +118,8 @@ struct MovieDetails: View {
                             
                             //MARK: Providers
                             if(movie.providers != nil) {
-                                MovieProviders(movie.providers?.us,returnToPopCorn: {
+                                
+                                MovieProviders(movie.getLocalProviders(),returnToPopCorn: {
                                     if let returnToPopcorn = returnToPopcorn {
                                         returnToPopcorn()
                                     }

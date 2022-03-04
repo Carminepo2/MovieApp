@@ -16,6 +16,25 @@ class Movie: Codable, Identifiable,Hashable {
     func hash(into hasher: inout Hasher) {
             
         }
+    func getLocalProviders()->CountryProviders?{
+        var localProviders:CountryProviders? = nil
+        if (self.language == languageType.englishUSA){
+            if let provider = providers?.us{
+                localProviders = self.providers!.us!
+            }
+        }
+        else if(self.language == languageType.italian){
+            if let provider = providers?.it{
+                localProviders = self.providers!.it!
+            }
+        }
+        else if(self.language == languageType.german){
+            if let provider = providers?.de{
+                localProviders = self.providers!.de!
+            }
+        }
+        return localProviders
+    }
     
     
     let id: Int64
@@ -46,7 +65,7 @@ class Movie: Codable, Identifiable,Hashable {
      var providers: Providers? = Providers(de: nil, it: nil, us: nil)
     var vote:Float? = nil
     var isSaved:Bool? = nil
-    
+    var language:languageType? = nil
      static let example = Movie()
     
     
@@ -177,4 +196,9 @@ enum Company{
 struct shortMovie:Codable{
     var id:Int?
     var name:String?
+}
+enum languageType:Codable{
+    case englishUSA
+    case german
+    case italian
 }
