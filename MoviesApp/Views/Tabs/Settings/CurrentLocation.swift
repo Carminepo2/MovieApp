@@ -13,10 +13,8 @@ struct CurrentLocation: View {
         UITableView.appearance().backgroundColor=UIColor.clear
     }
     
-    
     var locations = ["United States", "United Kingdom", "Italy", "Germany"]
-    
-    
+        
     var body: some View {
         VStack{
             List {
@@ -39,8 +37,9 @@ struct CurrentLocation: View {
                 .listRowBackground(Color.clear)
                 .listStyle(.plain)
             
-        } .navigationTitle("Current Location")
-            .navigationBarTitleDisplayMode(.inline)
+        }
+        .navigationTitle("Current Location")
+        .navigationBarTitleDisplayMode(.inline)
         
     }
     

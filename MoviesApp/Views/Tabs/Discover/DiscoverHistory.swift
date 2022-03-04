@@ -41,7 +41,7 @@ struct DiscoverHistory: View {
     let allFilterText = LocalizedStringKey("all-history-filter")
     
     var body: some View {
-        ScrollView(.vertical, showsIndicators: false) {
+        ScrollView(.vertical, showsIndicators: true) {
             // MARK: - Empty state placeholder
             if (filmHistory.count == 0) {
                 VStack(spacing:10) {

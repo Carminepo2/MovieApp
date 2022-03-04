@@ -19,3 +19,49 @@
 
 "movie-providers-title" = "Available on:";
 "close" = "Close";
+
+
+"location-united-states" = "United States";
+"location-united-kingdom" = "United Kingdom";
+"location-italy" = "Italy";
+"location-germany" = "Germany";
+
+
+"settings-title" = "Settings";
+
+"select-language-title" = "Select language";
+"language-italian" = "Italian";
+"language-german" = "German";
+"language-english" = "English";
+
+"label-user-settings-section" = "User";
+"label-general-settings-section" = "General";
+
+"current-location-settings" = "Current Location";
+"streaming-platform-settings" = "Streaming platforms";
+"display-settings" = "Display";
+"storage-settings" = "Storage";
+"about-settings" = "About";
+
+/*
+"location-united-states" = "Stati Uniti";
+"location-united-kingdom" = "Inghilterra";
+"location-italy" = "Italia";
+"location-germany" = "Germania";
+
+
+"settings-title" = "Impostazioni";
+
+"select-language-title" = "Seleziona lingua";
+"language-italian" = "Italiano";
+"language-german" = "Tedesco";
+"language-english" = "Inglese";
+
+"label-user-settings-section" = "Utente";
+"label-general-settings-section" = "Generali";
+
+"current-location-settings" = "Posizione attuale";
+"streaming-platform-settings" = "Piattaforme di streaming";
+"display-settings" = "Display";
+"storage-settings" = "Memoria";
+"about-settings" = "About";

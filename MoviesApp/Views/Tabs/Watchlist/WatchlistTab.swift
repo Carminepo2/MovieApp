@@ -27,7 +27,7 @@ struct WatchlistTab: View {
     
     var body: some View {
         NavigationView {
-            ScrollView(.vertical, showsIndicators: false) {
+            ScrollView(.vertical, showsIndicators: true) {
                 // MARK: - Empty state placeholder
                 if (viewModel.getWatchList().count == 0) {
                     VStack(spacing:10) {
@@ -47,13 +47,11 @@ struct WatchlistTab: View {
                             .foregroundColor(Color.white)
                         }
                     }
-                    .padding(.vertical)
+                    .padding()
+                    //.padding(.horizontal)
                 }
             }
-            
-            
             .searchable(text: $searchText)
-            .padding(.horizontal)
             .navigationTitle("Watchlist")
             .withBackground()
         }

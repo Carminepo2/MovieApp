@@ -22,7 +22,7 @@ struct MovieCardGridItem: View {
     
     var body: some View {
         
-        VStack(spacing: 0) {
+        ZStack(alignment: .bottom) {
             // MARK: Poster
             MoviePoster(posterPath: movie.posterPath, contentMode: .fit)
             
@@ -46,7 +46,7 @@ struct MovieCardGridItem: View {
             }
             .frame(alignment: .leading)
             .padding(12)
-            .background(Color("Gray-700"))
+            .background(.ultraThinMaterial)
         }
         .background(Color("Gray-800"))
         .cornerRadius(6)
@@ -67,7 +67,7 @@ struct MovieCardLikedGridItem: View {
                     .overlay {
                         if let vote = movie.vote {
                             ZStack {
-                            
+                                
                                 Color("Gray-700").opacity(0.6)
                                 Image(systemName: vote > 0 ? "heart.fill" : "xmark")
                                     .font(.title)
