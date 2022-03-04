@@ -62,7 +62,7 @@ struct SavedLabel: View {
                 Image(systemName: "bookmark.fill")
                     .font(.title3)
                 
-                Text("SAVED")
+                Text(LocalizedStringKey("saved-label"))
                     .font(.title3)
                     .fontWeight(.heavy)
             }

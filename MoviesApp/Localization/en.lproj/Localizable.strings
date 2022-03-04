@@ -12,12 +12,17 @@
 "settings-tab-title" = "Settings";
 "discover-call-to-action" = "Tap to start!";
 
+"saved-label" = "SAVED";
+
 "discover-history-title" = "History";
 "loved-history-filter" = "Loved";
 "discarded-history-filter" = "Discarded";
 "all-history-filter" = "All";
 
-"movie-providers-title" = "Available on:";
+"history-empty-state" = "The movies you swiped in the current session will be displayed here";
+"watchlist-empty-state" = "Bookmark movies to find them here";
+
+"movie-providers-title" = "Available for streaming on:";
 "close" = "Close";
 
 "location-united-states" = "United States";
@@ -41,3 +46,7 @@
 "display-settings" = "Display";
 "storage-settings" = "Storage";
 "about-settings" = "About";
+
+"clean-watchlist-button" = "Clean Watchlist";
+"clean-history-button" = "Clean History";
+"clean-cache-button" = "Clean Cache";

@@ -16,7 +16,7 @@ struct Storage: View {
     var body: some View {
         VStack(spacing: 30) {
             
-            Button("Clean Watchlist") {
+            Button(LocalizedStringKey("clean-watchlist-button")) {
                 showingCleanWatchlist = true
             }
             .buttonStyle(RoundedRectangleButtonStyle())
@@ -27,7 +27,7 @@ struct Storage: View {
                 }
             }
             
-            Button("Clean History") {
+            Button(LocalizedStringKey("clean-history-button")) {
                 showingCleanHistory = true
             }
             .buttonStyle(RoundedRectangleButtonStyle(.secondary))
@@ -38,7 +38,7 @@ struct Storage: View {
                 }
             }
             
-            Button("Clean Cache") {
+            Button(LocalizedStringKey("clean-cache-button")) {
                 showingCleanCache = true
             }
             .confirmationDialog("Clear all cache data", isPresented: $showingCleanCache, titleVisibility: .visible) {
@@ -51,7 +51,7 @@ struct Storage: View {
         }
         .padding()
         .withBackground()
-        .navigationTitle("Storage")
+        .navigationTitle(LocalizedStringKey("storage-settings"))
         .navigationBarTitleDisplayMode(.inline)
         
     }

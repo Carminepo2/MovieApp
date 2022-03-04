@@ -32,7 +32,7 @@ struct WatchlistTab: View {
                 if (viewModel.getWatchList().count == 0) {
                     VStack(spacing:10) {
                         Image("WatchlistEmptyStatePlaceholder")
-                        Text("Bookmark movies to find them here")
+                        Text(LocalizedStringKey("watchlist-empty-state"))
                             .font(.headline)
                             .foregroundColor(.secondary)
                     }
@@ -52,7 +52,7 @@ struct WatchlistTab: View {
                 }
             }
             .searchable(text: $searchText)
-            .navigationTitle("Watchlist")
+            .navigationTitle(LocalizedStringKey("watchlist-tab-title"))
             .withBackground()
         }
         .navigationViewStyle(.stack)

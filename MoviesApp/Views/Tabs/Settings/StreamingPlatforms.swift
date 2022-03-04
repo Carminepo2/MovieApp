@@ -43,7 +43,7 @@ struct StreamingPlatforms: View {
         }   .padding(.top)
             .withBackground()
             .listStyle(.plain)
-            .navigationTitle("Streaming Platforms")
+            .navigationTitle("streaming-platform-settings")
                 .navigationBarTitleDisplayMode(.inline)
     }
 }

@@ -7,37 +7,46 @@
 */
 
 
-"discover-tab-title" = "Discover";
-"watchlist-tab-title" = "Watchlist";
-"settings-tab-title" = "Settings";
-"discover-call-to-action" = "Tap to start!";
+"discover-tab-title" = "Entdecken";
+"watchlist-tab-title" = "Filmliste";
+"settings-tab-title" = "Einstellungen";
+"discover-call-to-action" = "Zum starten tippen!";
 
-"discover-history-title" = "History";
-"loved-history-filter" = "Loved";
-"discarded-history-filter" = "Discarded";
-"all-history-filter" = "All";
+"saved-label" = "GERETTET";
 
-"movie-providers-title" = "Available on:";
+"discover-history-title" = "Chronologie";
+"loved-history-filter" = "Gefallen";
+"discarded-history-filter" = "Verworfen";
+"all-history-filter" = "Jeder";
+
+"history-empty-state" = "The movies you swiped in the current session will be displayed here";
+"watchlist-empty-state" = "Bookmark movies to find them here";
+
+"movie-providers-title" = "Zum streamen verfügbar:";
 "close" = "Close";
 
-"location-united-states" = "United States";
-"location-united-kingdom" = "United Kingdom";
-"location-italy" = "Italy";
-"location-germany" = "Germany";
+"location-united-states" = "Vereinigte Staaten";
+"location-united-kingdom" = "Vereinigtes Königreich";
+"location-italy" = "Italien";
+"location-germany" = "Deutschland";
 
 
-"settings-title" = "Settings";
+"settings-title" = "Einstellungen";
 
-"select-language-title" = "Select language";
-"language-italian" = "Italian";
-"language-german" = "German";
-"language-english" = "English";
+"select-language-title" = "Sprache auswählen";
+"language-italian" = "Italienisch";
+"language-german" = "Deutsch";
+"language-english" = "Englisch";
 
-"label-user-settings-section" = "User";
-"label-general-settings-section" = "General";
+"label-user-settings-section" = "Benutzer";
+"label-general-settings-section" = "Allgemein";
 
-"current-location-settings" = "Current Location";
-"streaming-platform-settings" = "Streaming platforms";
-"display-settings" = "Display";
-"storage-settings" = "Storage";
-"about-settings" = "About";
+"current-location-settings" = "Aktueller standort";
+"streaming-platform-settings" = "Streaming-Plattformen";
+"display-settings" = "Anzeige";
+"storage-settings" = "Erinnerung";
+"about-settings" = "Über";
+
+"clean-watchlist-button" = "Leere Filmliste";
+"clean-history-button" = "Verlauf löschen";
+"clean-cache-button" = "Cache leeren";

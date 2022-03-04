@@ -7,50 +7,32 @@
 */
 
 
-"discover-tab-title" = "Discover";
-"watchlist-tab-title" = "Watchlist";
-"settings-tab-title" = "Settings";
-"discover-call-to-action" = "Tap to start!";
+"discover-tab-title" = "Scopri";
+"watchlist-tab-title" = "Lista film";
+"settings-tab-title" = "Impostazioni";
+"discover-call-to-action" = "Tocca per iniziare!";
 
-"discover-history-title" = "History";
-"loved-history-filter" = "Loved";
-"discarded-history-filter" = "Discarded";
-"all-history-filter" = "All";
+"saved-label" = "SALVATO";
 
-"movie-providers-title" = "Available on:";
-"close" = "Close";
+"discover-history-title" = "Cronologia";
+"loved-history-filter" = "Piaciuti";
+"discarded-history-filter" = "Scartati";
+"all-history-filter" = "Tutti";
 
+"history-empty-state" = "I film che hai fatto scorrere nella sessione corrente verranno visualizzati qui";
+"watchlist-empty-state" = "Aggiungi i film ai preferiti per trovarli qui";
 
-"location-united-states" = "United States";
-"location-united-kingdom" = "United Kingdom";
-"location-italy" = "Italy";
-"location-germany" = "Germany";
+"movie-providers-title" = "Disponibile per lo streaming su:";
+"close" = "Chiudi";
 
-
-"settings-title" = "Settings";
-
-"select-language-title" = "Select language";
-"language-italian" = "Italian";
-"language-german" = "German";
-"language-english" = "English";
-
-"label-user-settings-section" = "User";
-"label-general-settings-section" = "General";
-
-"current-location-settings" = "Current Location";
-"streaming-platform-settings" = "Streaming platforms";
-"display-settings" = "Display";
-"storage-settings" = "Storage";
-"about-settings" = "About";
-
-/*
 "location-united-states" = "Stati Uniti";
 "location-united-kingdom" = "Inghilterra";
 "location-italy" = "Italia";
 "location-germany" = "Germania";
 
-
 "settings-title" = "Impostazioni";
+
+"select-country-title" = "Seleziona Paese";
 
 "select-language-title" = "Seleziona lingua";
 "language-italian" = "Italiano";
@@ -65,3 +47,7 @@
 "display-settings" = "Display";
 "storage-settings" = "Memoria";
 "about-settings" = "About";
+
+"clean-watchlist-button" = "Svuota Lista film";
+"clean-history-button" = "Svuota Croonologia";
+"clean-cache-button" = "Svuota Cache";

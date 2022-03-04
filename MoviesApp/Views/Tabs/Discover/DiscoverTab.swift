@@ -24,7 +24,7 @@ struct DiscoverTab: View {
                     //.spotlight(enabled: true, title: "TAP")
                     .background(Pulse())
                 
-                Text("Tap to start!")
+                Text(LocalizedStringKey("discover-call-to-action"))
                     .font(.title2)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)

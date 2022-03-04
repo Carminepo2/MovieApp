@@ -46,7 +46,7 @@ struct DiscoverHistory: View {
             if (filmHistory.count == 0) {
                 VStack(spacing:10) {
                     Image("HistoryEmptyStatePlaceholder")
-                    Text("The movies you swiped in the current session will be displayed here")
+                    Text(LocalizedStringKey("history-empty-state"))
                         .font(.headline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)

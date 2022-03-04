@@ -37,7 +37,7 @@ struct AllLocations: View {
         .padding(.top)
         .withBackground()
         .listStyle(.plain)
-        .navigationTitle("Select country")
+        .navigationTitle("select-country-title")
         .navigationBarTitleDisplayMode(.inline)
     }
 }
