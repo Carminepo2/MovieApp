@@ -12,6 +12,7 @@ struct Constants {
     static let ImagesBasePath = "https://image.tmdb.org/t/p/w500"
     static let CornerRadius = 8.0
     static let maxImageCacheNum = 120
+    static let swipeAnimationSpeed = 0.6
     
     static let CircleAspectRatio: CGFloat = 1/1
     

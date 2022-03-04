@@ -212,7 +212,7 @@ class DiscoverViewModel: ObservableObject {
         }
         Haptics.shared.play(.soft)
         withAnimation {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Constants.swipeAnimationSpeed) {
                 Task{
                     do {
                         let card = try await self.nextCard()
@@ -235,7 +235,7 @@ class DiscoverViewModel: ObservableObject {
         withAnimation {
             Haptics.shared.play(.heavy)
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Constants.swipeAnimationSpeed) {
                 Task {
                     do{
                         let card = try await self.nextCard()
@@ -256,7 +256,7 @@ class DiscoverViewModel: ObservableObject {
         withAnimation {
             Haptics.shared.play(.heavy)
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Constants.swipeAnimationSpeed) {
                 Task {
                     do{
                         let card = try await self.nextCard()

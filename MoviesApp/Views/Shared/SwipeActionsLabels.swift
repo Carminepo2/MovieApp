@@ -9,12 +9,19 @@ import SwiftUI
 
 struct LikedLabel: View {
     var body: some View {
-        Text("YEP")
-            .font(.title3)
-            .fontWeight(.heavy)
+        HStack {
+            Group {
+                Image(systemName: "heart.fill")
+                    .font(.title3)
+
+                Text("YEP")
+                    .font(.title3)
+                    .fontWeight(.heavy)
+            }
+            .foregroundColor(Color("AccentColor"))
+        }
             .padding(.horizontal, 20)
             .padding(.vertical, 10)
-            .foregroundColor(Color("AccentColor"))
             .overlay(
                 RoundedRectangle(cornerRadius: 100)
                     .strokeBorder(Color("AccentColor"), lineWidth: 3.5)
@@ -24,15 +31,22 @@ struct LikedLabel: View {
 
 struct DiscardedLabel: View {
     var body: some View {
-        Text("NOPE")
-            .font(.title3)
-            .fontWeight(.heavy)
+        HStack {
+            Group {
+                Image(systemName: "xmark")
+                    .font(.title3)
+
+                Text("NOPE")
+                    .font(.title3)
+                    .fontWeight(.heavy)
+            }
+            .foregroundColor(.white)
+        }
             .padding(.horizontal, 20)
             .padding(.vertical, 10)
-            .foregroundColor(Color.white)
             .overlay(
                 RoundedRectangle(cornerRadius: 100)
-                    .strokeBorder(Color.white, lineWidth: 3.5)
+                    .strokeBorder(.white, lineWidth: 3.5)
             )
     }
 }

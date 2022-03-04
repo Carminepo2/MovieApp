@@ -30,7 +30,7 @@ struct MovieCard: View {
         return 0
     }
     
-        
+    
     init(card: DiscoverViewModel.MovieCard, animation: Namespace.ID? = nil) {
         self.card = card
         self.animation = animation
@@ -98,37 +98,15 @@ struct MovieCard: View {
             
             
             ZStack {
-                ZStack {
-                    GeometryReader { geometry in
-                        Color("Gray-800")
-                        
-                            .overlay {
-                                Text("Loved!")
-                                    .font(.system(size: geometry.size.width * 0.4))
-                                    .blendMode(.destinationOut)
-                                
-                            }
-                        
-                    }
-                }
-                .compositingGroup()
-                .opacity(getLovedOpacity())
+                LikedLabel()
+                    .padding()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    .opacity(getLovedOpacity())
                 
-                ZStack {
-                    GeometryReader { geometry in
-                        Color("Gray-800")
-                        
-                            .overlay {
-                                Text("Discarded!")
-                                    .font(.system(size: geometry.size.width * 0.4))
-                                    .blendMode(.destinationOut)
-                                
-                            }
-                        
-                    }
-                }
-                .compositingGroup()
-                .opacity(getDiscardedOpacity())
+                DiscardedLabel()
+                    .padding()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                    .opacity(getDiscardedOpacity())
                 
                 ZStack {
                     GeometryReader { geometry in

@@ -125,7 +125,7 @@ struct MovieSwipe: View {
     }
     
     func makeFavoriteButtonTapped() {
-        withAnimation {
+        withAnimation(.easeOut(duration: Constants.swipeAnimationSpeed)) {
             discoverViewModel.moveCard(movieCards[movieCards.last!], offset: .init(width: 500, height: 0))
             discoverViewModel.rotateCard(movieCards[movieCards.last!], degrees: 15)
         }
@@ -133,7 +133,7 @@ struct MovieSwipe: View {
     }
     
     func discardButtonTapped() {
-        withAnimation {
+        withAnimation(.easeOut(duration: Constants.swipeAnimationSpeed)) {
             discoverViewModel.moveCard(movieCards[movieCards.last!], offset: .init(width: -500, height: 0))
             discoverViewModel.rotateCard(movieCards[movieCards.last!], degrees: -15)
         }
@@ -141,7 +141,7 @@ struct MovieSwipe: View {
     }
     
     func bookmarkButtonTapped() {
-        withAnimation {
+        withAnimation(.easeOut(duration: Constants.swipeAnimationSpeed)) {
             discoverViewModel.moveCard(movieCards[movieCards.last!], offset: .init(width: 0, height: 800))
             discoverViewModel.rotateCard(movieCards[movieCards.last!], degrees: 0)
         }
