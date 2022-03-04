@@ -79,6 +79,10 @@ struct MovieSwipe: View {
                                 DispatchQueue.main
                                     .asyncAfter(deadline: .now() + 0.2, execute: bookmarkButtonTapped)
                             }
+                            ,functionToCloseTheSheet: {
+                                showDetails = false
+                                isSwipeCardModalOpen = false
+                            }
                         )
                         .statusBar(hidden: showDetails)
                     }

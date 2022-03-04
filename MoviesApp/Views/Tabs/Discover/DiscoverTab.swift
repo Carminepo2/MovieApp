@@ -54,7 +54,6 @@ struct DiscoverTab: View {
     
     // MARK: - Functions
     func popCornButtonTapped() {
-        
         if((!discoverViewController.isCardsSetted())&&(!discoverViewController.isCardsLoading()))
         {
             discoverViewController.setCardsLoading(true)
@@ -67,13 +66,13 @@ struct DiscoverTab: View {
                 catch{
                     print("Errore caricamento dati")
                 }
-                
+
             }
         }
         else{
             if(!discoverViewController.isCardsLoading()){
                 isSwipeCardModalOpen = true
-                
+
             }
         }
     }

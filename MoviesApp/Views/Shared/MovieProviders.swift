@@ -6,15 +6,16 @@
 //
 
 import SwiftUI
-import StoreKit
 
 struct MovieProviders: View {
     let providers: CountryProviders?
     
-    init(_ providers: CountryProviders?) {
+    init(_ providers: CountryProviders?, returnToPopCorn:(() -> Void)? = nil) {
         self.providers = providers
+        self.returnToPopCorn = returnToPopCorn
+        
     }
-    
+    var returnToPopCorn:(()->Void)? = nil
     let movieProvidersTitle = LocalizedStringKey("movie-providers-title")
     
     
@@ -25,10 +26,10 @@ struct MovieProviders: View {
                 .foregroundStyle(.secondary)
             
             HStack(spacing: 16) {
-                ProviderIcon(isActive: isMovieAvailableFor(.Netflix), imageName: "netflix",url: "nflx://",itunesItem: 363590051)
-                ProviderIcon(isActive: isMovieAvailableFor(.DisneyPlus), imageName: "disney+")
-                ProviderIcon(isActive: isMovieAvailableFor(.PrimeVideo), imageName: "prime-video")
-                ProviderIcon(isActive: isMovieAvailableFor(.AppleTv), imageName: "apple-tv")
+                ProviderIcon(isActive: isMovieAvailableFor(.Netflix), imageName: "netflix",url: "nflx://",itunesItem: "363590051",returnToPopCorn: returnToPopCorn)
+                ProviderIcon(isActive: isMovieAvailableFor(.DisneyPlus), imageName: "disney+",url: "disneyplus://",itunesItem: "1446075923",returnToPopCorn: returnToPopCorn)
+                ProviderIcon(isActive: isMovieAvailableFor(.PrimeVideo), imageName: "prime-video",url: "aiv://",itunesItem: "545519333",returnToPopCorn: returnToPopCorn)
+                ProviderIcon(isActive: isMovieAvailableFor(.AppleTv), imageName: "apple-tv",url:"https://tv.apple.com",itunesItem: "0")
             }
             
         }
@@ -52,7 +53,8 @@ fileprivate struct ProviderIcon: View {
     let isActive: Bool;
     let imageName: String;
     var url:String? = nil
-    var itunesItem:Int? = nil
+    var itunesItem:String? = nil
+    var returnToPopCorn:(()->Void)? = nil
     var body: some View {
         
         Button(action: {
@@ -60,11 +62,19 @@ fileprivate struct ProviderIcon: View {
                 
                 if let urlOfTheProvider = URL(string: url!){
                     if(UIApplication.shared.canOpenURL(urlOfTheProvider)){
-                        UIApplication.shared.open(urlOfTheProvider, options: [:], completionHandler: nil)
+                        if let returnToPopCorn = returnToPopCorn {
+                            returnToPopCorn()
+                            UIApplication.shared.open(urlOfTheProvider, options: [:], completionHandler: nil)
+                        }
                     }
                     else{
                         if(itunesItem != nil){
-                            
+                            if let returnToPopCorn = returnToPopCorn {
+                                returnToPopCorn()
+                                WatchlistViewModel.shared.openTheStore(itunesItem: itunesItem!)
+
+                            }
+                          
                         }
                     }
                 }
