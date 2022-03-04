@@ -54,7 +54,7 @@ struct DiscoverTab: View {
     
     // MARK: - Functions
     func popCornButtonTapped() {
-        
+//        WatchlistViewModel.shared.openTheStore(itunesItem: "363590051")
         if((!discoverViewController.isCardsSetted())&&(!discoverViewController.isCardsLoading()))
         {
             discoverViewController.setCardsLoading(true)
@@ -67,13 +67,13 @@ struct DiscoverTab: View {
                 catch{
                     print("Errore caricamento dati")
                 }
-                
+
             }
         }
         else{
             if(!discoverViewController.isCardsLoading()){
                 isSwipeCardModalOpen = true
-                
+
             }
         }
     }

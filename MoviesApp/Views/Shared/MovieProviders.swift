@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import StoreKit
 
 struct MovieProviders: View {
     let providers: CountryProviders?
@@ -25,7 +24,7 @@ struct MovieProviders: View {
                 .foregroundStyle(.secondary)
             
             HStack(spacing: 16) {
-                ProviderIcon(isActive: isMovieAvailableFor(.Netflix), imageName: "netflix",url: "nflx://",itunesItem: 363590051)
+                ProviderIcon(isActive: isMovieAvailableFor(.Netflix), imageName: "netflix",url: "nflx://",itunesItem: "363590051")
                 ProviderIcon(isActive: isMovieAvailableFor(.DisneyPlus), imageName: "disney+")
                 ProviderIcon(isActive: isMovieAvailableFor(.PrimeVideo), imageName: "prime-video")
                 ProviderIcon(isActive: isMovieAvailableFor(.AppleTv), imageName: "apple-tv")
@@ -52,7 +51,7 @@ fileprivate struct ProviderIcon: View {
     let isActive: Bool;
     let imageName: String;
     var url:String? = nil
-    var itunesItem:Int? = nil
+    var itunesItem:String? = nil
     var body: some View {
         
         Button(action: {
@@ -64,7 +63,8 @@ fileprivate struct ProviderIcon: View {
                     }
                     else{
                         if(itunesItem != nil){
-                            
+//                            WatchlistViewModel.shared.openTheStore(itunesItem: itunesItem!)
+                          
                         }
                     }
                 }
