@@ -176,7 +176,7 @@ struct MovieCard: View {
     }
     
     func getBookmarkedOpacity() -> CGFloat {
-        let verticalOpacity = (verticalSwipeProgress - 0.2) * 5
+        let verticalOpacity = (verticalSwipeProgress - 0.1) * 5
         return verticalOpacity - abs((verticalOpacity * (horizontalSwipeProgress / 0.2)))
     }
 }

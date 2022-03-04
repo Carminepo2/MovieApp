@@ -100,6 +100,14 @@ struct MovieSwipe: View {
             }
             
         }
+        .onAppear {
+            UINavigationBar.appearance().setBackgroundImage(UIImage(), for:.default)
+            UINavigationBar.appearance().shadowImage = UIImage()
+        }
+        .onDisappear {
+            UINavigationBar.appearance().setBackgroundImage(nil, for:.default)
+            UINavigationBar.appearance().shadowImage = nil
+        }
         
     }
     
@@ -140,6 +148,8 @@ struct MovieSwipe: View {
         discoverViewModel.swipeToWatchList()
     }
 }
+
+
 
 struct MovieSwipe_Previews: PreviewProvider {
     
