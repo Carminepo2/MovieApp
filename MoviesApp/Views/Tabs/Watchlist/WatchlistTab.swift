@@ -57,7 +57,7 @@ struct WatchlistTab: View {
             .navigationTitle("Watchlist")
             .withBackground()
         }
-        
+        .navigationViewStyle(.stack)
     }
     
 }

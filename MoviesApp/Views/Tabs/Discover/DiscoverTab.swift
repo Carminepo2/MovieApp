@@ -46,8 +46,8 @@ struct DiscoverTab: View {
                 MovieSwipe(isSwipeCardModalOpen: $isSwipeCardModalOpen)
             })
             .withBackground()
-            
         }
+        .navigationViewStyle(.stack)
     }
     
     

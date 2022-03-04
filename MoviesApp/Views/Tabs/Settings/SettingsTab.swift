@@ -78,6 +78,7 @@ struct SettingsTab: View {
             .navigationTitle(settigsTabTitle)
             Spacer()
         }
+        .navigationViewStyle(DoubleColumnNavigationViewStyle())
     }
     
     // MARK: - Function
