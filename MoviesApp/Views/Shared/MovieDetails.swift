@@ -115,9 +115,10 @@ struct MovieDetails: View {
                                 .padding(.top)
                             
                             //MARK: Providers
-                            if(movie.providers != nil){
+                            if(movie.providers != nil) {
                                 MovieProviders(movie.providers?.us)
                                     .padding(.top)
+                                    .padding(.bottom, 80)
                             }
                         }
                         .hLeading()
