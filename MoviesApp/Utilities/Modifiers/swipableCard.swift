@@ -75,7 +75,7 @@ fileprivate struct SwipableCard: ViewModifier {
         }
         
         // MARK: Card Swiped Down
-        if verticalSwipeProgress > 0.3 {
+        if verticalSwipeProgress > 0.2 {
             withAnimation {
                 discoverViewModel.moveCard(card, offset: .init(width: 0, height: 800))
                 discoverViewModel.rotateCard(card, degrees: 0)

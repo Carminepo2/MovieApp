@@ -44,6 +44,9 @@ class DiscoverViewModel: ObservableObject {
             }
         }
     }
+    func setLanguage(language:LanguageType){
+        NetworkManager.shared.setLanguage(language: language)
+    }
     
     @MainActor
     func setCards() async throws{

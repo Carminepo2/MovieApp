@@ -10,11 +10,25 @@ import Foundation
 class NetworkManager{
     
     static var shared = NetworkManager()
-
+    private var languageResult:String = "it"
     
     private init(){
         
     }
+    
+    func setLanguage(language:LanguageType){
+        if(language == LanguageType.englishUSA){
+            languageResult = "en"
+        }
+        else if(language == LanguageType.german){
+            languageResult = "de"
+        }
+        else if(language == LanguageType.italian){
+            languageResult = "it"
+        }
+    }
+    
+    
     
     func getProvidersById(id:Int64) async throws->ProviderResponse{
         
@@ -26,8 +40,8 @@ class NetworkManager{
         urlComponent.queryItems = [
             "api_key": "fadf21998f46c545c3f3de23ca5712ec"
         ].map { URLQueryItem(name: $0.key, value: $0.value) }
-        
-        do{
+        print(urlComponent.url!)
+                do{
             let (data,response) = try await URLSession.shared.data(from: urlComponent.url!)
             
             if let httpResponse = response as? HTTPURLResponse,
@@ -50,9 +64,8 @@ class NetworkManager{
             } catch {
                 print("error: ", error)
             }
-       
-        return providerToReturn
         
+        return providerToReturn
     }
     
     
@@ -65,7 +78,8 @@ class NetworkManager{
         
         urlComponent.path = "/3/movie/\(id)"
         urlComponent.queryItems = [
-            "api_key": "fadf21998f46c545c3f3de23ca5712ec"
+            "api_key": "fadf21998f46c545c3f3de23ca5712ec",
+            "language": "\(languageResult)"
         ].map { URLQueryItem(name: $0.key, value: $0.value) }
         do{
             let (data,response) = try await URLSession.shared.data(from: urlComponent.url!)
@@ -78,6 +92,17 @@ class NetworkManager{
         catch{
             throw DataException.ErrorGettingTheData
         }
+        if(self.languageResult == "en"){
+            movieToReturn.language = LanguageType.englishUSA
+        }
+        else if(self.languageResult == "de"){
+            movieToReturn.language = LanguageType.german
+
+        }
+        else if(languageResult == "it"){
+            movieToReturn.language = LanguageType.italian
+
+        }
      
         return movieToReturn
         
@@ -87,5 +112,8 @@ class NetworkManager{
         case badURL, badResponse, errorDecodingData, invalidURL
     }
     
+    
 }
+
+
 

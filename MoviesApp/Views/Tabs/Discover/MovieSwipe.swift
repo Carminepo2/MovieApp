@@ -79,6 +79,10 @@ struct MovieSwipe: View {
                                 DispatchQueue.main
                                     .asyncAfter(deadline: .now() + 0.2, execute: bookmarkButtonTapped)
                             }
+                            ,functionToCloseTheSheet: {
+                                showDetails = false
+                                isSwipeCardModalOpen = false
+                            }
                         )
                         .statusBar(hidden: showDetails)
                     }
@@ -99,6 +103,14 @@ struct MovieSwipe: View {
                 }
             }
             
+        }
+        .onAppear {
+            UINavigationBar.appearance().setBackgroundImage(UIImage(), for:.default)
+            UINavigationBar.appearance().shadowImage = UIImage()
+        }
+        .onDisappear {
+            UINavigationBar.appearance().setBackgroundImage(nil, for:.default)
+            UINavigationBar.appearance().shadowImage = nil
         }
         
     }
@@ -140,6 +152,8 @@ struct MovieSwipe: View {
         discoverViewModel.swipeToWatchList()
     }
 }
+
+
 
 struct MovieSwipe_Previews: PreviewProvider {
     

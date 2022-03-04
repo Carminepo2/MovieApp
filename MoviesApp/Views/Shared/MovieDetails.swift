@@ -13,7 +13,7 @@ struct MovieDetails: View {
     
     let movie: Movie
     var onBookmarkPressed: (() -> Void)?
-
+    var returnToPopcorn:(() ->Void)? = nil
     @Binding var showDetails: Bool
     var animation: Namespace.ID?
     
@@ -25,11 +25,13 @@ struct MovieDetails: View {
     @State private var forceUIRefresh = false
     
     
-    init(movie: Movie, showDetails: Binding<Bool> = .constant(true), animation: Namespace.ID? = nil, onBookmarkPressed: (() -> Void)? = nil) {
+    init(movie: Movie, showDetails: Binding<Bool> = .constant(true), animation: Namespace.ID? = nil, onBookmarkPressed: (() -> Void)? = nil,functionToCloseTheSheet:(() -> Void)? = nil ) {
         self.movie = movie
         self._showDetails = showDetails
         self.animation = animation
         self.onBookmarkPressed = onBookmarkPressed
+        self.returnToPopcorn = functionToCloseTheSheet
+        
     }
     
     // If animation is not passed, it passes an animation id placeholder
@@ -115,9 +117,15 @@ struct MovieDetails: View {
                                 .padding(.top)
                             
                             //MARK: Providers
-                            if(movie.providers != nil){
-                                MovieProviders(movie.providers?.us)
+                            if(movie.providers != nil) {
+                                
+                                MovieProviders(movie.getLocalProviders(),returnToPopCorn: {
+                                    if let returnToPopcorn = returnToPopcorn {
+                                        returnToPopcorn()
+                                    }
+                                })
                                     .padding(.top)
+                                    .padding(.bottom, 80)
                             }
                         }
                         .hLeading()
