@@ -27,9 +27,9 @@ struct MovieProviders: View {
             
             HStack(spacing: 16) {
                 ProviderIcon(isActive: isMovieAvailableFor(.Netflix), imageName: "netflix",url: "nflx://",itunesItem: "363590051",returnToPopCorn: returnToPopCorn)
-                ProviderIcon(isActive: isMovieAvailableFor(.DisneyPlus), imageName: "disney+")
-                ProviderIcon(isActive: isMovieAvailableFor(.PrimeVideo), imageName: "prime-video")
-                ProviderIcon(isActive: isMovieAvailableFor(.AppleTv), imageName: "apple-tv")
+                ProviderIcon(isActive: isMovieAvailableFor(.DisneyPlus), imageName: "disney+",url: "disneyplus://",itunesItem: "1446075923",returnToPopCorn: returnToPopCorn)
+                ProviderIcon(isActive: isMovieAvailableFor(.PrimeVideo), imageName: "prime-video",url: "aiv://",itunesItem: "545519333",returnToPopCorn: returnToPopCorn)
+                ProviderIcon(isActive: isMovieAvailableFor(.AppleTv), imageName: "apple-tv",url:"https://tv.apple.com",itunesItem: "0")
             }
             
         }
