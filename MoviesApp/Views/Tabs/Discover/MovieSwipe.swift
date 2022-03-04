@@ -16,9 +16,6 @@ struct MovieSwipe: View {
     
     @State private var showDetails = false
     @State private var tappedMovie: Movie? = nil
-    @State private var cardHorizontalScrollProgress: CGFloat = 0
-    @State private var cardVerticalScrollProgress: CGFloat = 0
-
 
     private var movieCards: Array<DiscoverViewModel.MovieCard> {
         return discoverViewModel.movieCards
@@ -36,7 +33,7 @@ struct MovieSwipe: View {
                             ForEach(movieCards) { movieCard in
                                 if movieCard.id != movieCards.last!.id {
                                     // MARK: - Cards behind
-                                    MovieCard(movie: movieCard.movie)
+                                    MovieCard(card: movieCard)
                                         .rotationEffect(
                                             .degrees(movieCard.rotationDegree)
                                         )
@@ -44,32 +41,29 @@ struct MovieSwipe: View {
                                 } else {
                                     // MARK: - First Card
                                     MovieCard(
-                                        movie: movieCard.movie,
-                                        animation: animation,
-                                        verticalScrollProgress: cardVerticalScrollProgress,
-                                        horizontalScrollProgress: cardHorizontalScrollProgress
+                                        card: movieCard,
+                                        animation: animation
                                     )
                                        .rotationEffect(.degrees(movieCard.rotationDegree))
                                         .onTapGesture { showDetailsOf(movieCard.movie) }
                                         .swipableCard(
                                             card: movieCard,
-                                            verticalSwipeProgress: $cardVerticalScrollProgress,
-                                            horizontalSwipeProgress: $cardHorizontalScrollProgress,
                                             onSwipeRightSuccess: discoverViewModel.makeMovieFavorite,
                                             onSwipeLeftSuccess: discoverViewModel.discardMovie,
-                                            //TODO: Bookmark
                                             onSwipeDownSuccess: discoverViewModel.swipeToWatchList
                                         )
                                 }
                             }
                         }
                         .padding()
+                        .zIndex(3)
                         
                         DiscardFavoriteButtons(
                             makeFavorite: makeFavoriteButtonTapped,
                             discard: discardButtonTapped,
                             addToBookmark: bookmarkButtonTapped
                         )
+                            .zIndex(1)
                     }
                     
                 } else {
