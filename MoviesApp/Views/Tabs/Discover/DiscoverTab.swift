@@ -54,7 +54,6 @@ struct DiscoverTab: View {
     
     // MARK: - Functions
     func popCornButtonTapped() {
-//        WatchlistViewModel.shared.openTheStore(itunesItem: "363590051")
         if((!discoverViewController.isCardsSetted())&&(!discoverViewController.isCardsLoading()))
         {
             discoverViewController.setCardsLoading(true)

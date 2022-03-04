@@ -10,10 +10,12 @@ import SwiftUI
 struct MovieProviders: View {
     let providers: CountryProviders?
     
-    init(_ providers: CountryProviders?) {
+    init(_ providers: CountryProviders?, returnToPopCorn:(() -> Void)? = nil) {
         self.providers = providers
+        self.returnToPopCorn = returnToPopCorn
+        
     }
-    
+    var returnToPopCorn:(()->Void)? = nil
     let movieProvidersTitle = LocalizedStringKey("movie-providers-title")
     
     
@@ -24,7 +26,7 @@ struct MovieProviders: View {
                 .foregroundStyle(.secondary)
             
             HStack(spacing: 16) {
-                ProviderIcon(isActive: isMovieAvailableFor(.Netflix), imageName: "netflix",url: "nflx://",itunesItem: "363590051")
+                ProviderIcon(isActive: isMovieAvailableFor(.Netflix), imageName: "netflix",url: "nflx://",itunesItem: "363590051",returnToPopCorn: returnToPopCorn)
                 ProviderIcon(isActive: isMovieAvailableFor(.DisneyPlus), imageName: "disney+")
                 ProviderIcon(isActive: isMovieAvailableFor(.PrimeVideo), imageName: "prime-video")
                 ProviderIcon(isActive: isMovieAvailableFor(.AppleTv), imageName: "apple-tv")
@@ -52,6 +54,7 @@ fileprivate struct ProviderIcon: View {
     let imageName: String;
     var url:String? = nil
     var itunesItem:String? = nil
+    var returnToPopCorn:(()->Void)? = nil
     var body: some View {
         
         Button(action: {
@@ -59,11 +62,18 @@ fileprivate struct ProviderIcon: View {
                 
                 if let urlOfTheProvider = URL(string: url!){
                     if(UIApplication.shared.canOpenURL(urlOfTheProvider)){
-                        UIApplication.shared.open(urlOfTheProvider, options: [:], completionHandler: nil)
+                        if let returnToPopCorn = returnToPopCorn {
+                            returnToPopCorn()
+                            UIApplication.shared.open(urlOfTheProvider, options: [:], completionHandler: nil)
+                        }
                     }
                     else{
                         if(itunesItem != nil){
-//                            WatchlistViewModel.shared.openTheStore(itunesItem: itunesItem!)
+                            if let returnToPopCorn = returnToPopCorn {
+                                returnToPopCorn()
+                                WatchlistViewModel.shared.openTheStore(itunesItem: itunesItem!)
+
+                            }
                           
                         }
                     }
