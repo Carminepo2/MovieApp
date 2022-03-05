@@ -13,6 +13,9 @@ struct DiscoverHistory: View {
     @EnvironmentObject var viewModel: DiscoverViewModel
     @StateObject var watchListViewModel = WatchlistViewModel.shared
     
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
+    @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
+    
     var filmHistory: Array<Movie> {
         var movies = watchListViewModel.getMovieAlreadyRecommended().reduce([],{ [$1] + $0 })
         
@@ -55,7 +58,11 @@ struct DiscoverHistory: View {
                 .offset(y: UIScreen.main.bounds.height / 4)
             } else {
                 // MARK: - Swiped movies grid
-                LazyVGrid(columns: threeColumnGrid, spacing: 14) {
+                //LazyVGrid(columns: threeColumnGrid, spacing: 14) {
+                LazyVGrid(
+                    columns: [GridItem(.adaptive(minimum: 110, maximum: .infinity), spacing: 14)],
+                    spacing: 14
+                ) {
                     ForEach(filmHistory) { newRecord in
                         NavigationLink {
                             MovieDetails(movie: newRecord)

@@ -22,9 +22,6 @@ struct WatchlistTab: View {
         return movies.filter { $0.title.contains(searchText) }
     }
     
-    
-    private var twoColumnGrid = [GridItem(.flexible(), spacing:14), GridItem(.flexible())]
-    
     var body: some View {
         NavigationView {
             ScrollView(.vertical, showsIndicators: true) {
@@ -38,8 +35,11 @@ struct WatchlistTab: View {
                     }
                     .offset(y: UIScreen.main.bounds.height / 5.5)
                 } else {
-                    // MARK: - Swiped movies grid
-                    LazyVGrid(columns: twoColumnGrid, spacing: 24) {
+                    // MARK: - Bookmarked movies grid
+                    LazyVGrid(
+                        columns: [GridItem(.adaptive(minimum: 183), spacing: 14)],
+                        spacing: 24
+                    ) {
                         ForEach(Array(movie),id: \.self) { newRecord in
                             NavigationLink {
                                 MovieDetails(movie: newRecord)
