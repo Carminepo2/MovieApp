@@ -10,7 +10,8 @@ import SwiftUI
 struct MovieDetails: View {
     
     @Environment(\.presentationMode) var goback: Binding<PresentationMode>
-    
+    @EnvironmentObject var viewModel: DiscoverViewModel
+
     let movie: Movie
     var onBookmarkPressed: (() -> Void)?
     var returnToPopcorn:(() ->Void)? = nil
@@ -174,6 +175,15 @@ struct MovieDetails: View {
         .cornerRadius(cornerRadius)
         .scaleEffect(scale)
         .edgesIgnoringSafeArea(.all)
+        .task {
+            do{
+                try await viewModel.getProviders(movie: self.movie)
+            }
+            catch{
+                
+            }
+        }
+    
         
     }
     
