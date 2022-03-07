@@ -37,7 +37,7 @@ struct WatchlistTab: View {
                 } else {
                     // MARK: - Bookmarked movies grid
                     LazyVGrid(
-                        columns: [GridItem(.adaptive(minimum: 183), spacing: 14)],
+                        columns: [GridItem(.adaptive(minimum: 170), spacing: 14)],
                         spacing: 24
                     ) {
                         ForEach(Array(movie),id: \.self) { newRecord in
