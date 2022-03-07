@@ -63,6 +63,7 @@ class Movie: Codable, Identifiable,Hashable {
     let voteCount: Int
 //     let keywords: Array<Keyword>
      var providers: Providers? = Providers(de: nil, it: nil, us: nil)
+    var credits: Credits? = nil
     var vote:Float? = nil
     var isSaved:Bool? = nil
     var language:LanguageType? = nil
@@ -243,6 +244,7 @@ struct shortMovie:Codable{
     var id:Int?
     var name:String?
 }
+
 enum LanguageType:Codable{
     case englishUSA
     case german

@@ -70,7 +70,7 @@ class DiscoverViewModel: ObservableObject {
             }
         }
         cardSetted = true
-
+        
     }
     
     
@@ -90,8 +90,8 @@ class DiscoverViewModel: ObservableObject {
         if(movieCards.count >= 3){
             removedCard = movieCards.removeLast()
             var movieRemoved = removedCard!.movie
-//            self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
-//            self.addToMovieAlreadyReccomended(movieToSave: movieRemoved, voteOfTheMovie: Float(voto))
+            //            self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
+            //            self.addToMovieAlreadyReccomended(movieToSave: movieRemoved, voteOfTheMovie: Float(voto))
             let advice = try await self.getAdvice()
             if let notNullAdvice = advice {
                 if (notNullAdvice.id != Movie.example.id){
@@ -103,8 +103,8 @@ class DiscoverViewModel: ObservableObject {
             let advice = try await self.getAdvice()
             removedCard = movieCards.removeLast()
             var movieRemoved = removedCard!.movie
-//            self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
-//            self.addToMovieAlreadyReccomended(movieToSave: movieRemoved, voteOfTheMovie: Float(voto))
+            //            self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
+            //            self.addToMovieAlreadyReccomended(movieToSave: movieRemoved, voteOfTheMovie: Float(voto))
             if let notNullAdvice = advice {
                 if (notNullAdvice.id != Movie.example.id){
                     movieCards.insert(MovieCard(movie: notNullAdvice), at: 0)
@@ -118,15 +118,18 @@ class DiscoverViewModel: ObservableObject {
         advisor.resetAdvisor()
     }
     
- 
+    
     // MARK: Riccardo Function
     
     func getAdviceByID(idAdvice:Int64) async throws-> Movie?{
-    
-          async let downloadedMovie = try self.getMovieById(id: idAdvice)
-          async let providersOfTheMovie = try self.getProvidersById(id: idAdvice)
-          var (adviceToReturn, elemento) = try await (downloadedMovie, providersOfTheMovie)
-          adviceToReturn?.providers = elemento
+        
+        async let downloadedMovie = try self.getMovieById(id: idAdvice)
+        async let providersOfTheMovie = try self.getProvidersById(id: idAdvice)
+        async let creditsOfTheMovie = try self.getCreditsById(id: idAdvice)
+        
+        let (adviceToReturn, elemento, credits) = try await (downloadedMovie, providersOfTheMovie, creditsOfTheMovie)
+        adviceToReturn?.providers = elemento
+        adviceToReturn?.credits = credits
         let posterPath = URL(string: Constants.ImagesBasePath + (adviceToReturn?.posterPath!)!)
         Task(priority:.high){
             try await self.fetchImage(posterPath)
@@ -150,22 +153,25 @@ class DiscoverViewModel: ObservableObject {
     
     
     func getAdvice() async throws -> Movie? {
-//        let isAdvisorSetted = advisor.isAdvisorSetted
-//        if(isAdvisorSetted == false){
-//            let watchListId = WatchlistViewModel.shared.getWatchListId()
-//            var initialValues:[Int64:Double] = [:]
-//            for id in watchListId {
-//                initialValues[id] = 1.0
-//            }
-//            advisor.setAdvisor(initialValues: initialValues)
-//        }
+        //        let isAdvisorSetted = advisor.isAdvisorSetted
+        //        if(isAdvisorSetted == false){
+        //            let watchListId = WatchlistViewModel.shared.getWatchListId()
+        //            var initialValues:[Int64:Double] = [:]
+        //            for id in watchListId {
+        //                initialValues[id] = 1.0
+        //            }
+        //            advisor.setAdvisor(initialValues: initialValues)
+        //        }
         let idAdvice = advisor.getAdvice()
         
-
-          async let downloadedMovie = try self.getMovieById(id: idAdvice)
-          async let providersOfTheMovie = try self.getProvidersById(id: idAdvice)
-          var (adviceToReturn, elemento) = try await (downloadedMovie, providersOfTheMovie)
-          adviceToReturn?.providers = elemento
+        
+        async let downloadedMovie = try self.getMovieById(id: idAdvice)
+        async let providersOfTheMovie = try self.getProvidersById(id: idAdvice)
+        async let creditsOfTheMovie = try self.getCreditsById(id: idAdvice)
+        
+        let (adviceToReturn, elemento, credits) = try await (downloadedMovie, providersOfTheMovie, creditsOfTheMovie)
+        adviceToReturn?.providers = elemento
+        adviceToReturn?.credits = credits
         let posterPath = URL(string: Constants.ImagesBasePath + (adviceToReturn?.posterPath!)!)
         Task(priority:.high){
             try await self.fetchImage(posterPath)
@@ -188,7 +194,7 @@ class DiscoverViewModel: ObservableObject {
         adviceToReturn?.isSaved = false
         return adviceToReturn
     }
-
+    
     @MainActor
     func fetchImage(_ url: URL?) async throws {
         
@@ -220,11 +226,15 @@ class DiscoverViewModel: ObservableObject {
     func getProvidersById(id:Int64) async throws -> Providers?{
         return try await networkingManager.getProvidersById(id: id).results
     }
-        
+    
+    func getCreditsById(id:Int64) async throws -> Credits? {
+        return try await networkingManager.getCreditsById(id: id)
+    }
+    
     func giveFeedback(drawValueId:Int64,result:Double){
         advisor.giveFeedback(drawValueId: drawValueId, result: result)
     }
-
+    
     func getMovieById(id:Int64) async throws-> Movie? {
         return try await model.getMovieById(id: id)
     }
@@ -235,7 +245,7 @@ class DiscoverViewModel: ObservableObject {
     }
     
     func discardMovie() {
-
+        
         // Remove discarded movie's poster image from cache
         if let posterPath = movieCards.last?.movie.posterPath {
             ImageCache.removeImageFromCache(with: Constants.ImagesBasePath + posterPath)
@@ -285,7 +295,7 @@ class DiscoverViewModel: ObservableObject {
     func swipeToWatchList(){
         withAnimation {
             Haptics.shared.play(.heavy)
-
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + Constants.swipeAnimationSpeed) {
                 Task {
                     do{
@@ -321,7 +331,7 @@ class DiscoverViewModel: ObservableObject {
         init(movie: Movie) {
             self.movie = movie
         }
-
+        
         let id = UUID()
         var rotationDegree = Double(
             Int.random(in: -4...4)
@@ -331,6 +341,6 @@ class DiscoverViewModel: ObservableObject {
         var offset: CGSize = .zero
         var rotationOffset: CGFloat = .zero
         
-    
+        
     }
 }

@@ -53,7 +53,7 @@ class NetworkManager{
             "api_key": "fadf21998f46c545c3f3de23ca5712ec"
         ].map { URLQueryItem(name: $0.key, value: $0.value) }
         print(urlComponent.url!)
-                do{
+        do{
             let (data,response) = try await URLSession.shared.data(from: urlComponent.url!)
             
             if let httpResponse = response as? HTTPURLResponse,
@@ -63,19 +63,19 @@ class NetworkManager{
             }
         }
         catch let DecodingError.dataCorrupted(context) {
-                print(context)
-            } catch let DecodingError.keyNotFound(key, context) {
-                print("Key '\(key)' not found:", context.debugDescription)
-                print("codingPath:", context.codingPath)
-            } catch let DecodingError.valueNotFound(value, context) {
-                print("Value '\(value)' not found:", context.debugDescription)
-                print("codingPath:", context.codingPath)
-            } catch let DecodingError.typeMismatch(type, context)  {
-                print("Type '\(type)' mismatch:", context.debugDescription)
-                print("codingPath:", context.codingPath)
-            } catch {
-                print("error: ", error)
-            }
+            print(context)
+        } catch let DecodingError.keyNotFound(key, context) {
+            print("Key '\(key)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        } catch let DecodingError.valueNotFound(value, context) {
+            print("Value '\(value)' not found:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        } catch let DecodingError.typeMismatch(type, context)  {
+            print("Type '\(type)' mismatch:", context.debugDescription)
+            print("codingPath:", context.codingPath)
+        } catch {
+            print("error: ", error)
+        }
         
         return providerToReturn
     }
@@ -86,7 +86,7 @@ class NetworkManager{
         var urlComponent = URLComponents(string: "https://api.themoviedb.org")!
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-
+        
         
         urlComponent.path = "/3/movie/\(id)"
         urlComponent.queryItems = [
@@ -109,14 +109,42 @@ class NetworkManager{
         }
         else if(self.languageResult == "de"){
             movieToReturn.language = LanguageType.german
-
+            
         }
         else if(languageResult == "it"){
             movieToReturn.language = LanguageType.italian
-
+            
         }
-     
+        
         return movieToReturn
+        
+    }
+    
+    func getCreditsById(id:Int64) async throws -> Credits? {
+        var urlComponent = URLComponents(string: "https://api.themoviedb.org")!
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        urlComponent.path = "/3/movie/\(id)/credits"
+        urlComponent.queryItems = [
+            "api_key": "fadf21998f46c545c3f3de23ca5712ec",
+            "language": "\(languageResult)"
+        ].map { URLQueryItem(name: $0.key, value: $0.value) }
+        
+        do {
+            let (data,response) = try await URLSession.shared.data(from: urlComponent.url!)
+            if let httpResponse = response as? HTTPURLResponse,
+               httpResponse.statusCode == 200,
+               let movieCredits = try? decoder.decode(Credits.self, from: data) {
+                return movieCredits
+            }
+        }
+        
+        catch{
+            throw DataException.ErrorGettingTheData
+        }
+        
+        return nil
         
     }
     
