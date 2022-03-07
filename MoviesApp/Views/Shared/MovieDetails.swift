@@ -117,21 +117,26 @@ struct MovieDetails: View {
                                 .padding(.top)
                             
                             //MARK: Providers
-                            if(movie.providers != nil) {
+                            if let _ = movie.providers {
                                 
-                                MovieProviders(movie.getLocalProviders(),returnToPopCorn: {
+                                MovieProviders(movie.getLocalProviders(), returnToPopCorn: {
                                     if let returnToPopcorn = returnToPopcorn {
                                         returnToPopcorn()
                                     }
                                 })
                                     .padding(.top)
-                                    .padding(.bottom, 80)
                             }
                         }
                         .hLeading()
                     }
                     .padding()
+                    .padding(.bottom, 80)
                     .foregroundColor(.white)
+                    
+                    if let credits = movie.credits {
+                        MovieCredits(credits: credits)
+                            .padding(.top)
+                    }
                     
                     Spacer()
                 }
