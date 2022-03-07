@@ -9,28 +9,57 @@ import SwiftUI
 
 struct MovieProviders: View {
     let providers: CountryProviders?
+    @EnvironmentObject var viewModel: DiscoverViewModel
+
     
     init(_ providers: CountryProviders?, returnToPopCorn:(() -> Void)? = nil) {
         self.providers = providers
-        self.returnToPopCorn = returnToPopCorn
-        
     }
     var returnToPopCorn:(()->Void)? = nil
     let movieProvidersTitle = LocalizedStringKey("movie-providers-title")
-    
+    @StateObject private var imageLoader = ImageLoaderViewModel()
+
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(movieProvidersTitle)
-                .font(.callout)
-                .foregroundStyle(.secondary)
             
-            HStack(spacing: 16) {
-                ProviderIcon(isActive: isMovieAvailableFor(.Netflix), imageName: "netflix",url: "nflx://",itunesItem: "363590051",returnToPopCorn: returnToPopCorn)
-                ProviderIcon(isActive: isMovieAvailableFor(.DisneyPlus), imageName: "disney+",url: "disneyplus://",itunesItem: "1446075923",returnToPopCorn: returnToPopCorn)
-                ProviderIcon(isActive: isMovieAvailableFor(.PrimeVideo), imageName: "prime-video",url: "aiv://",itunesItem: "545519333",returnToPopCorn: returnToPopCorn)
-                ProviderIcon(isActive: isMovieAvailableFor(.AppleTv), imageName: "apple-tv",url:"https://tv.apple.com",itunesItem: "0")
+            
+            if let flateRateProvider = providers?.flatrate{
+                Text(movieProvidersTitle)
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                
+                HStack(spacing: 16) {
+                    ForEach(providers!.flatrate!){ aProvider in
+                        ProviderIcon(provider: aProvider)
+                        
+                    }
+                    
+                }
             }
+            if let rentProvider = providers?.rent{
+                Text("Disponibile per il noleggio")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                
+                HStack(spacing: 16) {
+                        ForEach(providers!.rent!){ aProvider in
+                            ProviderIcon(provider: aProvider)
+                        }
+                }
+                
+            }
+            if let nuyRateProvider = providers?.buy{
+                Text("Disponibile per la vendita")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+                HStack(spacing: 16) {
+                    ForEach(providers!.buy!){ aProvider in
+                        ProviderIcon(provider: aProvider)
+                    }
+                }
+            }
+           
             
         }
     }
@@ -50,42 +79,44 @@ struct MovieProviders: View {
 }
 
 fileprivate struct ProviderIcon: View {
-    let isActive: Bool;
-    let imageName: String;
-    var url:String? = nil
+//    let isActive: Bool;
+    @EnvironmentObject var viewModel: DiscoverViewModel
+    let provider: MoovieProvider;
+//    var url:String? = nil
     var itunesItem:String? = nil
     var returnToPopCorn:(()->Void)? = nil
+    
     var body: some View {
         
         Button(action: {
-            if(isActive && url != nil){
-                
-                if let urlOfTheProvider = URL(string: url!){
-                    if(UIApplication.shared.canOpenURL(urlOfTheProvider)){
-                        if let returnToPopCorn = returnToPopCorn {
-                            returnToPopCorn()
-                            UIApplication.shared.open(urlOfTheProvider, options: [:], completionHandler: nil)
-                        }
-                    }
-                    else{
-                        if(itunesItem != nil){
-                            if let returnToPopCorn = returnToPopCorn {
-                                returnToPopCorn()
-                                WatchlistViewModel.shared.openTheStore(itunesItem: itunesItem!)
-
-                            }
-                          
-                        }
-                    }
-                }
-            }
+            print(Constants.ImagesBasePath + provider.logoPath)
         }, label: {
-            Image(imageName)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 45, height: 45)
-                .opacity(isActive ? 1 : 0.15)
-                .clipShape(Circle())
+            
+            if let url = URL(string: Constants.ImagesBasePath + provider.logoPath), let cachedImage = ImageCache[url.absoluteString] {
+                Image(uiImage: cachedImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 45, height: 45)
+                    .clipShape(Circle())
+            }
+            else if let uiImage = viewModel.uiImage {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 45, height: 45)
+                    .clipShape(Circle())
+            
+                
+            } else {
+                Image("placeholder")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 45, height: 45)
+                    .clipShape(Circle())
+//                    .task {
+//                        await downloadImage()
+//                    }
+            }
         })
         
         

@@ -15,7 +15,7 @@ class Movie: Codable, Identifiable,Hashable {
     
     func hash(into hasher: inout Hasher) {
             
-        }
+    }
     func getLocalProviders()->CountryProviders?{
         var localProviders:CountryProviders? = nil
         if (self.language == LanguageType.englishUSA){
@@ -163,6 +163,29 @@ struct Providers: Codable {
     let it: CountryProviders?
     let us: CountryProviders?
     
+    
+    
+    
+    func getAllMoovieProvider()->Set<MoovieProvider>{
+        var allMoovieProvider:Set<MoovieProvider> = []
+        
+        if let notNullDe = de{
+            for aDeProvider in notNullDe.getAllMooovieProvider(){
+                allMoovieProvider.insert(aDeProvider)
+            }
+        }
+        if let notNullIt = it{
+            for aItProvider in notNullIt.getAllMooovieProvider(){
+                allMoovieProvider.insert(aItProvider)
+            }
+        }
+        if let notNullUs = us{
+            for aUsProvider in notNullUs.getAllMooovieProvider(){
+                allMoovieProvider.insert(aUsProvider)
+            }
+        }
+        return allMoovieProvider
+    }
     enum CodingKeys: String, CodingKey {
         case de = "DE"
         case it = "IT"
@@ -172,6 +195,27 @@ struct Providers: Codable {
 
 // MARK: - CountryProviders
 struct CountryProviders: Codable {
+    
+    func getAllMooovieProvider()->Set<MoovieProvider>{
+        var allMoovieProvider:Set<MoovieProvider> = []
+        if let notNullRent = self.rent{
+            for aRent in notNullRent{
+                allMoovieProvider.insert(aRent)
+            }
+        }
+        if let notNullBuy = self.buy{
+            for aBuy in notNullBuy{
+                allMoovieProvider.insert(aBuy)
+            }
+        }
+        if let notNullFlatrate = self.flatrate{
+            for aFlatRate in notNullFlatrate{
+                allMoovieProvider.insert(aFlatRate)
+            }
+        }
+        return allMoovieProvider
+    }
+    
     let link: String
     let rent: Array<MoovieProvider>?
     let buy: Array<MoovieProvider>?
@@ -179,11 +223,13 @@ struct CountryProviders: Codable {
 }
 
 // MARK: - MoovieProvider
-struct MoovieProvider: Codable {
+struct MoovieProvider: Codable,Identifiable,Hashable {
+    let id = UUID()
     let displayPriority: Int
     let logoPath: String
     let providerId: Int
     let providerName: String
+    var providerLink:String? = nil
 }
 
 enum Company{

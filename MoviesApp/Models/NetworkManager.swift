@@ -27,7 +27,19 @@ class NetworkManager{
             languageResult = "it"
         }
     }
-    
+    func getCurrentLanguage()->LanguageType{
+        var currentLanguage:LanguageType? = nil
+        if(self.languageResult == "en"){
+            currentLanguage = LanguageType.englishUSA
+        }
+        else if(self.languageResult == "de"){
+            currentLanguage = LanguageType.german
+        }
+        else if(self.languageResult == "it"){
+            currentLanguage = LanguageType.italian
+        }
+        return currentLanguage!
+    }
     
     
     func getProvidersById(id:Int64) async throws->ProviderResponse{
