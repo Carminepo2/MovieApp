@@ -28,36 +28,40 @@ struct MovieProviders: View {
                 Text(movieProvidersTitle)
                     .font(.callout)
                     .foregroundStyle(.secondary)
-                
-                HStack(spacing: 16) {
-                    ForEach(providers!.flatrate!){ aProvider in
-                        ProviderIcon(provider: aProvider)
-                        
+                ScrollView(.horizontal){
+                    HStack(spacing: 16) {
+                        ForEach(providers!.flatrate!){ aProvider in
+                            ProviderIcon(provider: aProvider)
+                            
+                        }
                     }
-                    
                 }
+               
             }
             if let rentProvider = providers?.rent{
                 Text("Disponibile per il noleggio")
                     .font(.callout)
                     .foregroundStyle(.secondary)
-                
-                HStack(spacing: 16) {
-                        ForEach(providers!.rent!){ aProvider in
-                            ProviderIcon(provider: aProvider)
-                        }
+                ScrollView(.horizontal){
+                    HStack(spacing: 16) {
+                            ForEach(providers!.rent!){ aProvider in
+                                ProviderIcon(provider: aProvider)
+                            }
+                    }
                 }
-                
             }
             if let nuyRateProvider = providers?.buy{
                 Text("Disponibile per la vendita")
                     .font(.callout)
                     .foregroundStyle(.secondary)
-                HStack(spacing: 16) {
-                    ForEach(providers!.buy!){ aProvider in
-                        ProviderIcon(provider: aProvider)
+                ScrollView(.horizontal){
+                    HStack(spacing: 16) {
+                        ForEach(providers!.buy!){ aProvider in
+                            ProviderIcon(provider: aProvider)
+                        }
                     }
                 }
+               
             }
            
             
