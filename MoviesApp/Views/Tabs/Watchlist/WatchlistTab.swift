@@ -11,6 +11,7 @@ import Foundation
 struct WatchlistTab: View {
     
     @EnvironmentObject var viewModel: WatchlistViewModel
+    @EnvironmentObject var viewModel2:DiscoverViewModel
     @State private var searchText = ""
     
     var movie: Set<Movie> {

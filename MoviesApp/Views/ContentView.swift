@@ -13,16 +13,17 @@ struct ContentView: View {
     let discoverTabTitle = LocalizedStringKey("discover-tab-title")
     let watchlistTabTitle = LocalizedStringKey("watchlist-tab-title")
     let settingsTabTitle = LocalizedStringKey("settings-tab-title")
-    
+    var discoverViewModel = DiscoverViewModel()
     var body: some View {
         
         TabView {
             // MARK: - Discover Tab
             DiscoverTab()
                 .withBackground()
-                .environmentObject(DiscoverViewModel())
+                .environmentObject(discoverViewModel)
                 .tabItem {
                     Label(discoverTabTitle, systemImage: "globe.americas")
+                        
                 }
             
             /* MARK: - Search Tab
@@ -37,6 +38,7 @@ struct ContentView: View {
             WatchlistTab()
                 .withBackground()
                 .environmentObject(WatchlistViewModel.shared)
+                .environmentObject(discoverViewModel)
                 .tabItem {
                     Label(watchlistTabTitle, systemImage: "bookmark.fill")
                 }
