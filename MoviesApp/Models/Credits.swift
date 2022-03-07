@@ -21,7 +21,6 @@ struct CastMember: Codable, Identifiable {
     let knownForDepartment: String
     let name: String
     let originalName: String
-    let popularity: Int
     let profilePath: String?
     let castId: Int
     let character: String
@@ -36,7 +35,6 @@ struct CrewMember: Codable, Identifiable {
     let knownForDepartment: String
     let name: String
     let originalName: String
-    let popularity: Int
     let profilePath: String?
     let creditId: String
     let department: String

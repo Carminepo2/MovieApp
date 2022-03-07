@@ -46,7 +46,7 @@ class NetworkManager{
             
             if let httpResponse = response as? HTTPURLResponse,
                httpResponse.statusCode == 200,
-               let provider = try?decoder.decode(ProviderResponse.self, from: data){
+               let provider = try? decoder.decode(ProviderResponse.self, from: data){
                 providerToReturn = provider
             }
         }
@@ -129,6 +129,7 @@ class NetworkManager{
         }
         
         catch{
+            print(error)
             throw DataException.ErrorGettingTheData
         }
         
