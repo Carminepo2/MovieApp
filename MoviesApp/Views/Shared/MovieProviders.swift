@@ -26,7 +26,7 @@ struct MovieProviders: View {
             
             if let flateRateProvider = providers?.flatrate{
                 Text(movieProvidersTitle)
-                    .font(.callout)
+                    .font(.callout.smallCaps())
                     .foregroundStyle(.secondary)
                 ScrollView(.horizontal){
                     HStack(spacing: 16) {
@@ -36,12 +36,12 @@ struct MovieProviders: View {
                         }
                     }
                 }
-               
             }
             if let rentProvider = providers?.rent{
                 Text("Disponibile per il noleggio")
-                    .font(.callout)
+                    .font(.callout.smallCaps())
                     .foregroundStyle(.secondary)
+                    .padding(.top)
                 ScrollView(.horizontal){
                     HStack(spacing: 16) {
                             ForEach(providers!.rent!){ aProvider in
@@ -51,9 +51,10 @@ struct MovieProviders: View {
                 }
             }
             if let nuyRateProvider = providers?.buy{
-                Text("Disponibile per la vendita")
-                    .font(.callout)
+                Text("Disponibile per l'acquisto")
+                    .font(.callout.smallCaps())
                     .foregroundStyle(.secondary)
+                    .padding(.top)
                 ScrollView(.horizontal){
                     HStack(spacing: 16) {
                         ForEach(providers!.buy!){ aProvider in
@@ -61,11 +62,9 @@ struct MovieProviders: View {
                         }
                     }
                 }
-               
             }
-           
-            
         }
+        .padding(.horizontal)
     }
     
     

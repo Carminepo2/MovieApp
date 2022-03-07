@@ -13,18 +13,18 @@ struct MovieCredits: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(LocalizedStringKey("movie-credits-title"))
-                .font(.callout)
+                .font(.callout.smallCaps())
                 .foregroundStyle(.secondary)
             
-            ScrollView(.horizontal) {
-                HStack(spacing: 16) {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
                     ForEach(credits.cast) { cast in
                         MovieCastPhoto(name: cast.name, path: cast.profilePath)
                     }
                 }
             }
-            
         }
+        .padding(.horizontal)
     }
 }
 
@@ -49,32 +49,35 @@ struct MovieCastPhoto: View {
             if let url = url, let cachedImage = ImageCache[url.absoluteString] {
                 Image(uiImage: cachedImage)
                     .resizable()
-                    .scaledToFit()
-                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                    .frame(width: 120, height: 120)
+                    .aspectRatio(Constants.CardAspectRatio, contentMode: .fill)
+                    .cornerRadius(6)
                 
             } else if let uiImage = imageLoader.uiImage {
                 Image(uiImage: uiImage)
                     .resizable()
-                    .scaledToFit()
-                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                    .frame(width: 120, height: 120)
-                
+                    .aspectRatio(Constants.CardAspectRatio, contentMode: .fill)
+                    .cornerRadius(6)
+                    
                 
             } else {
                 Image("cast-placeholder")
                     .resizable()
-                    .scaledToFit()
-                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                    .frame(width: 120, height: 120)
+                    .scaledToFill()
+                    .frame(maxWidth:100)
+                    //.aspectRatio(Constants.CardAspectRatio, contentMode: .fill)
+                    .cornerRadius(6)
                     .task {
                         await downloadImage()
                     }
             }
             
             Text(name)
+                .font(.footnote)
+                .fontWeight(.semibold)
                 .foregroundColor(.white)
+                .lineLimit(1)
         }
+        .frame(width: 100)
     }
     
     private func downloadImage() async {

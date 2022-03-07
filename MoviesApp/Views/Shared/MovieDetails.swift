@@ -139,6 +139,7 @@ struct MovieDetails: View {
                             }
                         })
                             .padding(.top)
+                        
                     }
                     
                    
