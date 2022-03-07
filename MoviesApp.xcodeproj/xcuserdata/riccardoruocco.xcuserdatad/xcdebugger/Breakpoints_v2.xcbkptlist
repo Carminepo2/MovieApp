@@ -80,8 +80,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "150"
             endingLineNumber = "150"
-            landmarkName = "DiscoverViewModel"
-            landmarkType = "3">
+            landmarkName = "getAdviceByID(idAdvice:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -112,7 +112,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "292"
             endingLineNumber = "292"
-            landmarkName = "swipeToWatchList()"
+            landmarkName = "makeMovieFavorite()"
             landmarkType = "7">
             <Locations>
                <Location

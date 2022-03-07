@@ -10,7 +10,7 @@ import Foundation
 class NetworkManager{
     
     static var shared = NetworkManager()
-    private var languageResult:String = "en"
+    private var languageResult:String = "it"
     
     private init(){
         
