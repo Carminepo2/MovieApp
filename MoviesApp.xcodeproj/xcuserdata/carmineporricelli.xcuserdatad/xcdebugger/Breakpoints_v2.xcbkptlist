@@ -64,7 +64,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "112"
             endingLineNumber = "112"
-            landmarkName = "getCreditsById(id:)"
+            landmarkName = "getMovieById(id:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -205,8 +205,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "122"
             endingLineNumber = "122"
-            landmarkName = "getCreditsById(id:)"
-            landmarkType = "7">
+            landmarkName = "NetworkManager"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

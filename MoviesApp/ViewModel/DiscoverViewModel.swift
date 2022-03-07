@@ -134,6 +134,18 @@ class DiscoverViewModel: ObservableObject {
         Task(priority:.high){
             try await self.fetchImage(posterPath)
         }
+        if let providersWichImageINeed = elemento{
+            var arrayOfUniqueProviders = Array(elemento!.getAllMoovieProvider())
+            let providersImage = try await withThrowingTaskGroup(of: Void.self){ group in
+                for aProvider in arrayOfUniqueProviders{
+                    let url = URL(string: Constants.ImagesBasePath + aProvider.logoPath)
+                    group.addTask {
+                        try await self.fetchImage(url)
+                    }
+                }
+                try await group
+            }
+        }
         adviceToReturn?.isSaved = false
         return adviceToReturn
     }
@@ -164,6 +176,21 @@ class DiscoverViewModel: ObservableObject {
         Task(priority:.high){
             try await self.fetchImage(posterPath)
         }
+        
+        if let providersWichImageINeed = elemento{
+            var arrayOfUniqueProviders = Array(elemento!.getAllMoovieProvider())
+            let providersImage = try await withThrowingTaskGroup(of: Void.self){ group in
+                for aProvider in arrayOfUniqueProviders{
+                    let url = URL(string: Constants.ImagesBasePath + aProvider.logoPath)
+                    group.addTask {
+                        try await self.fetchImage(url)
+                    }
+                }
+                try await group
+            }
+        }
+        
+        
         adviceToReturn?.isSaved = false
         return adviceToReturn
     }

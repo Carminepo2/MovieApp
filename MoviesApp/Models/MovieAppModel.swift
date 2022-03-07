@@ -11,9 +11,13 @@ class MovieAppModel {
     var allMovies:Array<Movie>
     static var shared = MovieAppModel()
     var networkManager = NetworkManager.shared
+    var deepLinks:[String:String]
+    
+    
     
     private init(){
         allMovies = []
+        deepLinks = ["Riccardo":"Lucia",]
     }
     
     func getMovieById(id:Int64) async throws-> Movie? {
