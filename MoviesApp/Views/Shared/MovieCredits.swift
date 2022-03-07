@@ -50,22 +50,22 @@ struct MovieCastPhoto: View {
                 Image(uiImage: cachedImage)
                     .resizable()
                     .scaledToFit()
-                    .clipShape(Circle())
+                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
                     .frame(width: 120, height: 120)
 
             } else if let uiImage = imageLoader.uiImage {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFit()
-                    .clipShape(Circle())
+                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
                     .frame(width: 120, height: 120)
 
             
             } else {
-                Image("placeholder")
+                Image("cast-placeholder")
                     .resizable()
                     .scaledToFit()
-                    .clipShape(Circle())
+                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
                     .frame(width: 120, height: 120)
                     .task {
                         await downloadImage()
