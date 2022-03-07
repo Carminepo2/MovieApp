@@ -41,7 +41,7 @@ struct MovieCastPhoto: View {
             self.url = URL(string: Constants.ImagesBasePath + path)
         }
     }
-
+    
     
     var body: some View {
         VStack {
@@ -52,15 +52,15 @@ struct MovieCastPhoto: View {
                     .scaledToFit()
                     .clipShape(RoundedRectangle(cornerRadius: 10.0))
                     .frame(width: 120, height: 120)
-
+                
             } else if let uiImage = imageLoader.uiImage {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFit()
                     .clipShape(RoundedRectangle(cornerRadius: 10.0))
                     .frame(width: 120, height: 120)
-
-            
+                
+                
             } else {
                 Image("cast-placeholder")
                     .resizable()
@@ -86,8 +86,14 @@ struct MovieCastPhoto: View {
     }
 }
 
-//struct MovieCast_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MovieCredits()
-//    }
-//}
+struct MovieCast_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack {
+            MovieCastPhoto(name: "John Formaggio", path: "/5XBzD5WuTyVQZeS4VI25z2moMeY.jpg")
+            
+            MovieCastPhoto(name: "John Formaggio", path: nil)
+
+        }
+
+    }
+}

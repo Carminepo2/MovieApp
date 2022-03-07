@@ -305,7 +305,6 @@
 				753B57CF27C3D5ED00231CA4 /* MovieGenres.swift */,
 				9517943D27D124F2005E3D34 /* SwipeActionsLabels.swift */,
 				7558069927D650D800FC8183 /* MovieCredits.swift */,
-				95BD7CC527D6539200849669 /* CastItemPlaceholder.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -470,7 +469,6 @@
 				1DDDFC4027CE6FC100A10F2A /* GenresRaccomender3 1.mlmodel in Sources */,
 				756F1DAF27B904FD00609A15 /* UINavigationBar.swift in Sources */,
 				75A4C76A27C51C7400CF5D53 /* PopcornButton.swift in Sources */,
-				95BD7CC627D6539200849669 /* CastItemPlaceholder.swift in Sources */,
 				7511316F27BD0D6B0025BE52 /* DiscoverTab.swift in Sources */,
 				756F1DA727B858A700609A15 /* MoviePoster.swift in Sources */,
 				DED54F8B27C52A7C00DFB47F /* StreamingPlatforms.swift in Sources */,
