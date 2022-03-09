@@ -23,6 +23,12 @@
 "watchlist-empty-state" = "Bookmark movies to find them here";
 
 "movie-providers-title" = "Available for streaming on:";
+
+"movie-credit-title" = "Actors:";
+"movie-providers-title" = "Available for streaming on:";
+"available-to-buy "= "Available to buy on:";
+"available-to-rent" = "Available to rent on:";
+
 "close" = "Close";
 
 "location-united-states" = "United States";

@@ -37,8 +37,9 @@ struct MovieProviders: View {
                     }
                 }
             }
+            
             if let rentProvider = providers?.rent{
-                Text("Disponibile per il noleggio")
+                Text(LocalizedStringKey("available-to-buy"))
                     .font(.callout.smallCaps())
                     .foregroundStyle(.secondary)
                     .padding(.top)
@@ -51,7 +52,7 @@ struct MovieProviders: View {
                 }
             }
             if let nuyRateProvider = providers?.buy{
-                Text("Disponibile per l'acquisto")
+                Text(LocalizedStringKey("available-to-rent"))
                     .font(.callout.smallCaps())
                     .foregroundStyle(.secondary)
                     .padding(.top)

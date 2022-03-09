@@ -22,7 +22,11 @@
 "history-empty-state" = "I film che hai fatto scorrere nella sessione corrente verranno visualizzati qui";
 "watchlist-empty-state" = "Aggiungi i film ai preferiti per trovarli qui";
 
+"movie-credit-title" = "Attori:";
 "movie-providers-title" = "Disponibile per lo streaming su:";
+"available-to-buy "= "Disponibile per l'acquisto:";
+"available-to-rent" = "Disponibile per il noleggio:";
+
 "close" = "Chiudi";
 
 "location-united-states" = "Stati Uniti";
