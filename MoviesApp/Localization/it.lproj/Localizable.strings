@@ -30,6 +30,9 @@
 "location-italy" = "Italia";
 "location-germany" = "Germania";
 
+"original-titles-language-text-titles" = "Titoli";
+"original-titles-language-text" = "Titoli in lingua originale";
+
 "settings-title" = "Impostazioni";
 
 "select-country-title" = "Seleziona Paese";
@@ -49,5 +52,12 @@
 "about-settings" = "About";
 
 "clean-watchlist-button" = "Svuota Lista film";
-"clean-history-button" = "Svuota Croonologia";
+"clean-history-button" = "Svuota Cronologia";
 "clean-cache-button" = "Svuota Cache";
+
+"about-text" = "MoovieFinder è un tool intuitivo per trovare qualcosa di nuovo da guardare in modo semplice, alimentato da suggerimenti dinamici aggiornati automaticamente in base alle tue scelte precedenti.";
+"contributions-section-title" = "Contributi";
+"contact-section-title" = "Hai bisogno di parlarci?";
+"button-contact" = "Contattaci";
+"credits-tmdb" = "Questo prodotto utilizza l'API TMDb ma non è approvato o certificato da TMDb";
+"credits-team" = "MoovieFinder è realizzato da";

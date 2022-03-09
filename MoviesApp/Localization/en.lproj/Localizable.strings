@@ -38,6 +38,9 @@
 "language-german" = "German";
 "language-english" = "English";
 
+"original-titles-language-text-title" = "Titles";
+"original-titles-language-text" = "Titles in original language";
+
 "label-user-settings-section" = "User";
 "label-general-settings-section" = "General";
 
@@ -50,3 +53,10 @@
 "clean-watchlist-button" = "Clean Watchlist";
 "clean-history-button" = "Clean History";
 "clean-cache-button" = "Clean Cache";
+
+"about-text" = "MoovieFinder is an intuitive tool to find something new to watch in an easy way, powered by dynamic suggestion automatically updated according to your previous choices";
+"contributions-section-title" = "Contributions";
+"contact-section-title" = "Need to chat?";
+"button-contact" = "Get in touch";
+"credits-tmdb" = "This product uses the TMDb API but is not endorsed or certified by TMDb";
+"credits-team" = "MoovieFinder is brought to you by";

@@ -30,6 +30,8 @@
 "location-italy" = "Italien";
 "location-germany" = "Deutschland";
 
+"original-titles-language-text-title" = "Titel";
+"original-titles-language-text" = "Titel in Originalsprache anzeigen";
 
 "settings-title" = "Einstellungen";
 
@@ -50,3 +52,10 @@
 "clean-watchlist-button" = "Leere Filmliste";
 "clean-history-button" = "Verlauf löschen";
 "clean-cache-button" = "Cache leeren";
+
+"about-text" = "";
+"contributions-section-title" = "Beiträge";
+"contact-section-title" = "Müssen Sie chatten?";
+"button-contact" = "Kontakt";
+"credits-tmdb" = "Dieses Produkt verwendet die TMDb-API, ist jedoch nicht von TMDb unterstützt oder zertifiziert";
+"credits-team" = "MoovieFinder wird Ihnen bereitgestellt von";

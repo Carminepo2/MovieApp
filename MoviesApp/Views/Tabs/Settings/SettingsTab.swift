@@ -78,26 +78,18 @@ struct SettingsTab: View {
                 VStack() {
                     List {
                         Group {
-                            Section(header: sectionHeader(label: userSectionTitle)) {
-                                NavigationLink { AllLocations() } label: {
+                            Section/*(header: sectionHeader(label: userSectionTitle))*/ {
+                                /*NavigationLink { AllLocations() } label: {
                                     HStack {
                                         Text(currentLocationSettings)
                                         Spacer()
                                         Text(locations[0])
                                             .foregroundColor(.secondary)
                                     }
-                                }
+                                }*/
                                 
                                 NavigationLink { StreamingPlatforms() } label: {
                                     Text(streamingPlatformSettings)
-                                }
-                            }
-                            
-                            Section(header: sectionHeader(label: generalSectionTitle)) {
-                                NavigationLink {
-                                    Display()
-                                } label: {
-                                    Text(displaySettings)
                                 }
                                 NavigationLink {
                                     Storage()
@@ -111,6 +103,25 @@ struct SettingsTab: View {
                                 }
                                 
                             }
+                            
+                            /*Section(header: sectionHeader(label: generalSectionTitle)) {
+                                /*NavigationLink {
+                                    Display()
+                                } label: {
+                                    Text(displaySettings)
+                                }*/
+                                NavigationLink {
+                                    Storage()
+                                } label: {
+                                    Text(storageSettings)
+                                }
+                                NavigationLink {
+                                    About()
+                                } label: {
+                                    Text(aboutSettings)
+                                }
+                                
+                            }*/
                         }
                         .listRowBackground(Color.clear)
                     }
