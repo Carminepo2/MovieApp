@@ -87,7 +87,7 @@ class DiscoverViewModel: ObservableObject {
     @MainActor
     func nextCard() async throws->MovieCard{
         var removedCard:MovieCard? = nil
-//        if(movieCards.count >= 3){
+        if(movieCards.count >= 3){
             removedCard = movieCards.removeLast()
             var movieRemoved = removedCard!.movie
             //            self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
@@ -98,19 +98,19 @@ class DiscoverViewModel: ObservableObject {
                     movieCards.insert(MovieCard(movie: notNullAdvice), at: 0)
                 }
             }
-//        }
-//        else if(movieCards.count < 3){
-//            let advice = try await self.getAdvice()
-//            removedCard = movieCards.removeLast()
-//            var movieRemoved = removedCard!.movie
-//            //            self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
-//            //            self.addToMovieAlreadyReccomended(movieToSave: movieRemoved, voteOfTheMovie: Float(voto))
-//            if let notNullAdvice = advice {
-//                if (notNullAdvice.id != Movie.example.id){
-//                    movieCards.insert(MovieCard(movie: notNullAdvice), at: 0)
-//                }
-//            }
-//        }
+        }
+        else if(movieCards.count < 3){
+            let advice = try await self.getAdvice()
+            removedCard = movieCards.removeLast()
+            var movieRemoved = removedCard!.movie
+            //            self.giveFeedback(drawValueId: movieRemoved.id, result: voto)
+            //            self.addToMovieAlreadyReccomended(movieToSave: movieRemoved, voteOfTheMovie: Float(voto))
+            if let notNullAdvice = advice {
+                if (notNullAdvice.id != Movie.example.id){
+                    movieCards.insert(MovieCard(movie: notNullAdvice), at: 0)
+                }
+            }
+        }
         return removedCard!
     }
     func getProviders(movie:Movie) async throws{
