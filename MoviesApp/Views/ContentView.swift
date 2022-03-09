@@ -13,7 +13,11 @@ struct ContentView: View {
     let discoverTabTitle = LocalizedStringKey("discover-tab-title")
     let watchlistTabTitle = LocalizedStringKey("watchlist-tab-title")
     let settingsTabTitle = LocalizedStringKey("settings-tab-title")
-    var discoverViewModel = DiscoverViewModel()
+    
+    
+    @StateObject var discoverViewModel = DiscoverViewModel()
+    
+    
     var body: some View {
         
         TabView {
