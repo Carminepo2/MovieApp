@@ -245,7 +245,7 @@ struct shortMovie:Codable{
     var name:String?
 }
 
-enum LanguageType:Codable{
+enum LanguageType: Codable{
     case englishUSA
     case german
     case italian
