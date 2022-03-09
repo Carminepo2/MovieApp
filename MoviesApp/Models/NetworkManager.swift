@@ -10,10 +10,20 @@ import Foundation
 class NetworkManager{
     
     static var shared = NetworkManager()
-    private var languageResult:String = "it"
+    private var languageResult:String = "en"
     
     private init(){
-        
+        if let locale = Locale.current.languageCode {
+            switch locale {
+            case "it":
+                setLanguage(language: .italian)
+            case "de":
+                setLanguage(language: .german)
+            default:
+                setLanguage(language: .englishUSA)
+            }
+            
+        }
     }
     
     func setLanguage(language:LanguageType){
