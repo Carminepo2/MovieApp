@@ -147,6 +147,7 @@ struct MovieDetails: View {
                     
                     Spacer()
                 }
+                .padding(.bottom, 80)
             }
             
             // MARK: - Close button
@@ -179,7 +180,7 @@ struct MovieDetails: View {
             do{
                 try await viewModel.getProviders(movie: self.movie)
             }
-            catch{
+            catch {
                 
             }
         }

@@ -22,7 +22,11 @@
 "history-empty-state" = "The movies you swiped in the current session will be displayed here";
 "watchlist-empty-state" = "Bookmark movies to find them here";
 
-"movie-providers-title" = "Zum streamen verfügbar:";
+"movie-credit-title" = "Schauspieler:";
+"movie-providers-title" = "Zum Streamen verfügbar:";
+"available-to-buy "= "Zum Nachkaufen verfügbar:";
+"available-to-rent" = "Zur Miete verfügbar:";
+
 "close" = "schließen";
 
 "location-united-states" = "Vereinigte Staaten";
