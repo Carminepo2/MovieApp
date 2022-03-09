@@ -104,6 +104,7 @@ struct SettingsTab: View {
                                 
                             }
                             
+                            
                             /*Section(header: sectionHeader(label: generalSectionTitle)) {
                                 /*NavigationLink {
                                     Display()
