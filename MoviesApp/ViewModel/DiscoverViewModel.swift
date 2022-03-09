@@ -174,9 +174,11 @@ class DiscoverViewModel: ObservableObject {
         let (adviceToReturn, elemento, credits) = try await (downloadedMovie, providersOfTheMovie, creditsOfTheMovie)
         adviceToReturn?.providers = elemento
         adviceToReturn?.credits = credits
-        let posterPath = URL(string: Constants.ImagesBasePath + (adviceToReturn?.posterPath!)!)
-        Task(priority:.high){
-            try await self.fetchImage(posterPath)
+        if(adviceToReturn?.posterPath != nil){
+            let posterPath = URL(string: Constants.ImagesBasePath + (adviceToReturn?.posterPath!)!)
+            Task(priority:.high){
+                try await self.fetchImage(posterPath)
+            }
         }
         
 //        if let providersWichImageINeed = elemento{
