@@ -46,6 +46,8 @@ struct Constants {
         gradient: Gradient(colors: [.init("Gray-700"), .init("Gray-800")]),
         startPoint: .top, endPoint: .bottom
     )
+    
+    static let mailUrl = URL(string: "mailto:davebarrel64@gmail.com?bcc=carmineporricelli96@gmail.com,basile.luca@outlook.it,ruocco.rf@gmail.com,luigipedata.design@gmail.com&subject=Moovier App feedback")
 }
 
 
