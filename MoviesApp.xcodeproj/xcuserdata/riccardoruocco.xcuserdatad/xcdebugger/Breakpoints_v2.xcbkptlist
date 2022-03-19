@@ -62,9 +62,9 @@
             filePath = "MoviesApp/ViewModel/GrandAdvisor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "setAdvisor(initialValues:)"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "giveFeedback(drawValueId:result:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -188,8 +188,8 @@
             filePath = "MoviesApp/ViewModel/GrandAdvisor.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "getAdvice()"
             landmarkType = "7">
          </BreakpointContent>
