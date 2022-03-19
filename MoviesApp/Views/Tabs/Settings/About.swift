@@ -12,7 +12,7 @@ import MessageUI
 struct About: View {
     
     @State var result: Result<MFMailComposeResult, Error>? = nil
-       @State var isShowingMailView = false
+    @State var isShowingMailView = false
     
     // MARK: - Localized string
     let aboutTabTitle = LocalizedStringKey("about-settings")
@@ -33,7 +33,7 @@ struct About: View {
             .listRowSeparator(.hidden)
             Section(header: sectionHeader(label: contactsSectionTitle)) {
                 Group {
-                Button(action: {
+                    Button(action: {
                             self.isShowingMailView.toggle()
                         }) {
                             Text("Get in touch")
