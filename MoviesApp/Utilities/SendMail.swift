@@ -55,4 +55,3 @@ struct MailView: UIViewControllerRepresentable {
 
     }
 }
-
